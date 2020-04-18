@@ -9,6 +9,13 @@ on:
 jobs:
   molecule:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        distro:
+          - centos:7
+          - ubuntu:18.04
+
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.x
@@ -23,7 +30,7 @@ jobs:
           pipenv install --dev
 
       - name: Lint
-        run: pipenv run ansible-lint *.yml
+        run: make lint
 
       - name: Move project to Ansible-required location
         run: |
@@ -31,4 +38,6 @@ jobs:
           cp -r ./ ~/.ansible/roles/artis3n.tailscale
 
       - name: Molecule
-        run: pipenv run molecule test
+        run: make test
+        env:
+          MOLECULE_DISTRO: ${{ matrix.distro  }}
