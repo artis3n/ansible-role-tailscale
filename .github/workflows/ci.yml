@@ -14,7 +14,7 @@ jobs:
       matrix:
         distro:
           - centos:7
-          - ubuntu:18.04
+          - amazonlinux:2
 
     steps:
       - uses: actions/checkout@v2
