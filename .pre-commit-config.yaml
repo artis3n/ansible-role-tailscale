@@ -1,0 +1,27 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v2.5.0
+  hooks:
+    - id: check-yaml
+      # https://github.com/pre-commit/pre-commit-hooks/issues/273
+      # Not the best option but it doesn't seem to accept an 'ignore' option
+      args: [--unsafe]
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
+    - id: check-executables-have-shebangs
+    - id: check-merge-conflict
+    - id: mixed-line-ending
+    - id: sort-simple-yaml
+
+- repo: https://github.com/jumanjihouse/pre-commit-hooks
+  rev: 2.0.0
+  hooks:
+    - id: shellcheck
+
+- repo: https://github.com/ansible/ansible-lint
+  rev: v4.2.0
+  hooks:
+    - id: ansible-lint
+      files: \.(yaml|yml)$
+
+default_stages: [prepare-commit-msg, commit, push]
