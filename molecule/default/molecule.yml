@@ -11,7 +11,6 @@ platforms:
   - name: instance
     image: ${MOLECULE_DISTRO:-centos:7}
     # Needed for systemd
-    command: /usr/sbin/init
     privileged: true
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro

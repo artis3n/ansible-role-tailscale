@@ -4,4 +4,4 @@
   tasks:
     - name: "Include artis3n.tailscale"
       include_role:
-        name: tailscale
+        name: artis3n.tailscale
