@@ -72,3 +72,6 @@
   become: yes
   # noqa 301
   command: tailscale up --authkey={{ tailscale_auth_key }}
+  # Since the auth key is included in this task, we do not want to log output
+  # However, disable for now while we test things
+  # no_log: true
