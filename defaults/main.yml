@@ -1,1 +1,22 @@
 ---
+tailscale_package: tailscale
+tailscale_service: tailscaled
+
+repo_description: Tailscale repository
+
+apt_dependencies:
+  - gpg
+
+yum_dependencies:
+  - yum-utils
+  - gnupg2
+
+apt_distros:
+  Ubuntu18: bionic
+  Debian10: buster
+
+apt_signkey: https://pkgs.tailscale.com/stable/{{ ansible_distribution | lower }}/{{ apt_distros[ansible_distribution + ansible_distribution_major_version] }}.gpg
+
+yum_repos:
+  Amazon: https://pkgs.tailscale.com/stable/amazon-linux/{{ ansible_distribution_major_version }}/tailscale.repo
+  CentOS: https://pkgs.tailscale.com/stable/centos/{{ ansible_distribution_major_version }}/tailscale.repo

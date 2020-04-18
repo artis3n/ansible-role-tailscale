@@ -9,13 +9,6 @@ on:
 jobs:
   molecule:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        distro:
-          - centos:7
-          - amazonlinux:2
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.x
@@ -39,5 +32,3 @@ jobs:
 
       - name: Molecule
         run: make test
-        env:
-          MOLECULE_DISTRO: ${{ matrix.distro  }}
