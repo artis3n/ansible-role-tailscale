@@ -14,7 +14,7 @@ jobs:
       - name: Set up Python 3.x
         uses: actions/setup-python@v1
         with:
-          python-version: 3.7
+          python-version: 3.8
 
       - name: Install dependencies
         run: |
@@ -27,8 +27,8 @@ jobs:
 
       - name: Move project to Ansible-required location
         run: |
-          mkdir -p ~/.ansible/roles/artis3n/tailscale
-          cp -r ./ ~/.ansible/roles/artis3n/tailscale
+          mkdir -p ~/.ansible/roles/artis3n.tailscale
+          cp -r ./ ~/.ansible/roles/artis3n.tailscale
 
       - name: Molecule
         run: pipenv run molecule test
