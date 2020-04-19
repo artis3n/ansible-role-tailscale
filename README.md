@@ -1,7 +1,7 @@
 # artis3n.tailscale
 
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/artis3n/ansible-role-tailscale/CI%20Tests)](https://github.com/artis3n/ansible-role-tailscale/actions)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/artis3n/ansible-role-tailscale)](https://github.com/artis3n/ansible-role-tailscale/releases)
+[![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/artis3n/ansible-role-tailscale?include_prereleases)](https://github.com/artis3n/ansible-role-tailscale/releases)
 ![GitHub last commit](https://img.shields.io/github/last-commit/artis3n/ansible-role-tailscale)
 ![GitHub](https://img.shields.io/github/license/artis3n/ansible-role-tailscale)
 [![GitHub followers](https://img.shields.io/github/followers/artis3n?style=social)](https://github.com/artis3n/)
@@ -22,6 +22,14 @@ You must supply a `tailscale_auth_key` variable, which can be generated under yo
 An [ansible-vault encrypted variable][ansible-vault] containing a Tailscale Node Authorization auth key.
 
 A Node Authorization auth key can be generated under your Tailscale account at <https://login.tailscale.com/admin/authkeys>.
+
+Encrypt this variable with the following command:
+
+```bash
+ansible-vault encrypt_string --vault-id tailscale@.ci-vault-pass '[AUTH KEY VALUE HERE]' --name 'tailscale_auth_key'
+```
+
+See [Ansible's documentation][ansible-vault] for an explanation of the `ansible-vault encrypt_string` command syntax.
 
 ### release_stability
 
