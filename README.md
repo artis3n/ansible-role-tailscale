@@ -23,6 +23,14 @@ An [ansible-vault encrypted variable][ansible-vault] containing a Tailscale Node
 
 A Node Authorization auth key can be generated under your Tailscale account at <https://login.tailscale.com/admin/authkeys>.
 
+Encrypt this variable with the following command:
+
+```bash
+ansible-vault encrypt_string --vault-id tailscale@.ci-vault-pass '[AUTH KEY VALUE HERE]' --name 'tailscale_auth_key'
+```
+
+See [Ansible's documentation][ansible-vault] for an explanation of the `ansible-vault encrypt_string` command syntax.
+
 ### release_stability
 
 **Default**: `stable`
