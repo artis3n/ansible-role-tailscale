@@ -7,8 +7,8 @@
 - name: Unstable Warning
   # Print an error message to the console but proceed anyway
   fail:
-    msg: Installing Tailscale from the unstable branch. Stability is not guaranteed. Be warned.
-  when: release_stability == 'unstable'
+    msg: Installing Tailscale from the unstable branch. This is bleeding edge and may have issues. Be warned.
+  when: release_stability | lower == 'unstable'
   ignore_errors: yes
 
 - name: Operating System
