@@ -7,8 +7,10 @@ verify_ssl = true
 ansible-lint = "*"
 yamllint = "*"
 pre-commit = "*"
+ansible = "*"
 molecule = {extras = ["docker"],version = "*"}
 docker = "*"
+cryptography = "*"
 
 [packages]
 ansible = "*"

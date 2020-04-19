@@ -17,7 +17,7 @@ clean:
 
 .PHONY: test
 test:
-	pipenv run molecule test
+	ANSIBLE_VAULT_PASSWORD_FILE=$(PWD)/.ci-vault-pass pipenv run molecule test
 
 .PHONY: lint
 lint:

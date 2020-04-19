@@ -9,13 +9,6 @@ on:
 jobs:
   molecule:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        distro:
-          - centos:7
-          - amazonlinux:2
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.x
@@ -38,6 +31,8 @@ jobs:
           cp -r ./ ~/.ansible/roles/artis3n.tailscale
 
       - name: Molecule
-        run: make test
-        env:
-          MOLECULE_DISTRO: ${{ matrix.distro  }}
+        run: echo "${{ secrets.VAULT_PASS }}" > /home/runner/work/_temp/.vault-ci-pass && ANSIBLE_VAULT_PASSWORD_FILE=/home/runner/work/_temp/.vault-ci-pass pipenv run molecule test
+
+      - name: Clean up
+        if: always()
+        run: rm /home/runner/work/_temp/.vault-ci-pass

@@ -2,6 +2,13 @@
 - name: Verify
   hosts: all
   tasks:
-  - name: Example assertion
+  - name: Get Tailscale status
+    become: yes
+    command: tailscale up
+    changed_when: false
+    register: tailscale_status
+
+  - name: Assertions
     assert:
-      that: true
+      that:
+        - tailscale_status.stderr == "\ntailscaled is authenticated, nothing more to do."

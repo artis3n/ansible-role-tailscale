@@ -2,7 +2,7 @@
 galaxy_info:
   name: tailscale
   author: artis3n
-  description: Install and enable a Tailscale node
+  description: Install and enable a Tailscale node.
   license: license (MIT)
 
   min_ansible_version: 2.9
