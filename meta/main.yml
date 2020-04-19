@@ -12,7 +12,7 @@ galaxy_info:
       versions:
         - bionic
     - name: EL
-      version:
+      versions:
         - 7
 
   galaxy_tags:
