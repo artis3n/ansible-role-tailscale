@@ -8,7 +8,7 @@ lint: |
   yamllint .
   ansible-lint
 platforms:
-  - name: centos
+  - name: instance
     image: ${MOLECULE_DISTRO:-geerlingguy/docker-centos7-ansible:latest}
     # Needed for systemd
     command: ${MOLECULE_DOCKER_COMMAND:-""}

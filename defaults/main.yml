@@ -10,6 +10,8 @@ apt_dependencies:
   - gnupg2
   - gnupg-agent
   - aptitude
+  - apt-transport-https
+  - python-minimal
 
 apt_deb: deb https://pkgs.tailscale.com/{{ release_stability }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main
 
