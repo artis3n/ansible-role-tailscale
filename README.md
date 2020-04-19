@@ -1,7 +1,7 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+This role initializes a [Tailscale][] node.
 
 Requirements
 ------------
@@ -30,9 +30,11 @@ Including an example of how to use your role (for instance, with variables passe
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Ari Kalfus ([@artis3n](https://www.artis3nal.com/)) <dev@arti3nal.com>
+
+[tailscale]: https://tailscale.com/

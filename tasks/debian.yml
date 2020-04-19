@@ -1,0 +1,30 @@
+---
+- name: Apt Update
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: Apt Dependencies
+  become: yes
+  apt:
+    name: "{{ apt_dependencies }}"
+    state: present
+
+- name: Tailscale Signing Key
+  become: yes
+  apt_key:
+    url: "{{ apt_signkey }}"
+    state: present
+
+- name: Add Tailscale Deb
+  become: yes
+  apt_repository:
+    repo: "{{ apt_deb }}"
+    state: present
+
+- name: Install Tailscale
+  become: yes
+  apt:
+    name: "{{ tailscale_package }}"
+    state: present
+    update_cache: yes
