@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  name: tailscale
+  role_name: tailscale
   author: artis3n
   description: Install and enable a Tailscale node.
   license: license (MIT)
