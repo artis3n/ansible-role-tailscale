@@ -9,19 +9,18 @@ repo_description: Tailscale repository
 apt_dependencies:
   - gnupg2
   - gnupg-agent
+  - apt-transport-https
+  - python-apt
+  - python3-apt
 
-apt_deb: deb https://pkgs.tailscale.com/{{ release_stability }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main
+apt_deb: deb https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release | lower }} main
+
+apt_signkey: https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ ansible_distribution | lower }}/{{ ansible_distribution_release | lower }}.gpg
 
 yum_dependencies:
   - yum-utils
   - gnupg2
 
-apt_distros:
-  Ubuntu18: bionic
-  Debian10: buster
-
-apt_signkey: https://pkgs.tailscale.com/{{ release_stability }}/{{ ansible_distribution | lower }}/{{ apt_distros[ansible_distribution + ansible_distribution_major_version] }}.gpg
-
 yum_repos:
-  Amazon: https://pkgs.tailscale.com/{{ release_stability }}/amazon-linux/{{ ansible_distribution_major_version }}/tailscale.repo
-  CentOS: https://pkgs.tailscale.com/{{ release_stability }}/centos/{{ ansible_distribution_major_version }}/tailscale.repo
+  Amazon: https://pkgs.tailscale.com/{{ release_stability | lower }}/amazon-linux/{{ ansible_distribution_major_version }}/tailscale.repo
+  CentOS: https://pkgs.tailscale.com/{{ release_stability | lower }}/centos/{{ ansible_distribution_major_version }}/tailscale.repo

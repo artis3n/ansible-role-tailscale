@@ -8,16 +8,8 @@ lint: |
   yamllint .
   ansible-lint
 platforms:
-  - name: centos
-    image: geerlingguy/docker-centos7-ansible:latest
-    # Needed for systemd
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    privileged: true
-    pre_build_image: true
-  - name: ubuntu
-    image: geerlingguy/docker-ubuntu1804-ansible:latest
+  - name: instance
+    image: ${MOLECULE_DISTRO:-geerlingguy/docker-centos7-ansible:latest}
     # Needed for systemd
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:

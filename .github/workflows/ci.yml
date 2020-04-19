@@ -9,6 +9,17 @@ on:
 jobs:
   molecule:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        distros:
+          - geerlingguy/docker-centos7-ansible:latest
+          - geerlingguy/docker-centos8-ansible:latest
+          - geerlingguy/docker-ubuntu2004-ansible:latest
+          - geerlingguy/docker-ubuntu1804-ansible:latest
+          - geerlingguy/docker-ubuntu1604-ansible:latest
+      fail-fast: false
+
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.x
@@ -32,6 +43,8 @@ jobs:
 
       - name: Molecule
         run: echo "${{ secrets.VAULT_PASS }}" > /home/runner/work/_temp/.vault-ci-pass && ANSIBLE_VAULT_PASSWORD_FILE=/home/runner/work/_temp/.vault-ci-pass pipenv run molecule test
+        env:
+          MOLECULE_DISTRO: "${{ matrix.distros }}"
 
       - name: Clean up
         if: always()
