@@ -70,8 +70,8 @@
 
 - name: Bring Tailscale Up
   become: yes
-  # noqa 301
   command: tailscale up --authkey={{ tailscale_auth_key }}
   # Since the auth key is included in this task, we do not want to log output
-  # However, disable for now while we test things
-  # no_log: true
+  no_log: true
+  register: tailscale_start
+  changed_when: tailscale_start.stderr != "\ntailscaled is authenticated, nothing more to do."
