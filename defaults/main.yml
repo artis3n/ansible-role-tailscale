@@ -9,6 +9,7 @@ repo_description: Tailscale repository
 apt_dependencies:
   - gnupg2
   - gnupg-agent
+  - aptitude
 
 apt_deb: deb https://pkgs.tailscale.com/{{ release_stability }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main
 
