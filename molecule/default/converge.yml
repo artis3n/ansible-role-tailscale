@@ -1,7 +1,6 @@
 ---
 - name: Converge
   hosts: all
-  vars:
   tasks:
     - name: "Include artis3n.tailscale"
       include_role:
