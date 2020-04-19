@@ -12,15 +12,11 @@ apt_dependencies:
 
 apt_deb: deb https://pkgs.tailscale.com/{{ release_stability }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main
 
+apt_signkey: https://pkgs.tailscale.com/{{ release_stability }}/{{ ansible_distribution | lower }}/{{ ansible_distribution_release | lower }}.gpg
+
 yum_dependencies:
   - yum-utils
   - gnupg2
-
-apt_distros:
-  Ubuntu18: bionic
-  Debian10: buster
-
-apt_signkey: https://pkgs.tailscale.com/{{ release_stability }}/{{ ansible_distribution | lower }}/{{ apt_distros[ansible_distribution + ansible_distribution_major_version] }}.gpg
 
 yum_repos:
   Amazon: https://pkgs.tailscale.com/{{ release_stability }}/amazon-linux/{{ ansible_distribution_major_version }}/tailscale.repo

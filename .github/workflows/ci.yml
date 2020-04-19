@@ -15,6 +15,7 @@ jobs:
         distros:
           - geerlingguy/docker-centos7-ansible:latest
           - geerlingguy/docker-centos8-ansible:latest
+          - geerlingguy/docker-ubuntu2004-ansible:latest
           - geerlingguy/docker-ubuntu1804-ansible:latest
           - geerlingguy/docker-ubuntu1604-ansible:latest
       fail-fast: false

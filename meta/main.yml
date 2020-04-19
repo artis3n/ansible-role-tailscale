@@ -10,10 +10,13 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
+        - eoan
         - bionic
+        - xenial
     - name: EL
       versions:
         - 7
+        - 8
 
   galaxy_tags:
     - tailscale
