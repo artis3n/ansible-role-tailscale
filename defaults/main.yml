@@ -6,6 +6,8 @@ release_stability: stable
 
 repo_description: Tailscale repository
 
+tailscale_args: ""
+
 apt_dependencies:
   - gnupg2
   - gnupg-agent
