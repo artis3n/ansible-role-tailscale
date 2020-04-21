@@ -32,7 +32,7 @@
 
 - name: Bring Tailscale Up
   become: yes
-  command: tailscale up --authkey={{ tailscale_auth_key }}
+  command: tailscale up --authkey={{ tailscale_auth_key }} {{ tailscale_args }}
   # Since the auth key is included in this task, we do not want to log output
   # no_log: true
   register: tailscale_start
