@@ -18,11 +18,11 @@ galaxy_info:
       versions:
         - 7
         - 8
-    - name: Amazon
+    - name: Amazon Linux 2
       versions:
-        - all
+        - any
     - name: Debian
-      version:
+      versions:
         - buster
 
   galaxy_tags:
