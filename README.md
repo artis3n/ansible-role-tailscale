@@ -36,11 +36,11 @@ See [Ansible's documentation][ansible-vault] for an explanation of the `ansible-
 
 Whether to use the Tailscale stable or unstable track.
 
-Stable:
+`stable`:
 
 > Stable releases. If you're not sure which track to use, pick this one.
 
-Unstable:
+`unstable`:
 
 > The bleeding edge. Pushed early and often. Expect rough edges!
 
@@ -53,17 +53,12 @@ None
 You **must** include the `tailscale_auth_key` variable.
 We cannot force you to use an [encrypted variable][ansible-vault], but please use an encrypted variable.
 
-`--authkey` is not currently on the Tailscale stable branch.
-Thus, you must specify `release_stablility: unstable` to use this role.
-Once Tailscale releases a stable build with `authkey`, this will be updated.
-
 ```yaml
 - name: Servers
   hosts: all
   roles:
     - role: artis3n.tailscale
       vars:
-        release_stability: unstable
         # Fake example encrypted by ansible-vault
         tailscale_auth_key: !vault |
           $ANSIBLE_VAULT;1.2;AES256;tailscale
