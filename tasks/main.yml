@@ -32,9 +32,10 @@
 
 - name: Bring Tailscale Up
   become: yes
-  command:
-    cmd: tailscale up --authkey={{ tailscale_auth_key | quote }} {{ tailscale_args | quote }}
+  # The command module cannot use | ; &
+  # So we are ok not quoting the variables
+  command: tailscale up --authkey={{ tailscale_auth_key }} {{ tailscale_args | default() }}
   # Since the auth key is included in this task, we do not want to log output
-  # no_log: true
+  no_log: true
   register: tailscale_start
   changed_when: tailscale_start.stderr != "\ntailscaled is authenticated, nothing more to do."
