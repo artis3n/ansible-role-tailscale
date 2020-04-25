@@ -24,6 +24,7 @@ galaxy_info:
     - name: Debian
       versions:
         - buster
+        - stretch
     - name: Fedora
       versions:
         - 31
