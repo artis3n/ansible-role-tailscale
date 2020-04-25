@@ -24,6 +24,9 @@ galaxy_info:
     - name: Debian
       versions:
         - buster
+    - name: Fedora
+      versions:
+        - 31
 
   galaxy_tags:
     - tailscale

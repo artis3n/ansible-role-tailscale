@@ -23,6 +23,7 @@ jobs:
           - geerlingguy/docker-ubuntu1804-ansible:latest
           - geerlingguy/docker-ubuntu1604-ansible:latest
           - geerlingguy/docker-debian10-ansible:latest
+          - geerlingguy/docker-fedora31-ansible:latest
       fail-fast: false
 
     steps:
