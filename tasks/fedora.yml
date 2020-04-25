@@ -1,5 +1,8 @@
 ---
 
+- name: Systemd
+  include_tasks: systemd.yml
+
 - name: Yum Dependencies
   become: yes
   yum:

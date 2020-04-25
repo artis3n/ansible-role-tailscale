@@ -1,4 +1,7 @@
 ---
+- name: Systemd
+  include_tasks: systemd.yml
+
 - name: Apt Update
   become: yes
   apt:
