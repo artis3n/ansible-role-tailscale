@@ -9,6 +9,8 @@
 
 This role initializes a [Tailscale][] node.
 
+Find supported operating systems on this role's [Ansible Galaxy page](https://galaxy.ansible.com/artis3n/tailscale).
+
 ## Requirements
 
 You must supply a `tailscale_auth_key` variable, which can be generated under your Tailscale account at <https://login.tailscale.com/admin/authkeys>.
