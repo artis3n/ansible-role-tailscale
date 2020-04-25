@@ -140,6 +140,9 @@ Ari Kalfus ([@artis3n](https://www.artis3nal.com/)) <dev@arti3nal.com>
 
 ## Development and Contributing
 
+| :exclamation: Due to the encrypted Tailscale auth key in `molecule/defaults/converge.yml`, this repository can't successfully test PRs from forks. I'm working on how to enable collaboration and welcome any ideas. |
+| ----- |
+
 This GitHub repository uses a dedicated "test" Tailscale account to authenticate Tailscale during CI runs.
 Each Docker container creates a new authorized machine in that test account.
 The machines are manually cleaned up every so often.
@@ -147,7 +150,10 @@ The machines are manually cleaned up every so often.
 If you are interested in contributing to this repository, you must create a [Tailscale account][] and generate a [Node Authorization auth key][auth key].
 
 Then, choose a password to encrypt with.
-Write the password in a `.ci-vault-pass` file at the project root.
+
+To run `make test` locally, write the password in a `.ci-vault-pass` file at the project root.
+
+To run the GitHub Actions workflow, set a `VAULT_PASS` secret in your forked repository.
 
 Then, run the following Ansible command to encrypt the auth key:
 
