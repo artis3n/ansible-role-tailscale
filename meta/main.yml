@@ -21,6 +21,9 @@ galaxy_info:
     - name: Amazon
       versions:
         - all
+    - name: Debian
+      version:
+        - buster
 
   galaxy_tags:
     - tailscale
