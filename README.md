@@ -1,5 +1,6 @@
 # artis3n.tailscale
 
+[![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/artis3n/ansible-role-tailscale/CI Tests/master)](https://github.com/artis3n/ansible-role-tailscale/actions)
 [![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/artis3n/ansible-role-tailscale?include_prereleases)](https://github.com/artis3n/ansible-role-tailscale/releases)
 ![GitHub last commit](https://img.shields.io/github/last-commit/artis3n/ansible-role-tailscale)
 ![GitHub](https://img.shields.io/github/license/artis3n/ansible-role-tailscale)
@@ -118,7 +119,7 @@ Pass arbitrary command-line arguments:
       include_role:
         name: artis3n.tailscale
       vars:
-        tailscale_args: "-accept-routes=false -advertise-routes={{ subnet_blocks | join(',') }}"
+        tailscale_args: "--accept-routes=false --advertise-routes={{ subnet_blocks | join(',') }}"
         # Fake example encrypted by ansible-vault
         tailscale_auth_key: !vault |
           $ANSIBLE_VAULT;1.2;AES256;tailscale
