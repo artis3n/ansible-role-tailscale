@@ -44,6 +44,19 @@ Whether to use the Tailscale stable or unstable track.
 
 > The bleeding edge. Pushed early and often. Expect rough edges!
 
+### tailscale_args
+
+Pass any additional command-line arguments to `tailscale up`.
+
+Note that this parameter does not support bash piping or command extensions like `&` or `;`.
+Only `tailscale up` arguments can be passed.
+
+Do not use this for `--authkey`.
+Use the `tailscale_auth_key` variable instead.
+
+In the future, this parameter will be replaced with a map of supported command-line arguments.
+Since Tailscale is still undergoing rapid development, we are holding off on creating such an argument map until features are more stable.
+
 ## Dependencies
 
 None
@@ -59,6 +72,53 @@ We cannot force you to use an [encrypted variable][ansible-vault], but please us
   roles:
     - role: artis3n.tailscale
       vars:
+        # Fake example encrypted by ansible-vault
+        tailscale_auth_key: !vault |
+          $ANSIBLE_VAULT;1.2;AES256;tailscale
+          32616238303134343065613038383933333733383765653166346564363332343761653761646363
+          6637666565626333333664363739613366363461313063640a613330393062323161636235383936
+          37373734653036613133613533376139383138613164323661386362376335316364653037353631
+          6539646561373535610a643334396234396332376431326565383432626232383131303131363362
+          3537
+```
+
+Pass arbitrary command-line arguments:
+
+```yaml
+- name: Servers
+  hosts: all
+  tasks:
+    - name: Get AZ subnets
+      ec2_vpc_subnet_facts:
+        region: "{{ placement.region }}"
+        filters:
+          vpc-id: "{{ vpc_id }}"
+          availability-zone: "{{ placement.availability_zone }}"
+      register: subnet_info
+
+    - name: Set Subnet list
+      set_fact:
+        subnet_blocks: "{{ subnet_info.subnets | map(attribute='cidr_block') | list  }}"
+
+    - name: Configure Sysctl
+      sysctl:
+        name: net.ipv4.ip_forward=1
+        value: 1
+        state: present
+        ignoreerrors: true
+        sysctl_set: true
+
+    - name: Iptables Masquerade
+      iptables:
+        table: nat
+        chain: POSTROUTING
+        jump: MASQUERADE
+
+    - name: Configure Tailscale
+      include_role:
+        name: artis3n.tailscale
+      vars:
+        tailscale_args: "-accept-routes=false -advertise-routes={{ subnet_blocks | join(',') }}"
         # Fake example encrypted by ansible-vault
         tailscale_auth_key: !vault |
           $ANSIBLE_VAULT;1.2;AES256;tailscale
