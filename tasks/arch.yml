@@ -1,0 +1,13 @@
+---
+
+- name: Download Tailscale AUR
+  git:
+    repo: https://aur.archlinux.org/tailscale.git
+    dest: "{{ lookup('env', 'HOME') }}/tailscale"
+    version: master
+
+- name: Install Tailscale
+  command: makepkg -si --noconfirm
+  args:
+    chdir: "{{ lookup('env', 'HOME') }}/tailscale"
+    creates: /usr/sbin/tailscale

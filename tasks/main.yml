@@ -27,6 +27,10 @@
   when: ansible_distribution == 'Fedora'
   include_tasks: fedora.yml
 
+- name: Arch
+  when: ansible_distribution == 'Archlinux'
+  include_tasks: arch.yml
+
 - name: Enable Service
   become: yes
   service:
