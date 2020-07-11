@@ -4,11 +4,11 @@
   tasks:
   - name: Get Tailscale status
     become: yes
-    command: tailscale up
+    command: tailscale status
     changed_when: false
     register: tailscale_status
 
   - name: Assertions
     assert:
       that:
-        - tailscale_status.stderr == "\ntailscaled is authenticated, nothing more to do."
+        - tailscale_status.stdout | length != 0
