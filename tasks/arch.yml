@@ -1,0 +1,31 @@
+---
+
+- name: Ensure non-root user
+  become: yes
+  user:
+    name: tailscale
+    home: /home/tailscale
+    system: yes
+
+- name: Add tailscale user to sudoers
+  become: yes
+  lineinfile:
+    path: /etc/sudoers
+    regexp: '^tailscale'
+    line: 'tailscale ALL=(ALL) NOPASSWD: ALL'
+
+- name: Download Tailscale AUR
+  become: yes
+  become_user: tailscale
+  git:
+    repo: https://aur.archlinux.org/tailscale.git
+    dest: /home/tailscale/tailscale
+    version: master
+
+- name: Install Tailscale
+  become: yes
+  become_user: tailscale
+  command: makepkg -si --noconfirm
+  args:
+    chdir: /home/tailscale/tailscale
+    creates: /usr/sbin/tailscale

@@ -14,6 +14,7 @@ galaxy_info:
         - eoan
         - bionic
         - xenial
+        - focal
     - name: EL
       versions:
         - 7
@@ -28,6 +29,9 @@ galaxy_info:
     - name: Fedora
       versions:
         - 31
+    - name: ArchLinux
+      versions:
+        - any
 
   galaxy_tags:
     - tailscale

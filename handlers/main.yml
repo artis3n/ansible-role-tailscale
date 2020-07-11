@@ -1,1 +1,12 @@
 ---
+
+- name: Tailscale Status
+  listen: Confirm Tailscale is Connected
+  command: tailscale status
+  register: handlers_tailscale_status
+
+- name: Assert Tailscale is Connected
+  listen: Confirm Tailscale is Connected
+  assert:
+    that:
+      - handlers_tailscale_status.stdout | length != 0

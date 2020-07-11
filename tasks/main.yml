@@ -27,12 +27,21 @@
   when: ansible_distribution == 'Fedora'
   include_tasks: fedora.yml
 
+- name: Arch
+  when: ansible_distribution == 'Archlinux'
+  include_tasks: arch.yml
+
 - name: Enable Service
   become: yes
   service:
     name: "{{ tailscale_service }}"
     state: started
     enabled: yes
+
+- name: Check if Tailscale is connected
+  command: tailscale status
+  changed_when: false
+  register: tailscale_status
 
 - name: Bring Tailscale Up
   become: yes
@@ -42,4 +51,5 @@
   # Since the auth key is included in this task, we do not want to log output
   no_log: true
   register: tailscale_start
-  changed_when: tailscale_start.stderr != "\ntailscaled is authenticated, nothing more to do."
+  when: tailscale_status.stdout | length == 0
+  notify: Confirm Tailscale is Connected
