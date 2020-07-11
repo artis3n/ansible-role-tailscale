@@ -31,7 +31,7 @@ galaxy_info:
         - 31
     - name: ArchLinux
       versions:
-        - any
+        - all
 
   galaxy_tags:
     - tailscale
