@@ -29,7 +29,7 @@ galaxy_info:
     - name: Fedora
       versions:
         - 31
-    - name: ArchLinux
+    - name: Archlinux
       versions:
         - all
 
