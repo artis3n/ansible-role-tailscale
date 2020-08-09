@@ -20,7 +20,7 @@
   include_tasks: centos.yml
 
 - name: Debian and related families
-  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian' or ansible_distribution == 'Pop!_OS'
   include_tasks: debian.yml
 
 - name: Fedora and related families
