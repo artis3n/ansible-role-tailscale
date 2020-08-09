@@ -13,9 +13,14 @@ apt_dependencies:
   - python-apt
   - python3-apt
 
-apt_deb: deb https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release | lower }} main
+distro:
+  pop!_os: ubuntu
+  ubuntu: ubuntu
+  debian: debian
 
-apt_signkey: https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ ansible_distribution | lower }}/{{ ansible_distribution_release | lower }}.gpg
+apt_deb: deb https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ distro[ansible_distribution | lower] }} {{ ansible_distribution_release | lower }} main
+
+apt_signkey: https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ distro[ansible_distribution | lower] }}/{{ ansible_distribution_release | lower }}.gpg
 
 yum_dependencies:
   - yum-utils
