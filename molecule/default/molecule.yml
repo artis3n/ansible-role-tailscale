@@ -9,7 +9,7 @@ lint: |
   ansible-lint
 platforms:
   - name: instance
-    image: ${MOLECULE_DISTRO:-geerlingguy/docker-centos7-ansible:latest}
+    image: ${MOLECULE_DISTRO:-geerlingguy/docker-ubuntu2004-ansible:latest}
     # Needed for systemd
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
