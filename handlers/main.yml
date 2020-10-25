@@ -1,11 +1,11 @@
 ---
 
-- name: artis3n.tailscale | Tailscale Status
+- name: Tailscale Status
   listen: Confirm Tailscale is Connected
   command: tailscale status
   register: handlers_tailscale_status
 
-- name: artis3n.tailscale | Assert Tailscale is Connected
+- name: Assert Tailscale is Connected
   listen: Confirm Tailscale is Connected
   assert:
     that:
