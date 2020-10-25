@@ -14,7 +14,7 @@
   become: yes
   apt:
     name: "{{ legacy_apt_dependencies }}"
-  when: ansible_distribution_major_version < 20
+  when: ansible_distribution_major_version | int < 20
 
 - name: Debian | Tailscale Signing Key
   become: yes
