@@ -10,6 +10,12 @@
     name: "{{ apt_dependencies }}"
     state: present
 
+- name: Debian | Legacy Apt Dependencies
+  become: yes
+  apt:
+    name: "{{ legacy_apt_dependencies }}"
+  when: ansible_distribution_major_version < 20
+
 - name: Debian | Tailscale Signing Key
   become: yes
   apt_key:

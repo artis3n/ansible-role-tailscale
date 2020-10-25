@@ -10,8 +10,11 @@ apt_dependencies:
   - gnupg2
   - gnupg-agent
   - apt-transport-https
-  - python-apt
   - python3-apt
+
+legacy_apt_dependencies:
+  # Only install on legacy Debian systems
+  - python-apt
 
 distro:
   pop!_os: ubuntu
