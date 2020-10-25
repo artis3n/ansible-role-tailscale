@@ -19,6 +19,7 @@ jobs:
           - geerlingguy/docker-centos7-ansible:latest
           - geerlingguy/docker-centos8-ansible:latest
           - geerlingguy/docker-amazonlinux2-ansible:latest
+          - ghcr.io/artis3n/docker-ubuntu2010-ansible:latest
           - geerlingguy/docker-ubuntu2004-ansible:latest
           - geerlingguy/docker-ubuntu1804-ansible:latest
           - geerlingguy/docker-ubuntu1604-ansible:latest
@@ -31,7 +32,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.x
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: 3.8
 
