@@ -15,6 +15,7 @@ galaxy_info:
         - bionic
         - xenial
         - focal
+        - groovy
     - name: EL
       versions:
         - 7
