@@ -18,10 +18,16 @@
     "default": {
         "ansible": {
             "hashes": [
-                "sha256:e83d84ae8bf131c0499d8a4c0e1144bf969454c43086e61cca3c224227df29d1"
+                "sha256:75708c67e2ac926cea42856af72cbc9494bf8008197652f9609089f7b4c2515a"
             ],
             "index": "pypi",
-            "version": "==2.9.9"
+            "version": "==2.10.1"
+        },
+        "ansible-base": {
+            "hashes": [
+                "sha256:c79fe108e13b286bad21734208624aaef9dabb49bb4211b13bc96d88829e22ab"
+            ],
+            "version": "==2.10.2"
         },
         "cffi": {
             "hashes": [
@@ -136,12 +142,26 @@
             ],
             "version": "==1.1.1"
         },
+        "packaging": {
+            "hashes": [
+                "sha256:4357f74f47b9c12db93624a82154e9b120fa8293699949152b22065d556079f8",
+                "sha256:998416ba6962ae7fbd6596850b80e17859a5753ba17c32284f67bfff33784181"
+            ],
+            "version": "==20.4"
+        },
         "pycparser": {
             "hashes": [
                 "sha256:2d475327684562c3a96cc71adf7dc8c4f0565175cf86b6d7a404ff4c771f15f0",
                 "sha256:7582ad22678f0fcd81102833f60ef8d0e57288b6b5fb00323d101be910e35705"
             ],
             "version": "==2.20"
+        },
+        "pyparsing": {
+            "hashes": [
+                "sha256:c203ec8783bf771a155b207279b9bccb8dea02d8f0c9e5f8ead507bc3246ecc1",
+                "sha256:ef9d7589ef3c200abe66653d3f1ab1033c3c419ae9b9bdb1240a85b024efc88b"
+            ],
+            "version": "==2.4.7"
         },
         "pyyaml": {
             "hashes": [
@@ -170,10 +190,16 @@
     "develop": {
         "ansible": {
             "hashes": [
-                "sha256:e83d84ae8bf131c0499d8a4c0e1144bf969454c43086e61cca3c224227df29d1"
+                "sha256:75708c67e2ac926cea42856af72cbc9494bf8008197652f9609089f7b4c2515a"
             ],
             "index": "pypi",
-            "version": "==2.9.9"
+            "version": "==2.10.1"
+        },
+        "ansible-base": {
+            "hashes": [
+                "sha256:c79fe108e13b286bad21734208624aaef9dabb49bb4211b13bc96d88829e22ab"
+            ],
+            "version": "==2.10.2"
         },
         "ansible-lint": {
             "hashes": [
@@ -479,6 +505,13 @@
             ],
             "version": "==1.5.0"
         },
+        "packaging": {
+            "hashes": [
+                "sha256:4357f74f47b9c12db93624a82154e9b120fa8293699949152b22065d556079f8",
+                "sha256:998416ba6962ae7fbd6596850b80e17859a5753ba17c32284f67bfff33784181"
+            ],
+            "version": "==20.4"
+        },
         "paramiko": {
             "hashes": [
                 "sha256:4f3e316fef2ac628b05097a637af35685183111d4bc1b5979bd397c2ab7b5898",
@@ -565,6 +598,13 @@
                 "sha256:f8851ab9041756003119368c1e6cd0b9c631f46d686b3904b18c0139f4419f80"
             ],
             "version": "==1.4.0"
+        },
+        "pyparsing": {
+            "hashes": [
+                "sha256:c203ec8783bf771a155b207279b9bccb8dea02d8f0c9e5f8ead507bc3246ecc1",
+                "sha256:ef9d7589ef3c200abe66653d3f1ab1033c3c419ae9b9bdb1240a85b024efc88b"
+            ],
+            "version": "==2.4.7"
         },
         "python-dateutil": {
             "hashes": [
