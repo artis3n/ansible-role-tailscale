@@ -203,11 +203,11 @@
         },
         "ansible-lint": {
             "hashes": [
-                "sha256:4eabcea3572a9a3d85c6abefe04ca80ec8b306f50116ee6a9d118b4f2fd5e192",
-                "sha256:bec230cf5fcc4d976246d4170da3ae289715f99185529ca8bba4b3c173035656"
+                "sha256:3844a424fcfae4b4a2e56c91f1b5870170c14d2a7c5807d987f785d699e9c48c",
+                "sha256:888cf2510d830de017e01ca4d5fd92abfb84458a2b2a47263a2d923a7dabc7ba"
             ],
             "index": "pypi",
-            "version": "==4.3.5"
+            "version": "==4.3.6"
         },
         "appdirs": {
             "hashes": [
@@ -738,10 +738,10 @@
         },
         "toml": {
             "hashes": [
-                "sha256:926b612be1e5ce0634a2ca03470f95169cf16f939018233a670519cb4ac58b0f",
-                "sha256:bda89d5935c2eac546d648028b9901107a595863cb36bae0c73ac804a9b4ce88"
+                "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b",
+                "sha256:b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f"
             ],
-            "version": "==0.10.1"
+            "version": "==0.10.2"
         },
         "tree-format": {
             "hashes": [
