@@ -1,7 +1,10 @@
 ---
 - name: Tailscale Auth Key Required
   fail:
-    msg: "You must include a Node Authorization auth key. Set a `tailscale_auth_key` ansible-vault encrypted variable. You can create this key from: https://login.tailscale.com/admin/authkeys" # noqa 204
+    msg: |
+      You must include a Node Authorization auth key.
+      Set a `tailscale_auth_key` ansible-vault encrypted variable.
+      You can create this key from: https://login.tailscale.com/admin/authkeys"
   when: tailscale_auth_key is not defined
 
 - name: Unstable Warning
@@ -42,6 +45,11 @@
   command: tailscale status
   changed_when: false
   register: tailscale_status
+
+- name: Tailscale Status
+  debug:
+    var: tailscale_status
+  when: verbose
 
 - name: Record Tailscale Version
   command: tailscale version

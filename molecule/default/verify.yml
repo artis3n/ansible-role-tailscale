@@ -11,4 +11,4 @@
   - name: Assertions
     assert:
       that:
-        - tailscale_status.stdout | length != 0
+        - '"linux" in tailscale_status.stdout'

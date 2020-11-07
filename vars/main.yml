@@ -1,2 +1,5 @@
 ---
 # vars file for artis3n.tailscale
+
+# Whether to output debug information during role execution
+verbose: false

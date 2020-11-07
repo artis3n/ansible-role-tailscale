@@ -60,6 +60,13 @@ Use the `tailscale_auth_key` variable instead.
 In the future, this parameter will be replaced with a map of supported command-line arguments.
 Since Tailscale is still undergoing rapid development, we are holding off on creating such an argument map until features are more stable.
 
+### verbose
+
+**Default**: `false`
+
+Whether to output additional information during role execution.
+Helpful for debugging and collecting information to submit in a GitHub issue on this repository.
+
 ## Dependencies
 
 None
@@ -130,6 +137,25 @@ Pass arbitrary command-line arguments:
           37373734653036613133613533376139383138613164323661386362376335316364653037353631
           6539646561373535610a643334396234396332376431326565383432626232383131303131363362
           3537
+```
+
+Get verbose output:
+
+```yaml
+- name: Servers
+  hosts: all
+  roles:
+    - role: artis3n.tailscale
+      vars:
+        # Fake example encrypted by ansible-vault
+        tailscale_auth_key: !vault |
+          $ANSIBLE_VAULT;1.2;AES256;tailscale
+          32616238303134343065613038383933333733383765653166346564363332343761653761646363
+          6637666565626333333664363739613366363461313063640a613330393062323161636235383936
+          37373734653036613133613533376139383138613164323661386362376335316364653037353631
+          6539646561373535610a643334396234396332376431326565383432626232383131303131363362
+          3537
+        verbose: true
 ```
 
 ## License
