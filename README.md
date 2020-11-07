@@ -164,7 +164,7 @@ MIT
 
 ## Author Information
 
-Ari Kalfus ([@artis3n](https://www.artis3nal.com/)) <dev@arti3nal.com>
+Ari Kalfus ([@artis3n](https://www.artis3nal.com/)) <dev@artis3nal.com>
 
 ## Development and Contributing
 
