@@ -11,7 +11,7 @@ platforms:
   - name: instance
     image: ${MOLECULE_DISTRO:-geerlingguy/docker-ubuntu2004-ansible:latest}
     # Needed for systemd
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    command: ${MOLECULE_DOCKER_COMMAND:-/lib/systemd/systemd}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
