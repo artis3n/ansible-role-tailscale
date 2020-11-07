@@ -1,7 +1,7 @@
 ---
 - name: Tailscale Auth Key Required
   fail:
-    msg: |
+    msg: >
       You must include a Node Authorization auth key.
       Set a `tailscale_auth_key` ansible-vault encrypted variable.
       You can create this key from: https://login.tailscale.com/admin/authkeys"
@@ -10,7 +10,10 @@
 - name: Unstable Warning
   # Print an error message to the console but proceed anyway
   fail:
-    msg: Installing Tailscale from the unstable branch. This is bleeding edge and may have issues. Be warned.
+    msg: >
+      Installing Tailscale from the unstable branch.
+      This is bleeding edge and may have issues.
+      Be warned.
   when: release_stability | lower == 'unstable'
   ignore_errors: yes
 
@@ -49,16 +52,18 @@
 - name: Tailscale Status
   debug:
     var: tailscale_status
-  when: verbose
+  when: verbose | bool
 
 - name: Record Tailscale Version
   command: tailscale version
   changed_when: false
   register: tailscale_version
+  when: verbose | bool
 
 - name: Tailscale Version
   debug:
-    var: tailscale_version.stdout
+    msg: "{{ tailscale_version.stdout.split('\n') }}"
+  when: verbose | bool
 
 - name: Bring Tailscale Up
   become: yes
@@ -66,7 +71,9 @@
   # So we are ok not quoting the variables
   command: tailscale up --authkey={{ tailscale_auth_key }} {{ tailscale_args | default() }}
   # Since the auth key is included in this task, we do not want to log output
-  no_log: true
+  # no_log: true
   register: tailscale_start
-  when: tailscale_status.stdout | length == 0
+  when: >
+    tailscale_status.stdout | length == 0
+    or tailscale_status.stdout is match('\[L\+V9o\]')
   notify: Confirm Tailscale is Connected

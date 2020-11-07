@@ -23,9 +23,22 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - All relevant software versions [e.g. ansible 2.9.7]
+**Target (please complete the following information):**
+ - OS: [e.g. Ubuntu]
+ - Ansible version:
+ - `artis3n.tailscale` version:
+ - Tailscale version (set `verbose` to true):
+
+Output of `tailscale status` during role execution (set `verbose` to true):
+
+```bash
+ok: [instance] => {
+        "tailscale_status": {
+            ...
+        }
+    }
+
+```
 
 **Additional context**
 Add any other context about the problem here.

@@ -12,3 +12,4 @@
     assert:
       that:
         - '"linux" in tailscale_status.stdout'
+        - '"L+V9o" not in tailscale_status.stdout'
