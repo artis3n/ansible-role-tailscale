@@ -41,3 +41,7 @@ dnf_yum_dependencies:
 
 dnf_repos:
   Fedora: https://pkgs.tailscale.com/{{ release_stability | lower }}/fedora/tailscale.repo
+
+arch_dependencies:
+  - glibc
+  - go

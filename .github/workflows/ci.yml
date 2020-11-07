@@ -23,7 +23,7 @@ jobs:
           - geerlingguy/docker-debian10-ansible:latest
           - geerlingguy/docker-debian9-ansible:latest
           - geerlingguy/docker-fedora31-ansible:latest
-          - artis3n/docker-arch-ansible:latest
+          - ghcr.io/artis3n/docker-arch-ansible:latest
       fail-fast: false
 
     steps:

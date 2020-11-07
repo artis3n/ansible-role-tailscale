@@ -1,5 +1,16 @@
 ---
 
+- name: Arch | Cache Update
+  become: yes
+  pacman:
+    update_cache: yes
+
+- name: Arch | Install Dependencies
+  become: yes
+  pacman:
+    name: '{{ arch_dependencies }}'
+    state: present
+
 - name: Arch | Ensure non-root user
   become: yes
   user:

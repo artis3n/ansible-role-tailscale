@@ -43,6 +43,15 @@
   changed_when: false
   register: tailscale_status
 
+- name: Record Tailscale Version
+  command: tailscale version
+  changed_when: false
+  register: tailscale_version
+
+- name: Tailscale Version
+  debug:
+    var: tailscale_version.stdout
+
 - name: Bring Tailscale Up
   become: yes
   # The command module cannot use | ; &
