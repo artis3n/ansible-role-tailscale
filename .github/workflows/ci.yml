@@ -66,19 +66,19 @@ jobs:
         if: always()
         run: rm /home/runner/work/_temp/.vault-ci-pass
 
-  windows:
+  molecule-windows:
     runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Python 3.x
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
-
       - name: Set up WSL
         uses: Vampire/setup-wsl@v1
+        with:
+          distribution: Ubuntu-20.04
+          additional_packages:
+            python
+            python-pip
 
       - name: Install dependencies
         shell: wsl-bash {0}
