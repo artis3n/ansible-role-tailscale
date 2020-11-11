@@ -83,7 +83,7 @@ jobs:
           pip install setuptools wheel
 
       - name: Install packages
-        run: pip install ansible~=2.9 docker 'molecule[docker]'
+        run: pip install ansible docker 'molecule[docker]'
 
       - name: Test
         run: |
