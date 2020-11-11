@@ -77,17 +77,23 @@ jobs:
         with:
           python-version: 3.8
 
+      - name: Set up WSL
+        uses: Vampire/setup-wsl@v1
+
       - name: Install dependencies
+        shell: wsl-bash {0}
         run: |
           python -m pip install --upgrade pip
           pip install setuptools wheel
 
       - name: Install packages
-        run: pip install ansible docker 'molecule[docker]'
+        shell: wsl-bash {0}
+        run: pipenv install --dev
 
       - name: Test
+        shell: wsl-bash {0}
         run: |
-          dir
+          ls -la
           pip cache info
-          pip show ansible
-          ansible-galaxy install artis3n.tailscale
+          pipenv --where
+          pipenv run ansible-galaxy install artis3n.tailscale
