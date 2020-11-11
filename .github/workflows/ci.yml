@@ -65,3 +65,27 @@ jobs:
       - name: Clean up
         if: always()
         run: rm /home/runner/work/_temp/.vault-ci-pass
+
+  windows:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pipenv
+
+      - name: Install packages
+        run: pipenv install --dev
+
+      - name: Test
+        run: |
+          dir
+          pipenv --where

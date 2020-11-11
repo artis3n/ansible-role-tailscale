@@ -37,43 +37,50 @@
   when: ansible_distribution == 'Archlinux'
   include_tasks: arch.yml
 
-- name: Enable Service
-  become: yes
-  service:
-    name: "{{ tailscale_service }}"
-    state: started
-    enabled: yes
+- name: Windows
+  when: ansible_distribution == 'Windows'
+  include_tasks: windows.yml
 
-- name: Check if Tailscale is connected
-  command: tailscale status
-  changed_when: false
-  register: tailscale_status
+- name: Configure Tailscale
+  when: ansible_distribution != 'Windows'
+  block:
+    - name: Enable Service
+      become: yes
+      service:
+        name: "{{ tailscale_service }}"
+        state: started
+        enabled: yes
 
-- name: Tailscale Status
-  debug:
-    var: tailscale_status
-  when: verbose | bool
+    - name: Check if Tailscale is connected
+      command: tailscale status
+      changed_when: false
+      register: tailscale_status
 
-- name: Record Tailscale Version
-  command: tailscale version
-  changed_when: false
-  register: tailscale_version
-  when: verbose | bool
+    - name: Tailscale Status
+      debug:
+        var: tailscale_status
+      when: verbose | bool
 
-- name: Tailscale Version
-  debug:
-    msg: "{{ tailscale_version.stdout.split('\n') }}"
-  when: verbose | bool
+    - name: Record Tailscale Version
+      command: tailscale version
+      changed_when: false
+      register: tailscale_version
+      when: verbose | bool
 
-- name: Bring Tailscale Up
-  become: yes
-  # The command module cannot use | ; &
-  # So we are ok not quoting the variables
-  command: tailscale up --authkey={{ tailscale_auth_key }} {{ tailscale_args | default() }}
-  # Since the auth key is included in this task, we do not want to log output
-  no_log: true
-  register: tailscale_start
-  when: >
-    tailscale_status.stdout | length == 0
-    or tailscale_status.stdout is match('\[L\+V9o\]')
-  notify: Confirm Tailscale is Connected
+    - name: Tailscale Version
+      debug:
+        msg: "{{ tailscale_version.stdout.split('\n') }}"
+      when: verbose | bool
+
+    - name: Bring Tailscale Up
+      become: yes
+      # The command module cannot use | ; &
+      # So we are ok not quoting the variables
+      command: tailscale up --authkey={{ tailscale_auth_key }} {{ tailscale_args | default() }}
+      # Since the auth key is included in this task, we do not want to log output
+      no_log: true
+      register: tailscale_start
+      when: >
+        tailscale_status.stdout | length == 0
+        or tailscale_status.stdout is match('\[L\+V9o\]')
+      notify: Confirm Tailscale is Connected
