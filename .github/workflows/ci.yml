@@ -76,7 +76,7 @@ jobs:
         uses: Vampire/setup-wsl@v1
         with:
           distribution: Ubuntu-20.04
-          additional_packages:
+          additional-packages:
             python
             python-pip
 
