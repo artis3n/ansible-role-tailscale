@@ -90,10 +90,38 @@ jobs:
         shell: wsl-bash {0}
         run: pipenv install --dev
 
+      - name: Move project to Ansible-required location
+        shell: wsl-bash {0}
+        run: |
+          mkdir -p ~/.ansible/roles/artis3n.tailscale
+          cp -r ./ ~/.ansible/roles/artis3n.tailscale
+
+      - name: WinRM Memory Hotfix
+        shell: powershell
+        run: |
+          $url = "https://raw.githubusercontent.com/jborean93/ansible-windows/master/scripts/Install-WMF3Hotfix.ps1"
+          $file = "$env:temp\Install-WMF3Hotfix.ps1"
+
+          (New-Object -TypeName System.Net.WebClient).DownloadFile($url, $file)
+          powershell.exe -ExecutionPolicy ByPass -File $file -Verbose
+
+      - name: Configure WinRM
+        shell: powershell
+        run: |
+          $url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
+          $file = "$env:temp\ConfigureRemotingForAnsible.ps1"
+
+          (New-Object -TypeName System.Net.WebClient).DownloadFile($url, $file)
+
+          powershell.exe -ExecutionPolicy ByPass -File $file
+
       - name: Test
         shell: wsl-bash {0}
         run: |
-          ls -la
-          pip cache info
-          pipenv --where
-          pipenv run ansible-galaxy install artis3n.tailscale
+          pwd
+          ip a
+
+      - name: WinRM Test
+        shell: powershell
+        run: |
+          winrm enumerate winrm/config/Listener
