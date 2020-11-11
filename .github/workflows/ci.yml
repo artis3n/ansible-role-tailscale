@@ -78,7 +78,6 @@ jobs:
           distribution: Ubuntu-20.04
           additional-packages:
             python
-            python-pip
 
       - name: Install dependencies
         shell: wsl-bash {0}
