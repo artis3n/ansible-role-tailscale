@@ -86,6 +86,14 @@ jobs:
           python3 -m pip install --upgrade pip
           pip3 install setuptools wheel pipenv
 
+      - name: Use Cache
+        uses: actions/cache@v2
+        with:
+          path: '%LOCALAPPDATA%\pipenv\pipenv\Cache'
+          key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pipenv-
+
       - name: Install packages
         shell: wsl-bash {0}
         run: pipenv install --dev
@@ -96,17 +104,7 @@ jobs:
           mkdir -p ~/.ansible/roles/artis3n.tailscale
           cp -r ./ ~/.ansible/roles/artis3n.tailscale
 
-      - name: WinRM Memory Hotfix
-        shell: powershell
-        run: |
-          $url = "https://raw.githubusercontent.com/jborean93/ansible-windows/master/scripts/Install-WMF3Hotfix.ps1"
-          $file = "$env:temp\Install-WMF3Hotfix.ps1"
-
-          (New-Object -TypeName System.Net.WebClient).DownloadFile($url, $file)
-          powershell.exe -ExecutionPolicy ByPass -File $file -Verbose
-
       - name: Configure WinRM
-        shell: powershell
         run: |
           $url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
           $file = "$env:temp\ConfigureRemotingForAnsible.ps1"
@@ -118,10 +116,10 @@ jobs:
       - name: Test
         shell: wsl-bash {0}
         run: |
+          pipenv --where
           pwd
           ip a
 
       - name: WinRM Test
-        shell: powershell
         run: |
           winrm enumerate winrm/config/Listener
