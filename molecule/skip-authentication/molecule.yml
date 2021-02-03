@@ -20,7 +20,7 @@ provisioner:
 verifier:
   name: ansible
 scenario:
-  name: default
+  name: skip-authentication
   test_sequence:
     - lint
     - destroy
@@ -29,5 +29,4 @@ scenario:
     - converge
     - idempotence
     - verify
-    - cleanup
     - destroy

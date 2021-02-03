@@ -58,7 +58,7 @@ jobs:
           cp -r ./ ~/.ansible/roles/artis3n.tailscale
 
       - name: Molecule
-        run: echo "${{ secrets.VAULT_PASS }}" > /home/runner/work/_temp/.vault-ci-pass && ANSIBLE_VAULT_PASSWORD_FILE=/home/runner/work/_temp/.vault-ci-pass pipenv run molecule test
+        run: echo "${{ secrets.VAULT_PASS }}" > /home/runner/work/_temp/.vault-ci-pass && ANSIBLE_VAULT_PASSWORD_FILE=/home/runner/work/_temp/.vault-ci-pass pipenv run molecule test --all
         env:
           MOLECULE_DISTRO: "${{ matrix.distros }}"
 
