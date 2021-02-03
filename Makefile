@@ -17,9 +17,8 @@ clean:
 
 .PHONY: test
 test:
-	ANSIBLE_VAULT_PASSWORD_FILE=$(PWD)/.ci-vault-pass pipenv run molecule test
+	ANSIBLE_VAULT_PASSWORD_FILE=$(PWD)/.ci-vault-pass pipenv run molecule test --all
 
 .PHONY: lint
 lint:
-	pipenv run yamllint .
 	pipenv run ansible-lint

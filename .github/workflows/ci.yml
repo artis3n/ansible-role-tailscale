@@ -31,7 +31,7 @@ jobs:
       - name: Set up Python 3.x
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: 3.9
 
       - name: Install dependencies
         run: |
@@ -41,8 +41,8 @@ jobs:
       - name: Use Cache
         uses: actions/cache@v2
         with:
-          path: ~/.cache/pipenv
-          key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
+          path: ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-pipenv-${{ hashFiles('Pipfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-pipenv-
 
@@ -58,7 +58,7 @@ jobs:
           cp -r ./ ~/.ansible/roles/artis3n.tailscale
 
       - name: Molecule
-        run: echo "${{ secrets.VAULT_PASS }}" > /home/runner/work/_temp/.vault-ci-pass && ANSIBLE_VAULT_PASSWORD_FILE=/home/runner/work/_temp/.vault-ci-pass pipenv run molecule test
+        run: echo "${{ secrets.VAULT_PASS }}" > /home/runner/work/_temp/.vault-ci-pass && ANSIBLE_VAULT_PASSWORD_FILE=/home/runner/work/_temp/.vault-ci-pass pipenv run molecule test --all
         env:
           MOLECULE_DISTRO: "${{ matrix.distros }}"
 
