@@ -5,7 +5,13 @@
       You must include a Node Authorization auth key.
       Set a `tailscale_auth_key` ansible-vault encrypted variable.
       You can create this key from: https://login.tailscale.com/admin/authkeys"
-  when: tailscale_auth_key is not defined
+  when: tailscale_auth_key is not defined and not tailscale_up_skip|bool
+
+- name: Skipping Authentication
+  debug:
+    msg: >
+      You have set 'tailscale_up_skip', so this node will not authenticate to your Tailscale network.
+  when: tailscale_up_skip|bool
 
 - name: Unstable Warning
   # Print an error message to the console but proceed anyway
@@ -74,6 +80,6 @@
   no_log: true
   register: tailscale_start
   when: >
-    tailscale_status.stdout | length == 0
-    or tailscale_status.stdout is match('\[L\+V9o\]')
+    not tailscale_up_skip | bool
+    and '"hello.ipn.dev"' not in tailscale_status.stdout
   notify: Confirm Tailscale is Connected

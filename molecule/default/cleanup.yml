@@ -1,0 +1,8 @@
+---
+- name: Cleanup
+  hosts: all
+  tasks:
+  - name: De-register Tailscale node
+    become: yes
+    command: tailscale down
+    changed_when: false

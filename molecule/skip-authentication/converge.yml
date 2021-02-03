@@ -1,0 +1,9 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include artis3n.tailscale"
+      include_role:
+        name: artis3n.tailscale
+      vars:
+        tailscale_up_skip: true

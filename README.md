@@ -21,6 +21,8 @@ You must supply a `tailscale_auth_key` variable, which can be generated under yo
 
 **Required**
 
+Is **not** required if `tailscale_up_skip` is set to `true`.
+
 An [ansible-vault encrypted variable][ansible-vault] containing a Tailscale Node Authorization auth key.
 
 A Node Authorization auth key can be generated under your Tailscale account at <https://login.tailscale.com/admin/authkeys>.
@@ -66,6 +68,15 @@ Since Tailscale is still undergoing rapid development, we are holding off on cre
 
 Whether to output additional information during role execution.
 Helpful for debugging and collecting information to submit in a GitHub issue on this repository.
+
+### tailscale_up_skip
+
+**Default**: `false`
+
+**If set to true, `tailscale_auth_key` is not required.**
+
+Whether to install and configure Tailscale as a service but skip running `tailscale up`.
+Helpful when packaging up a Tailscale installation into a build process such as AMI creation when the server should not yet authenticate to your Tailscale network.
 
 ## Dependencies
 
@@ -156,6 +167,17 @@ Get verbose output:
           6539646561373535610a643334396234396332376431326565383432626232383131303131363362
           3537
         verbose: true
+```
+
+Install Tailscale, but don't authenticate to the network
+
+```yaml
+- name: Servers
+  hosts: all
+  roles:
+    - role: artis3n.tailscale
+      vars:
+        tailscale_up_skip: true
 ```
 
 ## License

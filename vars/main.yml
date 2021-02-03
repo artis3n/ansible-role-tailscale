@@ -3,3 +3,4 @@
 
 # Whether to output debug information during role execution
 verbose: false
+tailscale_up_skip: false
