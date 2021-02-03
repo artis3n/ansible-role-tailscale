@@ -75,7 +75,7 @@ jobs:
       - name: Set up WSL
         uses: Vampire/setup-wsl@v1
         with:
-          distribution: Ubuntu-20.04
+          distribution: Ubuntu-20.10
           additional-packages:
             python3
             python3-pip
