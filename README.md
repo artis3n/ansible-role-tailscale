@@ -123,7 +123,7 @@ Pass arbitrary command-line arguments:
 
     - name: Configure Sysctl
       sysctl:
-        name: net.ipv4.ip_forward=1
+        name: net.ipv4.ip_forward
         value: 1
         state: present
         ignoreerrors: true
