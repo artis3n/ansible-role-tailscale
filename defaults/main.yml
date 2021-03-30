@@ -11,6 +11,7 @@ apt_dependencies:
   - gnupg-agent
   - apt-transport-https
   - python3-apt
+  - lsb-release
 
 legacy_apt_dependencies:
   # Only install on legacy Debian systems
