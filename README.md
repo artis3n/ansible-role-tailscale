@@ -78,6 +78,13 @@ Helpful for debugging and collecting information to submit in a GitHub issue on 
 Whether to install and configure Tailscale as a service but skip running `tailscale up`.
 Helpful when packaging up a Tailscale installation into a build process such as AMI creation when the server should not yet authenticate to your Tailscale network.
 
+### force
+
+**Default**: `false`
+
+If set to `true`, `tailscale up` will always run.
+This can be beneficial if tailscale has already been configured on a host but you want to re-run `up` with different arguments.
+
 ## Dependencies
 
 None

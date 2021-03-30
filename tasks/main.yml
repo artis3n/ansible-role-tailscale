@@ -80,6 +80,7 @@
   no_log: true
   register: tailscale_start
   when: >
-    not tailscale_up_skip | bool
-    and '"hello.ipn.dev"' not in tailscale_status.stdout
+    force | bool or
+    (not tailscale_up_skip | bool
+    and '"hello.ipn.dev"' not in tailscale_status.stdout)
   notify: Confirm Tailscale is Connected
