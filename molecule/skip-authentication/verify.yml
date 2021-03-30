@@ -11,4 +11,4 @@
   - name: Assertions
     assert:
       that:
-        - '"hello.ipn.dev" not in tailscale_status.stdout'
+        - '"hello-ipn-dev" not in tailscale_status.stdout'
