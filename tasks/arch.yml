@@ -1,8 +1,8 @@
 ---
 
 - name: Arch | Install Tailscale
-  become: yes
+  become: true
   pacman:
     name: '{{ tailscale_package }}'
-    update_cache: yes
+    update_cache: true
     state: present

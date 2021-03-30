@@ -3,6 +3,6 @@
   hosts: all
   tasks:
   - name: De-register Tailscale node
-    become: yes
+    become: true
     command: tailscale down
     changed_when: false
