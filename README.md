@@ -176,7 +176,7 @@ Get verbose output:
         verbose: true
 ```
 
-Install Tailscale, but don't authenticate to the network
+Install Tailscale, but don't authenticate to the network:
 
 ```yaml
 - name: Servers
@@ -185,6 +185,25 @@ Install Tailscale, but don't authenticate to the network
     - role: artis3n.tailscale
       vars:
         tailscale_up_skip: true
+```
+
+Run `tailscale up` on a host that has been previously configured:
+
+```yaml
+- name: Servers
+  hosts: all
+  roles:
+    - role: artis3n.tailscale
+      vars:
+        # Fake example encrypted by ansible-vault
+        tailscale_auth_key: !vault |
+          $ANSIBLE_VAULT;1.2;AES256;tailscale
+          32616238303134343065613038383933333733383765653166346564363332343761653761646363
+          6637666565626333333664363739613366363461313063640a613330393062323161636235383936
+          37373734653036613133613533376139383138613164323661386362376335316364653037353631
+          6539646561373535610a643334396234396332376431326565383432626232383131303131363362
+          3537
+        force: true
 ```
 
 ## License
