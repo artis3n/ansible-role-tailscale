@@ -1,19 +1,19 @@
 ---
 - name: CentOS | Yum Dependencies
-  become: yes
+  become: true
   yum:
     name: "{{ yum_dependencies }}"
     state: present
 
 - name: CentOS | Add Yum Repo
-  become: yes
+  become: true
   command: yum-config-manager --add-repo {{ yum_repos[ansible_distribution] }}
   args:
     creates: /etc/yum.repos.d/tailscale.repo
 
 - name: CentOS | Install Tailscale
-  become: yes
+  become: true
   yum:
     name: "{{ tailscale_package }}"
-    disable_gpg_check: yes
+    disable_gpg_check: true
     state: present

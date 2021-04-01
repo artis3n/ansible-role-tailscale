@@ -1,7 +1,7 @@
 ---
 
 # https://www.jeffgeerling.com/blog/2020/resolving-fedora-dnf-error-no-such-file-or-directory-varlibdnfrpmdblockpid
-- name: Fedora | Wait for systemd to complete initialization. # noqa 303
+- name: Fedora | Wait for systemd to complete initialization.  # noqa command-instead-of-module
   command: systemctl is-system-running
   register: systemctl_status
   until: >
@@ -13,27 +13,27 @@
   changed_when: false
 
 - name: Fedora | Yum Dependencies
-  become: yes
+  become: true
   yum:
     name: "{{ dnf_yum_dependencies }}"
-    update_cache: yes
+    update_cache: true
     state: present
 
 - name: Fedora | Dnf Dependencies
-  become: yes
+  become: true
   dnf:
     name: "{{ dnf_dependencies }}"
     state: present
 
 - name: Fedora | Add Dnf Repo
-  become: yes
+  become: true
   command: dnf config-manager --add-repo {{ dnf_repos[ansible_distribution] }}
   args:
     creates: /etc/yum.repos.d/tailscale.repo
-    warn: no
+    warn: false
 
 - name: Fedora | Install Tailscale
-  become: yes
+  become: true
   dnf:
     name: "{{ tailscale_package }}"
     state: present

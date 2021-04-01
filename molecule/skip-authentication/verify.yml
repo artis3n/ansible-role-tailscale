@@ -3,7 +3,7 @@
   hosts: all
   tasks:
   - name: Get Tailscale status
-    become: yes
+    become: true
     command: tailscale status
     changed_when: false
     register: tailscale_status
@@ -11,4 +11,4 @@
   - name: Assertions
     assert:
       that:
-        - '"hello.ipn.dev" not in tailscale_status.stdout'
+        - '"hello-ipn-dev" not in tailscale_status.stdout'

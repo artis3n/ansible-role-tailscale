@@ -21,7 +21,7 @@
       This is bleeding edge and may have issues.
       Be warned.
   when: release_stability | lower == 'unstable'
-  ignore_errors: yes
+  ignore_errors: true
 
 - name: Operating System
   debug:
@@ -44,11 +44,11 @@
   include_tasks: arch.yml
 
 - name: Enable Service
-  become: yes
+  become: true
   service:
     name: "{{ tailscale_service }}"
     state: started
-    enabled: yes
+    enabled: true
 
 - name: Check if Tailscale is connected
   command: tailscale status
@@ -72,7 +72,7 @@
   when: verbose | bool
 
 - name: Bring Tailscale Up
-  become: yes
+  become: true
   # The command module cannot use | ; &
   # So we are ok not quoting the variables
   command: tailscale up --authkey={{ tailscale_auth_key }} {{ tailscale_args | default() }}
@@ -80,6 +80,7 @@
   no_log: true
   register: tailscale_start
   when: >
-    not tailscale_up_skip | bool
-    and '"hello.ipn.dev"' not in tailscale_status.stdout
+    force | bool or
+    (not tailscale_up_skip | bool
+    and 'hello-ipn-dev' not in tailscale_status.stdout)
   notify: Confirm Tailscale is Connected
