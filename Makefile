@@ -14,9 +14,9 @@ install:
 # Only run this on GitHub Codespaces in order to set up Python 3.9
 .PHONY: codespaces-install
 codespaces-install:
-	sudo add-apt-repository ppa:deadsnakes/ppa
+	sudo add-apt-repository -y ppa:deadsnakes/ppa
 	sudo apt-get update
-	sudo apt-get install python3.9
+	sudo apt-get install -y python3.9
 	sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
 	sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 2
 	make install
