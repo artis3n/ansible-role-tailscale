@@ -11,7 +11,6 @@ apt_dependencies:
   - gnupg-agent
   - apt-transport-https
   - python3-apt
-  - lsb-release
 
 legacy_apt_dependencies:
   # Only install on legacy Debian systems
@@ -42,3 +41,5 @@ dnf_yum_dependencies:
 
 dnf_repos:
   Fedora: https://pkgs.tailscale.com/{{ release_stability | lower }}/fedora/tailscale.repo
+
+original_distribution_major_version: '{{ ansible_distribution_major_version }}'
