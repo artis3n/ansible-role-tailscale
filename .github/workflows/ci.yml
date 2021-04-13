@@ -89,7 +89,7 @@ jobs:
 
       - name: Install packages
         shell: wsl-bash {0}
-        run: pipenv install --dev
+        run: python3 -m pipenv install --dev
 
       - name: Configure WinRM
         run: |
