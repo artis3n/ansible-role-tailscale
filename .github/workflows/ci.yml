@@ -85,11 +85,11 @@ jobs:
           sudo apt-get install -y python3.9
           # Library dependencies
           python3 -m pip install --upgrade pip
-          pip3 install setuptools wheel pipen
+          pip3 install setuptools wheel pipenv
 
       - name: Install packages
         shell: wsl-bash {0}
-        run: python3 -m pipenv install --dev
+        run: pipenv install --dev
 
       - name: Configure WinRM
         run: |
