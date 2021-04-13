@@ -36,11 +36,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # Python 3.9
           sudo add-apt-repository -y ppa:deadsnakes/ppa
           sudo apt-get update
           sudo apt-get install -y python3.9
-          # Library dependencies
           python -m pip install --upgrade pip
           pip install pipenv
 
