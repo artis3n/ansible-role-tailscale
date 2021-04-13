@@ -24,6 +24,7 @@ jobs:
           - geerlingguy/docker-debian9-ansible:latest
           - geerlingguy/docker-fedora31-ansible:latest
           - ghcr.io/artis3n/docker-arch-ansible:latest
+          - ghcr.io/artis3n/docker-debian11-ansible:latest
       fail-fast: false
 
     steps:
@@ -39,7 +40,7 @@ jobs:
           pip install pipenv
 
       - name: Use Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v2.1.4
         with:
           path: ~/.local/share/virtualenvs
           key: ${{ runner.os }}-pipenv-${{ hashFiles('Pipfile.lock') }}
@@ -51,11 +52,6 @@ jobs:
 
       - name: Lint
         run: make lint
-
-      - name: Move project to Ansible-required location
-        run: |
-          mkdir -p ~/.ansible/roles/artis3n.tailscale
-          cp -r ./ ~/.ansible/roles/artis3n.tailscale
 
       - name: Molecule
         run: echo "${{ secrets.VAULT_PASS }}" > /home/runner/work/_temp/.vault-ci-pass && ANSIBLE_VAULT_PASSWORD_FILE=/home/runner/work/_temp/.vault-ci-pass pipenv run molecule test --all

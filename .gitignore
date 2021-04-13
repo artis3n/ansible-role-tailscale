@@ -1,4 +1,4 @@
 .idea
 .vscode
-
+.cache
 .*vault-pass
