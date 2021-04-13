@@ -36,9 +36,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo add-apt-repository -y ppa:deadsnakes/ppa
-          sudo apt-get update
-          sudo apt-get install -y python3.9
           python -m pip install --upgrade pip
           pip install pipenv
 
@@ -82,26 +79,17 @@ jobs:
       - name: Install dependencies
         shell: wsl-bash {0}
         run: |
+          # Python 3.9
+          sudo add-apt-repository -y ppa:deadsnakes/ppa
+          sudo apt-get update
+          sudo apt-get install -y python3.9
+          # Library dependencies
           python3 -m pip install --upgrade pip
-          pip3 install setuptools wheel pipenv
-
-      - name: Use Cache
-        uses: actions/cache@v2
-        with:
-          path: '%LOCALAPPDATA%\pipenv\pipenv\Cache'
-          key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-pipenv-
+          pip3 install setuptools wheel pipen
 
       - name: Install packages
         shell: wsl-bash {0}
         run: pipenv install --dev
-
-      - name: Move project to Ansible-required location
-        shell: wsl-bash {0}
-        run: |
-          mkdir -p ~/.ansible/roles/artis3n.tailscale
-          cp -r ./ ~/.ansible/roles/artis3n.tailscale
 
       - name: Configure WinRM
         run: |
