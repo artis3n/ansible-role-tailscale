@@ -26,6 +26,7 @@ Is **not** required if `tailscale_up_skip` is set to `true`.
 An [ansible-vault encrypted variable][ansible-vault] containing a Tailscale Node Authorization auth key.
 
 A Node Authorization auth key can be generated under your Tailscale account at <https://login.tailscale.com/admin/authkeys>.
+Note that reusable authorization keys now expire 90 days after they are generated.
 
 Encrypt this variable with the following command:
 

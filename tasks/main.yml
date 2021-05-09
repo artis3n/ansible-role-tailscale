@@ -83,6 +83,9 @@
   command: tailscale status
   changed_when: false
   register: tailscale_status
+  failed_when:
+    - tailscale_status.rc != 0
+    - tailscale_status.stdout != "Logged out."
 
 - name: Tailscale Status
   debug:
