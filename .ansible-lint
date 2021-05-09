@@ -3,6 +3,7 @@ exclude_paths:
     - .github/
     - .idea/
     - .vscode/
+    - ../../../../../.ansible/
 
 skip_list:
     - line-length
