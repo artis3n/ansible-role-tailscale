@@ -4,5 +4,5 @@
   tasks:
   - name: De-register Tailscale node
     become: true
-    command: tailscale down
+    command: tailscale logout
     changed_when: false
