@@ -14,4 +14,4 @@
   - name: Assertions
     assert:
       that:
-        - '"hello-ipn-dev" not in tailscale_status.stdout'
+        - tailscale_status.stdout == "Logged out."
