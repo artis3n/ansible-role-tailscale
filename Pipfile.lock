@@ -205,10 +205,10 @@
     "develop": {
         "ansible-lint": {
             "hashes": [
-                "sha256:a7b42c1dd8f44d611ea960c78e03436100fdb64d54bc69f5a82c0a1d33af8f4e",
-                "sha256:e7dab22d7826ac623c7c2566e17ee5420633afc844a3a0c0db3adaaa72bc6a82"
+                "sha256:56126f63cd5171b4265f76569138e366e6cebd57f11abbd737bec91c44608391",
+                "sha256:c41f398c5a3faaab0481ec988ed42221d9f2de48da1acb06f261546349a870c0"
             ],
-            "version": "==5.0.10"
+            "version": "==5.0.11"
         },
         "appdirs": {
             "hashes": [
@@ -562,11 +562,11 @@
         },
         "pre-commit": {
             "hashes": [
-                "sha256:70c5ec1f30406250b706eda35e868b87e3e4ba099af8787e3e8b4b01e84f4712",
-                "sha256:900d3c7e1bf4cf0374bb2893c24c23304952181405b4d88c9c40b72bda1bb8a9"
+                "sha256:764972c60693dc668ba8e86eb29654ec3144501310f7198742a767bec385a378",
+                "sha256:b679d0fddd5b9d6d98783ae5f10fd0c4c59954f375b70a58cbe1ce9bcf9809a4"
             ],
             "index": "pypi",
-            "version": "==2.12.1"
+            "version": "==2.13.0"
         },
         "pycodestyle": {
             "hashes": [
