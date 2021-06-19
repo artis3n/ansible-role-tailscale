@@ -48,7 +48,7 @@
         ansible_distribution == 'CentOS'
         or ansible_distribution == 'Amazon'
         or ansible_distribution == 'Fedora'
-
+        or ansible_distribution == 'OracleLinux'
     - name: Refresh Setup
       setup:
 
@@ -57,7 +57,7 @@
     msg: "{{ ansible_distribution }} {{ ansible_distribution_major_version }} ({{ ansible_distribution_release }})"
 
 - name: CentOS and related families
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Amazon'
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Amazon' or ansible_distribution == 'OracleLinux'
   include_tasks: centos.yml
 
 - name: Debian and related families
