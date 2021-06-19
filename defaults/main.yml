@@ -32,6 +32,7 @@ yum_dependencies:
 yum_repos:
   Amazon: https://pkgs.tailscale.com/{{ release_stability | lower }}/amazon-linux/{{ ansible_distribution_major_version }}/tailscale.repo
   CentOS: https://pkgs.tailscale.com/{{ release_stability | lower }}/centos/{{ ansible_distribution_major_version }}/tailscale.repo
+  OracleLinux: https://pkgs.tailscale.com/{{ release_stability | lower }}/centos/{{ ansible_distribution_major_version }}/tailscale.repo
 
 dnf_dependencies:
   - python-dnf
@@ -42,4 +43,4 @@ dnf_yum_dependencies:
 dnf_repos:
   Fedora: https://pkgs.tailscale.com/{{ release_stability | lower }}/fedora/tailscale.repo
 
-original_distribution_major_version: '{{ ansible_distribution_major_version }}'
+original_distribution_major_version: "{{ ansible_distribution_major_version }}"
