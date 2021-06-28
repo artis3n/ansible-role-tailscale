@@ -17,3 +17,12 @@
     name: "{{ tailscale_package }}"
     disable_gpg_check: true
     state: present
+  when: not upgrade_release
+
+- name: CentOS | Install or upgrade Tailscale
+  become: true
+  yum:
+    name: "{{ tailscale_package }}"
+    disable_gpg_check: true
+    state: present
+  when: upgrade_release | bool
