@@ -6,3 +6,12 @@
     name: '{{ tailscale_package }}'
     update_cache: true
     state: present
+  when: not upgrade_release
+
+- name: Arch | Install or upgrade Tailscale
+  become: true
+  pacman:
+    name: '{{ tailscale_package }}'
+    update_cache: true
+    state: latest
+  when: upgrade_release | bool

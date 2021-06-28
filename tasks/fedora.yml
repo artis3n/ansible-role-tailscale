@@ -37,3 +37,11 @@
   dnf:
     name: "{{ tailscale_package }}"
     state: present
+  when: not upgrade_release
+
+- name: Fedora | Install or upgrade Tailscale
+  become: true
+  dnf:
+    name: "{{ tailscale_package }}"
+    state: latest
+  when: upgrade_release | bool
