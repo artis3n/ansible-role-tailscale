@@ -3,7 +3,7 @@ tailscale_package: tailscale
 tailscale_service: tailscaled
 
 release_stability: stable
-upgrade_release: true
+upgrade_release: false
 
 repo_description: Tailscale repository
 
