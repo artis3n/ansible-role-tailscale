@@ -24,5 +24,5 @@
   yum:
     name: "{{ tailscale_package }}"
     disable_gpg_check: true
-    state: present
+    state: latest
   when: upgrade_release | bool
