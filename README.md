@@ -224,7 +224,7 @@ This GitHub repository uses a dedicated "test" Tailscale account to authenticate
 Each Docker container creates a new authorized machine in that test account.
 The machines are authorized with [ephemeral auth keys][] and are automatically cleaned up within 48 hours.
 
-If you are interested in contributing to this repository, you must create a [Tailscale account][] and generate a [Node Authorization auth key][auth key].
+If you are interested in contributing to this repository, you must create a [Tailscale account][] and generate a [Node Authorization ephemeral auth key][auth key].
 
 Then, choose a password to encrypt with.
 
@@ -242,6 +242,6 @@ This will generate an encrypted string for you to set in the `molecule/default/c
 
 [ansible-vault]: https://docs.ansible.com/ansible/latest/user_guide/vault.html#encrypt-string-for-use-in-yaml
 [auth key]: https://login.tailscale.com/admin/authkeys
-[ephemeral auth key]: https://tailscale.com/kb/1111/ephemeral-nodes/
+[ephemeral auth keys]: https://tailscale.com/kb/1111/ephemeral-nodes/
 [tailscale]: https://tailscale.com/
 [tailscale account]: https://login.tailscale.com/start
