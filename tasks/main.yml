@@ -5,12 +5,12 @@
       You must include a Node Authorization auth key.
       Set a `tailscale_auth_key` ansible-vault encrypted variable.
       You can create this key from: https://login.tailscale.com/admin/authkeys.
-  when: tailscale_auth_key is not defined and not tailscale_up_skip|bool
+  when: tailscale_auth_key == None and not tailscale_up_skip | bool
 
 - name: Skipping Authentication
   debug:
     msg: You have set 'tailscale_up_skip', so this node will not authenticate to your Tailscale network.
-  when: tailscale_up_skip|bool
+  when: tailscale_up_skip | bool
 
 - name: Unstable Warning
   # Print an error message to the console but proceed anyway

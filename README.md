@@ -7,9 +7,20 @@
 [![GitHub followers](https://img.shields.io/github/followers/artis3n?style=social)](https://github.com/artis3n/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/artis3n?style=social)](https://twitter.com/Artis3n)
 
-This role initializes a [Tailscale][] node.
+This role initializes a [Tailscale][] node. If Tailscale is already installed, this role will update Tailscale to the latest version.
+This role does not re-apply the `up` command if Tailscale is already logged in. This will be supported in a [future release](https://github.com/artis3n/ansible-role-tailscale/issues/115).
 
-Find supported operating systems on this role's [Ansible Galaxy page](https://galaxy.ansible.com/artis3n/tailscale).
+Supported operating systems:
+- Debian
+- Ubuntu
+- CentOS / RedHat
+- Amazon Linux
+- Oracle Linux
+- Fedora
+- Arch Linux
+- Raspbian (untested but should work)
+
+See the [CI worfklow](https://github.com/artis3n/ansible-role-tailscale/blob/main/.github/workflows/ci.yml#L15) for the list of distribution versions actively tested in each pull request.
 
 ## Requirements
 

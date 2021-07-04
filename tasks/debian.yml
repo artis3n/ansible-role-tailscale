@@ -32,14 +32,5 @@
   become: true
   apt:
     name: "{{ tailscale_package }}"
-    state: present
-    update_cache: true
-  when: not upgrade_release | bool
-
-- name: Debian | Install or upgrade Tailscale
-  become: true
-  apt:
-    name: "{{ tailscale_package }}"
     state: latest
     update_cache: true
-  when: upgrade_release | bool
