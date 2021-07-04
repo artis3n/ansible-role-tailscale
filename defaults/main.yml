@@ -1,4 +1,13 @@
----
+debian_family_distros:
+  - Ubuntu
+  - Debian
+  - Pop!_OS
+
+centos_family_distros:
+  - CentOS
+  - Amazon
+  - OracleLinux
+
 tailscale_package: tailscale
 tailscale_service: tailscaled
 

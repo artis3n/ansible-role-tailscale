@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.4.0
+    rev: v4.0.1
     hooks:
       - id: check-yaml
         # https://github.com/pre-commit/pre-commit-hooks/issues/273
@@ -19,7 +19,7 @@ repos:
       - id: shellcheck
 
   - repo: https://github.com/ansible/ansible-lint
-    rev: v5.0.6
+    rev: v5.0.12
     hooks:
       - id: ansible-lint
         files: \.(yaml|yml)$

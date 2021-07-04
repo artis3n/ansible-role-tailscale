@@ -25,6 +25,7 @@ jobs:
           - geerlingguy/docker-fedora31-ansible:latest
           - ghcr.io/artis3n/docker-arch-ansible:latest
           - ghcr.io/artis3n/docker-debian11-ansible:latest
+          - ghcr.io/artis3n/docker-oraclelinux8-ansible:latest
       fail-fast: false
 
     steps:
