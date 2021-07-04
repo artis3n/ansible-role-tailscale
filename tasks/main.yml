@@ -40,7 +40,7 @@
       package:
         name: redhat-lsb-core
         state: present
-      when: ansible_distribtuion in centos_family_distros or ansible_distribution == 'Fedora'
+      when: ansible_distribution in centos_family_distros or ansible_distribution == 'Fedora'
 
     - name: Refresh Setup
       setup:
