@@ -7,3 +7,4 @@ exclude_paths:
 
 skip_list:
     - line-length
+    - package-latest
