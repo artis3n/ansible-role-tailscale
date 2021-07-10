@@ -16,6 +16,7 @@ galaxy_info:
         - xenial
         - focal
         - groovy
+        - hirsute
     - name: EL
       versions:
         - 7
