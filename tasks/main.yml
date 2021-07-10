@@ -78,7 +78,7 @@
   register: tailscale_status
   failed_when:
     - tailscale_status.rc != 0
-    - tailscale_status.stdout != "Logged out."
+    - "'Logged out.' not in tailscale_status.stdout"
 
 - name: Tailscale Status
   debug:
@@ -107,5 +107,5 @@
   when: >
     force | bool or
     (not tailscale_up_skip | bool
-    and tailscale_status.stdout == "Logged out.")
+    and "'Logged out.' in tailscale_status.stdout")
   notify: Confirm Tailscale is Connected
