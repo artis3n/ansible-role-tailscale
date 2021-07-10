@@ -9,9 +9,9 @@
     register: tailscale_status
     failed_when:
       - tailscale_status.rc != 0
-      - tailscale_status.stdout != "Logged out."
+      - "'Logged out.' not in tailscale_status.stdout"
 
   - name: Assertions
     assert:
       that:
-        - tailscale_status.stdout == "Logged out."
+        - "'Logged out.' in tailscale_status.stdout"

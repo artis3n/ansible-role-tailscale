@@ -15,18 +15,18 @@ jobs:
         distros:
           - geerlingguy/docker-centos7-ansible:latest
           - geerlingguy/docker-centos8-ansible:latest
+          - ghcr.io/artis3n/docker-oraclelinux8-ansible:latest
           - geerlingguy/docker-amazonlinux2-ansible:latest
           - ghcr.io/artis3n/docker-ubuntu2104-ansible:latest
           - ghcr.io/artis3n/docker-ubuntu2010-ansible:latest
           - geerlingguy/docker-ubuntu2004-ansible:latest
           - geerlingguy/docker-ubuntu1804-ansible:latest
           - geerlingguy/docker-ubuntu1604-ansible:latest
+          - ghcr.io/artis3n/docker-debian11-ansible:latest
           - geerlingguy/docker-debian10-ansible:latest
           - geerlingguy/docker-debian9-ansible:latest
           - geerlingguy/docker-fedora31-ansible:latest
           - ghcr.io/artis3n/docker-arch-ansible:latest
-          - ghcr.io/artis3n/docker-debian11-ansible:latest
-          - ghcr.io/artis3n/docker-oraclelinux8-ansible:latest
       fail-fast: false
 
     steps:
