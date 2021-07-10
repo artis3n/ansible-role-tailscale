@@ -8,7 +8,7 @@ lint: |
   ansible-lint
 platforms:
   - name: instance
-    image: ${MOLECULE_DISTRO:-ghcr.io/artis3n/docker-ubuntu2010-ansible:latest}
+    image: ${MOLECULE_DISTRO:-ghcr.io/artis3n/docker-ubuntu2104-ansible:latest}
     # Needed for systemd
     command: ${MOLECULE_DOCKER_COMMAND:-/lib/systemd/systemd}
     volumes:
