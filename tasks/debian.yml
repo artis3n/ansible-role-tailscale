@@ -14,7 +14,7 @@
   become: true
   apt:
     name: "{{ legacy_apt_dependencies }}"
-  when: (ansible_distribution_major_version | int < 20) and ansible_distribution_major_version != "testing"
+  when: (ansible_distribution_major_version | int < 11) and ansible_distribution_major_version != "testing"
 
 - name: Debian | Tailscale Signing Key
   become: true
