@@ -19,7 +19,7 @@ repos:
       - id: shellcheck
 
   - repo: https://github.com/ansible/ansible-lint
-    rev: v5.0.12
+    rev: v5.1.2
     hooks:
       - id: ansible-lint
         files: \.(yaml|yml)$
