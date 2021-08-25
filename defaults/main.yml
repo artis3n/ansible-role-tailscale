@@ -1,4 +1,20 @@
 ---
+# Variables that a user may want to modify.
+
+# Required Node auth key to authenticate to Tailscale
+tailscale_auth_key: null
+# Optional command-line arguments for 'tailscale up'
+tailscale_args: null
+# Whether to output debug information during role execution
+verbose: false
+# Whether to skip 'tailscale up'
+tailscale_up_skip: false
+# Whether to always run 'tailscale up'
+force: false
+# Whether to use the stable or unstable upstream Tailscale build.
+# Strongly recommend to leave on 'stable' unless you know what you're doing
+release_stability: stable
+
 # Variables that an end user should likely never modify.
 
 debian_family_distros:
