@@ -1,1 +1,57 @@
 ---
+
+# Variables that an end user should likely never modify.
+
+debian_family_distros:
+  - Ubuntu
+  - Debian
+  - Pop!_OS
+
+centos_family_distros:
+  - CentOS
+  - Amazon
+  - OracleLinux
+
+tailscale_package: tailscale
+tailscale_service: tailscaled
+
+repo_description: Tailscale repository
+
+apt_dependencies:
+  - gnupg2
+  - gnupg-agent
+  - apt-transport-https
+  - python3-apt
+
+legacy_apt_dependencies:
+  # Only install on legacy Debian systems
+  - python-apt
+
+distro:
+  pop!_os: ubuntu
+  ubuntu: ubuntu
+  debian: debian
+
+apt_deb: deb https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ distro[ansible_distribution | lower] }} {{ ansible_distribution_release | lower }} main
+
+apt_signkey: https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ distro[ansible_distribution | lower] }}/{{ ansible_distribution_release | lower }}.gpg
+
+yum_dependencies:
+  - yum-utils
+  - gnupg2
+
+yum_repos:
+  Amazon: https://pkgs.tailscale.com/{{ release_stability | lower }}/amazon-linux/{{ ansible_distribution_major_version }}/tailscale.repo
+  CentOS: https://pkgs.tailscale.com/{{ release_stability | lower }}/centos/{{ ansible_distribution_major_version }}/tailscale.repo
+  OracleLinux: https://pkgs.tailscale.com/{{ release_stability | lower }}/centos/{{ ansible_distribution_major_version }}/tailscale.repo
+
+dnf_dependencies:
+  - python-dnf
+
+dnf_yum_dependencies:
+  - dnf-plugins-core
+
+dnf_repos:
+  Fedora: https://pkgs.tailscale.com/{{ release_stability | lower }}/fedora/tailscale.repo
+
+original_distribution_major_version: "{{ ansible_distribution_major_version }}"
