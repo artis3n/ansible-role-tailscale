@@ -28,24 +28,40 @@ You must supply a `tailscale_auth_key` variable, which can be generated under yo
 
 ## Role Variables
 
-### tailscale_auth_key
+## Required
 
-**Required**
+One of `tailscale_auth_key` or `tailscale_up_skip` must be present.
+In most cases you will use `tailscale_auth_key`.
+
+### tailscale_auth_key
 
 Is **not** required if `tailscale_up_skip` is set to `true`.
 
-An [ansible-vault encrypted variable][ansible-vault] containing a Tailscale Node Authorization auth key.
+A Tailscale Node Authorization auth key.
 
 A Node Authorization auth key can be generated under your Tailscale account at <https://login.tailscale.com/admin/authkeys>.
 Note that reusable authorization keys now expire 90 days after they are generated.
 
-Encrypt this variable with the following command:
+This value should be treated as a sensitive secret.
+You are encouraged to use [ansible-vault][] to encrypt this value in your playbook.
 
-```bash
-ansible-vault encrypt_string --vault-id tailscale@.ci-vault-pass '[AUTH KEY VALUE HERE]' --name 'tailscale_auth_key'
-```
+### tailscale_up_skip
 
-See [Ansible's documentation][ansible-vault] for an explanation of the `ansible-vault encrypt_string` command syntax.
+**If set to true, `tailscale_auth_key` is not required.**
+
+**Default**: `false`
+
+Whether to install and configure Tailscale as a service but skip running `tailscale up`.
+Helpful when packaging up a Tailscale installation into a build process such as AMI creation when the server should not yet authenticate to your Tailscale network.
+
+## Optional
+
+### force
+
+**Default**: `false`
+
+If set to `true`, `tailscale up` will always run.
+This can be beneficial if tailscale has already been configured on a host but you want to re-run `up` with different arguments.
 
 ### release_stability
 
@@ -81,30 +97,11 @@ Since Tailscale is still undergoing rapid development, we are holding off on cre
 Whether to output additional information during role execution.
 Helpful for debugging and collecting information to submit in a GitHub issue on this repository.
 
-### tailscale_up_skip
-
-**Default**: `false`
-
-**If set to true, `tailscale_auth_key` is not required.**
-
-Whether to install and configure Tailscale as a service but skip running `tailscale up`.
-Helpful when packaging up a Tailscale installation into a build process such as AMI creation when the server should not yet authenticate to your Tailscale network.
-
-### force
-
-**Default**: `false`
-
-If set to `true`, `tailscale up` will always run.
-This can be beneficial if tailscale has already been configured on a host but you want to re-run `up` with different arguments.
-
 ## Dependencies
 
 None
 
 ## Example Playbook
-
-You **must** include the `tailscale_auth_key` variable.
-We cannot force you to use an [encrypted variable][ansible-vault], but please use an encrypted variable.
 
 ```yaml
 - name: Servers
@@ -177,6 +174,7 @@ Get verbose output:
   roles:
     - role: artis3n.tailscale
       vars:
+        verbose: true
         # Fake example encrypted by ansible-vault
         tailscale_auth_key: !vault |
           $ANSIBLE_VAULT;1.2;AES256;tailscale
@@ -185,7 +183,6 @@ Get verbose output:
           37373734653036613133613533376139383138613164323661386362376335316364653037353631
           6539646561373535610a643334396234396332376431326565383432626232383131303131363362
           3537
-        verbose: true
 ```
 
 Install Tailscale, but don't authenticate to the network:
@@ -207,6 +204,7 @@ Run `tailscale up` on a host that has been previously configured:
   roles:
     - role: artis3n.tailscale
       vars:
+        force: true
         # Fake example encrypted by ansible-vault
         tailscale_auth_key: !vault |
           $ANSIBLE_VAULT;1.2;AES256;tailscale
@@ -215,7 +213,6 @@ Run `tailscale up` on a host that has been previously configured:
           37373734653036613133613533376139383138613164323661386362376335316364653037353631
           6539646561373535610a643334396234396332376431326565383432626232383131303131363362
           3537
-        force: true
 ```
 
 ## License
@@ -228,31 +225,20 @@ Ari Kalfus ([@artis3n](https://www.artis3nal.com/)) <dev@artis3nal.com>
 
 ## Development and Contributing
 
-| :exclamation: Due to the encrypted Tailscale ephemeral auth key in `molecule/defaults/converge.yml`, this repository can't successfully test PRs from forks. I'm working on how to enable collaboration and welcome any ideas. |
-| ----- |
-
 This GitHub repository uses a dedicated "test" Tailscale account to authenticate Tailscale during CI runs.
 Each Docker container creates a new authorized machine in that test account.
 The machines are authorized with [ephemeral auth keys][] and are automatically cleaned up within 48 hours.
 
+This value is stored in a [GitHub Action secret][] with the name `TAILSCALE_CI_KEY`.
 If you are interested in contributing to this repository, you must create a [Tailscale account][] and generate a [Node Authorization ephemeral auth key][auth key].
+Fork this repo and add your ephemeral auth key to the fork's secrets under the name `TAILSCALE_CI_KEY`.
 
-Then, choose a password to encrypt with.
-
-To run `make test` locally, write the password in a `.ci-vault-pass` file at the project root.
-
-To run the GitHub Actions workflow, set a `VAULT_PASS` secret in your forked repository.
-
-Then, run the following Ansible command to encrypt the auth key:
-
-```bash
-ansible-vault encrypt_string --vault-id tailscale@.ci-vault-pass '[AUTH KEY VALUE HERE]' --name 'tailscale_auth_key'
-```
-
-This will generate an encrypted string for you to set in the `molecule/default/converge.yml` playbook.
+To test this role locally, store the Tailscale ephemeral auth key in a file `.ci-vault-pass` in the project root.
+This is git ignored. Then, use `make test`.
 
 [ansible-vault]: https://docs.ansible.com/ansible/latest/user_guide/vault.html#encrypt-string-for-use-in-yaml
 [auth key]: https://login.tailscale.com/admin/authkeys
 [ephemeral auth keys]: https://tailscale.com/kb/1111/ephemeral-nodes/
+[github action secret]: https://docs.github.com/en/actions/reference/encrypted-secrets
 [tailscale]: https://tailscale.com/
 [tailscale account]: https://login.tailscale.com/start
