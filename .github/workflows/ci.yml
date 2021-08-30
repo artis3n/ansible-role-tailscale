@@ -56,9 +56,10 @@ jobs:
         run: make lint
 
       - name: Molecule
-        run: echo "${{ secrets.VAULT_PASS }}" > /home/runner/work/_temp/.vault-ci-pass && ANSIBLE_VAULT_PASSWORD_FILE=/home/runner/work/_temp/.vault-ci-pass pipenv run molecule test --all
+        run: pipenv run molecule test --all
         env:
           MOLECULE_DISTRO: "${{ matrix.distros }}"
+          CI_TAILSCALE_AUTH_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
 
       - name: Clean up
         if: always()

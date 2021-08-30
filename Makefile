@@ -27,7 +27,7 @@ clean:
 
 .PHONY: test
 test:
-	ANSIBLE_VAULT_PASSWORD_FILE=$(PWD)/.ci-vault-pass pipenv run molecule test --all --parallel
+	CI_TAILSCALE_AUTH_KEY=$$(cat .ci-vault-pass) pipenv run molecule test --all
 
 .PHONY: lint
 lint:
