@@ -60,7 +60,3 @@ jobs:
         env:
           MOLECULE_DISTRO: "${{ matrix.distros }}"
           CI_TAILSCALE_AUTH_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
-
-      - name: Clean up
-        if: always()
-        run: rm /home/runner/work/_temp/.vault-ci-pass
