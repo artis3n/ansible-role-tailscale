@@ -25,6 +25,11 @@ codespaces-install:
 clean:
 	pipenv --rm
 
+.PHONY: update
+update:
+	pipenv update
+	pipenv run pre-commit autoupdate
+
 .PHONY: test
 test:
 	CI_TAILSCALE_AUTH_KEY=$$(cat .ci-vault-pass) pipenv run molecule test --all
