@@ -3,7 +3,7 @@
   fail:
     msg: >
       You must include a Node Authorization auth key.
-      Set a `tailscale_auth_key` ansible-vault encrypted variable.
+      Set a `tailscale_auth_key` variable.
       You can create this key from: https://login.tailscale.com/admin/authkeys.
   when:
     - not tailscale_auth_key or tailscale_auth_key == None
@@ -18,9 +18,11 @@
   # Print an error message to the console but proceed anyway
   fail:
     msg: >
+      !!!!!
       Installing Tailscale from the unstable branch.
       This is bleeding edge and may have issues.
       Be warned.
+      !!!!!
   when: release_stability | lower == 'unstable'
   failed_when: false
 
