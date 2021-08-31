@@ -5,7 +5,9 @@
       You must include a Node Authorization auth key.
       Set a `tailscale_auth_key` ansible-vault encrypted variable.
       You can create this key from: https://login.tailscale.com/admin/authkeys.
-  when: tailscale_auth_key == None and not tailscale_up_skip | bool
+  when:
+    - not tailscale_auth_key or tailscale_auth_key == None
+    - not tailscale_up_skip | bool
 
 - name: Skipping Authentication
   debug:
