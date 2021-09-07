@@ -664,11 +664,11 @@
         },
         "pre-commit": {
             "hashes": [
-                "sha256:7977a3103927932d4823178cbe4719ab55bb336f42a9f3bb2776cff99007a117",
-                "sha256:a22d12a02da4d8df314187dfe7a61bda6291d57992060522feed30c8cd658b68"
+                "sha256:3c25add78dbdfb6a28a651780d5c311ac40dd17f160eb3954a0c59da40a505a7",
+                "sha256:a4ed01000afcb484d9eb8d504272e642c4c4099bbad3a6b27e519bd6a3e928a6"
             ],
             "index": "pypi",
-            "version": "==2.14.1"
+            "version": "==2.15.0"
         },
         "pycodestyle": {
             "hashes": [
@@ -798,7 +798,7 @@
                 "sha256:2c84d9b3459c16bf413fe0f9644c7ae1791971e0bb944dfae56e7c7634b187ab",
                 "sha256:ba285f1c519519490034284e6a9d2e6e3f16dc7690f2de3d9140737d81304d22"
             ],
-            "markers": "python_version >= '3.6' and python_version < '4.0'",
+            "markers": "python_version >= '3.6' and python_version < '4'",
             "version": "==10.9.0"
         },
         "ruamel.yaml": {
@@ -888,7 +888,7 @@
                 "sha256:39fb8672126159acb139a7718dd10806104dec1e2f0f6c88aab05d17df10c8d4",
                 "sha256:f57b4c16c62fa2760b7e3d97c35b255512fb6b59a259730f36ba32ce9f8e342f"
             ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_version < '4.0'",
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_version < '4'",
             "version": "==1.26.6"
         },
         "virtualenv": {
