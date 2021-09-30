@@ -2,3 +2,4 @@
 .vscode
 .cache
 .*vault-pass
+.dccache
