@@ -14,7 +14,18 @@
   become: true
   apt:
     name: "{{ legacy_apt_dependencies }}"
-  when: (ansible_distribution_major_version | int < 11) and ansible_distribution_major_version != "testing"
+  when:
+    - ansible_distribution_major_version | int < 11
+    # Debian 11 is responding with 11-updates instead of 11, for some reason, which makes int check above return 0
+    - ansible_distribution_major_version != "11-updates"
+    - ansible_distribution_major_version != "testing"
+
+- name: Debian | Test
+  debug:
+    var: "{{ item }}"
+  loop:
+   - ansible_distribution_release
+
 
 - name: Debian | Tailscale Signing Key
   become: true

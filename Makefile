@@ -13,7 +13,7 @@ install:
 
 # Only run this on GitHub Codespaces in order to set up Python 3.9
 .PHONY: codespaces-install
-codespaces-install:
+codespace-install:
 	sudo add-apt-repository -y ppa:deadsnakes/ppa
 	sudo apt-get update
 	sudo apt-get install -y python3.9
@@ -27,7 +27,7 @@ clean:
 
 .PHONY: update
 update:
-	pipenv update
+	pipenv update --dev
 	pipenv run pre-commit autoupdate
 
 .PHONY: test
