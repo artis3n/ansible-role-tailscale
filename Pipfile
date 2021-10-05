@@ -5,7 +5,9 @@ verify_ssl = true
 
 [dev-packages]
 pre-commit = "*"
-molecule = {extras = ["docker", "lint"],version = "*"}
+molecule = {extras = ["docker"],version = "*"}
+ansible-lint = "*"
+yamllint = "*"
 
 [packages]
 ansible = "*"
