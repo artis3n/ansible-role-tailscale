@@ -8,7 +8,7 @@
     changed_when: false
     register: tailscale_status
     failed_when:
-      - tailscale_status.rc not in [0, 1]
+      - tailscale_status.rc != 0
       - "'Logged out.' not in tailscale_status.stdout"
 
   - name: Assertions
