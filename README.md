@@ -5,6 +5,7 @@
 [![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/artis3n/ansible-role-tailscale?include_prereleases)](https://github.com/artis3n/ansible-role-tailscale/releases)
 ![GitHub last commit](https://img.shields.io/github/last-commit/artis3n/ansible-role-tailscale)
 ![GitHub](https://img.shields.io/github/license/artis3n/ansible-role-tailscale)
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/artis3n)](https://github.com/sponsors/artis3n)
 [![GitHub followers](https://img.shields.io/github/followers/artis3n?style=social)](https://github.com/artis3n/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/artis3n?style=social)](https://twitter.com/Artis3n)
 
