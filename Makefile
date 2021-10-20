@@ -12,7 +12,7 @@ install:
 	if [ ! -f .git/hooks/pre-commit ]; then pipenv run pre-commit install; fi;
 
 # Only run this on GitHub Codespaces in order to set up Python 3.9
-.PHONY: codespaces-install
+.PHONY: codespace-install
 codespace-install:
 	sudo add-apt-repository -y ppa:deadsnakes/ppa
 	sudo apt-get update

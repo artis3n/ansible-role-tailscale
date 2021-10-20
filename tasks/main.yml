@@ -112,3 +112,5 @@
     (not tailscale_up_skip | bool
     and 'Logged out.' in tailscale_status.stdout)
   notify: Confirm Tailscale is Connected
+  async: 60
+  poll: 5
