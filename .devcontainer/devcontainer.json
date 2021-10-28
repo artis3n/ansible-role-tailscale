@@ -58,5 +58,5 @@
 		"git": "latest",
 		"github-cli": "latest"
 	},
-	"onCreateCommand": "make install"
+	"onCreateCommand": "pipenv install --dev && pipenv run pre-commit install"
 }
