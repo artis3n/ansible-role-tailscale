@@ -2,7 +2,7 @@
 - name: Converge with play vars
   hosts: all
   vars:
-    tailscale_auth_key: "{{ lookup('env', 'CI_TAILSCALE_AUTH_KEY') }}"
+    tailscale_auth_key: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
     verbose: true
   tasks:
     - name: "Include artis3n.tailscale"

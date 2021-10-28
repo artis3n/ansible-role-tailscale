@@ -20,9 +20,11 @@ update:
 	pipenv update --dev
 	pipenv run pre-commit autoupdate
 
+# If local, make sure TAILSCALE_CI_KEY env var is set.
+# This is automatically populated in a Codespace.
 .PHONY: test
 test:
-	CI_TAILSCALE_AUTH_KEY=$$(cat .ci-vault-pass) pipenv run molecule test --all
+	pipenv run molecule test --all
 
 .PHONY: lint
 lint:
