@@ -10,7 +10,6 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/artis3n?style=social)](https://twitter.com/Artis3n)
 
 This role initializes a [Tailscale][] node. If Tailscale is already installed, this role will update Tailscale to the latest version.
-This role does not re-apply the `up` command if Tailscale is already logged in. This will be supported in a [future release](https://github.com/artis3n/ansible-role-tailscale/issues/115).
 
 Supported operating systems:
 - Debian
@@ -23,6 +22,8 @@ Supported operating systems:
 - Raspbian (untested but should work)
 
 See the [CI worfklow](https://github.com/artis3n/ansible-role-tailscale/blob/main/.github/workflows/ci.yml#L15) for the list of distribution versions actively tested in each pull request.
+
+This role does not re-apply the `up` command if Tailscale is already logged in. This will be supported in a [future release](https://github.com/artis3n/ansible-role-tailscale/issues/115).
 
 ## Requirements
 
@@ -235,8 +236,9 @@ This value is stored in a [GitHub Action secret][] with the name `TAILSCALE_CI_K
 If you are interested in contributing to this repository, you must create a [Tailscale account][] and generate a [Node Authorization ephemeral auth key][auth key].
 Fork this repo and add your ephemeral auth key to the fork's secrets under the name `TAILSCALE_CI_KEY`.
 
-To test this role locally, store the Tailscale ephemeral auth key in a file `.ci-vault-pass` in the project root.
-This is git ignored. Then, use `make test`.
+To test this role locally, store the Tailscale ephemeral auth key in a `TAILSCALE_CI_KEY` env var.
+
+If you are a Collaborator on this repository, you can open a GitHub Codespace and the `TAILSCALE_CI_KEY` will be populated for you.
 
 [ansible-vault]: https://docs.ansible.com/ansible/latest/user_guide/vault.html#encrypt-string-for-use-in-yaml
 [auth key]: https://login.tailscale.com/admin/authkeys
