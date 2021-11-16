@@ -1,12 +1,11 @@
 #!/usr/bin/env make
 
 .PHONY: all
-all: install lint test
+all: lint test
 
+# Install Python 3.10 first
 .PHONY: install
 install:
-	if [ ! -f /usr/bin/python3 ]; then sudo apt install python3; fi;
-	if [ ! -f ~/.local/bin/pipenv ]; then pip3 install pipenv; fi;
 	if [ ! -d ~/.local/share/virtualenvs/ ]; then mkdir -p ~/.local/share/virtualenvs; fi;
 	if [ ! $$(find ~/.local/share/virtualenvs/ -name "artis3n.tailscale*") ]; then pipenv install --dev; fi;
 	if [ ! -f .git/hooks/pre-commit ]; then pipenv run pre-commit install; fi;
@@ -21,11 +20,16 @@ update:
 	pipenv run pre-commit autoupdate
 
 # If local, make sure TAILSCALE_CI_KEY env var is set.
-# This is automatically populated in a Codespace.
+# This is automatically populated in a GitHub Codespace.
 .PHONY: test
 test:
+ifndef TAILSCALE_CI_KEY
+	$(error TAILSCALE_CI_KEY is not set)
+else
 	pipenv run molecule test --all
+endif
 
 .PHONY: lint
 lint:
+	pipenv run yamllint .
 	pipenv run ansible-lint
