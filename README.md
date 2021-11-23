@@ -100,6 +100,11 @@ Since Tailscale is still undergoing rapid development, we are holding off on cre
 Whether to output additional information during role execution.
 Helpful for debugging and collecting information to submit in a GitHub issue on this repository.
 
+### apt_cache_valid_time
+
+**Default**: `300`
+
+The age in seconds that the apt cache should be considered valid.
 ## Dependencies
 
 None

@@ -14,3 +14,6 @@ force: false
 # Whether to use the stable or unstable upstream Tailscale build.
 # Strongly recommend to leave on 'stable' unless you know what you're doing
 release_stability: stable
+
+# age in seconds that the apt cache should be considered fresh enough
+apt_cache_valid_time: 300 # 5 min

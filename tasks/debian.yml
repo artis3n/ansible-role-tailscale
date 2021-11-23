@@ -1,14 +1,10 @@
 ---
-- name: Debian | Apt Update
-  become: true
-  apt:
-    update_cache: true
-
 - name: Debian | Apt Dependencies
   become: true
   apt:
     name: "{{ apt_dependencies }}"
     state: present
+    cache_valid_time: "{{ apt_cache_valid_time }}"
 
 - name: Debian | Legacy Apt Dependencies
   become: true
@@ -29,10 +25,11 @@
   apt_repository:
     repo: "{{ apt_deb }}"
     state: present
+  register: tailscale_apt_repo_result
 
 - name: Debian | Install Tailscale
   become: true
   apt:
     name: "{{ tailscale_package }}"
     state: latest
-    update_cache: true
+    update_cache: "{{ tailscale_apt_repo_result.changed }}"
