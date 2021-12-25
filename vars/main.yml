@@ -11,6 +11,7 @@ centos_family_distros:
   - CentOS
   - Amazon
   - OracleLinux
+  - RedHat
 
 tailscale_package: tailscale
 tailscale_service: tailscaled
@@ -43,6 +44,7 @@ yum_dependencies:
 yum_repos:
   Amazon: https://pkgs.tailscale.com/{{ release_stability | lower }}/amazon-linux/{{ ansible_distribution_major_version }}/tailscale.repo
   CentOS: https://pkgs.tailscale.com/{{ release_stability | lower }}/centos/{{ ansible_distribution_major_version }}/tailscale.repo
+  RedHat: https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ "rhel" if ansible_distribution_major_version|int == 8 else "centos" }}/{{ ansible_distribution_major_version }}/tailscale.repo
   OracleLinux: https://pkgs.tailscale.com/{{ release_stability | lower }}/centos/{{ ansible_distribution_major_version }}/tailscale.repo
 
 dnf_dependencies:
