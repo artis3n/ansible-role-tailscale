@@ -18,7 +18,9 @@ jobs:
           - ghcr.io/artis3n/docker-oraclelinux8-ansible:latest
           - ghcr.io/artis3n/docker-amazonlinux2-ansible:latest
           - ghcr.io/artis3n/docker-ubuntu2104-ansible:latest
-          - ghcr.io/artis3n/docker-ubuntu2010-ansible:latest
+          #  20.10 is EOL
+          # apt update: "The repository 'http://archive.ubuntu.com/ubuntu groovy Release' does not have a Release file"
+          # - ghcr.io/artis3n/docker-ubuntu2010-ansible:latest
           - geerlingguy/docker-ubuntu2004-ansible:latest
           - geerlingguy/docker-ubuntu1804-ansible:latest
           - geerlingguy/docker-ubuntu1604-ansible:latest
