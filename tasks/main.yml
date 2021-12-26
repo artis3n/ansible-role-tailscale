@@ -104,8 +104,8 @@
   # The command module cannot use | ; &
   # So we are ok not quoting the variables
   command: tailscale up --authkey={{ tailscale_auth_key }} {{ tailscale_args | default() }}
-  # Since the auth key is included in this task, we do not want to log output
-  no_log: true
+  # Since the auth key is included in this task's output, we do not want to log output
+  no_log: "{{ not (insecurely_log_authkey | bool) }}"
   register: tailscale_start
   when: >
     force | bool or
