@@ -58,10 +58,75 @@ jobs:
         run: make lint
 
       - name: Molecule
-        run: pipenv run molecule test --all
+        run: pipenv run molecule test --scenario-name default
         env:
           MOLECULE_DISTRO: "${{ matrix.distros }}"
           TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
           # https://www.jeffgeerling.com/blog/2020/getting-colorized-output-molecule-and-ansible-on-github-actions-ci
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+
+  molecule-skip-auth:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 3.x
+        id: setup-python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pipenv
+
+      - name: Use Cache
+        uses: actions/cache@v2.1.7
+        with:
+          path: ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-pipenv-${{ hashFiles('Pipfile.lock') }}
+
+      - name: Install packages
+        run: pipenv install --dev
+
+      - name: Molecule - Skip Authentication
+        run: pipenv run molecule test --scenario-name skip-authentication
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+
+  molecule-vars-priority:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 3.x
+        id: setup-python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pipenv
+
+      - name: Use Cache
+        uses: actions/cache@v2.1.7
+        with:
+          path: ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-pipenv-${{ hashFiles('Pipfile.lock') }}
+
+      - name: Install packages
+        run: pipenv install --dev
+
+      - name: Molecule - Vars Priority Validation
+        run: pipenv run molecule test --scenario-name vars-priority
+        env:
+          TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
