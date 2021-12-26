@@ -59,6 +59,16 @@ Helpful when packaging up a Tailscale installation into a build process such as 
 
 ## Optional
 
+### insecurely_log_authkey
+
+**Default**: `false`
+
+If set to `true`, the "Bring Tailscale Up" command will not mask any failing output message.
+The authkey is not logged in successful task completions.
+Since the authkey is printed to the console if the task fails, [no_log](https://docs.ansible.com/ansible/latest/reference_appendices/logging.html#protecting-sensitive-data-with-no-log) is enabled by default on the task.
+
+If you are encountering an error bringing Tailscale up and want the "Bring Tailscale Up" task to log details on the error, set this variable to `true`.
+
 ### force
 
 **Default**: `false`

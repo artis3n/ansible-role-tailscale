@@ -14,3 +14,7 @@ force: false
 # Whether to use the stable or unstable upstream Tailscale build.
 # Strongly recommend to leave on 'stable' unless you know what you're doing
 release_stability: stable
+# Whether to log your Tailscale authkey in the event of some error with the "Bring Tailscale Up" command.
+# Since this value is sensitive, log output is disabled by default.
+# You can easily toggle this value by setting this variable to "true".
+insecurely_log_authkey: false
