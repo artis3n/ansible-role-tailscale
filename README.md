@@ -15,7 +15,7 @@ Supported operating systems:
 - Debian
 - Ubuntu
 - CentOS / RedHat
-- Amazon Linux
+- Amazon Linux 2
 - Oracle Linux
 - Fedora
 - Arch Linux
@@ -230,11 +230,11 @@ Ari Kalfus ([@artis3n](https://www.artis3nal.com/)) <dev@artis3nal.com>
 
 This GitHub repository uses a dedicated "test" Tailscale account to authenticate Tailscale during CI runs.
 Each Docker container creates a new authorized machine in that test account.
-The machines are authorized with [ephemeral auth keys][] and are automatically cleaned up within 48 hours.
+The machines are authorized with [ephemeral auth keys][] and are automatically cleaned up within 30 minutes-48 hours.
 
 This value is stored in a [GitHub Action secret][] with the name `TAILSCALE_CI_KEY`.
 If you are interested in contributing to this repository, you must create a [Tailscale account][] and generate a [Node Authorization ephemeral auth key][auth key].
-Fork this repo and add your ephemeral auth key to the fork's secrets under the name `TAILSCALE_CI_KEY`.
+Fork this repo and add an ephemeral auth key to the fork's secrets under the name `TAILSCALE_CI_KEY`.
 
 To test this role locally, store the Tailscale ephemeral auth key in a `TAILSCALE_CI_KEY` env var.
 
