@@ -2,18 +2,18 @@
 
 - name: Tailscale Status
   listen: Confirm Tailscale is Connected
-  command: tailscale status
+  ansible.builtin.command: tailscale status
   register: handlers_tailscale_status
 
 - name: Debug Tailscale Status
   listen: Confirm Tailscale is Connected
-  debug:
+  ansible.builtin.debug:
     var: handlers_tailscale_status
   when: verbose | bool
 
 - name: Assert Tailscale is Connected
   listen: Confirm Tailscale is Connected
-  assert:
+  ansible.builtin.assert:
     that:
       - handlers_tailscale_status.stdout | length != 0
       - handlers_tailscale_status.stdout is not match('\[L\+V9o\]')

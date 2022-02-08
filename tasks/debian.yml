@@ -1,18 +1,18 @@
 ---
 - name: Debian | Apt Update
   become: true
-  apt:
+  ansible.builtin.apt:
     update_cache: true
 
 - name: Debian | Apt Dependencies
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "{{ apt_dependencies }}"
     state: present
 
 - name: Debian | Legacy Apt Dependencies
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "{{ legacy_apt_dependencies }}"
   when:
     - ansible_distribution_major_version | int < 11
@@ -20,19 +20,19 @@
 
 - name: Debian | Tailscale Signing Key
   become: true
-  apt_key:
+  ansible.builtin.apt_key:
     url: "{{ apt_signkey }}"
     state: present
 
 - name: Debian | Add Tailscale Deb
   become: true
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "{{ apt_deb }}"
     state: present
 
 - name: Debian | Install Tailscale
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "{{ tailscale_package }}"
     state: latest
     update_cache: true

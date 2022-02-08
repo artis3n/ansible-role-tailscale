@@ -5,7 +5,7 @@ galaxy_info:
   description: Install and enable a Tailscale node.
   license: license (MIT)
 
-  min_ansible_version: 2.9
+  min_ansible_version: 2.12
 
   # Find supported platforms on https://galaxy.ansible.com/api/v1/platforms/
   platforms:
@@ -41,5 +41,8 @@ galaxy_info:
     - tailscale
     - vpn
     - networking
+
+collections:
+  - community.general
 
 dependencies: []

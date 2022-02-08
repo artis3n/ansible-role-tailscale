@@ -4,7 +4,7 @@
   tasks:
   - name: Get Tailscale status
     become: true
-    command: tailscale status
+    ansible.builtin.command: tailscale status
     changed_when: false
     register: tailscale_status
     failed_when:
@@ -12,6 +12,6 @@
       - "'Logged out.' not in tailscale_status.stdout"
 
   - name: Assertions
-    assert:
+    ansible.builtin.assert:
       that:
         - "'Logged out.' in tailscale_status.stdout"

@@ -1,0 +1,44 @@
+name: Security Scans
+
+on:
+  - push
+  - release
+
+jobs:
+  snyk-deps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Install pipenv
+        run: pipx install pipenv
+
+      - name: Set up Python 3.x
+        id: setup-python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+          cache: 'pipenv'
+
+      # Snyk needs Python packages to be installed to scan
+      - run: pipenv install --dev
+
+      - name: Install Snyk
+        uses: snyk/actions/setup@master
+
+      - name: Run Snyk to check for vulnerabilities
+        run: pipenv run snyk test --all-projects --dev --severity-threshold=high --sarif-file-output=snyk.sarif
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Upload dependency results to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: snyk.sarif
+
+      - name: Upload Snyk results to Snyk.io
+        run: pipenv run snyk monitor --all-projects --dev
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}

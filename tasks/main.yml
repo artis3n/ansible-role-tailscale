@@ -1,6 +1,6 @@
 ---
 - name: Tailscale Auth Key Required
-  fail:
+  ansible.builtin.fail:
     msg: >
       You must include a Node Authorization auth key.
       Set a `tailscale_auth_key` variable.
@@ -10,13 +10,13 @@
     - not tailscale_up_skip | bool
 
 - name: Skipping Authentication
-  debug:
+  ansible.builtin.debug:
     msg: You have set 'tailscale_up_skip', so this node will not authenticate to your Tailscale network.
   when: tailscale_up_skip | bool
 
 - name: Unstable Warning
   # Print an error message to the console but proceed anyway
-  fail:
+  ansible.builtin.fail:
     msg: >
       !!!!!
       Installing Tailscale from the unstable branch.
@@ -33,14 +33,14 @@
   block:
     - name: Install lsb_release
       become: true
-      package:
+      ansible.builtin.package:
         name: lsb-release
         state: present
       when: ansible_distribution in debian_family_distros or ansible_distribution == 'ArchLinux'
 
     - name: Install lsb_release
       become: true
-      package:
+      ansible.builtin.package:
         name: redhat-lsb-core
         state: present
       when: ansible_distribution in centos_family_distros or ansible_distribution == 'Fedora'
@@ -49,34 +49,34 @@
       setup:
 
 - name: Operating System
-  debug:
+  ansible.builtin.debug:
     msg: "{{ ansible_distribution }} {{ ansible_distribution_major_version }} ({{ ansible_distribution_release }})"
 
 - name: CentOS and related families
   when: ansible_distribution in centos_family_distros
-  include_tasks: centos.yml
+  ansible.builtin.include_tasks: centos.yml
 
 - name: Debian and related families
   when: ansible_distribution in debian_family_distros
-  include_tasks: debian.yml
+  ansible.builtin.include_tasks: debian.yml
 
 - name: Fedora and related families
   when: ansible_distribution == 'Fedora'
-  include_tasks: fedora.yml
+  ansible.builtin.include_tasks: fedora.yml
 
 - name: Arch
   when: ansible_distribution == 'Archlinux'
-  include_tasks: arch.yml
+  ansible.builtin.include_tasks: arch.yml
 
 - name: Enable Service
   become: true
-  service:
+  ansible.builtin.service:
     name: "{{ tailscale_service }}"
     state: started
     enabled: true
 
 - name: Check if Tailscale is connected
-  command: tailscale status
+  ansible.builtin.command: tailscale status
   changed_when: false
   register: tailscale_status
   failed_when:
@@ -84,18 +84,18 @@
     - "'Logged out.' not in tailscale_status.stdout"
 
 - name: Tailscale Status
-  debug:
+  ansible.builtin.debug:
     var: tailscale_status
   when: verbose | bool
 
 - name: Record Tailscale Version
-  command: tailscale version
+  ansible.builtin.command: tailscale version
   changed_when: false
   register: tailscale_version
   when: verbose | bool
 
 - name: Tailscale Version
-  debug:
+  ansible.builtin.debug:
     msg: "{{ tailscale_version.stdout.split('\n') }}"
   when: verbose | bool
 
@@ -103,7 +103,7 @@
   become: true
   # The command module cannot use | ; &
   # So we are ok not quoting the variables
-  command: tailscale up --authkey={{ tailscale_auth_key }} {{ tailscale_args | default() }}
+  ansible.builtin.command: tailscale up --authkey={{ tailscale_auth_key }} {{ tailscale_args | default() }}
   # Since the auth key is included in this task's output, we do not want to log output
   no_log: "{{ not (insecurely_log_authkey | bool) }}"
   register: tailscale_start

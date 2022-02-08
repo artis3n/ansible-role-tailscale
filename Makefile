@@ -6,9 +6,8 @@ all: lint test
 # Install Python 3.10 first
 .PHONY: install
 install:
-	if [ ! -d ~/.local/share/virtualenvs/ ]; then mkdir -p ~/.local/share/virtualenvs; fi;
-	if [ ! $$(find ~/.local/share/virtualenvs/ -name "artis3n.tailscale*") ]; then pipenv install --dev; fi;
-	if [ ! -f .git/hooks/pre-commit ]; then pipenv run pre-commit install; fi;
+	pipenv install --dev
+	pipenv run pre-commit install --install-hooks
 
 .PHONY: clean
 clean:
