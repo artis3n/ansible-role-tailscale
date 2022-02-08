@@ -12,6 +12,11 @@ defaults:
   run:
     working-directory: 'artis3n.tailscale'
 
+env:
+  # https://www.jeffgeerling.com/blog/2020/getting-colorized-output-molecule-and-ansible-on-github-actions-ci
+  PY_COLORS: '1'
+  ANSIBLE_FORCE_COLOR: '1'
+
 jobs:
   molecule:
     runs-on: ubuntu-latest
@@ -65,9 +70,6 @@ jobs:
         env:
           MOLECULE_DISTRO: "${{ matrix.distros }}"
           TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
-          # https://www.jeffgeerling.com/blog/2020/getting-colorized-output-molecule-and-ansible-on-github-actions-ci
-          PY_COLORS: '1'
-          ANSIBLE_FORCE_COLOR: '1'
 
   molecule-skip-auth:
     runs-on: ubuntu-latest
@@ -94,9 +96,6 @@ jobs:
 
       - name: Molecule - Skip Authentication
         run: pipenv run molecule test --scenario-name skip-authentication
-        env:
-          PY_COLORS: '1'
-          ANSIBLE_FORCE_COLOR: '1'
 
   molecule-vars-priority:
     runs-on: ubuntu-latest
@@ -125,5 +124,3 @@ jobs:
         run: pipenv run molecule test --scenario-name vars-priority
         env:
           TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
-          PY_COLORS: '1'
-          ANSIBLE_FORCE_COLOR: '1'
