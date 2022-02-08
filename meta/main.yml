@@ -44,4 +44,5 @@ galaxy_info:
 
 collections:
   - community.general
+
 dependencies: []

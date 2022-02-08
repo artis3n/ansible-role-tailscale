@@ -6,6 +6,12 @@ on:
     branches:
      - main
 
+# TODO: Remove after molecule is fixed
+# https://github.com/ansible-community/molecule/pull/3409
+defaults:
+  run:
+    working-directory: 'artis3n.tailscale'
+
 jobs:
   molecule:
     runs-on: ubuntu-latest
@@ -33,23 +39,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        # TODO: Remove after molecule is fixed
+        # https://github.com/ansible-community/molecule/pull/3409
+        with:
+          path: 'artis3n.tailscale'
+
+      - name: Install pipenv
+        run: pipx install pipenv
 
       - name: Set up Python 3.x
         id: setup-python
         uses: actions/setup-python@v2
         with:
           python-version: "3.10"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pipenv
-
-      - name: Use Cache
-        uses: actions/cache@v2.1.7
-        with:
-          path: ~/.local/share/virtualenvs
-          key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-pipenv-${{ hashFiles('Pipfile.lock') }}
+          cache: 'pipenv'
 
       - name: Install packages
         run: pipenv install --dev
@@ -71,23 +74,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        # TODO: Remove after molecule is fixed
+        # https://github.com/ansible-community/molecule/pull/3409
+        with:
+          path: 'artis3n.tailscale'
+
+      - name: Install pipenv
+        run: pipx install pipenv
 
       - name: Set up Python 3.x
         id: setup-python
         uses: actions/setup-python@v2
         with:
           python-version: "3.10"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pipenv
-
-      - name: Use Cache
-        uses: actions/cache@v2.1.7
-        with:
-          path: ~/.local/share/virtualenvs
-          key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-pipenv-${{ hashFiles('Pipfile.lock') }}
+          cache: 'pipenv'
 
       - name: Install packages
         run: pipenv install --dev
@@ -103,23 +103,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        # TODO: Remove after molecule is fixed
+        # https://github.com/ansible-community/molecule/pull/3409
+        with:
+          path: 'artis3n.tailscale'
+
+      - name: Install pipenv
+        run: pipx install pipenv
 
       - name: Set up Python 3.x
         id: setup-python
         uses: actions/setup-python@v2
         with:
           python-version: "3.10"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pipenv
-
-      - name: Use Cache
-        uses: actions/cache@v2.1.7
-        with:
-          path: ~/.local/share/virtualenvs
-          key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-pipenv-${{ hashFiles('Pipfile.lock') }}
+          cache: 'pipenv'
 
       - name: Install packages
         run: pipenv install --dev
