@@ -1,7 +1,8 @@
 # artis3n.tailscale
 
 [![Ansible Role](https://img.shields.io/ansible/role/d/51664)](https://galaxy.ansible.com/artis3n/tailscale)
-[![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/artis3n/ansible-role-tailscale/CI%20Tests/master)](https://github.com/artis3n/ansible-role-tailscale/actions)
+[![CI Tests](https://github.com/artis3n/ansible-role-tailscale/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/artis3n/ansible-role-tailscale/actions/workflows/ci.yml)
+[![Security Scans](https://github.com/artis3n/ansible-role-tailscale/actions/workflows/security.yml/badge.svg?branch=main)](https://github.com/artis3n/ansible-role-tailscale/actions/workflows/security.yml)
 [![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/artis3n/ansible-role-tailscale?include_prereleases)](https://github.com/artis3n/ansible-role-tailscale/releases)
 ![GitHub last commit](https://img.shields.io/github/last-commit/artis3n/ansible-role-tailscale)
 ![GitHub](https://img.shields.io/github/license/artis3n/ansible-role-tailscale)
@@ -19,11 +20,12 @@ Supported operating systems:
 - Oracle Linux
 - Fedora
 - Arch Linux
-- Raspbian (untested but should work)
+- Raspbian (untested but should work through Debian support)
 
 See the [CI worfklow](https://github.com/artis3n/ansible-role-tailscale/blob/main/.github/workflows/ci.yml#L15) for the list of distribution versions actively tested in each pull request.
 
-This role does not re-apply the `up` command if Tailscale is already logged in. This will be supported in a [future release](https://github.com/artis3n/ansible-role-tailscale/issues/115).
+This role uses Ansible fully qualified collection names (FQCN) and therefore requires Ansible 2.11+.
+Ansible 2.12 is set as the minimum allowed version as this was the version tested for compatibility during the FQCN refactor.
 
 ## Requirements
 
@@ -100,9 +102,6 @@ Only `tailscale up` arguments can be passed.
 Do not use this for `--authkey`.
 Use the `tailscale_auth_key` variable instead.
 
-In the future, this parameter will be replaced with a map of supported command-line arguments.
-Since Tailscale is still undergoing rapid development, we are holding off on creating such an argument map until features are more stable.
-
 ### verbose
 
 **Default**: `false`
@@ -112,7 +111,9 @@ Helpful for debugging and collecting information to submit in a GitHub issue on 
 
 ## Dependencies
 
-None
+### Collections
+
+- [`community.general`](https://docs.ansible.com/ansible/latest/collections/community/general/index.html)
 
 ## Example Playbook
 
@@ -169,14 +170,8 @@ Pass arbitrary command-line arguments:
         name: artis3n.tailscale
       vars:
         tailscale_args: "--accept-routes=false --advertise-routes={{ subnet_blocks | join(',') }}"
-        # Fake example encrypted by ansible-vault
-        tailscale_auth_key: !vault |
-          $ANSIBLE_VAULT;1.2;AES256;tailscale
-          32616238303134343065613038383933333733383765653166346564363332343761653761646363
-          6637666565626333333664363739613366363461313063640a613330393062323161636235383936
-          37373734653036613133613533376139383138613164323661386362376335316364653037353631
-          6539646561373535610a643334396234396332376431326565383432626232383131303131363362
-          3537
+        # Pulled from the env vars on the host running Ansible
+        tailscale_auth_key: "{{ lookup('env', 'TAILSCALE_KEY') }}"
 ```
 
 Get verbose output:
@@ -188,14 +183,8 @@ Get verbose output:
     - role: artis3n.tailscale
       vars:
         verbose: true
-        # Fake example encrypted by ansible-vault
-        tailscale_auth_key: !vault |
-          $ANSIBLE_VAULT;1.2;AES256;tailscale
-          32616238303134343065613038383933333733383765653166346564363332343761653761646363
-          6637666565626333333664363739613366363461313063640a613330393062323161636235383936
-          37373734653036613133613533376139383138613164323661386362376335316364653037353631
-          6539646561373535610a643334396234396332376431326565383432626232383131303131363362
-          3537
+        # Pulled from the env vars on the host running Ansible
+        tailscale_auth_key: "{{ lookup('env', 'TAILSCALE_KEY') }}"
 ```
 
 Install Tailscale, but don't authenticate to the network:
@@ -218,14 +207,8 @@ Run `tailscale up` on a host that has been previously configured:
     - role: artis3n.tailscale
       vars:
         force: true
-        # Fake example encrypted by ansible-vault
-        tailscale_auth_key: !vault |
-          $ANSIBLE_VAULT;1.2;AES256;tailscale
-          32616238303134343065613038383933333733383765653166346564363332343761653761646363
-          6637666565626333333664363739613366363461313063640a613330393062323161636235383936
-          37373734653036613133613533376139383138613164323661386362376335316364653037353631
-          6539646561373535610a643334396234396332376431326565383432626232383131303131363362
-          3537
+        # Pulled from the env vars on the host running Ansible
+        tailscale_auth_key: "{{ lookup('env', 'TAILSCALE_KEY') }}"
 ```
 
 ## License
