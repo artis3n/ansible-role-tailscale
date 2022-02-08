@@ -1,9 +1,9 @@
 # artis3n.tailscale
 
 [![Ansible Role](https://img.shields.io/ansible/role/d/51664)](https://galaxy.ansible.com/artis3n/tailscale)
+[![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/artis3n/ansible-role-tailscale?include_prereleases)](https://github.com/artis3n/ansible-role-tailscale/releases)
 [![CI Tests](https://github.com/artis3n/ansible-role-tailscale/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/artis3n/ansible-role-tailscale/actions/workflows/ci.yml)
 [![Security Scans](https://github.com/artis3n/ansible-role-tailscale/actions/workflows/security.yml/badge.svg?branch=main)](https://github.com/artis3n/ansible-role-tailscale/actions/workflows/security.yml)
-[![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/artis3n/ansible-role-tailscale?include_prereleases)](https://github.com/artis3n/ansible-role-tailscale/releases)
 ![GitHub last commit](https://img.shields.io/github/last-commit/artis3n/ansible-role-tailscale)
 ![GitHub](https://img.shields.io/github/license/artis3n/ansible-role-tailscale)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/artis3n)](https://github.com/sponsors/artis3n)
