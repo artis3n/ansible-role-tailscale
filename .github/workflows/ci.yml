@@ -19,7 +19,9 @@ jobs:
       matrix:
         distros:
           - geerlingguy/docker-centos7-ansible:latest
-          - geerlingguy/docker-centos8-ansible:latest
+           # Centos 8 reached EOL on Dec 31, 2021
+           # Failed to download metadata for repo 'appstream': Yum repo downloading error: Downloading error(s): repodata/75e00d390273f65b94d63a5ac7db2677d832bfa95b3d7eecf651c6f45e33f8ff-modules.yaml.xz - Cannot download, all mirrors were already tried without success
+#          - geerlingguy/docker-centos8-ansible:latest
           - ghcr.io/artis3n/docker-oraclelinux8-ansible:latest
           - ghcr.io/artis3n/docker-amazonlinux2-ansible:latest
           - ghcr.io/artis3n/docker-ubuntu2104-ansible:latest
