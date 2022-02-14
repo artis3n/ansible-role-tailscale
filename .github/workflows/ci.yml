@@ -6,12 +6,6 @@ on:
     branches:
      - main
 
-# TODO: Remove after molecule is fixed
-# https://github.com/ansible-community/molecule/pull/3409
-defaults:
-  run:
-    working-directory: 'artis3n.tailscale'
-
 env:
   # https://www.jeffgeerling.com/blog/2020/getting-colorized-output-molecule-and-ansible-on-github-actions-ci
   PY_COLORS: '1'
@@ -25,7 +19,9 @@ jobs:
       matrix:
         distros:
           - geerlingguy/docker-centos7-ansible:latest
-          - geerlingguy/docker-centos8-ansible:latest
+           # Centos 8 reached EOL on Dec 31, 2021
+           # Failed to download metadata for repo 'appstream': Yum repo downloading error: Downloading error(s): repodata/75e00d390273f65b94d63a5ac7db2677d832bfa95b3d7eecf651c6f45e33f8ff-modules.yaml.xz - Cannot download, all mirrors were already tried without success
+#          - geerlingguy/docker-centos8-ansible:latest
           - ghcr.io/artis3n/docker-oraclelinux8-ansible:latest
           - ghcr.io/artis3n/docker-amazonlinux2-ansible:latest
           - ghcr.io/artis3n/docker-ubuntu2104-ansible:latest
@@ -44,29 +40,26 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        # TODO: Remove after molecule is fixed
-        # https://github.com/ansible-community/molecule/pull/3409
-        with:
-          path: 'artis3n.tailscale'
 
-      - name: Install pipenv
-        run: pipx install pipenv
+      - name: Install dependency manager
+        run: pipx install poetry
 
       - name: Set up Python 3.x
         id: setup-python
         uses: actions/setup-python@v2
         with:
           python-version: "3.10"
-          cache: 'pipenv'
+          # Once supported in https://github.com/actions/setup-python/pull/281
+#          cache: 'poetry'
 
       - name: Install packages
-        run: pipenv install --dev
+        run: poetry install --no-interaction
 
       - name: Lint
         run: make lint
 
       - name: Molecule
-        run: pipenv run molecule test --scenario-name default
+        run: poetry run molecule test --scenario-name default
         env:
           MOLECULE_DISTRO: "${{ matrix.distros }}"
           TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
@@ -76,51 +69,45 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        # TODO: Remove after molecule is fixed
-        # https://github.com/ansible-community/molecule/pull/3409
-        with:
-          path: 'artis3n.tailscale'
 
-      - name: Install pipenv
-        run: pipx install pipenv
+      - name: Install dependency manager
+        run: pipx install poetry
 
       - name: Set up Python 3.x
         id: setup-python
         uses: actions/setup-python@v2
         with:
           python-version: "3.10"
-          cache: 'pipenv'
+          # Once supported in https://github.com/actions/setup-python/pull/281
+#          cache: 'poetry'
 
       - name: Install packages
-        run: pipenv install --dev
+        run: poetry install --no-interaction
 
       - name: Molecule - Skip Authentication
-        run: pipenv run molecule test --scenario-name skip-authentication
+        run: poetry run molecule test --scenario-name skip-authentication
 
   molecule-vars-priority:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
-        # TODO: Remove after molecule is fixed
-        # https://github.com/ansible-community/molecule/pull/3409
-        with:
-          path: 'artis3n.tailscale'
 
-      - name: Install pipenv
-        run: pipx install pipenv
+      - name: Install dependency manager
+        run: pipx install poetry
 
       - name: Set up Python 3.x
         id: setup-python
         uses: actions/setup-python@v2
         with:
           python-version: "3.10"
-          cache: 'pipenv'
+          # Once supported in https://github.com/actions/setup-python/pull/281
+#          cache: 'poetry'
 
       - name: Install packages
-        run: pipenv install --dev
+        run: poetry install --no-interaction
 
       - name: Molecule - Vars Priority Validation
-        run: pipenv run molecule test --scenario-name vars-priority
+        run: poetry run molecule test --scenario-name vars-priority
         env:
           TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
