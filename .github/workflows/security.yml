@@ -1,8 +1,11 @@
 name: Security Scans
 
 on:
-  - push
-  - release
+  pull_request:
+  release:
+  push:
+    branches:
+      - main
 
 jobs:
   snyk-deps:
@@ -11,23 +14,24 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Install pipenv
-        run: pipx install pipenv
+        run: pipx install poetry
 
       - name: Set up Python 3.x
         id: setup-python
         uses: actions/setup-python@v2
         with:
           python-version: "3.10"
-          cache: 'pipenv'
+          # Once supported in https://github.com/actions/setup-python/pull/281
+#          cache: 'poetry'
 
       # Snyk needs Python packages to be installed to scan
-      - run: pipenv install --dev
+      - run: poetry install --no-interaction
 
       - name: Install Snyk
         uses: snyk/actions/setup@master
 
       - name: Run Snyk to check for vulnerabilities
-        run: pipenv run snyk test --all-projects --dev --severity-threshold=high --sarif-file-output=snyk.sarif
+        run: poetry run snyk test --all-projects --dev --severity-threshold=high --sarif-file-output=snyk.sarif
         continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
@@ -38,7 +42,7 @@ jobs:
           sarif_file: snyk.sarif
 
       - name: Upload Snyk results to Snyk.io
-        run: pipenv run snyk monitor --all-projects --dev
+        run: poetry run snyk monitor --all-projects --dev
         continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}

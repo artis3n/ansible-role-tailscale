@@ -6,12 +6,6 @@ on:
     branches:
      - main
 
-# TODO: Remove after molecule is fixed
-# https://github.com/ansible-community/molecule/pull/3409
-defaults:
-  run:
-    working-directory: 'artis3n.tailscale'
-
 env:
   # https://www.jeffgeerling.com/blog/2020/getting-colorized-output-molecule-and-ansible-on-github-actions-ci
   PY_COLORS: '1'
@@ -44,29 +38,26 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        # TODO: Remove after molecule is fixed
-        # https://github.com/ansible-community/molecule/pull/3409
-        with:
-          path: 'artis3n.tailscale'
 
       - name: Install pipenv
-        run: pipx install pipenv
+        run: pipx install poetry
 
       - name: Set up Python 3.x
         id: setup-python
         uses: actions/setup-python@v2
         with:
           python-version: "3.10"
-          cache: 'pipenv'
+          # Once supported in https://github.com/actions/setup-python/pull/281
+#          cache: 'poetry'
 
       - name: Install packages
-        run: pipenv install --dev
+        run: poetry install --no-interaction
 
       - name: Lint
         run: make lint
 
       - name: Molecule
-        run: pipenv run molecule test --scenario-name default
+        run: poetry run molecule test --scenario-name default
         env:
           MOLECULE_DISTRO: "${{ matrix.distros }}"
           TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
@@ -76,51 +67,45 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        # TODO: Remove after molecule is fixed
-        # https://github.com/ansible-community/molecule/pull/3409
-        with:
-          path: 'artis3n.tailscale'
 
       - name: Install pipenv
-        run: pipx install pipenv
+        run: pipx install poetry
 
       - name: Set up Python 3.x
         id: setup-python
         uses: actions/setup-python@v2
         with:
           python-version: "3.10"
-          cache: 'pipenv'
+          # Once supported in https://github.com/actions/setup-python/pull/281
+#          cache: 'poetry'
 
       - name: Install packages
-        run: pipenv install --dev
+        run: poetry install --no-interaction
 
       - name: Molecule - Skip Authentication
-        run: pipenv run molecule test --scenario-name skip-authentication
+        run: poetry run molecule test --scenario-name skip-authentication
 
   molecule-vars-priority:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
-        # TODO: Remove after molecule is fixed
-        # https://github.com/ansible-community/molecule/pull/3409
-        with:
-          path: 'artis3n.tailscale'
 
       - name: Install pipenv
-        run: pipx install pipenv
+        run: pipx install poetry
 
       - name: Set up Python 3.x
         id: setup-python
         uses: actions/setup-python@v2
         with:
           python-version: "3.10"
-          cache: 'pipenv'
+          # Once supported in https://github.com/actions/setup-python/pull/281
+#          cache: 'poetry'
 
       - name: Install packages
-        run: pipenv install --dev
+        run: poetry install --no-interaction
 
       - name: Molecule - Vars Priority Validation
-        run: pipenv run molecule test --scenario-name vars-priority
+        run: poetry run molecule test --scenario-name vars-priority
         env:
           TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
