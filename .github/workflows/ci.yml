@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install pipenv
+      - name: Install dependency manager
         run: pipx install poetry
 
       - name: Set up Python 3.x
@@ -68,7 +68,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install pipenv
+      - name: Install dependency manager
         run: pipx install poetry
 
       - name: Set up Python 3.x
@@ -91,7 +91,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install pipenv
+      - name: Install dependency manager
         run: pipx install poetry
 
       - name: Set up Python 3.x
