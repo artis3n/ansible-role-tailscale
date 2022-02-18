@@ -19,7 +19,8 @@ jobs:
       matrix:
         distros:
           - geerlingguy/docker-centos7-ansible:latest
-          - geerlingguy/docker-centos8-ansible:latest
+          # Centos 8 reached EOL. This patch didn't work: https://github.com/geerlingguy/docker-centos8-ansible/blob/master/Dockerfile#L18
+          # - geerlingguy/docker-centos8-ansible:latest
           - geerlingguy/docker-rockylinux8-ansible:latest
           - ghcr.io/artis3n/docker-oraclelinux8-ansible:latest
           - ghcr.io/artis3n/docker-amazonlinux2-ansible:latest
