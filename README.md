@@ -15,8 +15,7 @@ This role initializes a [Tailscale][] node. If Tailscale is already installed, t
 Supported operating systems:
 - Debian
 - Ubuntu
-- CentOS 7 / RedHat
-  - Centos 8 has reached EOL
+- CentOS / RedHat / RockyLinux
 - Amazon Linux 2
 - Oracle Linux
 - Fedora
