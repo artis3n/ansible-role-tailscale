@@ -22,6 +22,8 @@ jobs:
           # Centos 8 reached EOL. This patch didn't work: https://github.com/geerlingguy/docker-centos8-ansible/blob/master/Dockerfile#L18
           # - geerlingguy/docker-centos8-ansible:latest
           - geerlingguy/docker-rockylinux8-ansible:latest
+          - ghcr.io/artis3n/docker-almalinux8-ansible:latest
+          - ghcr.io/artis3n/docker-rhel8-ansible:latest
           - ghcr.io/artis3n/docker-oraclelinux8-ansible:latest
           - ghcr.io/artis3n/docker-amazonlinux2-ansible:latest
           - ghcr.io/artis3n/docker-ubuntu2104-ansible:latest
@@ -36,7 +38,6 @@ jobs:
           - geerlingguy/docker-debian9-ansible:latest
           - geerlingguy/docker-fedora31-ansible:latest
           - ghcr.io/artis3n/docker-arch-ansible:latest
-          - ghcr.io/artis3n/docker-almalinux8-ansible:latest
       fail-fast: false
 
     steps:
