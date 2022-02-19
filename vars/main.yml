@@ -13,6 +13,7 @@ centos_family_distros:
   - OracleLinux
   - RedHat
   - Rocky
+  - AlmaLinux
 
 tailscale_package: tailscale
 tailscale_service: tailscaled
@@ -48,6 +49,7 @@ yum_repos:
   RedHat: https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ "rhel" if ansible_distribution_major_version|int == 8 else "centos" }}/{{ ansible_distribution_major_version }}/tailscale.repo
   OracleLinux: https://pkgs.tailscale.com/{{ release_stability | lower }}/centos/{{ ansible_distribution_major_version }}/tailscale.repo
   Rocky: https://pkgs.tailscale.com/{{ release_stability | lower }}/centos/{{ ansible_distribution_major_version }}/tailscale.repo
+  AlmaLinux: https://pkgs.tailscale.com/{{ release_stability | lower }}/centos/{{ ansible_distribution_major_version }}/tailscale.repo
 
 dnf_dependencies:
   - python-dnf
