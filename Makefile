@@ -28,6 +28,22 @@ else
 	poetry run molecule test --all
 endif
 
+.PHONY: test-default
+test-default:
+ifndef TAILSCALE_CI_KEY
+	$(error TAILSCALE_CI_KEY is not set)
+else
+	poetry run molecule test --scenario-name default
+endif
+
+.PHONY: test-state
+test-state:
+ifndef TAILSCALE_CI_KEY
+	$(error TAILSCALE_CI_KEY is not set)
+else
+	poetry run molecule test --scenario-name state
+endif
+
 .PHONY: lint
 lint:
 	poetry run yamllint .

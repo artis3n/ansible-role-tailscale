@@ -9,8 +9,6 @@ tailscale_args: null
 verbose: false
 # Whether to skip 'tailscale up'
 tailscale_up_skip: false
-# Whether to always run 'tailscale up'
-force: false
 # Whether to use the stable or unstable upstream Tailscale build.
 # Strongly recommend to leave on 'stable' unless you know what you're doing
 release_stability: stable

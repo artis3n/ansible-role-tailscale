@@ -27,9 +27,29 @@ See the [CI worfklow](https://github.com/artis3n/ansible-role-tailscale/blob/mai
 This role uses Ansible fully qualified collection names (FQCN) and therefore requires Ansible 2.11+.
 Ansible 2.12 is set as the minimum required version as this was the version tested for compatibility during the FQCN refactor.
 
-## Requirements
+## State Tracking
 
-You must supply a `tailscale_auth_key` variable, which can be generated under your Tailscale account at <https://login.tailscale.com/admin/authkeys>.
+This role will create a `.artis3n-tailscale` directory in the target's home directory in order to maintain a concept of state from the configuration of the arguments passed to `tailscale up`.
+This allows the role to idempotently update a Tailscale node's configuration when needed.
+Deleting this directory will lead to this role re-configuring Tailscale when it is not needed, but will not otherwise break anything.
+However, it is recommended that you let this Ansible role manage this directory and its contents.
+
+Note that:
+
+> Flags are not persisted between runs; you must specify all flags each time.
+>
+> ...
+>
+> In Tailscale v1.8 or greater, if you forget to specify a flag you added before, the CLI will warn you and provide a copyable command that includes all existing flags.
+
+<small>
+
+[docs: tailscale up][tailscale up docs]
+
+</small>
+
+This role will bubble up any stderr messages from the Tailscale binary to resolve any end-user configuration errors with `tailscale up` arguments.
+The `--authkey=` value will be redacted unless [`insecurely_log_authkey`](#insecurely_log_authkey) is set to `true`.
 
 ## Role Variables
 
@@ -65,18 +85,12 @@ Helpful when packaging up a Tailscale installation into a build process such as 
 
 **Default**: `false`
 
-If set to `true`, the "Bring Tailscale Up" command will not mask any failing output message.
-The authkey is not logged in successful task completions.
-Since the authkey is printed to the console if the task fails, [no_log](https://docs.ansible.com/ansible/latest/reference_appendices/logging.html#protecting-sensitive-data-with-no-log) is enabled by default on the task.
+If set to `true`, the "Bring Tailscale Up" command will include the raw value of the Tailscale authkey when logging any errors encountered during `tailscale up`.
+The authkey is not logged in successful task completions and is redacted in the `stderr` output by this role if an error occurs.
 
-If you are encountering an error bringing Tailscale up and want the "Bring Tailscale Up" task to log details on the error, set this variable to `true`.
+If you are encountering an error bringing Tailscale up and want the "Bring Tailscale Up" task to _not_ redact the value of the authkey, set this variable to `true`.
 
-### force
-
-**Default**: `false`
-
-If set to `true`, `tailscale up` will always run.
-This can be beneficial if tailscale has already been configured on a host but you want to re-run `up` with different arguments.
+If the authkey is invalid, the role will relay Tailscale's error message on that fact:
 
 ### release_stability
 
@@ -96,10 +110,10 @@ Whether to use the Tailscale stable or unstable track.
 
 Pass any additional command-line arguments to `tailscale up`.
 
-Note that this parameter does not support bash piping or command extensions like `&` or `;`.
-Only `tailscale up` arguments can be passed.
+Note that this parameter's contents will be [wrapped in quotes][ansible filters manipulting strings] to prevent command expansion. The [command][ansible.builtin.command] module is used, which does not support subshell expressions (`$()`) or bash operations like `;` and `&` in any case.
+Only `tailscale up` arguments can be passed in.
 
-Do not use this for `--authkey`.
+**Do not use this for `--authkey`.**
 Use the `tailscale_auth_key` variable instead.
 
 ### verbose
@@ -198,19 +212,6 @@ Install Tailscale, but don't authenticate to the network:
         tailscale_up_skip: true
 ```
 
-Run `tailscale up` on a host that has been previously configured:
-
-```yaml
-- name: Servers
-  hosts: all
-  roles:
-    - role: artis3n.tailscale
-      vars:
-        force: true
-        # Pulled from the env vars on the host running Ansible
-        tailscale_auth_key: "{{ lookup('env', 'TAILSCALE_KEY') }}"
-```
-
 ## License
 
 MIT
@@ -233,9 +234,19 @@ To test this role locally, store the Tailscale ephemeral auth key in a `TAILSCAL
 
 If you are a Collaborator on this repository, you can open a GitHub Codespace and the `TAILSCALE_CI_KEY` will be populated for you.
 
+### molecule scenario: state
+
+Note: the `-s state` scenario intentionally fails during execution to demonstrate correct error throwing with inconsistent state scenarios.
+Not sure how to turn that into a stable test scenario yet.
+It can be run via `make test-state` but is excluded from the GitHub Action CI workflow for now.
+The idempotency step will definitely need to go.
+
+[ansible filters manipulating strings]: https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#manipulating-strings
 [ansible-vault]: https://docs.ansible.com/ansible/latest/user_guide/vault.html#encrypt-string-for-use-in-yaml
+[ansible.builtin.command]: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/command_module.html
 [auth key]: https://login.tailscale.com/admin/authkeys
 [ephemeral auth keys]: https://tailscale.com/kb/1111/ephemeral-nodes/
 [github action secret]: https://docs.github.com/en/actions/reference/encrypted-secrets
 [tailscale]: https://tailscale.com/
 [tailscale account]: https://login.tailscale.com/start
+[tailscale up docs]: https://tailscale.com/kb/1080/cli/#up
