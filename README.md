@@ -22,7 +22,7 @@ Supported operating systems:
 - Arch Linux
 - Raspbian (untested but should work through Debian support)
 
-[![asciicast](https://asciinema.org/a/g8P2DT45oedUaxXSKGBKpU2Dl.svg)](https://asciinema.org/a/g8P2DT45oedUaxXSKGBKpU2Dl)
+[![asciicast](docs/demo.gif)](https://asciinema.org/a/g8P2DT45oedUaxXSKGBKpU2Dl)
 
 See the [CI worfklow](https://github.com/artis3n/ansible-role-tailscale/blob/main/.github/workflows/ci.yml#L15) for the list of distribution versions actively tested in each pull request.
 
