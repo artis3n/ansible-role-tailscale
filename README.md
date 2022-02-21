@@ -22,9 +22,9 @@ Supported operating systems:
 - Arch Linux
 - Raspbian (untested but should work through Debian support)
 
-<a href="https://asciinema.org/a/g8P2DT45oedUaxXSKGBKpU2Dl"><img src="docs/demo.gif" with=500 height=500></a>
-
 See the [CI worfklow](https://github.com/artis3n/ansible-role-tailscale/blob/main/.github/workflows/ci.yml#L15) for the list of distribution versions actively tested in each pull request.
+
+<a href="https://asciinema.org/a/g8P2DT45oedUaxXSKGBKpU2Dl"><img src="docs/demo.gif" with=500 height=500></a>
 
 This role uses Ansible fully qualified collection names (FQCN) and therefore requires Ansible 2.11+.
 Ansible 2.12 is set as the minimum required version as this was the version tested for compatibility during the FQCN refactor.
