@@ -22,6 +22,8 @@ Supported operating systems:
 - Arch Linux
 - Raspbian (untested but should work through Debian support)
 
+[![asciicast](https://asciinema.org/a/g8P2DT45oedUaxXSKGBKpU2Dl.svg)](https://asciinema.org/a/g8P2DT45oedUaxXSKGBKpU2Dl)
+
 See the [CI worfklow](https://github.com/artis3n/ansible-role-tailscale/blob/main/.github/workflows/ci.yml#L15) for the list of distribution versions actively tested in each pull request.
 
 This role uses Ansible fully qualified collection names (FQCN) and therefore requires Ansible 2.11+.
@@ -50,6 +52,8 @@ Note that:
 
 This role will bubble up any stderr messages from the Tailscale binary to resolve any end-user configuration errors with `tailscale up` arguments.
 The `--authkey=` value will be redacted unless [`insecurely_log_authkey`](#insecurely_log_authkey) is set to `true`.
+
+![logged stderr](docs/images/printed_stderr.png)
 
 ## Role Variables
 
@@ -88,9 +92,13 @@ Helpful when packaging up a Tailscale installation into a build process such as 
 If set to `true`, the "Bring Tailscale Up" command will include the raw value of the Tailscale authkey when logging any errors encountered during `tailscale up`.
 The authkey is not logged in successful task completions and is redacted in the `stderr` output by this role if an error occurs.
 
+![redacted authkey](docs/images/redacted_authkey.png)
+
 If you are encountering an error bringing Tailscale up and want the "Bring Tailscale Up" task to _not_ redact the value of the authkey, set this variable to `true`.
 
 If the authkey is invalid, the role will relay Tailscale's error message on that fact:
+
+![invalid authkey](docs/images/invalid_authkey.png)
 
 ### release_stability
 
@@ -115,6 +123,14 @@ Only `tailscale up` arguments can be passed in.
 
 **Do not use this for `--authkey`.**
 Use the `tailscale_auth_key` variable instead.
+
+Any stdout/stderr output from the `tailscale` binary will be printed. Since the tasks move quickly in this section, a 5 second pause is introduced to grant more time for users to realize a message was printed.
+
+![printed stdout](docs/images/printed_stdout.png)
+
+Stderrs will continue to fail the role's execution.
+The sensitive `--authkey` value will be redacted by default.
+If you need to view the unredacted value, see [`insecurely_log_authkey`](#insecurely_log_authkey).
 
 ### verbose
 
