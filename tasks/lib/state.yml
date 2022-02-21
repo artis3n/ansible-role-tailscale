@@ -21,7 +21,7 @@
   ansible.builtin.copy:
     dest: "{{ ansible_env.HOME }}/.artis3n-tailscale/.idempotency/state"
     content: "{{ state_checksum }}"
-    owner: "{{ ansible_user_uid  }}"
-    group: "{{ ansible_user_gid  }}"
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
     mode: '0644'
   when: item == "push"
