@@ -120,7 +120,7 @@ Whether to use the Tailscale stable or unstable track.
 
 Pass any additional command-line arguments to `tailscale up`.
 
-Note that this parameter's contents will be [wrapped in quotes][ansible filters manipulting strings] to prevent command expansion. The [command][ansible.builtin.command] module is used, which does not support subshell expressions (`$()`) or bash operations like `;` and `&` in any case.
+Note that this parameter's contents will be [wrapped in quotes][ansible filters manipulating strings] to prevent command expansion. The [command][ansible.builtin.command] module is used, which does not support subshell expressions (`$()`) or bash operations like `;` and `&` in any case.
 Only `tailscale up` arguments can be passed in.
 
 **Do not use this for `--authkey`.**
