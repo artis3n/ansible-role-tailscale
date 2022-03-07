@@ -3,10 +3,10 @@
   ansible.builtin.fail:
     msg: >
       You must include a Node Authorization auth key.
-      Set a `tailscale_auth_key` variable.
+      Set a `tailscale_authkey` variable.
       You can create this key from: https://login.tailscale.com/admin/authkeys.
   when:
-    - not tailscale_auth_key or tailscale_auth_key == None
+    - not tailscale_authkey or tailscale_authkey == None
     - not tailscale_up_skip | bool
 
 - name: Skipping Authentication

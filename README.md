@@ -61,10 +61,10 @@ The `--authkey=` value will be redacted unless [`insecurely_log_authkey`](#insec
 
 ## Required
 
-One of `tailscale_auth_key` or `tailscale_up_skip` must be present.
-In most cases you will use `tailscale_auth_key`.
+One of `tailscale_authkey` or `tailscale_up_skip` must be present.
+In most cases you will use `tailscale_authkey`.
 
-### tailscale_auth_key
+### tailscale_authkey
 
 Is **not** required if `tailscale_up_skip` is set to `true`.
 
@@ -78,7 +78,7 @@ You are encouraged to use [ansible-vault][] to encrypt this value in your playbo
 
 ### tailscale_up_skip
 
-**If set to true, `tailscale_auth_key` is not required.**
+**If set to true, `tailscale_authkey` is not required.**
 
 **Default**: `false`
 
@@ -124,7 +124,7 @@ Note that this parameter's contents will be [wrapped in quotes][ansible filters 
 Only `tailscale up` arguments can be passed in.
 
 **Do not use this for `--authkey`.**
-Use the `tailscale_auth_key` variable instead.
+Use the `tailscale_authkey` variable instead.
 
 Any stdout/stderr output from the `tailscale` binary will be printed. Since the tasks move quickly in this section, a 5 second pause is introduced to grant more time for users to realize a message was printed.
 
@@ -156,7 +156,7 @@ Helpful for debugging and collecting information to submit in a GitHub issue on 
     - role: artis3n.tailscale
       vars:
         # Fake example encrypted by ansible-vault
-        tailscale_auth_key: !vault |
+        tailscale_authkey: !vault |
           $ANSIBLE_VAULT;1.2;AES256;tailscale
           32616238303134343065613038383933333733383765653166346564363332343761653761646363
           6637666565626333333664363739613366363461313063640a613330393062323161636235383936
@@ -203,7 +203,7 @@ Pass arbitrary command-line arguments:
       vars:
         tailscale_args: "--accept-routes=false --advertise-routes={{ subnet_blocks | join(',') }}"
         # Pulled from the env vars on the host running Ansible
-        tailscale_auth_key: "{{ lookup('env', 'TAILSCALE_KEY') }}"
+        tailscale_authkey: "{{ lookup('env', 'TAILSCALE_KEY') }}"
 ```
 
 Get verbose output:
@@ -216,7 +216,7 @@ Get verbose output:
       vars:
         verbose: true
         # Pulled from the env vars on the host running Ansible
-        tailscale_auth_key: "{{ lookup('env', 'TAILSCALE_KEY') }}"
+        tailscale_authkey: "{{ lookup('env', 'TAILSCALE_KEY') }}"
 ```
 
 Install Tailscale, but don't authenticate to the network:

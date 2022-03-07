@@ -6,5 +6,5 @@
       ansible.builtin.include_role:
         name: artis3n.tailscale
       vars:
-        tailscale_auth_key: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
+        tailscale_authkey: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
         verbose: true

@@ -2,7 +2,7 @@
 # Variables that a user may want to modify.
 
 # Required Node auth key to authenticate to Tailscale
-tailscale_auth_key: null
+tailscale_authkey: null
 # Optional command-line arguments for 'tailscale up'
 tailscale_args: null
 # Whether to output debug information during role execution
