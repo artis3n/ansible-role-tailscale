@@ -15,5 +15,5 @@
   become: true
   ansible.builtin.yum:
     name: "{{ tailscale_package }}"
-    disable_gpg_check: true
+    update_cache: true
     state: latest
