@@ -30,14 +30,14 @@ legacy_apt_dependencies:
   # Only install on legacy Debian systems
   - python-apt
 
-distro:
+debian_distro:
   pop!_os: ubuntu
   ubuntu: ubuntu
   debian: debian
 
-apt_deb: deb https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ distro[ansible_distribution | lower] }} {{ ansible_distribution_release | lower }} main
+apt_deb: deb https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ debian_distro[ansible_distribution | lower] }} {{ ansible_distribution_release | lower }} main
 
-apt_signkey: https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ distro[ansible_distribution | lower] }}/{{ ansible_distribution_release | lower }}.gpg
+apt_signkey: https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ debian_distro[ansible_distribution | lower] }}/{{ ansible_distribution_release | lower }}.gpg
 
 yum_dependencies:
   - yum-utils

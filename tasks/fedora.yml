@@ -36,4 +36,5 @@
   become: true
   ansible.builtin.dnf:
     name: "{{ tailscale_package }}"
+    update_cache: true
     state: latest

@@ -1,0 +1,27 @@
+---
+- name: Get Existing State Checksum
+  ansible.builtin.slurp:
+    src: "{{ ansible_env.HOME }}/.artis3n-tailscale/.idempotency/state"
+  ignore_errors: true
+  register: remote_checksum
+  when: item == "pull"
+
+- name: Gather Up Arguments
+  ansible.builtin.set_fact:
+    tailscale_up_args: --authkey={{ tailscale_authkey }} {{ tailscale_args | default() }}
+
+- name: State Checksum
+  ansible.builtin.set_fact:
+    state_checksum: "{{ tailscale_up_args | trim | hash('sha256') }}"
+    # slurp.content is always base64-encoded
+    # 'Cg==' is base64-encoded empty string
+    existing_state_checksum: "{{ remote_checksum.content | default('Cg==') | b64decode }}"
+
+- name: Save State Checksum
+  ansible.builtin.copy:
+    dest: "{{ ansible_env.HOME }}/.artis3n-tailscale/.idempotency/state"
+    content: "{{ state_checksum }}"
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
+    mode: '0644'
+  when: item == "push"

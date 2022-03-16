@@ -1,0 +1,29 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include artis3n.tailscale"
+      ansible.builtin.include_role:
+        name: artis3n.tailscale
+      vars:
+        tailscale_authkey: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
+
+    - name: "Include artis3n.tailscale"
+      ansible.builtin.include_role:
+        name: artis3n.tailscale
+      vars:
+        tailscale_authkey: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
+        tailscale_up_args: "--advertise-exit-node"
+
+    - name: "Include artis3n.tailscale"
+      ansible.builtin.include_role:
+        name: artis3n.tailscale
+      vars:
+        tailscale_authkey: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
+
+    - name: "Include artis3n.tailscale"
+      ansible.builtin.include_role:
+        name: artis3n.tailscale
+      vars:
+        tailscale_authkey: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
+        tailscale_up_args: "--reset"
