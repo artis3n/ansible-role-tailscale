@@ -31,7 +31,13 @@ See the [CI worfklow](https://github.com/artis3n/ansible-role-tailscale/blob/mai
 This role uses Ansible fully qualified collection names (FQCN) and therefore requires Ansible 2.11+.
 Ansible 2.12 is set as the minimum required version as this was the version tested for compatibility during the FQCN refactor.
 
-## State Tracking
+# V3 Breaking Changes
+
+- `tailscale_auth_key` is now `tailscale_authkey`
+- `insecurely_log_auth_key` is now `insecurely_log_authkey`
+- `force` is no longer a role variable
+
+# State Tracking
 
 This role will create a `.artis3n-tailscale` directory in the target's home directory in order to maintain a concept of state from the configuration of the arguments passed to `tailscale up`.
 This allows the role to idempotently update a Tailscale node's configuration when needed.
@@ -57,7 +63,7 @@ The `--authkey=` value will be redacted unless [`insecurely_log_authkey`](#insec
 
 ![logged stderr](docs/images/printed_stderr.png)
 
-## Role Variables
+# Role Variables
 
 ## Required
 
@@ -141,13 +147,13 @@ If you need to view the unredacted value, see [`insecurely_log_authkey`](#insecu
 Whether to output additional information during role execution.
 Helpful for debugging and collecting information to submit in a GitHub issue on this repository.
 
-## Dependencies
+# Dependencies
 
-### Collections
+## Collections
 
 - [`community.general`](https://docs.ansible.com/ansible/latest/collections/community/general/index.html)
 
-## Example Playbook
+# Example Playbook
 
 ```yaml
 - name: Servers
@@ -230,15 +236,15 @@ Install Tailscale, but don't authenticate to the network:
         tailscale_up_skip: true
 ```
 
-## License
+# License
 
 MIT
 
-## Author Information
+# Author Information
 
 Ari Kalfus ([@artis3n](https://www.artis3nal.com/)) <dev@artis3nal.com>
 
-## Development and Contributing
+# Development and Contributing
 
 This GitHub repository uses a dedicated "test" Tailscale account to authenticate Tailscale during CI runs.
 Each Docker container creates a new authorized machine in that test account.
@@ -252,7 +258,7 @@ To test this role locally, store the Tailscale ephemeral auth key in a `TAILSCAL
 
 If you are a Collaborator on this repository, you can open a GitHub Codespace and the `TAILSCALE_CI_KEY` will be populated for you.
 
-### molecule scenario: state
+## molecule scenario: state
 
 Note: the `-s state` scenario intentionally fails during execution to demonstrate correct error throwing with inconsistent state scenarios.
 Not sure how to turn that into a stable test scenario yet.
