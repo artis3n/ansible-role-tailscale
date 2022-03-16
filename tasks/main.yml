@@ -138,7 +138,7 @@
 
 - name: Report non-sensitive stdout from "tailscale up" # noqa: no-handler
   ansible.builtin.debug:
-    msg: "{{ tailscale_start.stdout | split('\n') }}"
+    msg: "{{ tailscale_start.stdout | regex_replace('tskey.*\\s', 'REDACTED ') | regex_replace('\\t', '') | split('\n') }}"
   when:
     - tailscale_start.changed
     - tailscale_start.stdout | length > 0
