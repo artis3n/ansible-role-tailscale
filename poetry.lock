@@ -41,26 +41,25 @@ resolvelib = ">=0.5.3,<0.6.0"
 
 [[package]]
 name = "ansible-lint"
-version = "5.4.0"
-description = "Checks playbooks for practices and behaviour that could potentially be improved"
+version = "6.0.0"
+description = "Checks playbooks for practices and behavior that could potentially be improved"
 category = "dev"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.8"
 
 [package.dependencies]
+ansible-compat = ">=2.0.0"
+ansible-core = ">=2.12.0"
 enrich = ">=1.2.6"
 packaging = "*"
 pyyaml = "*"
 rich = ">=9.5.1"
-"ruamel.yaml" = {version = ">=0.15.37,<1", markers = "python_version >= \"3.7\""}
-tenacity = "*"
+"ruamel.yaml" = ">=0.15.34,<0.18"
 wcmatch = ">=7.0"
+yamllint = ">=1.25.0"
 
 [package.extras]
-community = ["ansible (>=2.10)"]
-core = ["ansible-core (>=2.11.4)"]
-test = ["coverage (>=6.2,<6.3)", "tomli (>=1.2.3,<2.0.0)", "flaky (>=3.7.0)", "pytest (>=6.0.1)", "pytest-cov (>=2.10.1)", "pytest-xdist (>=2.1.0)", "psutil"]
-yamllint = ["yamllint (>=1.25.0)"]
+test = ["coverage (>=6.2,<6.3)", "tomli (>=1.2.3,<2.0.0)", "flaky (>=3.7.0)", "pytest (>=6.0.1)", "pytest-cov (>=2.10.1)", "pytest-plus (>=0.2)", "pytest-xdist (>=2.1.0)", "psutil", "black", "mypy", "pylint", "flake8"]
 
 [[package]]
 name = "arrow"
@@ -448,6 +447,14 @@ gssapi = ["pyasn1 (>=0.1.7)", "gssapi (>=1.4.1)", "pywin32 (>=2.1.8)"]
 invoke = ["invoke (>=1.3)"]
 
 [[package]]
+name = "pathspec"
+version = "0.9.0"
+description = "Utility library for gitignore style pattern matching of file paths."
+category = "dev"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
+
+[[package]]
 name = "platformdirs"
 version = "2.5.1"
 description = "A small Python module for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
@@ -679,17 +686,6 @@ python-versions = ">=3.6"
 test = ["enrich (>=1.2.6)", "mock (>=4.0.3)", "molecule (>=3.4.0)", "pytest-cov (>=2.12.1)", "pytest-plus (>=0.2)", "pytest-xdist (>=2.3.0)", "pytest (>=6.2.5)"]
 
 [[package]]
-name = "tenacity"
-version = "8.0.1"
-description = "Retry code until it succeeds"
-category = "dev"
-optional = false
-python-versions = ">=3.6"
-
-[package.extras]
-doc = ["reno", "sphinx", "tornado (>=4.5)"]
-
-[[package]]
 name = "text-unidecode"
 version = "1.3"
 description = "The most basic Text::Unidecode port"
@@ -760,10 +756,22 @@ docs = ["Sphinx (>=3.4)", "sphinx-rtd-theme (>=0.5)"]
 optional = ["python-socks", "wsaccel"]
 test = ["websockets"]
 
+[[package]]
+name = "yamllint"
+version = "1.26.3"
+description = "A linter for YAML files."
+category = "dev"
+optional = false
+python-versions = ">=3.5"
+
+[package.dependencies]
+pathspec = ">=0.5.3"
+pyyaml = "*"
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "3cd26ca6db25df33acd3dcf7608ee0e3c578cb976ea7ee2fc6b54850100fb5ff"
+content-hash = "0ce72cb68649d52c13278059b89156702ef5f55a3843c810ca53b90af5d07ea0"
 
 [metadata.files]
 ansible = [
@@ -777,8 +785,8 @@ ansible-core = [
     {file = "ansible-core-2.12.3.tar.gz", hash = "sha256:8a135a9f74c97cab67759293744ad34350f719523e8bd9bb9008df4cf953af20"},
 ]
 ansible-lint = [
-    {file = "ansible-lint-5.4.0.tar.gz", hash = "sha256:2160a60b4ab034c04006d701a1779340ffb0f6e28f030ff8de958e1062a88962"},
-    {file = "ansible_lint-5.4.0-py3-none-any.whl", hash = "sha256:fb57755825b50da88c226052772bd843d37714155b504175912daac0e186e8c0"},
+    {file = "ansible-lint-6.0.0.tar.gz", hash = "sha256:8b24227dd778373ecc82fb8b15d796229665990a407112b3ec1086be24c1bead"},
+    {file = "ansible_lint-6.0.0-py3-none-any.whl", hash = "sha256:1366ee831d15545ba7b030ab13fa82273d1547b35105a07307fa6c0428aa39d3"},
 ]
 arrow = [
     {file = "arrow-1.2.2-py3-none-any.whl", hash = "sha256:d622c46ca681b5b3e3574fcb60a04e5cc81b9625112d5fb2b44220c36c892177"},
@@ -1015,6 +1023,10 @@ paramiko = [
     {file = "paramiko-2.10.2-py2.py3-none-any.whl", hash = "sha256:abf71533ea9332079db7cbcc039066c3d7575eed2df10766fa03496c3bf78cf1"},
     {file = "paramiko-2.10.2.tar.gz", hash = "sha256:ff47cc35dd4c4af507d2bdc9d7def9f7fa89977212b4f926e14ac486e930f03a"},
 ]
+pathspec = [
+    {file = "pathspec-0.9.0-py2.py3-none-any.whl", hash = "sha256:7d15c4ddb0b5c802d161efc417ec1a2558ea2653c2e8ad9c19098201dc1c993a"},
+    {file = "pathspec-0.9.0.tar.gz", hash = "sha256:e564499435a2673d586f6b2130bb5b95f04a3ba06f81b8f895b651a3c76aabb1"},
+]
 platformdirs = [
     {file = "platformdirs-2.5.1-py3-none-any.whl", hash = "sha256:bcae7cab893c2d310a711b70b24efb93334febe65f8de776ee320b517471e227"},
     {file = "platformdirs-2.5.1.tar.gz", hash = "sha256:7535e70dfa32e84d4b34996ea99c5e432fa29a708d0f4e394bbcb2a8faa4f16d"},
@@ -1167,10 +1179,6 @@ subprocess-tee = [
     {file = "subprocess-tee-0.3.5.tar.gz", hash = "sha256:ff5cced589a4b8ac973276ca1ba21bb6e3de600cde11a69947ff51f696efd577"},
     {file = "subprocess_tee-0.3.5-py3-none-any.whl", hash = "sha256:d34186c639aa7f8013b5dfba80e17f52589539137c9d9205f2ae1c1bd03549e1"},
 ]
-tenacity = [
-    {file = "tenacity-8.0.1-py3-none-any.whl", hash = "sha256:f78f4ea81b0fabc06728c11dc2a8c01277bfc5181b321a4770471902e3eb844a"},
-    {file = "tenacity-8.0.1.tar.gz", hash = "sha256:43242a20e3e73291a28bcbcacfd6e000b02d3857a9a9fff56b297a27afdc932f"},
-]
 text-unidecode = [
     {file = "text-unidecode-1.3.tar.gz", hash = "sha256:bad6603bb14d279193107714b288be206cac565dfa49aa5b105294dd5c4aab93"},
     {file = "text_unidecode-1.3-py2.py3-none-any.whl", hash = "sha256:1311f10e8b895935241623731c2ba64f4c455287888b18189350b67134a822e8"},
@@ -1194,4 +1202,7 @@ wcmatch = [
 websocket-client = [
     {file = "websocket-client-1.3.1.tar.gz", hash = "sha256:6278a75065395418283f887de7c3beafb3aa68dada5cacbe4b214e8d26da499b"},
     {file = "websocket_client-1.3.1-py3-none-any.whl", hash = "sha256:074e2ed575e7c822fc0940d31c3ac9bb2b1142c303eafcf3e304e6ce035522e8"},
+]
+yamllint = [
+    {file = "yamllint-1.26.3.tar.gz", hash = "sha256:3934dcde484374596d6b52d8db412929a169f6d9e52e20f9ade5bf3523d9b96e"},
 ]
