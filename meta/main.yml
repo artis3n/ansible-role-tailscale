@@ -5,7 +5,7 @@ galaxy_info:
   description: Install and enable a Tailscale node.
   license: license (MIT)
 
-  min_ansible_version: 2.12
+  min_ansible_version: "2.12"
 
   # Find supported platforms on https://galaxy.ansible.com/api/v1/platforms/
   platforms:
@@ -19,11 +19,11 @@ galaxy_info:
         - hirsute
     - name: EL
       versions:
-        - 7
-        - 8
+        - "7"
+        - "8"
     - name: Amazon Linux 2
       versions:
-        - any
+        - "all"
     - name: Debian
       versions:
         - buster
@@ -32,8 +32,8 @@ galaxy_info:
         - sid
     - name: Fedora
       versions:
-        - 31
-    - name: Archlinux
+        - "31"
+    - name: ArchLinux
       versions:
         - all
 

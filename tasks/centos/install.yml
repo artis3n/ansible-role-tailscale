@@ -5,7 +5,7 @@
     name: "{{ yum_dependencies }}"
     state: present
 
-- name: CentOS | Add Yum Repo
+- name: CentOS | Add Tailscale Repo
   become: true
   ansible.builtin.command: yum-config-manager --add-repo {{ yum_repos[ansible_distribution] }}
   args:

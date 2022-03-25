@@ -1,0 +1,34 @@
+---
+# https://www.jeffgeerling.com/blog/2020/resolving-fedora-dnf-error-no-such-file-or-directory-varlibdnfrpmdblockpid
+- name: Fedora | Wait for systemd to complete initialization.  # noqa command-instead-of-module
+  ansible.builtin.command: systemctl is-system-running
+  register: systemctl_status
+  until: >
+    'running' in systemctl_status.stdout or
+    'degraded' in systemctl_status.stdout
+  retries: 30
+  delay: 5
+  when: ansible_service_mgr == 'systemd'
+  changed_when: false
+
+- name: Fedora | Remove Tailscale
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ tailscale_package }}"
+    state: absent
+
+# noqa command-instead-of-module
+- name: Fedora | Check for Tailscale Repo
+  ansible.builtin.shell: |
+    set -o pipefail
+    dnf repolist | grep tailscale
+  register: repolist_tailscale
+  changed_when: false
+  failed_when:
+    - repolist_tailscale.rc != 0
+    - repolist_tailscale.rc != 1
+
+- name: Fedora | Remove Dnf Repo
+  become: true
+  ansible.builtin.command: dnf config-manager --disable tailscale-{{ release_stability | lower }}
+  when: repolist_tailscale.rc != 1

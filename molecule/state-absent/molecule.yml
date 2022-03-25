@@ -1,0 +1,31 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint: |
+  set -e
+  ansible-lint
+platforms:
+  - name: instance
+    image: ${MOLECULE_DISTRO:-ghcr.io/artis3n/docker-ubuntu2104-ansible:latest}
+    # Needed for systemd
+    command: ${MOLECULE_DOCKER_COMMAND:-/lib/systemd/systemd}
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
+provisioner:
+  name: ansible
+verifier:
+  name: ansible
+scenario:
+  name: state-absent
+  test_sequence:
+    - lint
+    - destroy
+    - syntax
+    - create
+    - converge
+    - verify
+    - destroy

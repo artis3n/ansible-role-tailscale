@@ -1,5 +1,4 @@
 ---
-
 # Variables that an end user should likely never modify.
 
 debian_family_distros:
