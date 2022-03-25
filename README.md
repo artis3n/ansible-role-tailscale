@@ -134,7 +134,7 @@ If defined, `state` must be either `present` or `absent`.
 If set to `absent`, this role will de-register the Tailscale node (if already authenticated)
 and clean up or disable all Tailscale artifacts added to the system.
 
-Note that `tailscale_authkey` is not required if `state: absent`.
+Note that neither `tailscale_authkey` nor `tailscale_up_skip` is required if `state` is set to `absent`.
 
 ### tailscale_args
 

@@ -52,7 +52,7 @@ jobs:
         with:
           python-version: "3.10"
           # Once supported in https://github.com/actions/setup-python/pull/281
-#          cache: 'poetry'
+          # cache: 'poetry'
 
       - name: Install packages
         run: poetry install --no-interaction
@@ -87,7 +87,7 @@ jobs:
         with:
           python-version: "3.10"
           # Once supported in https://github.com/actions/setup-python/pull/281
-#          cache: 'poetry'
+          # cache: 'poetry'
 
       - name: Install packages
         run: poetry install --no-interaction
@@ -110,7 +110,7 @@ jobs:
         with:
           python-version: "3.10"
           # Once supported in https://github.com/actions/setup-python/pull/281
-#          cache: 'poetry'
+          # cache: 'poetry'
 
       - name: Install packages
         run: poetry install --no-interaction

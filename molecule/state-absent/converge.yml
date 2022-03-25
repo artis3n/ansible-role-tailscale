@@ -7,7 +7,6 @@
       ansible.builtin.include_role:
         name: artis3n.tailscale
       vars:
-        tailscale_authkey: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
         state: absent
 
     - name: Install Tailscale
@@ -35,5 +34,4 @@
       ansible.builtin.include_role:
         name: artis3n.tailscale
       vars:
-        tailscale_authkey: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
         state: absent
