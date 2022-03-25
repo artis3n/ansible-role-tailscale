@@ -60,8 +60,14 @@ jobs:
       - name: Lint
         run: make lint
 
-      - name: Molecule
+      - name: Default scenario
         run: poetry run molecule test --scenario-name default
+        env:
+          MOLECULE_DISTRO: "${{ matrix.distros }}"
+          TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
+
+      - name: Uninstall scenario
+        run: poetry run molecule test --scenario-name state-absent
         env:
           MOLECULE_DISTRO: "${{ matrix.distros }}"
           TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"

@@ -20,14 +20,13 @@ provisioner:
 verifier:
   name: ansible
 scenario:
-  name: state
+  name: idempotent-up
   test_sequence:
     - lint
     - destroy
     - syntax
     - create
     - converge
-    - idempotence
     - verify
     - cleanup
     - destroy

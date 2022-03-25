@@ -18,7 +18,7 @@
     - ansible_distribution_major_version | int < 11
     - ansible_distribution_major_version != "testing"
 
-- name: Debian | Tailscale Signing Key
+- name: Debian | Add Tailscale Signing Key
   become: true
   ansible.builtin.apt_key:
     url: "{{ apt_signkey }}"

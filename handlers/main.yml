@@ -1,5 +1,4 @@
 ---
-
 - name: Tailscale Status
   listen: Confirm Tailscale is Connected
   ansible.builtin.command: tailscale status
@@ -9,7 +8,8 @@
   listen: Confirm Tailscale is Connected
   ansible.builtin.debug:
     var: handlers_tailscale_status
-  when: verbose | bool
+  when:
+    - verbose | bool
 
 - name: Assert Tailscale is Connected
   listen: Confirm Tailscale is Connected

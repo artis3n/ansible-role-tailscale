@@ -1,0 +1,39 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    # Should be idempotent and also not error out if run before Tailscale has ever been installed
+    - name: Uninstall Tailscale
+      ansible.builtin.include_role:
+        name: artis3n.tailscale
+      vars:
+        tailscale_authkey: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
+        state: absent
+
+    - name: Install Tailscale
+      ansible.builtin.include_role:
+        name: artis3n.tailscale
+      vars:
+        tailscale_authkey: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
+
+    # Force these to run before we start uninstalling things
+    - name: Flush Handlers
+      ansible.builtin.meta: flush_handlers
+
+    - name: Get Tailscale status
+      become: true
+      ansible.builtin.command: tailscale status
+      changed_when: false
+      register: tailscale_status
+
+    - name: Assert Tailscale is installed
+      ansible.builtin.assert:
+        that:
+          - "'Logged out.' not in tailscale_status.stdout"
+
+    - name: Uninstall Tailscale
+      ansible.builtin.include_role:
+        name: artis3n.tailscale
+      vars:
+        tailscale_authkey: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
+        state: absent

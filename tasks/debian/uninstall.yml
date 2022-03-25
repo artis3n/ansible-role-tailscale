@@ -1,0 +1,29 @@
+---
+- name: Debian | Apt Update
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: Debian | Apt Dependencies
+  become: true
+  ansible.builtin.apt:
+    name: "{{ apt_dependencies }}"
+    state: present
+
+- name: Debian | Remove Tailscale
+  become: true
+  ansible.builtin.apt:
+    name: "{{ tailscale_package }}"
+    state: absent
+
+- name: Debian | Remove Tailscale Deb
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "{{ apt_deb }}"
+    state: absent
+
+- name: Debian | Remove Tailscale Signing Key
+  become: true
+  ansible.builtin.apt_key:
+    url: "{{ apt_signkey }}"
+    state: absent

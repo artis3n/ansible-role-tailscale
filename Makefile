@@ -36,12 +36,20 @@ else
 	poetry run molecule test --parallel --scenario-name default
 endif
 
-.PHONY: test-state
-test-state:
+.PHONY: test-idempotent-up
+test-idempotent-up:
 ifndef TAILSCALE_CI_KEY
 	$(error TAILSCALE_CI_KEY is not set)
 else
-	poetry run molecule test --parallel --scenario-name state
+	poetry run molecule test --parallel --scenario-name idempotent-up
+endif
+
+.PHONY: test-absent
+test-absent:
+ifndef TAILSCALE_CI_KEY
+	$(error TAILSCALE_CI_KEY is not set)
+else
+	poetry run molecule test --parallel --scenario-name state-absent
 endif
 
 .PHONY: lint

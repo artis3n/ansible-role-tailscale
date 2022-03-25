@@ -70,6 +70,8 @@ The `--authkey=` value will be redacted unless [`insecurely_log_authkey`](#insec
 One of `tailscale_authkey` or `tailscale_up_skip` must be present.
 In most cases you will use `tailscale_authkey`.
 
+If you are uninstalling Tailscale (`state: absent`), neither `tailscale_authkey` nor `tailscale_up_skip` is required.
+
 ### tailscale_authkey
 
 Is **not** required if `tailscale_up_skip` is set to `true`.
@@ -121,6 +123,18 @@ Whether to use the Tailscale stable or unstable track.
 `unstable`:
 
 > The bleeding edge. Pushed early and often. Expect rough edges!
+
+### state
+
+**Default**: `present`
+
+Whether to install or uninstall Tailscale.
+If defined, `state` must be either `present` or `absent`.
+
+If set to `absent`, this role will de-register the Tailscale node (if already authenticated)
+and clean up or disable all Tailscale artifacts added to the system.
+
+Note that `tailscale_authkey` is not required if `state: absent`.
 
 ### tailscale_args
 

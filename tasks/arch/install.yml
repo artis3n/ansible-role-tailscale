@@ -1,5 +1,4 @@
 ---
-
 - name: Arch | Install Tailscale
   become: true
   community.general.pacman:

@@ -1,4 +1,11 @@
 ---
+- name: State Validation
+  ansible.builtin.fail:
+    msg: "'state' must either be 'present' or 'absent'."
+  when:
+    - state != "present"
+    - state != "absent"
+
 - name: Tailscale Auth Key Required
   ansible.builtin.fail:
     msg: >
@@ -6,8 +13,8 @@
       Set a `tailscale_authkey` variable.
       You can create this key from: https://login.tailscale.com/admin/settings/keys .
   when:
-    - not tailscale_authkey or tailscale_authkey == None
-    - not tailscale_up_skip | bool
+    - (not tailscale_authkey or tailscale_authkey == None) and state != "absent"
+    - not tailscale_up_skip | bool and state != "absent"
 
 - name: Skipping Authentication
   ansible.builtin.debug:
@@ -52,115 +59,10 @@
   ansible.builtin.debug:
     msg: "{{ ansible_distribution }} {{ ansible_distribution_major_version }} ({{ ansible_distribution_release }})"
 
-- name: CentOS and related families
-  when: ansible_distribution in centos_family_distros
-  ansible.builtin.include_tasks: centos.yml
+- name: Install Tailscale
+  when: state == "present"
+  ansible.builtin.include_tasks: install.yml
 
-- name: Debian and related families
-  when: ansible_distribution in debian_family_distros
-  ansible.builtin.include_tasks: debian.yml
-
-- name: Fedora and related families
-  when: ansible_distribution == 'Fedora'
-  ansible.builtin.include_tasks: fedora.yml
-
-- name: Arch
-  when: ansible_distribution == 'Archlinux'
-  ansible.builtin.include_tasks: arch.yml
-
-- name: Set state idempotency folder
-  ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.artis3n-tailscale/.idempotency"
-    state: directory
-    owner: "{{ ansible_user_uid }}"
-    group: "{{ ansible_user_gid }}"
-    mode: '0700'
-
-- name: Store state idempotency README
-  ansible.builtin.copy:
-    src: files/state_readme.md
-    dest: "{{ ansible_env.HOME }}/.artis3n-tailscale/README.md"
-    owner: "{{ ansible_user_uid }}"
-    group: "{{ ansible_user_gid }}"
-    mode: '0644'
-
-- name: Enable Service
-  become: true
-  ansible.builtin.service:
-    name: "{{ tailscale_service }}"
-    state: started
-    enabled: true
-
-- name: Check if Tailscale is connected
-  ansible.builtin.command: tailscale status
-  changed_when: false
-  register: tailscale_status
-  failed_when:
-    - tailscale_status.rc != 0
-    - "'Logged out.' not in tailscale_status.stdout"
-
-- name: Tailscale Status
-  ansible.builtin.debug:
-    var: tailscale_status
-  when: verbose | bool
-
-- name: Record Tailscale Version
-  ansible.builtin.command: tailscale version
-  changed_when: false
-  register: tailscale_version
-  when: verbose | bool
-
-- name: Tailscale Version
-  ansible.builtin.debug:
-    msg: "{{ tailscale_version.stdout.split('\n') }}"
-  when: verbose | bool
-
-- name: Calculate Changes to Tailscale
-  ansible.builtin.include_tasks: lib/state.yml
-  loop:
-    - "pull"
-
-- name: Bring Tailscale Up
-  become: true
-  ansible.builtin.command: tailscale up {{ tailscale_up_args | trim | quote }}
-  # Since the auth key is included in this task's output, we do not want to log output
-  no_log: "{{ not (insecurely_log_authkey | bool) }}"
-  register: tailscale_start
-  # If a failure occurred due to state changes, we still want to log a redacted version of the error if "no_log" is true
-  ignore_errors: true
-  when: >
-    not tailscale_up_skip | bool
-    and ('Logged out.' in tailscale_status.stdout
-    or state_checksum != existing_state_checksum)
-  notify: Confirm Tailscale is Connected
-  async: 60
-  poll: 5
-
-- name: Report non-sensitive stdout from "tailscale up" # noqa: no-handler
-  ansible.builtin.debug:
-    msg: "{{ tailscale_start.stdout | regex_replace('tskey.*\\s', 'REDACTED ') | regex_replace('\\t', '') | split('\n') }}"
-  when:
-    - tailscale_start.changed
-    - tailscale_start.stdout | length > 0
-  register: nonsensitive_stdout
-
-- name: Pausing to highlight stdout message above
-  ansible.builtin.pause:
-    seconds: 5
-  when: >
-    nonsensitive_stdout.skipped is not defined
-    or not nonsensitive_stdout.skipped | bool
-
-- name: Report redacted failure from "tailscale up"  # noqa: no-handler
-  ansible.builtin.fail:
-    msg: "{{ tailscale_start.stderr | regex_replace('tskey.*\\s', 'REDACTED ') | regex_replace('\\t', '') | split('\n') }}"
-  when:
-    - tailscale_start.changed
-    - tailscale_start.stderr | length > 0
-    - tailscale_start.failed | bool
-  register: nonsensitive_stderr
-
-- name: Record Changes to Tailscale
-  ansible.builtin.include_tasks: lib/state.yml
-  loop:
-    - "push"
+- name: Uninstall Tailscale
+  when: state == "absent"
+  ansible.builtin.include_tasks: uninstall.yml

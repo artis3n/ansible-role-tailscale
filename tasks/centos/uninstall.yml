@@ -1,0 +1,22 @@
+---
+- name: CentOS | Remove Tailscale
+  become: true
+  ansible.builtin.yum:
+    name: "{{ tailscale_package }}"
+    state: absent
+
+# noqa command-instead-of-module
+- name: CentOS | Check for Tailscale Repo
+  ansible.builtin.shell: |
+    set -o pipefail
+    yum repolist | grep tailscale
+  register: repolist_tailscale
+  changed_when: false
+  failed_when:
+    - repolist_tailscale.rc != 0
+    - repolist_tailscale.rc != 1
+
+- name: CentOS | Remove Tailscale Repo
+  become: true
+  ansible.builtin.command: yum-config-manager --disable tailscale-{{ release_stability | lower }}
+  when: repolist_tailscale.rc != 1
