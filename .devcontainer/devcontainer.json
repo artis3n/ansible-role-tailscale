@@ -1,8 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.202.5/containers/python-3
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.222.0/containers/python-3
 {
 	"name": "Python 3",
-	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
 		"context": "..",
@@ -18,8 +17,7 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
-		"python.pythonPath": "/usr/local/bin/python",
-		"python.languageServer": "Pylance",
+		"python.defaultInterpreterPath": "/usr/local/bin/python",
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
 		"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
@@ -52,7 +50,7 @@
 	// "postCreateCommand": "pip3 install --user -r requirements.txt",
 	"postCreateCommand": "make install",
 
-	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
 	"features": {
 		"docker-in-docker": "latest",
