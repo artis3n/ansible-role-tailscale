@@ -7,7 +7,7 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-ansible = "^5.5.0"
+ansible = "^5.6.0"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^2.18.1"
