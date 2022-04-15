@@ -258,7 +258,7 @@ De-register and uninstall a Tailscale node:
   roles:
     - role: artis3n.tailscale
       vars:
-        absent: true
+        state: absent
 ```
 
 # License
