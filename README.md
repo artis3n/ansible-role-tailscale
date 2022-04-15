@@ -250,6 +250,17 @@ Install Tailscale, but don't authenticate to the network:
         tailscale_up_skip: true
 ```
 
+De-register and uninstall a Tailscale node:
+
+```yaml
+- name: Servers
+  hosts: all
+  roles:
+    - role: artis3n.tailscale
+      vars:
+        absent: true
+```
+
 # License
 
 MIT
