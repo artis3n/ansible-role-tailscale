@@ -35,9 +35,15 @@
 
 - name: Prepare lsb_release if missing
   # Any system that Ansible can't gather versions from is missing lsb_release
-  # Only encountered on Debian Bullseye so far
+  # Only encountered on Debian so far during pre-release "testing" stage
   when: original_distribution_major_version == "NA"
   block:
+    - name: Apt Update
+      become: true
+      ansible.builtin.apt:
+        update_cache: true
+      when: ansible_distribution in debian_family_distros
+
     - name: Install lsb_release
       become: true
       ansible.builtin.package:
