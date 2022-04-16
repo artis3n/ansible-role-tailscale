@@ -26,6 +26,7 @@ jobs:
           - ghcr.io/artis3n/docker-rhel8-ansible:latest
           - ghcr.io/artis3n/docker-oraclelinux8-ansible:latest
           - ghcr.io/artis3n/docker-amazonlinux2-ansible:latest
+          - ghcr.io/artis3n/docker-ubuntu2204-ansible:latest
           # Temporary due to systemd faker in Molecule issues. Works on a real host
           # - ghcr.io/artis3n/docker-ubuntu2104-ansible:latest
           #  20.10 is EOL
