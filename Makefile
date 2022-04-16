@@ -18,10 +18,18 @@ update:
 	poetry update
 	poetry run pre-commit autoupdate
 
-# If local, make sure TAILSCALE_CI_KEY env var is set.
-# This is automatically populated in a GitHub Codespace.
 .PHONY: test
 test: test-default test-absent
+
+# If local, make sure TAILSCALE_CI_KEY env var is set.
+# This is automatically populated in a GitHub Codespace.
+.PHONY: test-all
+test-all:
+ifndef TAILSCALE_CI_KEY
+	$(error TAILSCALE_CI_KEY is not set)
+else
+	poetry run molecule test --parallel --all
+endif
 
 .PHONY: test-default
 test-default:

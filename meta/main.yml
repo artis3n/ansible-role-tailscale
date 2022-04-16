@@ -30,6 +30,7 @@ galaxy_info:
         - buster
         - stretch
         - bullseye
+        - bookworm
         - sid
     - name: Fedora
       versions:
