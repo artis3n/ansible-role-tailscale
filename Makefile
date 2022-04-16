@@ -21,12 +21,7 @@ update:
 # If local, make sure TAILSCALE_CI_KEY env var is set.
 # This is automatically populated in a GitHub Codespace.
 .PHONY: test
-test:
-ifndef TAILSCALE_CI_KEY
-	$(error TAILSCALE_CI_KEY is not set)
-else
-	poetry run molecule test --parallel --all
-endif
+test: test-default test-absent
 
 .PHONY: test-default
 test-default:

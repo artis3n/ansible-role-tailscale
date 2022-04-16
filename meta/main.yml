@@ -17,6 +17,7 @@ galaxy_info:
         - focal
         - groovy
         - hirsute
+        - jammy
     - name: EL
       versions:
         - "7"
