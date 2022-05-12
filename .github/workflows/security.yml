@@ -11,8 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install dependency manager
-        run: pipx install poetry
+      # - name: Install dependency manager
+      #   run: pipx install poetry
 
       - name: Set up Python 3.x
         id: setup-python
@@ -21,6 +21,9 @@ jobs:
           python-version: "3.10"
           # Once supported in https://github.com/actions/setup-python/pull/281
           # cache: 'poetry'
+
+      - name: Install dependency manager
+        run: pip install poetry
 
       # Snyk needs Python packages to be installed to scan
       - run: poetry install --no-interaction
