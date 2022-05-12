@@ -23,7 +23,7 @@ jobs:
           # cache: 'poetry'
 
       - name: Install dependency manager
-        run: pipx install poetry
+        run: pip install poetry
 
       # Snyk needs Python packages to be installed to scan
       - run: poetry install --no-interaction

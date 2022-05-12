@@ -58,7 +58,7 @@ jobs:
           # cache: 'poetry'
 
       - name: Install dependency manager
-        run: pipx install poetry
+        run: pip install poetry
 
       - name: Install packages
         run: poetry install --no-interaction
@@ -96,7 +96,7 @@ jobs:
           # cache: 'poetry'
 
       - name: Install dependency manager
-        run: pipx install poetry
+        run: pip install poetry
 
       - name: Install packages
         run: poetry install --no-interaction
@@ -122,7 +122,7 @@ jobs:
           # cache: 'poetry'
 
       - name: Install dependency manager
-        run: pipx install poetry
+        run: pip install poetry
 
       - name: Install packages
         run: poetry install --no-interaction
