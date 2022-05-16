@@ -69,7 +69,7 @@
 
 - name: Install | Bring Tailscale Up
   become: true
-  ansible.builtin.command: tailscale up {{ tailscale_up_args | trim | quote }}
+  ansible.builtin.command: tailscale up {{ tailscale_up_args | trim }}
   # Since the auth key is included in this task's output, we do not want to log output
   no_log: "{{ not (insecurely_log_authkey | bool) }}"
   register: tailscale_start
