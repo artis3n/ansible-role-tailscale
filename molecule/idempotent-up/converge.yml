@@ -13,7 +13,7 @@
         name: artis3n.tailscale
       vars:
         tailscale_authkey: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
-        tailscale_up_args: "--advertise-exit-node"
+        tailscale_args: "--advertise-exit-node"
 
     - name: Attempt to configure Tailscale without previous up argument
       ansible.builtin.include_role:
@@ -26,4 +26,4 @@
         name: artis3n.tailscale
       vars:
         tailscale_authkey: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
-        tailscale_up_args: "--reset"
+        tailscale_args: "--reset"
