@@ -131,3 +131,31 @@ jobs:
         run: poetry run molecule test --scenario-name vars-priority
         env:
           TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
+
+  molecule-args:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      # - name: Install dependency manager
+      #   run: pipx install poetry
+
+      - name: Set up Python 3.x
+        id: setup-python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+          # Once supported in https://github.com/actions/setup-python/pull/281
+          # cache: 'poetry'
+
+      - name: Install dependency manager
+        run: pip install poetry
+
+      - name: Install packages
+        run: poetry install --no-interaction
+
+      - name: Molecule - Vars Priority Validation
+        run: poetry run molecule test --scenario-name args
+        env:
+          TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
