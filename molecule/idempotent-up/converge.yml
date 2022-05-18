@@ -2,12 +2,6 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: Install Tailscale
-      ansible.builtin.include_role:
-        name: artis3n.tailscale
-      vars:
-        tailscale_authkey: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
-
     - name: Configure Tailscale with a new up argument
       ansible.builtin.include_role:
         name: artis3n.tailscale
