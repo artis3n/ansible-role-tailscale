@@ -6,5 +6,5 @@ exclude_paths:
     - ../../../../../.ansible/
 
 skip_list:
-    - line-length
+    - yaml[line-length]
     - package-latest
