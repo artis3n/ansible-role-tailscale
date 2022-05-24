@@ -3,7 +3,6 @@
 [![Ansible Role](https://img.shields.io/ansible/role/d/51664)](https://galaxy.ansible.com/artis3n/tailscale)
 [![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/artis3n/ansible-role-tailscale?include_prereleases)](https://github.com/artis3n/ansible-role-tailscale/releases)
 [![CI Tests](https://github.com/artis3n/ansible-role-tailscale/actions/workflows/ci.yml/badge.svg)](https://github.com/artis3n/ansible-role-tailscale/actions/workflows/ci.yml)
-[![Security Scans](https://github.com/artis3n/ansible-role-tailscale/actions/workflows/security.yml/badge.svg)](https://github.com/artis3n/ansible-role-tailscale/actions/workflows/security.yml)
 ![GitHub last commit](https://img.shields.io/github/last-commit/artis3n/ansible-role-tailscale)
 ![GitHub](https://img.shields.io/github/license/artis3n/ansible-role-tailscale)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/artis3n)](https://github.com/sponsors/artis3n)
@@ -276,19 +275,8 @@ Each Docker container creates a new authorized machine in that test account.
 The machines are authorized with [ephemeral auth keys][] and are automatically cleaned up within 30 minutes-48 hours.
 
 This value is stored in a [GitHub Action secret][] with the name `TAILSCALE_CI_KEY`.
-If you are interested in contributing to this repository, you must create a [Tailscale account][] and generate a [Node Authorization ephemeral auth key][auth key].
-Fork this repo and add an ephemeral auth key to the fork's secrets under the name `TAILSCALE_CI_KEY`.
-
 To test this role locally, store the Tailscale ephemeral auth key in a `TAILSCALE_CI_KEY` env var.
-
-If you are a Collaborator on this repository, you can open a GitHub Codespace and the `TAILSCALE_CI_KEY` will be populated for you.
-
-## molecule scenario: state
-
-Note: the `-s state` scenario intentionally fails during execution to demonstrate correct error throwing with inconsistent state scenarios.
-Not sure how to turn that into a stable test scenario yet.
-It can be run via `make test-state` but is excluded from the GitHub Action CI workflow for now.
-The idempotency step will definitely need to go.
+If you are a Collaborator on this repository, you can open a GitHub CodeSpace and the `TAILSCALE_CI_KEY` will be populated for you.
 
 [ansible filters manipulating strings]: https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#manipulating-strings
 [ansible-vault]: https://docs.ansible.com/ansible/latest/user_guide/vault.html#encrypt-string-for-use-in-yaml
