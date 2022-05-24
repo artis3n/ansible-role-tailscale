@@ -2,7 +2,7 @@
 name: CI Tests
 
 on:
-  pull_request:
+  pull_request_target:
     branches:
      - main
 
@@ -13,6 +13,7 @@ env:
 
 jobs:
   molecule:
+    environment: E2E
     runs-on: ubuntu-latest
 
     strategy:
@@ -45,6 +46,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       # - name: Install dependency manager
       #   run: pipx install poetry
@@ -79,10 +82,13 @@ jobs:
           TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
 
   molecule-skip-auth:
+    environment: E2E
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       # - name: Install dependency manager
       #   run: pipx install poetry
@@ -105,10 +111,13 @@ jobs:
         run: poetry run molecule test --scenario-name skip-authentication
 
   molecule-vars-priority:
+    environment: E2E
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       # - name: Install dependency manager
       #   run: pipx install poetry
