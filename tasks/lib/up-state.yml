@@ -8,7 +8,7 @@
 
 - name: Gather Up Arguments
   ansible.builtin.set_fact:
-    tailscale_up_args: --authkey={{ tailscale_authkey }} {{ tailscale_args | default() }}
+    tailscale_up_args: '{{ tailscale_args | default() }} --authkey={{ tailscale_authkey }}'
 
 - name: State Checksum
   ansible.builtin.set_fact:

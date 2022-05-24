@@ -20,14 +20,13 @@ provisioner:
 verifier:
   name: ansible
 scenario:
-  name: vars-priority
+  name: args
   test_sequence:
     - lint
     - destroy
     - syntax
     - create
     - converge
-    - idempotence
     - verify
     - cleanup
     - destroy
