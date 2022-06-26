@@ -3,8 +3,7 @@ exclude_paths:
     - .github/
     - .idea/
     - .vscode/
-    - ../../../../../.ansible/
 
 skip_list:
-    - line-length
+    - yaml[line-length]
     - package-latest
