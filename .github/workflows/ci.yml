@@ -20,7 +20,7 @@ jobs:
       matrix:
         distros:
           - geerlingguy/docker-centos7-ansible:latest
-          # Centos 8 reached EOL. This patch didn't work: https://github.com/geerlingguy/docker-centos8-ansible/blob/master/Dockerfile#L18
+          # Centos 8 reached EOL
           # - geerlingguy/docker-centos8-ansible:latest
           - geerlingguy/docker-rockylinux8-ansible:latest
           - ghcr.io/artis3n/docker-almalinux8-ansible:latest
@@ -28,10 +28,8 @@ jobs:
           - ghcr.io/artis3n/docker-oraclelinux8-ansible:latest
           - ghcr.io/artis3n/docker-amazonlinux2-ansible:latest
           - ghcr.io/artis3n/docker-ubuntu2204-ansible:latest
-          # Temporary due to systemd faker in Molecule issues. Works on a real host
-          # - ghcr.io/artis3n/docker-ubuntu2104-ansible:latest
+          - ghcr.io/artis3n/docker-ubuntu2104-ansible:latest
           #  20.10 is EOL
-          # apt update: "The repository 'http://archive.ubuntu.com/ubuntu groovy Release' does not have a Release file"
           # - ghcr.io/artis3n/docker-ubuntu2010-ansible:latest
           - geerlingguy/docker-ubuntu2004-ansible:latest
           - geerlingguy/docker-ubuntu1804-ansible:latest
@@ -49,19 +47,15 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      # - name: Install dependency manager
-      #   run: pipx install poetry
+      - name: Install dependency manager
+        run: pipx install poetry
 
       - name: Set up Python 3.x
         id: setup-python
         uses: actions/setup-python@v4.0.0
         with:
           python-version: "3.10"
-          # Once supported in https://github.com/actions/setup-python/pull/281
-          # cache: 'poetry'
-
-      - name: Install dependency manager
-        run: pip install poetry
+          cache: 'poetry'
 
       - name: Install packages
         run: poetry install --no-interaction
@@ -90,19 +84,15 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      # - name: Install dependency manager
-      #   run: pipx install poetry
+      - name: Install dependency manager
+        run: pipx install poetry
 
       - name: Set up Python 3.x
         id: setup-python
         uses: actions/setup-python@v4.0.0
         with:
           python-version: "3.10"
-          # Once supported in https://github.com/actions/setup-python/pull/281
-          # cache: 'poetry'
-
-      - name: Install dependency manager
-        run: pip install poetry
+          cache: 'poetry'
 
       - name: Install packages
         run: poetry install --no-interaction
@@ -119,19 +109,15 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      # - name: Install dependency manager
-      #   run: pipx install poetry
+      - name: Install dependency manager
+        run: pipx install poetry
 
       - name: Set up Python 3.x
         id: setup-python
         uses: actions/setup-python@v4.0.0
         with:
           python-version: "3.10"
-          # Once supported in https://github.com/actions/setup-python/pull/281
-          # cache: 'poetry'
-
-      - name: Install dependency manager
-        run: pip install poetry
+          cache: 'poetry'
 
       - name: Install packages
         run: poetry install --no-interaction
@@ -150,19 +136,15 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      # - name: Install dependency manager
-      #   run: pipx install poetry
+      - name: Install dependency manager
+        run: pipx install poetry
 
       - name: Set up Python 3.x
         id: setup-python
         uses: actions/setup-python@v4.0.0
         with:
           python-version: "3.10"
-          # Once supported in https://github.com/actions/setup-python/pull/281
-          # cache: 'poetry'
-
-      - name: Install dependency manager
-        run: pip install poetry
+          cache: 'poetry'
 
       - name: Install packages
         run: poetry install --no-interaction

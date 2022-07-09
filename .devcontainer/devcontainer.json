@@ -40,7 +40,8 @@
 		"MS-vsliveshare.vsliveshare",
 		"yzhang.markdown-all-in-one",
 		"be5invis.toml",
-		"redhat.vscode-yaml"
+		"redhat.vscode-yaml",
+		"ms-vscode.makefile-tools"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
