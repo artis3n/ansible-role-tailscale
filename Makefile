@@ -11,8 +11,9 @@ install:
 
 # Installation steps we only want to take inside a GitHub Codespace
 .PHONY: codespace-install
+RATCHET_VERSION ?= "0.2.3"
 codespace-install:
-	wget -O /tmp/ratchet.tar.gz https://github.com/sethvargo/ratchet/releases/download/v0.2.3/ratchet_0.2.3_linux_amd64.tar.gz && tar -xzf /tmp/ratchet.tar.gz -C /tmp && sudo mv /tmp/ratchet /usr/local/bin/ratchet
+	wget -O /tmp/ratchet.tar.gz https://github.com/sethvargo/ratchet/releases/download/v${RATCHET_VERSION}/ratchet_${RATCHET_VERSION}_linux_amd64.tar.gz && tar -xzf /tmp/ratchet.tar.gz -C /tmp && sudo mv /tmp/ratchet /usr/local/bin/ratchet
 
 .PHONY: clean
 clean:
