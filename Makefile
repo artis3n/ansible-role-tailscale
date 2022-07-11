@@ -9,6 +9,11 @@ install:
 	poetry install
 	poetry run pre-commit install --install-hooks
 
+# Installation steps we only want to take inside a GitHub Codespace
+.PHONY: codespace-install
+codespace-install:
+	wget -O /tmp/ratchet.tar.gz https://github.com/sethvargo/ratchet/releases/download/v0.2.3/ratchet_0.2.3_linux_amd64.tar.gz && tar -xzf /tmp/ratchet.tar.gz -C /tmp && sudo mv /tmp/ratchet /usr/local/bin/ratchet
+
 .PHONY: clean
 clean:
 	poetry env remove
