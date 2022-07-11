@@ -491,7 +491,7 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "pre-commit"
-version = "2.19.0"
+version = "2.20.0"
 description = "A framework for managing and maintaining multi-language pre-commit hooks."
 category = "dev"
 optional = false
@@ -804,7 +804,7 @@ pyyaml = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "8393bb97c050e05d9d1ebd3eacee729652fa415e239c73d1b9b7ee7b40bcb518"
+content-hash = "5414e17aab281470ff8526b7f5d73482ca001cd2f296078d44a41ae0bdd09b7c"
 
 [metadata.files]
 ansible = []
