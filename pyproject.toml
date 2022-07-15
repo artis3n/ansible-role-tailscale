@@ -7,10 +7,10 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-ansible = "^6.0.0"
+ansible = "^6.1.0"
 
 [tool.poetry.dev-dependencies]
-pre-commit = "^2.19.0"
+pre-commit = "^2.20.0"
 ansible-lint = "^6.1.0"
 molecule = {extras = ["docker"], version = "^4.0.0"}
 
