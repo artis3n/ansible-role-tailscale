@@ -1,0 +1,36 @@
+name: Supply Chain Security
+#
+on:
+  pull_request:
+    branches:
+      - main
+#
+permissions:
+  pull-requests: write
+#
+jobs:
+  # TODO: Only update files if `ratchet check` fails - or otherwise we'll enter infinite loop of triggering this job
+  # TODO: Commit changes back to current PR - likely with https://github.com/actions/github-script
+  ratchet:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    strategy:
+      matrix:
+        file:
+          - .github/workflows/ci.yml
+          - .github/workflows/supply_chain.yml
+    #
+    steps:
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # ratchet:actions/checkout@v3
+      #
+      - name: Check if workflows have been updated
+        id: ratchet-checks
+        uses: docker://ghcr.io/sethvargo/ratchet@sha256:b3e3e8da9f6269e52a48dc45bbe7bc4801d434a0bd987aa394f9bcb99a399d61 # ratchet:docker://ghcr.io/sethvargo/ratchet:0.2.3
+        with:
+          args: "check ${{ matrix.file }}"
+      #
+      - name: Update Ratchet pins
+        # if: ${{ ratchet-checks exit codes are both 0, have to see how the id output is formed }}
+        uses: docker://ghcr.io/sethvargo/ratchet@sha256:b3e3e8da9f6269e52a48dc45bbe7bc4801d434a0bd987aa394f9bcb99a399d61 # ratchet:docker://ghcr.io/sethvargo/ratchet:0.2.3
+        with:
+          args: "update ${{ matrix.file }}"

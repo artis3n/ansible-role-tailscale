@@ -278,6 +278,9 @@ This value is stored in a [GitHub Action secret][] with the name `TAILSCALE_CI_K
 To test this role locally, store the Tailscale ephemeral auth key in a `TAILSCALE_CI_KEY` env var.
 If you are a Collaborator on this repository, you can open a GitHub CodeSpace and the `TAILSCALE_CI_KEY` will be populated for you.
 
+[ratchet](https://github.com/sethvargo/ratchet) is used to securely pin workflow dependencies in the GitHub Action workflows used in this repo.
+The tool is not able to respect whitespace lines in the yaml files, so `#` empty comments are added to add visual breaks between groups of text in the workflow files.
+
 [ansible filters manipulating strings]: https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#manipulating-strings
 [ansible-vault]: https://docs.ansible.com/ansible/latest/user_guide/vault.html#encrypt-string-for-use-in-yaml
 [ansible.builtin.command]: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/command_module.html
