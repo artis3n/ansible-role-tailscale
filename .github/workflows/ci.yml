@@ -21,6 +21,7 @@ jobs:
         distros:
           - geerlingguy/docker-centos7-ansible:latest
           - geerlingguy/docker-rockylinux8-ansible:latest
+          - geerlingguy/docker-rockylinux9-ansible:latest
           - ghcr.io/artis3n/docker-almalinux8-ansible:latest
           - ghcr.io/artis3n/docker-rhel8-ansible:latest
           - ghcr.io/artis3n/docker-oraclelinux8-ansible:latest
