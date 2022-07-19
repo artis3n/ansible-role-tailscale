@@ -47,7 +47,7 @@
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
-	// "onCreateCommand": "make install",
+	"onCreateCommand": "make install",
 	"updateContentCommand": "make install",
 	// "postCreateCommand": "",
 	"postStartCommand": "sudo apt update && sudo apt full-upgrade -y",
