@@ -23,8 +23,8 @@ PyYAML = "*"
 subprocess-tee = ">=0.3.5"
 
 [package.extras]
-docs = ["sphinx-autobuild (>=0.7.1,<1.0)", "sphinx (>=4.2.0,<5.0)", "sphinx-ansible-theme", "myst-parser"]
-test = ["coverage", "flaky", "pip-tools", "pytest", "pytest-markdown", "pytest-mock", "pytest-plus"]
+test = ["pytest-plus", "pytest-mock", "pytest-markdown", "pytest", "pip-tools", "flaky", "coverage"]
+docs = ["myst-parser", "sphinx-ansible-theme", "sphinx (>=4.2.0,<5.0)", "sphinx-autobuild (>=0.7.1,<1.0)"]
 
 [[package]]
 name = "ansible-core"
@@ -43,17 +43,17 @@ resolvelib = ">=0.5.3,<0.9.0"
 
 [[package]]
 name = "ansible-lint"
-version = "6.3.0"
+version = "6.4.0"
 description = "Checks playbooks for practices and behavior that could potentially be improved"
 category = "dev"
 optional = false
 python-versions = ">=3.8"
 
 [package.dependencies]
-ansible-compat = ">=2.1.0"
+ansible-compat = ">=2.2.0"
 ansible-core = ">=2.12.0"
 enrich = ">=1.2.6"
-jsonschema = ">=4.6.0"
+jsonschema = ">=4.8.0"
 packaging = "*"
 pytest = "*"
 pyyaml = "*"
@@ -214,7 +214,7 @@ optional = false
 python-versions = "*"
 
 [package.extras]
-test = ["flake8 (==3.7.8)", "hypothesis (==3.55.3)"]
+test = ["hypothesis (==3.55.3)", "flake8 (==3.7.8)"]
 
 [[package]]
 name = "cookiecutter"
@@ -366,7 +366,7 @@ jinja2 = "*"
 
 [[package]]
 name = "jsonschema"
-version = "4.7.2"
+version = "4.8.0"
 description = "An implementation of JSON Schema validation for Python"
 category = "dev"
 optional = false
@@ -431,12 +431,12 @@ ansible-compat = ">=0.5.0"
 docker = ">=4.3.1"
 molecule = ">=3.4.0"
 requests = "*"
-selinux = {version = "*", markers = "sys_platform == \"linux\" or sys_platform == \"linux2\""}
+selinux = {version = "*", markers = "sys_platform == \"linux2\" or sys_platform == \"linux\""}
 
 [package.extras]
-docs = ["simplejson", "sphinx", "sphinx-ansible-theme (>=0.2.2)"]
-lint = ["pre-commit (>=1.21.0)"]
 test = ["molecule"]
+lint = ["pre-commit (>=1.21.0)"]
+docs = ["sphinx-ansible-theme (>=0.2.2)", "sphinx", "simplejson"]
 
 [[package]]
 name = "nodeenv"
@@ -486,8 +486,8 @@ optional = false
 python-versions = ">=3.6"
 
 [package.extras]
-dev = ["pre-commit", "tox"]
-testing = ["pytest", "pytest-benchmark"]
+testing = ["pytest-benchmark", "pytest"]
+dev = ["tox", "pre-commit"]
 
 [[package]]
 name = "pre-commit"
@@ -637,10 +637,10 @@ optional = false
 python-versions = "*"
 
 [package.extras]
-examples = ["html5lib", "packaging", "pygraphviz", "requests"]
-lint = ["black", "flake8", "mypy", "isort", "types-requests"]
-release = ["build", "towncrier", "twine"]
-test = ["commentjson", "packaging", "pytest"]
+test = ["pytest", "packaging", "commentjson"]
+release = ["twine", "towncrier", "build"]
+lint = ["types-requests", "isort", "mypy", "flake8", "black"]
+examples = ["requests", "pygraphviz", "packaging", "html5lib"]
 
 [[package]]
 name = "rich"
@@ -708,7 +708,7 @@ optional = false
 python-versions = ">=3.6"
 
 [package.extras]
-test = ["enrich (>=1.2.6)", "mock (>=4.0.3)", "molecule (>=3.4.0)", "pytest-cov (>=2.12.1)", "pytest-plus (>=0.2)", "pytest-xdist (>=2.3.0)", "pytest (>=6.2.5)"]
+test = ["pytest (>=6.2.5)", "pytest-xdist (>=2.3.0)", "pytest-plus (>=0.2)", "pytest-cov (>=2.12.1)", "molecule (>=3.4.0)", "mock (>=4.0.3)", "enrich (>=1.2.6)"]
 
 [[package]]
 name = "text-unidecode"
@@ -804,7 +804,7 @@ pyyaml = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "536c51236805296afabc818e41b923eecafa4b2fc276416409b3e77a3ec059fa"
+content-hash = "d6c4135e398d553e5ad18abeae8276b9f40bd58b393a206b733601949b1b6cb9"
 
 [metadata.files]
 ansible = [
@@ -820,8 +820,8 @@ ansible-core = [
     {file = "ansible_core-2.13.1-py3-none-any.whl", hash = "sha256:45d55e052bcea487366b0893b22f247e913a1f0948197658b7f3532a37ab6841"},
 ]
 ansible-lint = [
-    {file = "ansible-lint-6.3.0.tar.gz", hash = "sha256:f57f520ae5d810ce062157dc7d633990ad2fbec81bbbb34ccc4ce3a0c21fcd38"},
-    {file = "ansible_lint-6.3.0-py3-none-any.whl", hash = "sha256:144b61a43fb9bad9fb19529105a98c87b8b84c99519290209dc624231f5b70ca"},
+    {file = "ansible-lint-6.4.0.tar.gz", hash = "sha256:c5a76306cae906a260cf7286ca87c4d03ba4492b2ed7bfea21ad11fdf3c7e8d1"},
+    {file = "ansible_lint-6.4.0-py3-none-any.whl", hash = "sha256:bea12b88a69c1f9a6746ec0532aa72d6e7ca44918eea9a8110bc321b208f49e7"},
 ]
 arrow = [
     {file = "arrow-1.2.2-py3-none-any.whl", hash = "sha256:d622c46ca681b5b3e3574fcb60a04e5cc81b9625112d5fb2b44220c36c892177"},
@@ -1012,8 +1012,8 @@ jinja2-time = [
     {file = "jinja2_time-0.2.0-py2.py3-none-any.whl", hash = "sha256:d3eab6605e3ec8b7a0863df09cc1d23714908fa61aa6986a845c20ba488b4efa"},
 ]
 jsonschema = [
-    {file = "jsonschema-4.7.2-py3-none-any.whl", hash = "sha256:c7448a421b25e424fccfceea86b4e3a8672b4436e1988ccbde92c80828d4f085"},
-    {file = "jsonschema-4.7.2.tar.gz", hash = "sha256:73764f461d61eb97a057c929368610a134d1d1fffd858acfe88864ee94f1f1d3"},
+    {file = "jsonschema-4.8.0-py3-none-any.whl", hash = "sha256:58bb77251318cef5e1179e33dd6e7a008a3c6c638487ab4d943c2f370cc31a1a"},
+    {file = "jsonschema-4.8.0.tar.gz", hash = "sha256:c1d410e379b210ba903bee6adf3fce6d5204cea4c2b622d63f914d2dbfef0993"},
 ]
 markupsafe = [
     {file = "MarkupSafe-2.1.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:86b1f75c4e7c2ac2ccdaec2b9022845dbb81880ca318bb7a0a01fbf7813e3812"},
