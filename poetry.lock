@@ -43,7 +43,7 @@ resolvelib = ">=0.5.3,<0.9.0"
 
 [[package]]
 name = "ansible-lint"
-version = "6.5.1"
+version = "6.5.2"
 description = "Checks playbooks for practices and behavior that could potentially be improved"
 category = "dev"
 optional = false
@@ -52,6 +52,7 @@ python-versions = ">=3.8"
 [package.dependencies]
 ansible-compat = ">=2.2.0"
 ansible-core = ">=2.12.0"
+black = ">=22.1.0"
 enrich = ">=1.2.6"
 filelock = "*"
 jsonschema = ">=4.9.0"
@@ -64,7 +65,7 @@ yamllint = ">=1.25.0"
 
 [package.extras]
 docs = ["myst-parser (>=0.16.1)", "pipdeptree (>=2.2.1)", "sphinx (>=4.4.0)", "sphinx-ansible-theme (>=0.9.1)", "sphinx-rtd-theme (>=0.5.2,<1.0.0)", "sphinxcontrib-apidoc (>=0.3.0)", "sphinxcontrib-programoutput2 (>=2.0a1)", "yamllint (>=1.26.3)"]
-test = ["black", "coverage (>=6.3)", "flake8", "flake8-future-annotations", "flaky (>=3.7.0)", "mypy", "psutil", "pylint", "pytest (>=6.0.1)", "pytest-cov (>=2.10.1)", "pytest-plus (>=0.2)", "pytest-xdist (>=2.1.0)", "tomli (>=2.0.0)"]
+test = ["black", "coverage-enable-subprocess", "coverage[toml] (>=6.4.4)", "flake8", "flake8-future-annotations", "flaky (>=3.7.0)", "mypy", "psutil", "pylint", "pytest (>=6.0.1)", "pytest-plus (>=0.2)", "pytest-xdist (>=2.1.0)"]
 
 [[package]]
 name = "arrow"
@@ -101,6 +102,27 @@ python-versions = "*"
 
 [package.dependencies]
 chardet = ">=3.0.2"
+
+[[package]]
+name = "black"
+version = "22.8.0"
+description = "The uncompromising code formatter."
+category = "dev"
+optional = false
+python-versions = ">=3.6.2"
+
+[package.dependencies]
+click = ">=8.0.0"
+mypy-extensions = ">=0.4.3"
+pathspec = ">=0.9.0"
+platformdirs = ">=2"
+tomli = {version = ">=1.1.0", markers = "python_full_version < \"3.11.0a7\""}
+
+[package.extras]
+colorama = ["colorama (>=0.4.3)"]
+d = ["aiohttp (>=3.7.4)"]
+jupyter = ["ipython (>=7.8.0)", "tokenize-rt (>=3.2.0)"]
+uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "bracex"
@@ -422,6 +444,14 @@ lint = ["pre-commit (>=1.21.0)"]
 test = ["molecule"]
 
 [[package]]
+name = "mypy-extensions"
+version = "0.4.3"
+description = "Experimental type system extensions for programs checked with the mypy typechecker."
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "nodeenv"
 version = "1.7.0"
 description = "Node.js virtual environment builder"
@@ -681,6 +711,14 @@ optional = false
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 
 [[package]]
+name = "tomli"
+version = "2.0.1"
+description = "A lil' TOML parser"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
 name = "urllib3"
 version = "1.26.11"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
@@ -749,7 +787,7 @@ pyyaml = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "de39dab4738b0e97992289a68b68649428617b8ba273843a6ddd0eb61eb4c570"
+content-hash = "dfa121e902c32ddc5c72da8b0311bf83c038226729656e506827e001c35f70be"
 
 [metadata.files]
 ansible = [
@@ -765,8 +803,8 @@ ansible-core = [
     {file = "ansible_core-2.13.3-py3-none-any.whl", hash = "sha256:449dbcfbfe18e4f23dec0c29b9aa60d76d205657a8e136484f4edea49faf7614"},
 ]
 ansible-lint = [
-    {file = "ansible-lint-6.5.1.tar.gz", hash = "sha256:b02c5222450c469196c9cc28d3128e50f6bcf9549d5dd15c3cfbf47c70b5b06e"},
-    {file = "ansible_lint-6.5.1-py3-none-any.whl", hash = "sha256:8bba51a5da393db8fcbb050677fc59d8b2c9b7ebaf75f562619468375f40a318"},
+    {file = "ansible-lint-6.5.2.tar.gz", hash = "sha256:f4432c74c0f28b2870a188b4999592f6338042f30d0c6f4ee11b32440ca9ffe4"},
+    {file = "ansible_lint-6.5.2-py3-none-any.whl", hash = "sha256:ac8241d3ce1b161f0e052b44f0d226fbda7d8f318d4f24269de7f2b87e32ff6f"},
 ]
 arrow = [
     {file = "arrow-1.2.2-py3-none-any.whl", hash = "sha256:d622c46ca681b5b3e3574fcb60a04e5cc81b9625112d5fb2b44220c36c892177"},
@@ -779,6 +817,31 @@ attrs = [
 binaryornot = [
     {file = "binaryornot-0.4.4-py2.py3-none-any.whl", hash = "sha256:b8b71173c917bddcd2c16070412e369c3ed7f0528926f70cac18a6c97fd563e4"},
     {file = "binaryornot-0.4.4.tar.gz", hash = "sha256:359501dfc9d40632edc9fac890e19542db1a287bbcfa58175b66658392018061"},
+]
+black = [
+    {file = "black-22.8.0-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:ce957f1d6b78a8a231b18e0dd2d94a33d2ba738cd88a7fe64f53f659eea49fdd"},
+    {file = "black-22.8.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:5107ea36b2b61917956d018bd25129baf9ad1125e39324a9b18248d362156a27"},
+    {file = "black-22.8.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:e8166b7bfe5dcb56d325385bd1d1e0f635f24aae14b3ae437102dedc0c186747"},
+    {file = "black-22.8.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:dd82842bb272297503cbec1a2600b6bfb338dae017186f8f215c8958f8acf869"},
+    {file = "black-22.8.0-cp310-cp310-win_amd64.whl", hash = "sha256:d839150f61d09e7217f52917259831fe2b689f5c8e5e32611736351b89bb2a90"},
+    {file = "black-22.8.0-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:a05da0430bd5ced89176db098567973be52ce175a55677436a271102d7eaa3fe"},
+    {file = "black-22.8.0-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:4a098a69a02596e1f2a58a2a1c8d5a05d5a74461af552b371e82f9fa4ada8342"},
+    {file = "black-22.8.0-cp36-cp36m-win_amd64.whl", hash = "sha256:5594efbdc35426e35a7defa1ea1a1cb97c7dbd34c0e49af7fb593a36bd45edab"},
+    {file = "black-22.8.0-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:a983526af1bea1e4cf6768e649990f28ee4f4137266921c2c3cee8116ae42ec3"},
+    {file = "black-22.8.0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3b2c25f8dea5e8444bdc6788a2f543e1fb01494e144480bc17f806178378005e"},
+    {file = "black-22.8.0-cp37-cp37m-win_amd64.whl", hash = "sha256:78dd85caaab7c3153054756b9fe8c611efa63d9e7aecfa33e533060cb14b6d16"},
+    {file = "black-22.8.0-cp38-cp38-macosx_10_9_universal2.whl", hash = "sha256:cea1b2542d4e2c02c332e83150e41e3ca80dc0fb8de20df3c5e98e242156222c"},
+    {file = "black-22.8.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:5b879eb439094751185d1cfdca43023bc6786bd3c60372462b6f051efa6281a5"},
+    {file = "black-22.8.0-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:0a12e4e1353819af41df998b02c6742643cfef58282915f781d0e4dd7a200411"},
+    {file = "black-22.8.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c3a73f66b6d5ba7288cd5d6dad9b4c9b43f4e8a4b789a94bf5abfb878c663eb3"},
+    {file = "black-22.8.0-cp38-cp38-win_amd64.whl", hash = "sha256:e981e20ec152dfb3e77418fb616077937378b322d7b26aa1ff87717fb18b4875"},
+    {file = "black-22.8.0-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:8ce13ffed7e66dda0da3e0b2eb1bdfc83f5812f66e09aca2b0978593ed636b6c"},
+    {file = "black-22.8.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:32a4b17f644fc288c6ee2bafdf5e3b045f4eff84693ac069d87b1a347d861497"},
+    {file = "black-22.8.0-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:0ad827325a3a634bae88ae7747db1a395d5ee02cf05d9aa7a9bd77dfb10e940c"},
+    {file = "black-22.8.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:53198e28a1fb865e9fe97f88220da2e44df6da82b18833b588b1883b16bb5d41"},
+    {file = "black-22.8.0-cp39-cp39-win_amd64.whl", hash = "sha256:bc4d4123830a2d190e9cc42a2e43570f82ace35c3aeb26a512a2102bce5af7ec"},
+    {file = "black-22.8.0-py3-none-any.whl", hash = "sha256:d2c21d439b2baf7aa80d6dd4e3659259be64c6f49dfd0f32091063db0e006db4"},
+    {file = "black-22.8.0.tar.gz", hash = "sha256:792f7eb540ba9a17e8656538701d3eb1afcb134e3b45b71f20b25c77a8db7e6e"},
 ]
 bracex = [
     {file = "bracex-2.3.post1-py3-none-any.whl", hash = "sha256:351b7f20d56fb9ea91f9b9e9e7664db466eb234188c175fd943f8f755c807e73"},
@@ -1003,6 +1066,10 @@ molecule-docker = [
     {file = "molecule-docker-2.0.0.tar.gz", hash = "sha256:12c180c95c3f022d89aedd52e42b57e5c1e0ee4d4be8ec997c3dcb9c28d7e2a3"},
     {file = "molecule_docker-2.0.0-py3-none-any.whl", hash = "sha256:c447842ee4817fe6efa64ca6a73b1e3081cd60710ed86385b6ad7569d9599ab5"},
 ]
+mypy-extensions = [
+    {file = "mypy_extensions-0.4.3-py2.py3-none-any.whl", hash = "sha256:090fedd75945a69ae91ce1303b5824f428daf5a028d2f6ab8a299250a846f15d"},
+    {file = "mypy_extensions-0.4.3.tar.gz", hash = "sha256:2d82818f5bb3e369420cb3c4060a7970edba416647068eb4c5343488a6c604a8"},
+]
 nodeenv = [
     {file = "nodeenv-1.7.0-py2.py3-none-any.whl", hash = "sha256:27083a7b96a25f2f5e1d8cb4b6317ee8aeda3bdd121394e5ac54e498028a042e"},
     {file = "nodeenv-1.7.0.tar.gz", hash = "sha256:e0e7f7dfb85fc5394c6fe1e8fa98131a2473e04311a45afb6508f7cf1836fa2b"},
@@ -1186,6 +1253,10 @@ text-unidecode = [
 toml = [
     {file = "toml-0.10.2-py2.py3-none-any.whl", hash = "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b"},
     {file = "toml-0.10.2.tar.gz", hash = "sha256:b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f"},
+]
+tomli = [
+    {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
+    {file = "tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
 ]
 urllib3 = [
     {file = "urllib3-1.26.11-py2.py3-none-any.whl", hash = "sha256:c33ccba33c819596124764c23a97d25f32b28433ba0dedeb77d873a38722c9bc"},
