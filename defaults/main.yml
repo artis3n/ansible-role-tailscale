@@ -1,8 +1,8 @@
 ---
 # Variables that a user may want to modify.
 
-# Whether to install or uninstall Tailscale. Either 'present' or 'absent'
-state: present
+# Whether to install or uninstall Tailscale. Either 'latest', 'present', or 'absent'
+state: latest
 # Required Node auth key to authenticate to Tailscale
 tailscale_authkey: null
 # Optional command-line arguments for 'tailscale up'
