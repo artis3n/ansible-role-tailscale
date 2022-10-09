@@ -1,8 +1,9 @@
 ---
 - name: State Validation
   ansible.builtin.fail:
-    msg: "'state' must either be 'present' or 'absent'."
+    msg: "'state' must be 'latest', 'present', or 'absent'."
   when:
+    - state != "latest"
     - state != "present"
     - state != "absent"
 
@@ -66,7 +67,7 @@
     msg: "{{ ansible_distribution }} {{ ansible_distribution_major_version }} ({{ ansible_distribution_release }})"
 
 - name: Install Tailscale
-  when: state == "present"
+  when: state == "present" or state == "latest"
   ansible.builtin.include_tasks: install.yml
 
 - name: Uninstall Tailscale

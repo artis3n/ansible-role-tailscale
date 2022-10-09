@@ -10,7 +10,7 @@
 [![GitHub followers](https://img.shields.io/github/followers/artis3n?style=social)](https://github.com/artis3n/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/artis3n?style=social)](https://twitter.com/Artis3n)
 
-This role initializes a [Tailscale][] node. If Tailscale is already installed, this role will update Tailscale to the latest version.
+This role installs and configures [Tailscale][] on a Linux target.
 
 Supported operating systems:
 - Debian / Ubuntu
@@ -54,7 +54,7 @@ Note that:
 
 <small>
 
-[docs: tailscale up][tailscale up docs]
+\- [docs: tailscale up][tailscale up docs]
 
 </small>
 
@@ -126,10 +126,14 @@ Whether to use the Tailscale stable or unstable track.
 
 ### state
 
-**Default**: `present`
+**Default**: `latest`
 
 Whether to install or uninstall Tailscale.
-If defined, `state` must be either `present` or `absent`.
+If defined, `state` must be either `latest`, `present`, or `absent`.
+
+This role uses `latest` by default to help ensure your software remains up-to-date and incorporates the latest security and product features.
+For users who desire more control over configuration drift, `present` will not update Tailscale if it is already installed.
+Changes to [`tailscale_args`](#tailscale_args) will be applied under both `latest` and `present`; this parameter only impacts the version of Tailscale installed to the target system.
 
 If set to `absent`, this role will de-register the Tailscale node (if already authenticated)
 and clean up or disable all Tailscale artifacts added to the system.
@@ -140,7 +144,7 @@ Note that neither `tailscale_authkey` nor `tailscale_up_skip` is required if `st
 
 Pass any additional command-line arguments to `tailscale up`.
 
-Note that this parameter's contents will be [wrapped in quotes][ansible filters manipulating strings] to prevent command expansion. The [command][ansible.builtin.command] module is used, which does not support subshell expressions (`$()`) or bash operations like `;` and `&` in any case.
+Note that the [command][ansible.builtin.command] module is used, which does not support subshell expressions (`$()`) or bash operations like `;` and `&`.
 Only `tailscale up` arguments can be passed in.
 
 **Do not use this for `--authkey`.**
@@ -175,14 +179,8 @@ Helpful for debugging and collecting information to submit in a GitHub issue on 
   roles:
     - role: artis3n.tailscale
       vars:
-        # Fake example encrypted by ansible-vault
-        tailscale_authkey: !vault |
-          $ANSIBLE_VAULT;1.2;AES256;tailscale
-          32616238303134343065613038383933333733383765653166346564363332343761653761646363
-          6637666565626333333664363739613366363461313063640a613330393062323161636235383936
-          37373734653036613133613533376139383138613164323661386362376335316364653037353631
-          6539646561373535610a643334396234396332376431326565383432626232383131303131363362
-          3537
+        # Example pulling the API key from the env vars on the host running Ansible
+        tailscale_authkey: "{{ lookup('env', 'TAILSCALE_KEY') }}"
 ```
 
 Pass arbitrary command-line arguments:
@@ -222,7 +220,6 @@ Pass arbitrary command-line arguments:
         name: artis3n.tailscale
       vars:
         tailscale_args: "--accept-routes=false --advertise-routes={{ subnet_blocks | join(',') }}"
-        # Pulled from the env vars on the host running Ansible
         tailscale_authkey: "{{ lookup('env', 'TAILSCALE_KEY') }}"
 ```
 
@@ -235,7 +232,6 @@ Get verbose output:
     - role: artis3n.tailscale
       vars:
         verbose: true
-        # Pulled from the env vars on the host running Ansible
         tailscale_authkey: "{{ lookup('env', 'TAILSCALE_KEY') }}"
 ```
 
@@ -279,7 +275,6 @@ This value is stored in a [GitHub Action secret][] with the name `TAILSCALE_CI_K
 To test this role locally, store the Tailscale ephemeral auth key in a `TAILSCALE_CI_KEY` env var.
 If you are a Collaborator on this repository, you can open a GitHub CodeSpace and the `TAILSCALE_CI_KEY` will be populated for you.
 
-[ansible filters manipulating strings]: https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#manipulating-strings
 [ansible-vault]: https://docs.ansible.com/ansible/latest/user_guide/vault.html#encrypt-string-for-use-in-yaml
 [ansible.builtin.command]: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/command_module.html
 [auth key]: https://login.tailscale.com/admin/authkeys

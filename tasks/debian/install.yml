@@ -34,5 +34,5 @@
   become: true
   ansible.builtin.apt:
     name: "{{ tailscale_package }}"
-    state: latest
+    state: '{{ state }}'
     update_cache: true
