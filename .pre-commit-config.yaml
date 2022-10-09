@@ -15,12 +15,12 @@ repos:
       - id: sort-simple-yaml
 
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
-    rev: 2.1.6
+    rev: 3.0.0
     hooks:
       - id: shellcheck
 
   - repo: https://github.com/ansible/ansible-lint
-    rev: v6.3.0
+    rev: v6.8.0
     hooks:
       - id: ansible-lint
         files: \.(yaml|yml)$

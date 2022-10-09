@@ -18,6 +18,10 @@ update:
 	poetry update
 	poetry run pre-commit autoupdate
 
+.PHONY: lint
+lint:
+	poetry run ansible-lint
+
 .PHONY: test
 test: test-default test-absent
 
@@ -62,7 +66,3 @@ ifndef TAILSCALE_CI_KEY
 else
 	poetry run molecule test --parallel --scenario-name state-absent
 endif
-
-.PHONY: lint
-lint:
-	poetry run ansible-lint
