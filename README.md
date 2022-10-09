@@ -10,7 +10,7 @@
 [![GitHub followers](https://img.shields.io/github/followers/artis3n?style=social)](https://github.com/artis3n/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/artis3n?style=social)](https://twitter.com/Artis3n)
 
-This role installs and configures a [Tailscale][] node.
+This role installs and configures [Tailscale][] on a Linux target.
 
 Supported operating systems:
 - Debian / Ubuntu
@@ -144,7 +144,7 @@ Note that neither `tailscale_authkey` nor `tailscale_up_skip` is required if `st
 
 Pass any additional command-line arguments to `tailscale up`.
 
-Note that the [command][ansible.builtin.command] module is used, which does not support subshell expressions (`$()`) or bash operations like `;` and `&` in any case.
+Note that the [command][ansible.builtin.command] module is used, which does not support subshell expressions (`$()`) or bash operations like `;` and `&`.
 Only `tailscale up` arguments can be passed in.
 
 **Do not use this for `--authkey`.**
