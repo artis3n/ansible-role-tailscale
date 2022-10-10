@@ -186,6 +186,9 @@ jobs:
           # Once supported in https://github.com/actions/setup-python/pull/281
           # cache: 'poetry'
 
+      - name: Install dependency manager
+        run: pip install poetry
+
       - name: Install packages
         run: poetry install --no-interaction
 
