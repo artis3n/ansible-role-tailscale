@@ -36,7 +36,7 @@ debian_distro:
 
 apt_keyring_path: /usr/share/keyrings/tailscale-archive-keyring.gpg
 
-apt_deb: deb [{{ apt_keyring_path }} https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ debian_distro[ansible_distribution | lower] }} {{ ansible_distribution_release | lower }} main
+apt_deb: deb [signed-by={{ apt_keyring_path }}] https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ debian_distro[ansible_distribution | lower] }} {{ ansible_distribution_release | lower }} main
 
 apt_signkey: https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ debian_distro[ansible_distribution | lower] }}/{{ ansible_distribution_release | lower }}.noarmor.gpg
 
