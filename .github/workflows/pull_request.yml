@@ -1,0 +1,39 @@
+---
+name: CI
+
+on:
+  pull_request:
+    branches:
+     - main
+
+env:
+  # https://www.jeffgeerling.com/blog/2020/getting-colorized-output-molecule-and-ansible-on-github-actions-ci
+  PY_COLORS: '1'
+  ANSIBLE_FORCE_COLOR: '1'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      # - name: Install dependency manager
+      #   run: pipx install poetry
+
+      - name: Set up Python 3.x
+        id: setup-python
+        uses: actions/setup-python@v4.3.0
+        with:
+          python-version: "3.10"
+          # Once supported in https://github.com/actions/setup-python/pull/281
+          # cache: 'poetry'
+
+      - name: Install dependency manager
+        run: pip install poetry
+
+      - name: Install packages
+        run: poetry install --no-interaction
+
+      - name: Lint
+        run: make lint

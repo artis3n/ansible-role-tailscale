@@ -3,9 +3,6 @@ dependency:
   name: galaxy
 driver:
   name: docker
-lint: |
-  set -e
-  ansible-lint
 platforms:
   - name: instance
     image: ${MOLECULE_DISTRO:-ghcr.io/artis3n/docker-ubuntu2204-ansible:latest}
@@ -22,7 +19,6 @@ verifier:
 scenario:
   name: skip-authentication
   test_sequence:
-    - lint
     - destroy
     - syntax
     - create
