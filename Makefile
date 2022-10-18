@@ -20,7 +20,7 @@ update:
 
 .PHONY: lint
 lint:
-	poetry run ansible-lint
+	poetry run ansible-lint --profile=production
 
 .PHONY: test
 test: test-default test-absent

@@ -41,6 +41,7 @@
 		"yzhang.markdown-all-in-one",
 		"be5invis.toml",
 		"redhat.vscode-yaml",
+		"redhat.ansible",
 		"ms-vscode.makefile-tools"
 	],
 
