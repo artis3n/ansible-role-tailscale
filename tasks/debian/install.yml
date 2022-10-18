@@ -23,6 +23,7 @@
   ansible.builtin.get_url:
     url: "{{ apt_signkey }}"
     dest: "{{ apt_keyring_path }}"
+    mode: '0644'
 
 - name: Debian | Add Tailscale Deb
   become: true
