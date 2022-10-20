@@ -22,8 +22,14 @@
     repo: "{{ apt_deb }}"
     state: absent
 
-- name: Debian | Remove Tailscale Signing Key
+- name: Debian | Remove Tailscale Signing Key from trusted.gpg
   become: true
   ansible.builtin.apt_key:
     url: "{{ apt_signkey }}"
+    state: absent
+
+- name: Debian | Remove Tailscale Signing Key from keyrings
+  become: true
+  ansible.builtin.file:
+    path: "{{ apt_keyring_path }}"
     state: absent

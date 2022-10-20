@@ -20,9 +20,10 @@
 
 - name: Debian | Add Tailscale Signing Key
   become: true
-  ansible.builtin.apt_key:
+  ansible.builtin.get_url:
     url: "{{ apt_signkey }}"
-    state: present
+    dest: "{{ apt_keyring_path }}"
+    mode: '0644'
 
 - name: Debian | Add Tailscale Deb
   become: true
