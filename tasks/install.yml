@@ -44,6 +44,7 @@
   register: tailscale_status
   failed_when:
     - tailscale_status.rc != 0
+    - tailscale_status.rc != 1
     - "'Logged out.' not in tailscale_status.stdout"
 
 - name: Install | Tailscale Status
@@ -78,6 +79,7 @@
   when: >
     not tailscale_up_skip | bool
     and ('Logged out.' in tailscale_status.stdout
+    or tailscale_status.rc == 1
     or state_checksum != existing_state_checksum)
   notify: Confirm Tailscale is Connected
   async: 60
