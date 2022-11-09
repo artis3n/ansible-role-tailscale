@@ -1,13 +1,13 @@
 [[package]]
 name = "ansible"
-version = "6.5.0"
+version = "6.6.0"
 description = "Radically simple IT automation"
 category = "main"
 optional = false
 python-versions = ">=3.8"
 
 [package.dependencies]
-ansible-core = ">=2.13.5,<2.14.0"
+ansible-core = ">=2.13.6,<2.14.0"
 
 [[package]]
 name = "ansible-compat"
@@ -28,7 +28,7 @@ test = ["coverage", "flaky", "pip-tools", "pytest", "pytest-markdown", "pytest-m
 
 [[package]]
 name = "ansible-core"
-version = "2.13.5"
+version = "2.13.6"
 description = "Radically simple IT automation"
 category = "main"
 optional = false
@@ -89,7 +89,7 @@ python-versions = ">=3.5"
 dev = ["cloudpickle", "coverage[toml] (>=5.0.2)", "furo", "hypothesis", "mypy (>=0.900,!=0.940)", "pre-commit", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "sphinx", "sphinx-notfound-page", "zope.interface"]
 docs = ["furo", "sphinx", "sphinx-notfound-page", "zope.interface"]
 tests = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "zope.interface"]
-tests_no_zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins"]
+tests-no-zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins"]
 
 [[package]]
 name = "binaryornot"
@@ -175,7 +175,7 @@ optional = false
 python-versions = ">=3.6.0"
 
 [package.extras]
-unicode_backport = ["unicodedata2"]
+unicode-backport = ["unicodedata2"]
 
 [[package]]
 name = "click"
@@ -428,7 +428,7 @@ python-versions = ">=3.8"
 docker = ">=4.3.1"
 molecule = ">=4.0.0"
 requests = "*"
-selinux = {version = "*", markers = "sys_platform == \"linux2\" or sys_platform == \"linux\""}
+selinux = {version = "*", markers = "sys_platform == \"linux\" or sys_platform == \"linux2\""}
 
 [package.extras]
 docs = ["Sphinx", "simplejson", "sphinx-ansible-theme (>=0.2.2)"]
@@ -608,7 +608,7 @@ urllib3 = ">=1.21.1,<1.27"
 
 [package.extras]
 socks = ["PySocks (>=1.5.6,!=1.5.7)"]
-use_chardet_on_py3 = ["chardet (>=3.0.2,<6)"]
+use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
 name = "resolvelib"
@@ -800,20 +800,20 @@ setuptools = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "13c10ffd27b6b2c3dcd6e5c749b9a3221e0ac02f768a4febf458ab50ee2d31c0"
+content-hash = "bd1b572a14c1b41e600e9253b022975d114b9e589dd27ba93889bb0f719c64d2"
 
 [metadata.files]
 ansible = [
-    {file = "ansible-6.5.0-py3-none-any.whl", hash = "sha256:2cc8c9faf9351dc46d92281eb28f21be3d2faa212b20bfc05afa98946cb788de"},
-    {file = "ansible-6.5.0.tar.gz", hash = "sha256:7c0cdcd1121a5f12ab2da4bdd2e14c2c153e01214bfc6a6bc156b61bd7401c5b"},
+    {file = "ansible-6.6.0-py3-none-any.whl", hash = "sha256:3c6812e9af1c243b8a9e5fc6cba618449813765e609caae39a757452e2818dee"},
+    {file = "ansible-6.6.0.tar.gz", hash = "sha256:e1b940a8d4f412123ede3c14b25cb99c3c8a4d535fd040aabf8e4fb7b0e4f092"},
 ]
 ansible-compat = [
     {file = "ansible-compat-2.2.1.tar.gz", hash = "sha256:7a012753a0a02dab2f22b0e574e3e7b00399f660606154474ffe25621fa80d3b"},
     {file = "ansible_compat-2.2.1-py3-none-any.whl", hash = "sha256:8857b317bf36a00dbb0b06640d19b68bb64f667bf2a5355189f3c5961f4b1c10"},
 ]
 ansible-core = [
-    {file = "ansible-core-2.13.5.tar.gz", hash = "sha256:26dcd9218d5544cc15144f60bb5b634f2276e476c89f481b3f619c4f9def1588"},
-    {file = "ansible_core-2.13.5-py3-none-any.whl", hash = "sha256:3d2503ede324e0e73051b14e77f732a3cb0aed2437f94608af53929d2d1d54c8"},
+    {file = "ansible-core-2.13.6.tar.gz", hash = "sha256:31fe322b63290674a8f7386110df501f0044aa44890be3ab313a6e225b9a29cf"},
+    {file = "ansible_core-2.13.6-py3-none-any.whl", hash = "sha256:e31fd550a5ea9423f1fc1391de6b41bb0d264a83bbfc9c7edfef0f78b7624fd3"},
 ]
 ansible-lint = [
     {file = "ansible-lint-6.8.2.tar.gz", hash = "sha256:17dfacb0d9139a435ccf2095234e20491d556f7adb97dedd891b40566e316553"},
