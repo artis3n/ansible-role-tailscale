@@ -1,0 +1,18 @@
+---
+- name: openSUE | Install Repo
+  community.general.zypper_repository:
+    repo: "{{ opensuse_tumbleweed_repository }}"
+    state: present
+  when: ansible_distribution == "openSUSE Tumbleweed"
+
+- name: openSUSE | Install Repo
+  community.general.zypper_repository:
+    repo: "{{ opensuse_leap_repository }}"
+    state: present
+  when: ansible_distribution == "openSUSE Leap"
+
+- name: openSUSE | Install Tailscale
+  community.general.zypper:
+    name: tailscale
+    update_cache: true
+    state: '{{ state }}'
