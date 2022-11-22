@@ -3,14 +3,14 @@
   become: true
   community.general.zypper_repository:
     repo: "{{ opensuse_tumbleweed_repository }}"
-    state: present
+    state: '{{ state }}'
   when: ansible_distribution == "openSUSE Tumbleweed"
 
 - name: OpenSUSE | Install Repo
   become: true
   community.general.zypper_repository:
     repo: "{{ opensuse_leap_repository }}"
-    state: present
+    state: '{{ state }}'
   when: ansible_distribution == "openSUSE Leap"
 
 - name: OpenSUSE | Install Tailscale
