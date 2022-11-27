@@ -29,7 +29,6 @@
   ansible.builtin.command: dnf config-manager --add-repo {{ dnf_repos[ansible_distribution] }}
   args:
     creates: /etc/yum.repos.d/tailscale.repo
-    warn: false
 
 - name: Fedora | Install Tailscale
   become: true
