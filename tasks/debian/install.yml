@@ -16,7 +16,9 @@
     name: "{{ legacy_apt_dependencies }}"
   when:
     - ansible_distribution_major_version | int < 11
+    # Prelease versions of debian tend to not have a version integer yet
     - ansible_distribution_major_version != "testing"
+    - ansible_distribution_major_version != "n/a"
 
 - name: Debian | Add Tailscale Signing Key
   become: true
