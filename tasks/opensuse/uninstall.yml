@@ -1,19 +1,19 @@
 ---
-- name: OpenSUE | Install Repo - Leap
+- name: OpenSUE | Remove Repo - Leap
   become: true
   community.general.zypper_repository:
     repo: "{{ opensuse_tumbleweed_repository }}"
-    state: present
+    state: absent
   when: ansible_distribution == "openSUSE Tumbleweed"
 
-- name: OpenSUSE | Install Repo - Tumbleweed
+- name: OpenSUSE | Remove Repo - Tumbleweed
   become: true
   community.general.zypper_repository:
     repo: "{{ opensuse_leap_repository }}"
-    state: present
+    state: absent
   when: ansible_distribution == "openSUSE Leap"
 
-- name: OpenSUSE | Install Tailscale
+- name: OpenSUSE | Remove Tailscale
   become: true
   community.general.zypper:
     name: tailscale
