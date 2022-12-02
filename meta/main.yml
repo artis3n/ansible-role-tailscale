@@ -38,6 +38,11 @@ galaxy_info:
     - name: ArchLinux
       versions:
         - all
+    - name: opensuse
+      versions:
+        - "15.1"
+        - "15.2"
+        - "15.3"
 
   galaxy_tags:
     - tailscale
