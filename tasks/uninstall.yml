@@ -22,6 +22,17 @@
     path: "{{ ansible_env.HOME }}/.artis3n-tailscale"
     state: absent
 
+- name: Uninstall | Gather Service Facts
+  ansible.builtin.service_facts:
+
+- name: Uninstall | Disable Tailscale Service
+  become: true
+  ansible.builtin.service:
+    name: "{{ tailscale_service }}"
+    state: stopped
+    enabled: false
+  when: tailscale_service in ansible_facts.services
+
 - name: Uninstall | CentOS and related families
   when: ansible_distribution in centos_family_distros
   ansible.builtin.include_tasks: centos/uninstall.yml
@@ -38,13 +49,6 @@
   when: ansible_distribution == 'Archlinux'
   ansible.builtin.include_tasks: arch/uninstall.yml
 
-- name: Uninstall | Gather Service Facts
-  ansible.builtin.service_facts:
-
-- name: Uninstall | Disable Tailscale Service
-  become: true
-  ansible.builtin.service:
-    name: "{{ tailscale_service }}"
-    state: stopped
-    enabled: false
-  when: tailscale_service in ansible_facts.services
+- name: Uninstall | OpenSUSE
+  when: ansible_distribution in opensuse_family_distros
+  ansible.builtin.include_tasks: opensuse/uninstall.yml
