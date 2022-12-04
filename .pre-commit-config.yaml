@@ -17,9 +17,14 @@ repos:
       - id: shellcheck
 
   - repo: https://github.com/ansible/ansible-lint
-    rev: v6.9.0
+    rev: v6.9.1
     hooks:
       - id: ansible-lint
         files: \.(yaml|yml)$
         args:
           - '--profile=production'
+
+  - repo: https://github.com/hollow/pre-commit-actionlint
+    rev: v1.6.22
+    hooks:
+      - id: actionlint
