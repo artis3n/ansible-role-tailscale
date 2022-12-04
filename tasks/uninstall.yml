@@ -49,6 +49,6 @@
   when: ansible_distribution == 'Archlinux'
   ansible.builtin.include_tasks: arch/uninstall.yml
 
-- name: Install | OpenSUSE
+- name: Uninstall | OpenSUSE
   when: ansible_distribution in opensuse_family_distros
   ansible.builtin.include_tasks: opensuse/uninstall.yml
