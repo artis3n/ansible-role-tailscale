@@ -7,6 +7,21 @@
     - state != "present"
     - state != "absent"
 
+- name: Verify TUN Adapter Availability
+  community.general.modprobe:
+    name: tun
+    state: present
+  register: tun_available
+  ignore_errors: true
+
+- name: Verify TUN Adapter Availability
+  ansible.builtin.fail:
+    msg: >
+      This playbook requires the TUN kernel module available
+      If you are using container-based virtualization, this may be an option on a control panel.
+      Please enable it and re-run this playbook.
+    when: tun_available is failed
+
 - name: Tailscale Auth Key Required
   ansible.builtin.fail:
     msg: >
