@@ -32,7 +32,7 @@ test-all:
 ifndef TAILSCALE_CI_KEY
 	$(error TAILSCALE_CI_KEY is not set)
 else
-	poetry run molecule test --parallel --all
+	poetry run molecule test --all
 endif
 
 .PHONY: test-default
@@ -40,7 +40,7 @@ test-default:
 ifndef TAILSCALE_CI_KEY
 	$(error TAILSCALE_CI_KEY is not set)
 else
-	poetry run molecule test --parallel --scenario-name default
+	poetry run molecule test --scenario-name default
 endif
 
 .PHONY: test-idempotent-up
@@ -48,7 +48,7 @@ test-idempotent-up:
 ifndef TAILSCALE_CI_KEY
 	$(error TAILSCALE_CI_KEY is not set)
 else
-	poetry run molecule test --parallel --scenario-name idempotent-up
+	poetry run molecule test --scenario-name idempotent-up
 endif
 
 .PHONY: test-args
@@ -56,7 +56,7 @@ test-args:
 ifndef TAILSCALE_CI_KEY
 	$(error TAILSCALE_CI_KEY is not set)
 else
-	poetry run molecule test --parallel --scenario-name args
+	poetry run molecule test --scenario-name args
 endif
 
 .PHONY: test-absent
@@ -64,5 +64,5 @@ test-absent:
 ifndef TAILSCALE_CI_KEY
 	$(error TAILSCALE_CI_KEY is not set)
 else
-	poetry run molecule test --parallel --scenario-name state-absent
+	poetry run molecule test --scenario-name state-absent
 endif
