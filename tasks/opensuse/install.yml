@@ -1,12 +1,12 @@
 ---
-- name: OpenSUE | Install Repo - Leap
+- name: OpenSUE | Install Repo - TUmbleweed
   become: true
   community.general.zypper_repository:
     repo: "{{ opensuse_tumbleweed_repository }}"
     state: present
   when: ansible_distribution == "openSUSE Tumbleweed"
 
-- name: OpenSUSE | Install Repo - Tumbleweed
+- name: OpenSUSE | Install Repo - Leap
   become: true
   community.general.zypper_repository:
     repo: "{{ opensuse_leap_repository }}"

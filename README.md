@@ -20,6 +20,7 @@ Supported operating systems:
 - Oracle Linux
 - Fedora
 - Arch Linux
+- OpenSUSE
 - Raspbian (untested but should work through Debian support)
 
 See the [CI worfklow](https://github.com/artis3n/ansible-role-tailscale/blob/main/.github/workflows/ci.yml#L15) for the list of distribution versions actively tested in each pull request.

@@ -1,12 +1,12 @@
 ---
-- name: OpenSUE | Remove Repo - Leap
+- name: OpenSUE | Remove Repo - Tumbleweed
   become: true
   community.general.zypper_repository:
     repo: "{{ opensuse_tumbleweed_repository }}"
     state: absent
   when: ansible_distribution == "openSUSE Tumbleweed"
 
-- name: OpenSUSE | Remove Repo - Tumbleweed
+- name: OpenSUSE | Remove Repo - Leap
   become: true
   community.general.zypper_repository:
     repo: "{{ opensuse_leap_repository }}"
@@ -18,4 +18,4 @@
   community.general.zypper:
     name: tailscale
     update_cache: true
-    state: '{{ state }}'
+    state: absent
