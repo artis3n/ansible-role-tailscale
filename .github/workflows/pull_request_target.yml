@@ -36,6 +36,8 @@ jobs:
           - geerlingguy/docker-debian9-ansible:latest
           - geerlingguy/docker-fedora31-ansible:latest
           - ghcr.io/artis3n/docker-arch-ansible:latest
+          - ghcr.io/artis3n/docker-opensuse-tumbleweed-ansible:latest
+          - ghcr.io/artis3n/docker-opensuse-leap-ansible:latest
       fail-fast: false
 
     steps:
