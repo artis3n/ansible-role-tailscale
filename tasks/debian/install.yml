@@ -3,6 +3,7 @@
   become: true
   ansible.builtin.apt:
     update_cache: true
+    cache_valid_time: 3600
 
 - name: Debian | Apt Dependencies
   become: true
@@ -25,7 +26,7 @@
   ansible.builtin.get_url:
     url: "{{ apt_signkey }}"
     dest: "{{ apt_keyring_path }}"
-    mode: '0644'
+    mode: "0644"
 
 - name: Debian | Add Tailscale Deb
   become: true
@@ -37,5 +38,5 @@
   become: true
   ansible.builtin.apt:
     name: "{{ tailscale_package }}"
-    state: '{{ state }}'
+    state: "{{ state }}"
     update_cache: true
