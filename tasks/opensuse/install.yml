@@ -1,5 +1,5 @@
 ---
-- name: OpenSUE | Install Repo - TUmbleweed
+- name: OpenSUSE | Install Repo - Tumbleweed
   become: true
   community.general.zypper_repository:
     repo: "{{ opensuse_tumbleweed_repository }}"

@@ -1,6 +1,8 @@
 ---
 dependency:
   name: galaxy
+  options:
+    requirements-file: requirements.yml
 driver:
   name: docker
 platforms:
@@ -20,6 +22,7 @@ verifier:
 scenario:
   name: default
   test_sequence:
+    - dependency
     - destroy
     - syntax
     - create
