@@ -14,7 +14,7 @@ env:
 jobs:
   molecule:
     environment: E2E
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -76,7 +76,7 @@ jobs:
 
   molecule-skip-auth:
     environment: E2E
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
@@ -105,7 +105,7 @@ jobs:
 
   molecule-vars-priority:
     environment: E2E
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
@@ -136,7 +136,7 @@ jobs:
 
   molecule-args:
     environment: E2E
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
@@ -167,7 +167,7 @@ jobs:
 
   molecule-state-present:
     environment: E2E
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
