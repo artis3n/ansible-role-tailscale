@@ -39,16 +39,11 @@
   # Only encountered on Debian so far during pre-release "testing" stage
   when: original_distribution_major_version == "NA"
   block:
-    - name: Apt Update
-      become: true
-      ansible.builtin.apt:
-        update_cache: true
-      when: ansible_distribution in debian_family_distros
-
     - name: Install lsb_release
       become: true
       ansible.builtin.package:
         name: lsb-release
+        cache_valid_time: 3600
         state: present
       when: ansible_distribution in debian_family_distros or ansible_distribution == 'ArchLinux'
 
