@@ -1,13 +1,9 @@
 ---
-- name: Debian | Apt Update
-  become: true
-  ansible.builtin.apt:
-    update_cache: true
-
 - name: Debian | Apt Dependencies
   become: true
   ansible.builtin.apt:
     name: "{{ apt_dependencies }}"
+    cache_valid_time: 3600
     state: present
 
 - name: Debian | Legacy Apt Dependencies
@@ -37,5 +33,5 @@
   become: true
   ansible.builtin.apt:
     name: "{{ tailscale_package }}"
+    cache_valid_time: 3600
     state: '{{ state }}'
-    update_cache: true
