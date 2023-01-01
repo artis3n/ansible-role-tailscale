@@ -5,8 +5,16 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    reviewers:
+      - artis3n
 
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "daily"
+    reviewers:
+      - artis3n
+    commit-message:
+      prefix: fix
+      prefix-development: chore
+      include: scope
