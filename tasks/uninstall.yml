@@ -10,7 +10,7 @@
   # Hack to get correct changed/ok status
   ansible.builtin.shell: tailscale status; tailscale logout
   register: tailscale_logout
-  changed_when: "'Logged out.' not in tailscale_logout.stdout"
+  changed_when: "'Logged out.' not in tailscale_status.stdout and 'not logged in' not in tailscale_status.stdout"
   when:
     # [Errno 2] No such file or directory: 'tailscale'
     - tailscale_status.rc != 2

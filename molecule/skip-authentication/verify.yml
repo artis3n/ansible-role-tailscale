@@ -10,6 +10,7 @@
     failed_when:
       - tailscale_status.rc != 0
       - "'Logged out.' not in tailscale_status.stdout"
+      - "'not logged in' not in tailscale_status.stdout"
 
   - name: Assertions
     ansible.builtin.assert:
