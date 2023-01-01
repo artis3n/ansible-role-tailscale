@@ -48,16 +48,20 @@
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
-	"onCreateCommand": "make install",
+	// "onCreateCommand": "make install",
 	"updateContentCommand": "make install",
-	// "postCreateCommand": "",
-	"postStartCommand": "sudo apt update && sudo apt full-upgrade -y",
+	"postCreateCommand": "sudo apt update && sudo apt full-upgrade -y",
+	"postStartCommand": "git pull --prune",
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
 	"features": {
-		"docker-in-docker": "latest",
-		"git": "latest",
-		"github-cli": "latest"
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+		"ghcr.io/devcontainers/features/git:1": {},
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"ghcr.io/devcontainers-contrib/features/ansible:2": {},
+		"ghcr.io/devcontainers-contrib/features/poetry:2": {},
+		"ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
+		"ghcr.io/devcontainers/features/go:1": {}
 	}
 }
