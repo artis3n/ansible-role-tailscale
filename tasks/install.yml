@@ -49,6 +49,7 @@
   failed_when:
     - tailscale_status.rc != 0
     - "'Logged out.' not in tailscale_status.stdout"
+    - "'not logged in' not in tailscale_status.stdout"
 
 - name: Install | Tailscale Status
   ansible.builtin.debug:
@@ -81,7 +82,8 @@
   ignore_errors: true
   when: >
     not tailscale_up_skip | bool
-    and ('Logged out.' in tailscale_status.stdout
+    and (('Logged out.' in tailscale_status.stdout
+    and 'not logged in' in tailscale_status.stdout)
     or state_checksum != existing_state_checksum)
   notify: Confirm Tailscale is Connected
   async: 60

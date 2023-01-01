@@ -29,6 +29,7 @@
       ansible.builtin.assert:
         that:
           - "'Logged out.' not in tailscale_status.stdout"
+          - "'not logged in' not in tailscale_status.stdout"
 
     - name: Uninstall Tailscale
       ansible.builtin.include_role:
