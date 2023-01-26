@@ -37,7 +37,7 @@
 - name: Prepare lsb_release if missing
   # Any system that Ansible can't gather versions from is missing lsb_release
   # Only encountered on Debian so far during pre-release "testing" stage
-  when: original_distribution_major_version == "NA"
+  when: tailscale_original_distribution_major_version == "NA"
   block:
     - name: Install lsb_release
       become: true
@@ -45,14 +45,14 @@
         name: lsb-release
         cache_valid_time: 3600
         state: present
-      when: ansible_distribution in debian_family_distros or ansible_distribution == 'ArchLinux'
+      when: ansible_distribution in tailscale_debian_family_distros or ansible_distribution == 'ArchLinux'
 
     - name: Install lsb_release
       become: true
       ansible.builtin.package:
         name: redhat-lsb-core
         state: present
-      when: ansible_distribution in centos_family_distros or ansible_distribution == 'Fedora'
+      when: ansible_distribution in tailscale_centos_family_distros or ansible_distribution == 'Fedora'
 
     - name: Refresh Setup
       ansible.builtin.setup:
