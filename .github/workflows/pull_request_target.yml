@@ -48,19 +48,15 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      # - name: Install dependency manager
-      #   run: pipx install poetry
+      - name: Install dependency manager
+        run: pipx install poetry
 
       - name: Set up Python 3.x
         id: setup-python
         uses: actions/setup-python@v4.5.0
         with:
-          python-version: "3.10"
-          # Once supported in https://github.com/actions/setup-python/pull/281
-          # cache: 'poetry'
-
-      - name: Install dependency manager
-        run: pip install poetry
+          python-version: "3.11"
+          cache: 'poetry'
 
       - name: Install packages
         run: poetry install --no-interaction
@@ -86,19 +82,15 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      # - name: Install dependency manager
-      #   run: pipx install poetry
+      - name: Install dependency manager
+        run: pipx install poetry
 
       - name: Set up Python 3.x
         id: setup-python
         uses: actions/setup-python@v4.5.0
         with:
-          python-version: "3.10"
-          # Once supported in https://github.com/actions/setup-python/pull/281
-          # cache: 'poetry'
-
-      - name: Install dependency manager
-        run: pip install poetry
+          python-version: "3.11"
+          cache: 'poetry'
 
       - name: Install packages
         run: poetry install --no-interaction
@@ -115,19 +107,15 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      # - name: Install dependency manager
-      #   run: pipx install poetry
+      - name: Install dependency manager
+        run: pipx install poetry
 
       - name: Set up Python 3.x
         id: setup-python
         uses: actions/setup-python@v4.5.0
         with:
-          python-version: "3.10"
-          # Once supported in https://github.com/actions/setup-python/pull/281
-          # cache: 'poetry'
-
-      - name: Install dependency manager
-        run: pip install poetry
+          python-version: "3.11"
+          cache: 'poetry'
 
       - name: Install packages
         run: poetry install --no-interaction
@@ -146,19 +134,15 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      # - name: Install dependency manager
-      #   run: pipx install poetry
+      - name: Install dependency manager
+        run: pipx install poetry
 
       - name: Set up Python 3.x
         id: setup-python
         uses: actions/setup-python@v4.5.0
         with:
-          python-version: "3.10"
-          # Once supported in https://github.com/actions/setup-python/pull/281
-          # cache: 'poetry'
-
-      - name: Install dependency manager
-        run: pip install poetry
+          python-version: "3.11"
+          cache: 'poetry'
 
       - name: Install packages
         run: poetry install --no-interaction
@@ -177,19 +161,15 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      # - name: Install dependency manager
-      #   run: pipx install poetry
+      - name: Install dependency manager
+        run: pipx install poetry
 
       - name: Set up Python 3.x
         id: setup-python
         uses: actions/setup-python@v4.5.0
         with:
-          python-version: "3.10"
-          # Once supported in https://github.com/actions/setup-python/pull/281
-          # cache: 'poetry'
-
-      - name: Install dependency manager
-        run: pip install poetry
+          python-version: "3.11"
+          cache: 'poetry'
 
       - name: Install packages
         run: poetry install --no-interaction

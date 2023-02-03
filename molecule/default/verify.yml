@@ -2,14 +2,14 @@
 - name: Verify
   hosts: all
   tasks:
-  - name: Get Tailscale status
-    become: true
-    ansible.builtin.command: tailscale status
-    changed_when: false
-    register: tailscale_status
+    - name: Get Tailscale status
+      become: true
+      ansible.builtin.command: tailscale status
+      changed_when: false
+      register: tailscale_status
 
-  - name: Assertions
-    ansible.builtin.assert:
-      that:
-        - "'Logged out.' not in tailscale_status.stdout"
-        - "'not logged in' not in tailscale_status.stdout"
+    - name: Assertions
+      ansible.builtin.assert:
+        that:
+          - "'Logged out.' not in tailscale_status.stdout"
+          - "'not logged in' not in tailscale_status.stdout"
