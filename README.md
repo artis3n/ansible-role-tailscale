@@ -29,18 +29,14 @@ See the [CI worfklow](https://github.com/artis3n/ansible-role-tailscale/blob/mai
   <a href="https://asciinema.org/a/g8P2DT45oedUaxXSKGBKpU2Dl"><img src="docs/demo.gif" width=650 height=450></a>
 </div>
 
-This role uses Ansible fully qualified collection names (FQCN) and therefore requires Ansible 2.11+.
-Ansible 2.12 is set as the minimum required version as this was the version tested for compatibility during the FQCN refactor.
-
-# V3 Breaking Changes
-
-- `tailscale_auth_key` is now `tailscale_authkey`
-- `insecurely_log_auth_key` is now `insecurely_log_authkey`
-- `force` is no longer a role variable
+> **Note**
+>
+> This role uses Ansible fully qualified collection names (FQCN) and therefore requires Ansible 2.11+.
+> Ansible 2.12 is set as the minimum required version as this was the version tested for compatibility during the FQCN refactor.
 
 # State Tracking
 
-This role will create a `.artis3n-tailscale` directory in the target's home directory in order to maintain a concept of state from the configuration of the arguments passed to `tailscale up`.
+This role will create an `artis3n-tailscale` directory in the target's [`XDG_STATE_HOME`](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) directory, or `$HOME/.local/state` if the variable is not present, in order to maintain a concept of state from the configuration of the arguments passed to `tailscale up`.
 This allows the role to idempotently update a Tailscale node's configuration when needed.
 Deleting this directory will lead to this role re-configuring Tailscale when it is not needed, but will not otherwise break anything.
 However, it is recommended that you let this Ansible role manage this directory and its contents.
@@ -51,7 +47,7 @@ Note that:
 >
 > ...
 >
-> In Tailscale v1.8 or greater, if you forget to specify a flag you added before, the CLI will warn you and provide a copyable command that includes all existing flags.
+> In Tailscale v1.8 or later, if you forget to specify a flag you added before, the CLI will warn you and provide a copyable command that includes all existing flags.
 
 <small>
 
@@ -83,7 +79,6 @@ A Node Authorization auth key can be generated under your Tailscale account at <
 Note that reusable authorization keys now expire 90 days after they are generated.
 
 This value should be treated as a sensitive secret.
-You are encouraged to use [ansible-vault][] to encrypt this value in your playbook.
 
 ### tailscale_up_skip
 
@@ -101,13 +96,13 @@ Helpful when packaging up a Tailscale installation into a build process such as 
 **Default**: `false`
 
 If set to `true`, the "Bring Tailscale Up" command will include the raw value of the Tailscale authkey when logging any errors encountered during `tailscale up`.
-The authkey is not logged in successful task completions and is redacted in the `stderr` output by this role if an error occurs.
+By default, the authkey is not logged in successful task completions and is redacted in the `stderr` output by this role if an error occurs.
 
 ![redacted authkey](docs/images/redacted_authkey.png)
 
 If you are encountering an error bringing Tailscale up and want the "Bring Tailscale Up" task to _not_ redact the value of the authkey, set this variable to `true`.
 
-If the authkey is invalid, the role will relay Tailscale's error message on that fact:
+Regardless, if the authkey is invalid, the role will relay Tailscale's error message on that fact:
 
 ![invalid authkey](docs/images/invalid_authkey.png)
 
@@ -148,8 +143,10 @@ Pass any additional command-line arguments to `tailscale up`.
 Note that the [command][ansible.builtin.command] module is used, which does not support subshell expressions (`$()`) or bash operations like `;` and `&`.
 Only `tailscale up` arguments can be passed in.
 
-**Do not use this for `--authkey`.**
-Use the `tailscale_authkey` variable instead.
+> **Warning**
+>
+> **Do not use this for `--authkey`.**
+> Use the `tailscale_authkey` variable instead.
 
 Any stdout/stderr output from the `tailscale` binary will be printed. Since the tasks move quickly in this section, a 5 second pause is introduced to grant more time for users to realize a message was printed.
 
@@ -182,6 +179,19 @@ Helpful for debugging and collecting information to submit in a GitHub issue on 
       vars:
         # Example pulling the API key from the env vars on the host running Ansible
         tailscale_authkey: "{{ lookup('env', 'TAILSCALE_KEY') }}"
+```
+
+Enable Tailscale SSH:
+
+```yaml
+- name: Servers
+  hosts: all
+  roles:
+    - role: artis3n.tailscale
+      vars:
+        # Example pulling the API key from the env vars on the host running Ansible
+        tailscale_authkey: "{{ lookup('env', 'TAILSCALE_KEY') }}"
+        tailscale_args: "--ssh"
 ```
 
 Pass arbitrary command-line arguments:
@@ -276,9 +286,7 @@ This value is stored in a [GitHub Action secret][] with the name `TAILSCALE_CI_K
 To test this role locally, store the Tailscale ephemeral auth key in a `TAILSCALE_CI_KEY` env var.
 If you are a Collaborator on this repository, you can open a GitHub CodeSpace and the `TAILSCALE_CI_KEY` will be populated for you.
 
-[ansible-vault]: https://docs.ansible.com/ansible/latest/user_guide/vault.html#encrypt-string-for-use-in-yaml
 [ansible.builtin.command]: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/command_module.html
-[auth key]: https://login.tailscale.com/admin/authkeys
 [ephemeral auth keys]: https://tailscale.com/kb/1111/ephemeral-nodes/
 [github action secret]: https://docs.github.com/en/actions/reference/encrypted-secrets
 [tailscale]: https://tailscale.com/
