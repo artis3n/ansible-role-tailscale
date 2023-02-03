@@ -2,25 +2,25 @@
 - name: Verify
   hosts: all
   tasks:
-  - name: Gather Service Facts
-    ansible.builtin.service_facts:
+    - name: Gather Service Facts
+      ansible.builtin.service_facts:
 
-  - name: Get Tailscale path
-    ansible.builtin.command: which tailscale
-    changed_when: false
-    failed_when:
-      - tailscale_status.rc != 0
-      - tailscale_status.rc != 1
-    register: tailscale_status
+    - name: Get Tailscale path
+      ansible.builtin.command: which tailscale
+      changed_when: false
+      failed_when:
+        - tailscale_status.rc != 0
+        - tailscale_status.rc != 1
+      register: tailscale_status
 
-  - name: Get state directory status
-    ansible.builtin.stat:
-      path: "{{ ansible_env.HOME }}/.artis3n-tailscale"
-    register: state_dir
+    - name: Get state directory status
+      ansible.builtin.stat:
+        path: "{{ ansible_env.HOME }}/.artis3n-tailscale"
+      register: state_dir
 
-  - name: Assertions
-    ansible.builtin.assert:
-      that:
-        - tailscale_status.rc == 1
-        - not state_dir.stat.exists
-        - "'tailscaled' not in ansible_facts.services or ansible_facts.services['tailscaled']['status'] == 'stopped'"
+    - name: Assertions
+      ansible.builtin.assert:
+        that:
+          - tailscale_status.rc == 1
+          - not state_dir.stat.exists
+          - "'tailscaled' not in ansible_facts.services or ansible_facts.services['tailscaled']['status'] == 'stopped'"
