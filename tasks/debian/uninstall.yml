@@ -2,7 +2,7 @@
 - name: Debian | Apt Dependencies
   become: true
   ansible.builtin.apt:
-    name: "{{ apt_dependencies }}"
+    name: "{{ tailscale_apt_dependencies }}"
     cache_valid_time: 3600
     state: present
 
@@ -15,17 +15,17 @@
 - name: Debian | Remove Tailscale Deb
   become: true
   ansible.builtin.apt_repository:
-    repo: "{{ apt_deb }}"
+    repo: "{{ tailscale_apt_deb }}"
     state: absent
 
 - name: Debian | Remove Tailscale Signing Key from trusted.gpg
   become: true
   ansible.builtin.apt_key:
-    url: "{{ apt_signkey }}"
+    url: "{{ tailscale_apt_signkey }}"
     state: absent
 
 - name: Debian | Remove Tailscale Signing Key from keyrings
   become: true
   ansible.builtin.file:
-    path: "{{ apt_keyring_path }}"
+    path: "{{ tailscale_apt_keyring_path }}"
     state: absent

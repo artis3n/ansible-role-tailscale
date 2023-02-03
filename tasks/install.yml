@@ -1,10 +1,10 @@
 ---
 - name: Install | CentOS and related families
-  when: ansible_distribution in centos_family_distros
+  when: ansible_distribution in tailscale_centos_family_distros
   ansible.builtin.include_tasks: centos/install.yml
 
 - name: Install | Debian and related families
-  when: ansible_distribution in debian_family_distros
+  when: ansible_distribution in tailscale_debian_family_distros
   ansible.builtin.include_tasks: debian/install.yml
 
 - name: Install | Fedora and related families
@@ -16,7 +16,7 @@
   ansible.builtin.include_tasks: arch/install.yml
 
 - name: Install | OpenSUSE
-  when: ansible_distribution in opensuse_family_distros
+  when: ansible_distribution in tailscale_opensuse_family_distros
   ansible.builtin.include_tasks: opensuse/install.yml
 
 - name: Install | Set state idempotency folder
