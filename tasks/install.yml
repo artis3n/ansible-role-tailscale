@@ -19,6 +19,11 @@
   when: ansible_distribution in tailscale_opensuse_family_distros
   ansible.builtin.include_tasks: opensuse/install.yml
 
+- name: Install | Remove legacy state folder
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.artis3n-tailscale"
+    state: absent
+
 - name: Install | Determine state folder
   ansible.builtin.set_fact:
     # Following https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
