@@ -31,4 +31,6 @@
 - name: Fedora | Remove Dnf Repo
   become: true
   ansible.builtin.command: dnf config-manager --disable tailscale-{{ release_stability | lower }}
+  register: dnf_config_output
+  changed_when: dnf_config_output.rc != 0
   when: repolist_tailscale.rc != 1
