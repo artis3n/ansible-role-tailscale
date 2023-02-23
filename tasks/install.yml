@@ -93,6 +93,7 @@
   register: tailscale_start
   # If a failure occurred due to state changes, we still want to log a redacted version of the error if "no_log" is true
   ignore_errors: true
+  changed_when: tailscale_start.rc != 0
   when: >
     not tailscale_up_skip | bool
     and (('Logged out.' in tailscale_status.stdout
