@@ -24,7 +24,7 @@ repos:
         args:
           - '--profile=production'
 
-  - repo: https://github.com/hollow/pre-commit-actionlint
+  - repo: https://github.com/rhysd/actionlint
     rev: v1.6.23
     hooks:
       - id: actionlint
