@@ -59,18 +59,18 @@ resolvelib = ">=0.5.3,<0.9.0"
 
 [[package]]
 name = "ansible-lint"
-version = "6.13.1"
+version = "6.14.0"
 description = "Checks playbooks for practices and behavior that could potentially be improved"
 category = "dev"
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.9"
 files = [
-    {file = "ansible-lint-6.13.1.tar.gz", hash = "sha256:435c12b4fd88da815af6821f3bf8b04ebb651811da89a11c9d190baff21badaa"},
-    {file = "ansible_lint-6.13.1-py3-none-any.whl", hash = "sha256:419b1a2c8523fbe0c0e8a6c51a5c41a692badb5a530e880a9050ac3a69c3fde3"},
+    {file = "ansible-lint-6.14.0.tar.gz", hash = "sha256:e55157ac18bb3e3dfef424381c0299c67aac633de5aa11f7f80fe0a508041d7a"},
+    {file = "ansible_lint-6.14.0-py3-none-any.whl", hash = "sha256:7544638ee633ec2f7313abb12ec429e8cfeda007d075e0a179fc8b1f1761df01"},
 ]
 
 [package.dependencies]
-ansible-core = {version = ">=2.12.0", markers = "python_version >= \"3.9\""}
+ansible-core = ">=2.12.0"
 black = ">=22.8.0"
 filelock = ">=3.3.0"
 jsonschema = ">=4.10.0"
@@ -83,9 +83,9 @@ wcmatch = ">=8.1.2"
 yamllint = ">=1.26.3"
 
 [package.extras]
-docs = ["cairosvg", "markdown-exec (>=1.0.0)", "mkdocs (>=1.4.2)", "mkdocs-gen-files (>=0.4.0)", "mkdocs-htmlproofer-plugin", "mkdocs-material (>=9.0.6)", "mkdocs-material-extensions (>=1.1.1)", "mkdocstrings (>=0.20.0)", "mkdocstrings-python (>=0.8.3)", "pillow", "pipdeptree (>=2.3.3)", "pymdown-extensions (>=9.9.2)"]
-lock = ["ansible-core (==2.14.2)", "attrs (==22.2.0)", "black (==22.12.0)", "bracex (==2.3.post1)", "cffi (==1.15.1)", "click (==8.1.3)", "cryptography (==39.0.1)", "filelock (==3.9.0)", "jinja2 (==3.1.2)", "jsonschema (==4.17.3)", "markdown-it-py (==2.1.0)", "markupsafe (==2.1.1)", "mdurl (==0.1.2)", "mypy-extensions (==0.4.3)", "packaging (==22.0)", "pathspec (==0.10.3)", "platformdirs (==2.6.2)", "pycparser (==2.21)", "pygments (==2.13.0)", "pyrsistent (==0.19.3)", "pyyaml (==6.0)", "resolvelib (==0.8.1)", "rich (==13.2.0)", "ruamel-yaml (==0.17.21)", "setuptools (==65.6.3)", "subprocess-tee (==0.4.1)", "tomli (==2.0.1)", "typing-extensions (==4.4.0)", "wcmatch (==8.4.1)", "yamllint (==1.28.0)"]
-test = ["black", "coverage-enable-subprocess", "coverage[toml] (>=6.4.4)", "flake8", "flake8-future-annotations", "mypy", "psutil", "pylint", "pytest (>=7.2.0)", "pytest-mock", "pytest-plus (>=0.2)", "pytest-xdist (>=2.1.0)", "types-pyyaml"]
+docs = ["cairosvg (>=2.6.0)", "markdown-exec (>=1.3.0)", "mkdocs (>=1.4.2)", "mkdocs-gen-files (>=0.4.0)", "mkdocs-htmlproofer-plugin (>=0.10.2)", "mkdocs-material (>=9.0.13)", "mkdocs-material-extensions (>=1.1.1)", "mkdocstrings (>=0.20.0)", "mkdocstrings-python (>=0.8.3)", "pillow (>=9.4.0)", "pipdeptree (>=2.4.0)", "pymdown-extensions (>=9.9.2)"]
+lock = ["ansible-core (==2.14.3)", "attrs (==22.2.0)", "black (==23.1.0)", "bracex (==2.3.post1)", "cffi (==1.15.1)", "click (==8.1.3)", "cryptography (==39.0.1)", "filelock (==3.9.0)", "jinja2 (==3.1.2)", "jsonschema (==4.17.3)", "markdown-it-py (==2.2.0)", "markupsafe (==2.1.2)", "mdurl (==0.1.2)", "mypy-extensions (==1.0.0)", "packaging (==23.0)", "pathspec (==0.11.0)", "platformdirs (==3.0.0)", "pycparser (==2.21)", "pygments (==2.14.0)", "pyrsistent (==0.19.3)", "pyyaml (==6.0)", "resolvelib (==0.8.1)", "rich (==13.3.1)", "ruamel-yaml (==0.17.21)", "setuptools (==67.4.0)", "subprocess-tee (==0.4.1)", "tomli (==2.0.1)", "typing-extensions (==4.5.0)", "wcmatch (==8.4.1)", "yamllint (==1.29.0)"]
+test = ["black", "coverage-enable-subprocess", "coverage[toml] (>=6.4.4)", "flake8", "flake8-future-annotations", "mypy", "psutil", "pylint", "pytest (>=7.2.0)", "pytest-mock", "pytest-plus (>=0.2)", "pytest-xdist (>=2.1.0)", "spdx-tools", "types-pyyaml"]
 
 [[package]]
 name = "arrow"
@@ -1377,4 +1377,4 @@ setuptools = "*"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "f884383e6ffc86322741b72174fcbe524af8ba4508fecf289d6901c1a323a931"
+content-hash = "dfcaf6f8ac288e014d8597e9765b54f1ea5029d7755d60f77e2961ac15a0a73b"
