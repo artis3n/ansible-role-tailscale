@@ -59,14 +59,14 @@ resolvelib = ">=0.5.3,<0.9.0"
 
 [[package]]
 name = "ansible-lint"
-version = "6.14.0"
+version = "6.14.1"
 description = "Checks playbooks for practices and behavior that could potentially be improved"
 category = "dev"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "ansible-lint-6.14.0.tar.gz", hash = "sha256:e55157ac18bb3e3dfef424381c0299c67aac633de5aa11f7f80fe0a508041d7a"},
-    {file = "ansible_lint-6.14.0-py3-none-any.whl", hash = "sha256:7544638ee633ec2f7313abb12ec429e8cfeda007d075e0a179fc8b1f1761df01"},
+    {file = "ansible-lint-6.14.1.tar.gz", hash = "sha256:8e7efc7254764b1101e2a70bea606d4ed6b66c16bdc1f85e97528201fe5f56aa"},
+    {file = "ansible_lint-6.14.1-py3-none-any.whl", hash = "sha256:1c8505d908216b64de6ca1c3f3ad0bd675f58506ad34117a95d243447844c449"},
 ]
 
 [package.dependencies]
@@ -84,7 +84,7 @@ yamllint = ">=1.26.3"
 
 [package.extras]
 docs = ["cairosvg (>=2.6.0)", "markdown-exec (>=1.3.0)", "mkdocs (>=1.4.2)", "mkdocs-gen-files (>=0.4.0)", "mkdocs-htmlproofer-plugin (>=0.10.2)", "mkdocs-material (>=9.0.13)", "mkdocs-material-extensions (>=1.1.1)", "mkdocstrings (>=0.20.0)", "mkdocstrings-python (>=0.8.3)", "pillow (>=9.4.0)", "pipdeptree (>=2.4.0)", "pymdown-extensions (>=9.9.2)"]
-lock = ["ansible-core (==2.14.3)", "attrs (==22.2.0)", "black (==23.1.0)", "bracex (==2.3.post1)", "cffi (==1.15.1)", "click (==8.1.3)", "cryptography (==39.0.1)", "filelock (==3.9.0)", "jinja2 (==3.1.2)", "jsonschema (==4.17.3)", "markdown-it-py (==2.2.0)", "markupsafe (==2.1.2)", "mdurl (==0.1.2)", "mypy-extensions (==1.0.0)", "packaging (==23.0)", "pathspec (==0.11.0)", "platformdirs (==3.0.0)", "pycparser (==2.21)", "pygments (==2.14.0)", "pyrsistent (==0.19.3)", "pyyaml (==6.0)", "resolvelib (==0.8.1)", "rich (==13.3.1)", "ruamel-yaml (==0.17.21)", "setuptools (==67.4.0)", "subprocess-tee (==0.4.1)", "tomli (==2.0.1)", "typing-extensions (==4.5.0)", "wcmatch (==8.4.1)", "yamllint (==1.29.0)"]
+lock = ["ansible-core (==2.14.3)", "attrs (==22.2.0)", "black (==23.1.0)", "bracex (==2.3.post1)", "cffi (==1.15.1)", "click (==8.1.3)", "cryptography (==39.0.2)", "filelock (==3.9.0)", "jinja2 (==3.1.2)", "jsonschema (==4.17.3)", "markdown-it-py (==2.2.0)", "markupsafe (==2.1.2)", "mdurl (==0.1.2)", "mypy-extensions (==1.0.0)", "packaging (==23.0)", "pathspec (==0.11.0)", "platformdirs (==3.1.0)", "pycparser (==2.21)", "pygments (==2.14.0)", "pyrsistent (==0.19.3)", "pyyaml (==6.0)", "resolvelib (==0.8.1)", "rich (==13.3.2)", "ruamel-yaml (==0.17.21)", "setuptools (==67.5.1)", "subprocess-tee (==0.4.1)", "tomli (==2.0.1)", "typing-extensions (==4.5.0)", "wcmatch (==8.4.1)", "yamllint (==1.29.0)"]
 test = ["black", "coverage-enable-subprocess", "coverage[toml] (>=6.4.4)", "flake8", "flake8-future-annotations", "mypy", "psutil", "pylint", "pytest (>=7.2.0)", "pytest-mock", "pytest-plus (>=0.2)", "pytest-xdist (>=2.1.0)", "spdx-tools", "types-pyyaml"]
 
 [[package]]
@@ -1377,4 +1377,4 @@ setuptools = "*"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "dfcaf6f8ac288e014d8597e9765b54f1ea5029d7755d60f77e2961ac15a0a73b"
+content-hash = "ee15d3172edd56146907c911c34a36521bbabdc324a13205b65d39706041ad8c"
