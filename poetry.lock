@@ -59,14 +59,14 @@ resolvelib = ">=0.5.3,<0.9.0"
 
 [[package]]
 name = "ansible-lint"
-version = "6.14.1"
+version = "6.14.2"
 description = "Checks playbooks for practices and behavior that could potentially be improved"
 category = "dev"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "ansible-lint-6.14.1.tar.gz", hash = "sha256:8e7efc7254764b1101e2a70bea606d4ed6b66c16bdc1f85e97528201fe5f56aa"},
-    {file = "ansible_lint-6.14.1-py3-none-any.whl", hash = "sha256:1c8505d908216b64de6ca1c3f3ad0bd675f58506ad34117a95d243447844c449"},
+    {file = "ansible-lint-6.14.2.tar.gz", hash = "sha256:de87ef104302c2c6fcb43798a75c42d4f0a5c07e887c2a1d07a0b5a9fb774de0"},
+    {file = "ansible_lint-6.14.2-py3-none-any.whl", hash = "sha256:1e76d6736efff05556d0f15d052822688b512759a3e97820b22ba59ecd900de2"},
 ]
 
 [package.dependencies]
@@ -1377,4 +1377,4 @@ setuptools = "*"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "ee15d3172edd56146907c911c34a36521bbabdc324a13205b65d39706041ad8c"
+content-hash = "99c21105e176dfad2d66aa39c85d13d0cf51753e32bdf2015f34db01c92d8781"
