@@ -2,6 +2,7 @@
 - name: Tailscale Status
   listen: Confirm Tailscale is Connected
   ansible.builtin.command: tailscale status
+  changed_when: false
   register: handlers_tailscale_status
 
 - name: Debug Tailscale Status
