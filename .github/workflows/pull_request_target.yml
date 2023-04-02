@@ -2,12 +2,12 @@
 name: Molecule Tests
 
 on:
-  pull_request_target:
-    branches:
-      - main
-    paths-ignore:
-      - ".devcontainer/**"
-      - "README.md"
+  # pull_request_target:
+  #   branches:
+  #     - main
+  #   paths-ignore:
+  #     - ".devcontainer/**"
+  #     - "README.md"
   # TODO: remove before merging, just for testing
   pull_request:
 
@@ -26,12 +26,14 @@ jobs:
       matrix:
         include:
           - image: geerlingguy/docker-centos7-ansible:latest
+            command: /lib/systemd/systemd
           - image: geerlingguy/docker-rockylinux8-ansible:latest
           - image: geerlingguy/docker-rockylinux9-ansible:latest
           - image: ghcr.io/artis3n/docker-almalinux8-ansible:latest
           - image: ghcr.io/artis3n/docker-rhel8-ansible:latest
           - image: ghcr.io/artis3n/docker-oraclelinux8-ansible:latest
           - image: ghcr.io/artis3n/docker-amazonlinux2-ansible:latest
+            command: /lib/systemd/systemd
           - image: geerlingguy/docker-ubuntu2204-ansible:latest
           - image: geerlingguy/docker-ubuntu2004-ansible:latest
           - image: geerlingguy/docker-ubuntu1804-ansible:latest
