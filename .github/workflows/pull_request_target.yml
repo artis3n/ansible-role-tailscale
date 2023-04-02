@@ -8,6 +8,8 @@ on:
     paths-ignore:
       - ".devcontainer/**"
       - "README.md"
+  # TODO: remove before merging, just for testing
+  pull_request:
 
 env:
   # https://www.jeffgeerling.com/blog/2020/getting-colorized-output-molecule-and-ansible-on-github-actions-ci
@@ -17,31 +19,37 @@ env:
 jobs:
   molecule:
     environment: E2E
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     strategy:
-      matrix:
-        distros:
-          - geerlingguy/docker-centos7-ansible:latest
-          - geerlingguy/docker-rockylinux8-ansible:latest
-          - geerlingguy/docker-rockylinux9-ansible:latest
-          - ghcr.io/artis3n/docker-almalinux8-ansible:latest
-          - ghcr.io/artis3n/docker-rhel8-ansible:latest
-          - ghcr.io/artis3n/docker-oraclelinux8-ansible:latest
-          - ghcr.io/artis3n/docker-amazonlinux2-ansible:latest
-          - ghcr.io/artis3n/docker-ubuntu2204-ansible:latest
-          - geerlingguy/docker-ubuntu2004-ansible:latest
-          - geerlingguy/docker-ubuntu1804-ansible:latest
-          - geerlingguy/docker-ubuntu1604-ansible:latest
-          - cisagov/docker-debian12-ansible:latest
-          - geerlingguy/docker-debian11-ansible:latest
-          - geerlingguy/docker-debian10-ansible:latest
-          - geerlingguy/docker-debian9-ansible:latest
-          - geerlingguy/docker-fedora31-ansible:latest
-          - ghcr.io/artis3n/docker-arch-ansible:latest
-          - ghcr.io/artis3n/docker-opensuse-tumbleweed-ansible:latest
-          - ghcr.io/artis3n/docker-opensuse-leap-ansible:latest
       fail-fast: false
+      matrix:
+        include:
+          - image: geerlingguy/docker-centos7-ansible:latest
+          - image: geerlingguy/docker-rockylinux8-ansible:latest
+          - image: geerlingguy/docker-rockylinux9-ansible:latest
+          - image: ghcr.io/artis3n/docker-almalinux8-ansible:latest
+          - image: ghcr.io/artis3n/docker-rhel8-ansible:latest
+          - image: ghcr.io/artis3n/docker-oraclelinux8-ansible:latest
+          - image: ghcr.io/artis3n/docker-amazonlinux2-ansible:latest
+          - image: geerlingguy/docker-ubuntu2204-ansible:latest
+          - image: geerlingguy/docker-ubuntu2004-ansible:latest
+          - image: geerlingguy/docker-ubuntu1804-ansible:latest
+            command: /lib/systemd/systemd
+          - image: geerlingguy/docker-ubuntu1604-ansible:latest
+            command: /lib/systemd/systemd
+          - image: cisagov/docker-debian12-ansible:latest
+          - image: geerlingguy/docker-debian11-ansible:latest
+            command: /lib/systemd/systemd
+          - image: geerlingguy/docker-debian10-ansible:latest
+            command: /lib/systemd/systemd
+          - image: geerlingguy/docker-debian9-ansible:latest
+            command: /lib/systemd/systemd
+          - image: geerlingguy/docker-fedora31-ansible:latest
+          - image: ghcr.io/artis3n/docker-arch-ansible:latest
+          - image: ghcr.io/artis3n/docker-opensuse-tumbleweed-ansible:latest
+          - image: ghcr.io/artis3n/docker-opensuse-leap-ansible:latest
+            command: /lib/systemd/systemd
 
     steps:
       - uses: actions/checkout@v3
@@ -64,18 +72,20 @@ jobs:
       - name: Default scenario
         run: poetry run molecule test --scenario-name default
         env:
-          MOLECULE_DISTRO: "${{ matrix.distros }}"
+          MOLECULE_DISTRO: "${{ matrix.image }}"
+          MOLECULE_COMMAND: "${{ matrix.command }}"
           TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
 
       - name: Uninstall scenario
         run: poetry run molecule test --scenario-name state-absent
         env:
-          MOLECULE_DISTRO: "${{ matrix.distros }}"
+          MOLECULE_DISTRO: "${{ matrix.image }}"
+          MOLECULE_COMMAND: "${{ matrix.command }}"
           TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
 
   molecule-skip-auth:
     environment: E2E
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
@@ -100,7 +110,7 @@ jobs:
 
   molecule-vars-priority:
     environment: E2E
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
@@ -127,7 +137,7 @@ jobs:
 
   molecule-args:
     environment: E2E
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
@@ -154,7 +164,7 @@ jobs:
 
   molecule-state-present:
     environment: E2E
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
