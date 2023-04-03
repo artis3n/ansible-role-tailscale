@@ -10,6 +10,10 @@ on:
       command:
         required: true
         type: string
+      runner:
+        required: false
+        type: string
+        default: ubuntu-22.04
     secrets:
       tailscale_key:
         required: true
@@ -22,7 +26,7 @@ env:
 jobs:
   run-molecule:
     environment: E2E
-    runs-on: ubuntu-22.04
+    runs-on: ${{ inputs.runner }}
 
     steps:
       - uses: actions/checkout@v3

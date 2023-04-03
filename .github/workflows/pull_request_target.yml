@@ -67,6 +67,7 @@ jobs:
     with:
       image: ${{ matrix.image }}
       command: ${{ matrix.command }}
+      runner: ubuntu-20.04
     secrets:
       tailscale_key: ${{ secrets.TAILSCALE_CI_KEY }}
 
