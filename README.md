@@ -16,7 +16,7 @@ Supported operating systems:
 - Debian / Ubuntu
 - CentOS / RedHat
 - Rocky Linux / AlmaLinux
-- Amazon Linux 2
+- Amazon Linux 2 / Amazon Linux 2023
 - Oracle Linux
 - Fedora
 - Arch Linux

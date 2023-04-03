@@ -59,14 +59,14 @@ resolvelib = ">=0.5.3,<0.9.0"
 
 [[package]]
 name = "ansible-lint"
-version = "6.14.3"
+version = "6.14.4"
 description = "Checks playbooks for practices and behavior that could potentially be improved"
 category = "dev"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "ansible-lint-6.14.3.tar.gz", hash = "sha256:73ec59929b6214f6d2ce5858c22c64e3a1daba7b8cdc1271833bb6d3c7155449"},
-    {file = "ansible_lint-6.14.3-py3-none-any.whl", hash = "sha256:dc34b9d9ead5036880ae8889034391cec361a911e7c5916cda51c9700e22e819"},
+    {file = "ansible-lint-6.14.4.tar.gz", hash = "sha256:4258a41e766cb16a88fea4c3d535f390f967c5af36e0e8cac2364c5ec99043db"},
+    {file = "ansible_lint-6.14.4-py3-none-any.whl", hash = "sha256:890358e14102800425777f53fa086b6eefee58c2317353ebc8af2ec41c019f1d"},
 ]
 
 [package.dependencies]
@@ -75,17 +75,16 @@ black = ">=22.8.0"
 filelock = ">=3.3.0"
 jsonschema = ">=4.10.0"
 packaging = ">=21.3"
-pathspec = "!=0.11.1"
 pyyaml = ">=5.4.1"
 rich = ">=12.0.0"
 "ruamel.yaml" = ">=0.17.21,<0.18"
 subprocess-tee = ">=0.4.1"
 wcmatch = ">=8.1.2"
-yamllint = ">=1.26.3"
+yamllint = ">=1.30.0"
 
 [package.extras]
 docs = ["mkdocs-ansible[lock] (>=0.1.2)", "pipdeptree (>=2.4.0)"]
-lock = ["ansible-core (==2.14.3)", "attrs (==22.2.0)", "black (==23.1.0)", "bracex (==2.3.post1)", "cffi (==1.15.1)", "click (==8.1.3)", "cryptography (==39.0.2)", "filelock (==3.10.0)", "jinja2 (==3.1.2)", "jsonschema (==4.17.3)", "markdown-it-py (==2.2.0)", "markupsafe (==2.1.2)", "mdurl (==0.1.2)", "mypy-extensions (==1.0.0)", "packaging (==23.0)", "pathspec (==0.11.0)", "platformdirs (==3.1.1)", "pycparser (==2.21)", "pygments (==2.14.0)", "pyrsistent (==0.19.3)", "pyyaml (==6.0)", "resolvelib (==0.8.1)", "rich (==13.3.2)", "ruamel-yaml (==0.17.21)", "setuptools (==67.6.0)", "subprocess-tee (==0.4.1)", "tomli (==2.0.1)", "typing-extensions (==4.5.0)", "wcmatch (==8.4.1)", "yamllint (==1.30.0)"]
+lock = ["ansible-core (==2.14.4)", "attrs (==22.2.0)", "black (==23.3.0)", "bracex (==2.3.post1)", "cffi (==1.15.1)", "click (==8.1.3)", "cryptography (==40.0.1)", "filelock (==3.10.7)", "jinja2 (==3.1.2)", "jsonschema (==4.17.3)", "markdown-it-py (==2.2.0)", "markupsafe (==2.1.2)", "mdurl (==0.1.2)", "mypy-extensions (==1.0.0)", "packaging (==23.0)", "pathspec (==0.11.1)", "platformdirs (==3.2.0)", "pycparser (==2.21)", "pygments (==2.14.0)", "pyrsistent (==0.19.3)", "pyyaml (==6.0)", "resolvelib (==0.8.1)", "rich (==13.3.3)", "ruamel-yaml (==0.17.21)", "setuptools (==67.6.1)", "subprocess-tee (==0.4.1)", "tomli (==2.0.1)", "typing-extensions (==4.5.0)", "wcmatch (==8.4.1)", "yamllint (==1.30.0)"]
 test = ["black", "coverage-enable-subprocess", "coverage[toml] (>=6.4.4)", "flake8", "flake8-future-annotations", "mypy", "psutil", "pylint", "pytest (>=7.2.2)", "pytest-mock", "pytest-plus (>=0.2)", "pytest-xdist (>=2.1.0)", "spdx-tools (>=0.7.1)", "types-jsonschema", "types-pyyaml"]
 
 [[package]]
@@ -871,14 +870,14 @@ files = [
 
 [[package]]
 name = "pathspec"
-version = "0.11.0"
+version = "0.11.1"
 description = "Utility library for gitignore style pattern matching of file paths."
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "pathspec-0.11.0-py3-none-any.whl", hash = "sha256:3a66eb970cbac598f9e5ccb5b2cf58930cd8e3ed86d393d541eaf2d8b1705229"},
-    {file = "pathspec-0.11.0.tar.gz", hash = "sha256:64d338d4e0914e91c1792321e6907b5a593f1ab1851de7fc269557a21b30ebbc"},
+    {file = "pathspec-0.11.1-py3-none-any.whl", hash = "sha256:d8af70af76652554bd134c22b3e8a1cc46ed7d91edcdd721ef1a0c51a84a5293"},
+    {file = "pathspec-0.11.1.tar.gz", hash = "sha256:2798de800fa92780e33acca925945e9a19a133b715067cf165b8866c15a31687"},
 ]
 
 [[package]]
