@@ -8,7 +8,6 @@ on:
     paths-ignore:
       - ".devcontainer/**"
       - "README.md"
-  pull_request:
 
 env:
   # https://www.jeffgeerling.com/blog/2020/getting-colorized-output-molecule-and-ansible-on-github-actions-ci
