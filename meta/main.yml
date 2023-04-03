@@ -22,6 +22,7 @@ galaxy_info:
       versions:
         - "7"
         - "8"
+    # Need to add an Amazon Linux 2023 platform, but Galaxy doesn't have a supported platform for it yet.
     - name: Amazon Linux 2
       versions:
         - "all"

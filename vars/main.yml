@@ -8,7 +8,6 @@ tailscale_debian_family_distros:
 
 tailscale_centos_family_distros:
   - CentOS
-  - Amazon
   - OracleLinux
   - RedHat
   - Rocky
@@ -61,6 +60,7 @@ tailscale_dnf_plugins:
   - dnf-plugins-core
 
 tailscale_dnf_repos:
+  Amazon: https://pkgs.tailscale.com/{{ release_stability | lower }}/fedora/tailscale.repo
   Fedora: https://pkgs.tailscale.com/{{ release_stability | lower }}/fedora/tailscale.repo
 
 tailscale_opensuse_leap_repository: "https://pkgs.tailscale.com/stable/opensuse/leap/{{ ansible_distribution_version }}/tailscale.repo"

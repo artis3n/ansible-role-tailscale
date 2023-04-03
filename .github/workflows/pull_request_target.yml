@@ -20,6 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - image: ghcr.io/artis3n/docker-amazonlinux2023-ansible:latest
           - image: geerlingguy/docker-rockylinux8-ansible:latest
           - image: geerlingguy/docker-rockylinux9-ansible:latest
           - image: ghcr.io/artis3n/docker-almalinux8-ansible:latest

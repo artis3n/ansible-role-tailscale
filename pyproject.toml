@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "artis3n.tailscale"
-version = "3.5.0"
+version = "4.1.0"
 description = "Ansible role to install and enable a Tailscale node."
 authors = ["Artis3n <dev@artis3nal.com>"]
 license = "MIT"
