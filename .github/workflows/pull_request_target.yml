@@ -16,66 +16,63 @@ env:
 
 jobs:
   molecule:
-    environment: E2E
-    runs-on: ubuntu-20.04
-
     strategy:
-      matrix:
-        distros:
-          - geerlingguy/docker-centos7-ansible:latest
-          - geerlingguy/docker-rockylinux8-ansible:latest
-          - geerlingguy/docker-rockylinux9-ansible:latest
-          - ghcr.io/artis3n/docker-almalinux8-ansible:latest
-          - ghcr.io/artis3n/docker-rhel8-ansible:latest
-          - ghcr.io/artis3n/docker-oraclelinux8-ansible:latest
-          - ghcr.io/artis3n/docker-amazonlinux2-ansible:latest
-          - ghcr.io/artis3n/docker-ubuntu2204-ansible:latest
-          - geerlingguy/docker-ubuntu2004-ansible:latest
-          - geerlingguy/docker-ubuntu1804-ansible:latest
-          - geerlingguy/docker-ubuntu1604-ansible:latest
-          - cisagov/docker-debian12-ansible:latest
-          - geerlingguy/docker-debian11-ansible:latest
-          - geerlingguy/docker-debian10-ansible:latest
-          - geerlingguy/docker-debian9-ansible:latest
-          - geerlingguy/docker-fedora31-ansible:latest
-          - ghcr.io/artis3n/docker-arch-ansible:latest
-          - ghcr.io/artis3n/docker-opensuse-tumbleweed-ansible:latest
-          - ghcr.io/artis3n/docker-opensuse-leap-ansible:latest
       fail-fast: false
+      matrix:
+        include:
+          - image: geerlingguy/docker-rockylinux8-ansible:latest
+          - image: geerlingguy/docker-rockylinux9-ansible:latest
+          - image: ghcr.io/artis3n/docker-almalinux8-ansible:latest
+          - image: ghcr.io/artis3n/docker-rhel8-ansible:latest
+          - image: ghcr.io/artis3n/docker-oraclelinux8-ansible:latest
+          - image: geerlingguy/docker-ubuntu2204-ansible:latest
+          - image: geerlingguy/docker-ubuntu2004-ansible:latest
+          - image: geerlingguy/docker-ubuntu1804-ansible:latest
+            command: /lib/systemd/systemd
+          - image: cisagov/docker-debian12-ansible:latest
+          - image: geerlingguy/docker-debian11-ansible:latest
+            command: /lib/systemd/systemd
+          - image: geerlingguy/docker-debian10-ansible:latest
+            command: /lib/systemd/systemd
+          - image: geerlingguy/docker-debian9-ansible:latest
+            command: /lib/systemd/systemd
+          - image: geerlingguy/docker-fedora31-ansible:latest
+          - image: ghcr.io/artis3n/docker-arch-ansible:latest
+          - image: ghcr.io/artis3n/docker-opensuse-tumbleweed-ansible:latest
+          - image: ghcr.io/artis3n/docker-opensuse-leap-ansible:latest
+            command: /lib/systemd/systemd
 
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
+    uses: ./.github/workflows/molecule.yml
+    with:
+      image: ${{ matrix.image }}
+      command: ${{ matrix.command }}
+    secrets:
+      tailscale_key: ${{ secrets.TAILSCALE_CI_KEY }}
 
-      - name: Install dependency manager
-        run: pipx install poetry
+  # Systems that aren't working with cgroups v2 on ubuntu 22.04, but works on ubuntu 20.04
+  molecule-legacy:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - image: geerlingguy/docker-centos7-ansible:latest
+            command: /usr/lib/systemd/systemd
+          - image: ghcr.io/artis3n/docker-amazonlinux2-ansible:latest
+            command: /usr/lib/systemd/systemd
+          - image: geerlingguy/docker-ubuntu1604-ansible:latest
+            command: /lib/systemd/systemd
 
-      - name: Set up Python 3.x
-        id: setup-python
-        uses: actions/setup-python@v4.5.0
-        with:
-          python-version: "3.11"
-          cache: 'poetry'
-
-      - name: Install packages
-        run: poetry install --no-interaction
-
-      - name: Default scenario
-        run: poetry run molecule test --scenario-name default
-        env:
-          MOLECULE_DISTRO: "${{ matrix.distros }}"
-          TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
-
-      - name: Uninstall scenario
-        run: poetry run molecule test --scenario-name state-absent
-        env:
-          MOLECULE_DISTRO: "${{ matrix.distros }}"
-          TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
+    uses: ./.github/workflows/molecule.yml
+    with:
+      image: ${{ matrix.image }}
+      command: ${{ matrix.command }}
+      runner: ubuntu-20.04
+    secrets:
+      tailscale_key: ${{ secrets.TAILSCALE_CI_KEY }}
 
   molecule-skip-auth:
     environment: E2E
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
@@ -100,7 +97,7 @@ jobs:
 
   molecule-vars-priority:
     environment: E2E
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
@@ -127,7 +124,7 @@ jobs:
 
   molecule-args:
     environment: E2E
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
@@ -154,7 +151,7 @@ jobs:
 
   molecule-state-present:
     environment: E2E
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
