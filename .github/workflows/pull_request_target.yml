@@ -8,7 +8,6 @@ on:
     paths-ignore:
       - ".devcontainer/**"
       - "README.md"
-  # TODO: remove before merging, just for testing
   pull_request:
 
 env:
@@ -18,9 +17,6 @@ env:
 
 jobs:
   molecule:
-    environment: E2E
-    runs-on: ubuntu-22.04
-
     strategy:
       fail-fast: false
       matrix:
@@ -47,42 +43,15 @@ jobs:
           - image: ghcr.io/artis3n/docker-opensuse-leap-ansible:latest
             command: /lib/systemd/systemd
 
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
+    uses: ./.github/workflows/molecule.yml
+    with:
+      image: ${{ matrix.image }}
+      command: ${{ matrix.command }}
+    secrets:
+      tailscale_key: ${{ secrets.TAILSCALE_CI_KEY }}
 
-      - name: Install dependency manager
-        run: pipx install poetry
-
-      - name: Set up Python 3.x
-        id: setup-python
-        uses: actions/setup-python@v4.5.0
-        with:
-          python-version: "3.11"
-          cache: 'poetry'
-
-      - name: Install packages
-        run: poetry install --no-interaction
-
-      - name: Default scenario
-        run: poetry run molecule test --scenario-name default
-        env:
-          MOLECULE_DISTRO: "${{ matrix.image }}"
-          MOLECULE_COMMAND: "${{ matrix.command }}"
-          TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
-
-      - name: Uninstall scenario
-        run: poetry run molecule test --scenario-name state-absent
-        env:
-          MOLECULE_DISTRO: "${{ matrix.image }}"
-          MOLECULE_COMMAND: "${{ matrix.command }}"
-          TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
-
+  # Systems that aren't working with cgroups v2 on ubuntu 22.04, but works on ubuntu 20.04
   molecule-legacy:
-    environment: E2E
-    runs-on: ubuntu-20.04
-
     strategy:
       fail-fast: false
       matrix:
@@ -94,37 +63,12 @@ jobs:
           - image: geerlingguy/docker-ubuntu1604-ansible:latest
             command: /lib/systemd/systemd
 
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-
-      - name: Install dependency manager
-        run: pipx install poetry
-
-      - name: Set up Python 3.x
-        id: setup-python
-        uses: actions/setup-python@v4.5.0
-        with:
-          python-version: "3.11"
-          cache: 'poetry'
-
-      - name: Install packages
-        run: poetry install --no-interaction
-
-      - name: Default scenario
-        run: poetry run molecule test --scenario-name default
-        env:
-          MOLECULE_DISTRO: "${{ matrix.image }}"
-          MOLECULE_COMMAND: "${{ matrix.command }}"
-          TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
-
-      - name: Uninstall scenario
-        run: poetry run molecule test --scenario-name state-absent
-        env:
-          MOLECULE_DISTRO: "${{ matrix.image }}"
-          MOLECULE_COMMAND: "${{ matrix.command }}"
-          TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
+    uses: ./.github/workflows/molecule.yml
+    with:
+      image: ${{ matrix.image }}
+      command: ${{ matrix.command }}
+    secrets:
+      tailscale_key: ${{ secrets.TAILSCALE_CI_KEY }}
 
   molecule-skip-auth:
     environment: E2E

@@ -1,0 +1,57 @@
+---
+name: Run Molecule Test
+
+on:
+  workflow_call:
+    inputs:
+      image:
+        required: true
+        type: string
+      command:
+        required: true
+        type: string
+    secrets:
+      tailscale_key:
+        required: true
+
+env:
+  # https://www.jeffgeerling.com/blog/2020/getting-colorized-output-molecule-and-ansible-on-github-actions-ci
+  PY_COLORS: '1'
+  ANSIBLE_FORCE_COLOR: '1'
+
+jobs:
+  run-molecule:
+    environment: E2E
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Install dependency manager
+        run: pipx install poetry
+
+      - name: Set up Python 3.x
+        id: setup-python
+        uses: actions/setup-python@v4.5.0
+        with:
+          python-version: "3.11"
+          cache: 'poetry'
+
+      - name: Install packages
+        run: poetry install --no-interaction
+
+      - name: Default scenario
+        run: poetry run molecule test --scenario-name default
+        env:
+          MOLECULE_DISTRO: "${{ inputs.image }}"
+          MOLECULE_COMMAND: "${{ inputs.command }}"
+          TAILSCALE_CI_KEY: "${{ secrets.tailscale_key }}"
+
+      - name: Uninstall scenario
+        run: poetry run molecule test --scenario-name state-absent
+        env:
+          MOLECULE_DISTRO: "${{ inputs.image }}"
+          MOLECULE_COMMAND: "${{ inputs.command }}"
+          TAILSCALE_CI_KEY: "${{ secrets.tailscale_key }}"
