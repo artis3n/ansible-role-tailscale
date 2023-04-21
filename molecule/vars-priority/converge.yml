@@ -1,10 +1,11 @@
 ---
 - name: Converge with play vars
-  hosts: all
+  hosts: instance
   vars:
-    tailscale_authkey: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
     verbose: true
   tasks:
+    - name: Init tailscale credentials variables
+      ansible.builtin.include_tasks: ../default/init_tailscale_vars.yml
     - name: "Include artis3n.tailscale"
       ansible.builtin.include_role:
         name: artis3n.tailscale

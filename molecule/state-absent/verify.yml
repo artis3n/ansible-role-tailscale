@@ -1,6 +1,6 @@
 ---
 - name: Verify
-  hosts: all
+  hosts: instance
   tasks:
     - name: Gather Service Facts
       ansible.builtin.service_facts:
