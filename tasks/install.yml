@@ -71,27 +71,31 @@
 - name: Install | Tailscale Status
   ansible.builtin.debug:
     var: tailscale_status
-  when: verbose | bool
+  when: verbose
 
 - name: Install | Record Tailscale Version
   ansible.builtin.command: tailscale version
   changed_when: false
   register: tailscale_version
-  when: verbose | bool
+  when: verbose
 
 - name: Install | Tailscale Version
   ansible.builtin.debug:
     msg: "{{ tailscale_version.stdout.split('\n') }}"
-  when: verbose | bool
+  when: verbose
 
-- name: Install | Calculate Changes to Tailscale
-  ansible.builtin.include_tasks: lib/up-state.yml
-  loop:
-    - "pull"
+- name: Install | Write state file
+  ansible.builtin.template:
+    src: state.j2
+    dest: "{{ tailscale_state_folder }}/artis3n-tailscale/state"
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
+    mode: '0644'
+  register: state_file
 
 - name: Install | Bring Tailscale Up
   become: true
-  ansible.builtin.command: tailscale up {{ tailscale_up_args | trim }}
+  ansible.builtin.command: "tailscale up {{ tailscale_args | default() }} --authkey={{ tailscale_authkey }}"
   # Since the auth key is included in this task's output, we do not want to log output
   no_log: "{{ not (insecurely_log_authkey | bool) }}"
   register: tailscale_start
@@ -102,7 +106,7 @@
     not tailscale_up_skip | bool
     and (('Logged out.' in tailscale_status.stdout
     and 'not logged in' in tailscale_status.stdout)
-    or state_checksum != existing_state_checksum)
+    or state_file is changed)
   notify: Confirm Tailscale is Connected
   async: 60
   poll: 5
@@ -111,7 +115,7 @@
   ansible.builtin.debug:
     msg: "{{ tailscale_start.stdout | regex_replace('tskey.*\\s', 'REDACTED ') | regex_replace('\\t', '') | split('\n') }}"
   when:
-    - tailscale_start.changed
+    - tailscale_start is failed
     - tailscale_start.stdout | length > 0
   register: nonsensitive_stdout
 
@@ -122,17 +126,15 @@
     nonsensitive_stdout.skipped is not defined
     or not nonsensitive_stdout.skipped | bool
 
+- name: Install | Remove state file
+  ansible.builtin.file:
+    path: "{{ tailscale_state_folder }}/artis3n-tailscale/state"
+    state: absent
+  when:
+    - tailscale_start is failed
+
 - name: Install | Report redacted failure from "tailscale up"  # noqa: no-handler
   ansible.builtin.fail:
-    msg: "{{ tailscale_start.stderr | regex_replace('tskey.*\\s', 'REDACTED ') | regex_replace('\\t', '') | split('\n') }}"
+    msg: "{{ tailscale_start.stderr | default () | regex_replace('tskey.*\\s', 'REDACTED ') | regex_replace('\\t', '') | split('\n') }}"
   when:
-    - tailscale_start.changed
-    - tailscale_start.stderr | length > 0
-    - tailscale_start.failed | bool
-  register: nonsensitive_stderr
-
-- name: Install | Record Changes to Tailscale
-  ansible.builtin.include_tasks: lib/up-state.yml
-  when: not tailscale_up_skip | bool
-  loop:
-    - "push"
+    - tailscale_start is failed
