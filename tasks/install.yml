@@ -84,7 +84,7 @@
     msg: "{{ tailscale_version.stdout.split('\n') }}"
   when: verbose
 
-- name: Install | Write state file
+- name: Install | Save State
   ansible.builtin.template:
     src: state.j2
     dest: "{{ tailscale_state_folder }}/artis3n-tailscale/state"
@@ -126,7 +126,7 @@
     nonsensitive_stdout.skipped is not defined
     or not nonsensitive_stdout.skipped | bool
 
-- name: Install | Remove state file
+- name: Install | Revert State Upon Error
   ansible.builtin.file:
     path: "{{ tailscale_state_folder }}/artis3n-tailscale/state"
     state: absent
