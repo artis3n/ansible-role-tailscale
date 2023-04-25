@@ -126,7 +126,7 @@
     nonsensitive_stdout.skipped is not defined
     or not nonsensitive_stdout.skipped | bool
 
-- name: Install | Revert State Upon Error
+- name: Install | Clear State Upon Error
   ansible.builtin.file:
     path: "{{ tailscale_state_folder }}/artis3n-tailscale/state"
     state: absent
