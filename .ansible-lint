@@ -4,6 +4,7 @@ exclude_paths:
     - .idea/
     - .vscode/
     - molecule/default/headscale.config.yaml
+    - molecule/default/init_tailscale_vars.yml
 
 
 skip_list:
