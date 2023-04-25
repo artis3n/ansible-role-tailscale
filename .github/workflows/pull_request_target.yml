@@ -176,3 +176,37 @@ jobs:
         run: poetry run molecule test --scenario-name state-present
         env:
           TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
+
+  run-molecule-headscale:
+    environment: E2E
+    runs-on: ${{ inputs.runner }}
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Install dependency manager
+        run: pipx install poetry
+
+      - name: Set up Python 3.x
+        id: setup-python
+        uses: actions/setup-python@v4.5.0
+        with:
+          python-version: "3.11"
+          cache: 'poetry'
+
+      - name: Install packages
+        run: poetry install --no-interaction
+
+      - name: Default scenario with Headscale
+        run: poetry run molecule test --scenario-name default
+        env:
+          TAILSCALE_CI_KEY: "unused"
+          USE_HEADSCALE: "true"
+
+      - name: Uninstall scenario with Headscale
+        run: poetry run molecule test --scenario-name state-absent
+        env:
+          TAILSCALE_CI_KEY: "unused"
+          USE_HEADSCALE: "true"
