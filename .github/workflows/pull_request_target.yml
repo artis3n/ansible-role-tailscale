@@ -179,7 +179,7 @@ jobs:
 
   run-molecule-headscale:
     environment: E2E
-    runs-on: ${{ inputs.runner }}
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
