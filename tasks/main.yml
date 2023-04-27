@@ -14,13 +14,14 @@
       Set a `tailscale_authkey` variable.
       You can create this key from: https://login.tailscale.com/admin/settings/keys .
   when:
-    - (not tailscale_authkey or tailscale_authkey == None) and state != "absent"
-    - not tailscale_up_skip | bool and state != "absent"
+    - not tailscale_authkey
+    - not tailscale_up_skip
+    - state != "absent"
 
 - name: Skipping Authentication
   ansible.builtin.debug:
     msg: You have set 'tailscale_up_skip', so this node will not authenticate to your Tailscale network.
-  when: tailscale_up_skip | bool
+  when: tailscale_up_skip
 
 - name: Unstable Warning
   # Print an error message to the console but proceed anyway
