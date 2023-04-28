@@ -4,9 +4,9 @@
 # Whether to install or uninstall Tailscale. Either 'latest', 'present', or 'absent'
 state: latest
 # Required Node auth key to authenticate to Tailscale
-tailscale_authkey: null
+tailscale_authkey: ""
 # Optional command-line arguments for 'tailscale up'
-tailscale_args: null
+tailscale_args: ""
 # Whether to output debug information during role execution
 verbose: false
 # Whether to skip 'tailscale up'
@@ -18,3 +18,6 @@ release_stability: stable
 # Since this value is sensitive, log output is disabled by default.
 # You can easily toggle this value by setting this variable to "true".
 insecurely_log_authkey: false
+# Whether to store hashed authkey in state
+# Setting to false won't re-run 'tailscale up' on authkey change
+auth_key_in_state: true
