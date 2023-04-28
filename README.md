@@ -286,9 +286,16 @@ This value is stored in a [GitHub Action secret][] with the name `TAILSCALE_CI_K
 To test this role locally, store the Tailscale ephemeral auth key in a `TAILSCALE_CI_KEY` env var.
 If you are a Collaborator on this repository, you can open a GitHub CodeSpace and the `TAILSCALE_CI_KEY` will be populated for you.
 
+Alternatively for Molecule testing, you can use [Headscale][] container that is spun up as part of the create/prepare steps. To do this, `USE_HEADSCALE` env variable needs to be set to any value. For example:
+
+``` sh
+USE_HEADSCALE=true molecule test
+```
+
 [ansible.builtin.command]: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/command_module.html
 [ephemeral auth keys]: https://tailscale.com/kb/1111/ephemeral-nodes/
 [github action secret]: https://docs.github.com/en/actions/reference/encrypted-secrets
 [tailscale]: https://tailscale.com/
 [tailscale account]: https://login.tailscale.com/start
 [tailscale up docs]: https://tailscale.com/kb/1080/cli/#up
+[headscale]: https://github.com/juanfont/headscale/

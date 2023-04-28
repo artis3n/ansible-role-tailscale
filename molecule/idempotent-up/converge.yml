@@ -1,22 +1,32 @@
 ---
 - name: Converge
-  hosts: all
+  hosts: instance
   tasks:
+    - name: Set custom up argument
+      ansible.builtin.set_fact:
+        tailscale_args: "--advertise-exit-node"
+
+    - name: Init tailscale credentials variables
+      ansible.builtin.include_tasks: ../default/init_tailscale_vars.yml
+
     - name: Configure Tailscale with a new up argument
       ansible.builtin.include_role:
         name: artis3n.tailscale
-      vars:
-        tailscale_authkey: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
-        tailscale_args: "--advertise-exit-node"
 
     - name: Attempt to configure Tailscale without previous up argument
       block:
+        - name: Set custom up argument
+          ansible.builtin.set_fact:
+            tailscale_args: null
+
+        - name: Init tailscale credentials variables
+          ansible.builtin.include_tasks: ../default/init_tailscale_vars.yml
+
         - name: Run tailscale up
           ansible.builtin.include_role:
             name: artis3n.tailscale
-          vars:
-            tailscale_authkey: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
           register: should_fail
+
         - name: Check execution halted
           ansible.builtin.fail:
             msg: Should not be reached
@@ -28,9 +38,13 @@
               - should_fail is defined
               - should_not_run is not defined
 
+    - name: Set custom up argument
+      ansible.builtin.set_fact:
+        tailscale_args: "--reset"
+
+    - name: Init tailscale credentials variables
+      ansible.builtin.include_tasks: ../default/init_tailscale_vars.yml
+
     - name: Reset all previous Tailscale arguments
       ansible.builtin.include_role:
         name: artis3n.tailscale
-      vars:
-        tailscale_authkey: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
-        tailscale_args: "--reset"

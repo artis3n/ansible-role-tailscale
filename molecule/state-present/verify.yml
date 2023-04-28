@@ -1,6 +1,6 @@
 ---
 - name: Verify
-  hosts: all
+  hosts: instance
   tasks:
     - name: Get Tailscale status
       become: true

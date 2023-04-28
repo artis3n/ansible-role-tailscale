@@ -1,0 +1,14 @@
+---
+- name: Prepare
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Create Headscale user
+      community.docker.docker_container_exec:
+        container: headscale
+        command: headscale users create test
+
+    - name: Create preauth key
+      community.docker.docker_container_exec:
+        container: headscale
+        command: headscale preauthkeys create -u test --reusable

@@ -1,6 +1,6 @@
 ---
 - name: Cleanup
-  hosts: all
+  hosts: instance
   tasks:
     - name: De-register Tailscale node
       become: true

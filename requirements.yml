@@ -1,3 +1,5 @@
 collections:
   - name: https://github.com/ansible-collections/community.general
     type: git
+  - name: https://github.com/ansible-collections/community.docker
+    type: git

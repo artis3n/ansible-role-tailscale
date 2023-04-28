@@ -3,6 +3,9 @@ exclude_paths:
     - .github/
     - .idea/
     - .vscode/
+    - molecule/default/headscale.config.yaml
+    - molecule/default/init_tailscale_vars.yml
+
 
 skip_list:
     - yaml[line-length]

@@ -1,10 +1,14 @@
 ---
 - name: Converge
-  hosts: all
+  hosts: instance
   tasks:
+    - name: Set custom up argument
+      ansible.builtin.set_fact:
+        tailscale_args: "--accept-dns"
+
+    - name: Init tailscale credentials variables
+      ansible.builtin.include_tasks: ../default/init_tailscale_vars.yml
+
     - name: Install Tailscale with custom up argument
       ansible.builtin.include_role:
         name: artis3n.tailscale
-      vars:
-        tailscale_authkey: "{{ lookup('env', 'TAILSCALE_CI_KEY') }}"
-        tailscale_args: "--accept-dns"

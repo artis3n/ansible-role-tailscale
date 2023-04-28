@@ -1,0 +1,22 @@
+---
+- name: Use tailscale service
+  ansible.builtin.set_fact:
+    tailscale_authkey: "{{ lookup('ansible.builtin.env', 'TAILSCALE_CI_KEY') }}"
+  when: not lookup('ansible.builtin.env', 'USE_HEADSCALE', default=false)
+
+- name: Fetch headscale preauth key
+  delegate_to: localhost
+  changed_when: false
+  community.docker.docker_container_exec:
+    container: headscale
+    command: headscale preauthkeys list -u test -o json
+  register: preauth_list
+  when: lookup('ansible.builtin.env', 'USE_HEADSCALE', default=false)
+
+- name: Use headscale service
+  vars:
+    combined_args: "{{ tailscale_args|default('') }} --login-server=http://headscale:8080"
+  ansible.builtin.set_fact:
+    tailscale_authkey: "{{ (preauth_list.stdout|from_json)[0].key }}"
+    tailscale_args: "{{ combined_args }}"
+  when: lookup('ansible.builtin.env', 'USE_HEADSCALE', default=false)

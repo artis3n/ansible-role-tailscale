@@ -1,0 +1,34 @@
+# minimal Headscale configuration for local testing
+# See upstream example file for full description of all options:
+# https://github.com/juanfont/headscale/blob/main/config-example.yaml
+server_url: http://headscale:8080
+listen_addr: 0.0.0.0:8080
+metrics_listen_addr: 0.0.0.0:9090
+private_key_path: /etc/headscale/private.key
+noise:
+  private_key_path: /etc/headscale/noise_private.key
+db_type: sqlite3
+db_path: /etc/headscale/db.sqlite
+
+# Default Tailscale prefixes
+ip_prefixes:
+  - fd7a:115c:a1e0::/48
+  - 100.64.0.0/10
+
+# Disable TLS
+tls_cert_path: ""
+tls_key_path: ""
+
+# Add DNS configuration so we can --accept-dns
+dns_config:
+  override_local_dns: true
+  nameservers:
+    - 1.1.1.1
+
+derp:
+  server:
+    enabled: true
+    region_id: 999
+    region_code: "headscale"
+    region_name: "Headscale Embedded DERP"
+    stun_listen_addr: "0.0.0.0:3478"
