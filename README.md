@@ -201,37 +201,11 @@ Pass arbitrary command-line arguments:
 - name: Servers
   hosts: all
   tasks:
-    - name: Get AZ subnets
-      ec2_vpc_subnet_facts:
-        region: "{{ placement.region }}"
-        filters:
-          vpc-id: "{{ vpc_id }}"
-          availability-zone: "{{ placement.availability_zone }}"
-      register: subnet_info
-
-    - name: Set Subnet list
-      set_fact:
-        subnet_blocks: "{{ subnet_info.subnets | map(attribute='cidr_block') | list  }}"
-
-    - name: Configure Sysctl
-      sysctl:
-        name: net.ipv4.ip_forward
-        value: 1
-        state: present
-        ignoreerrors: true
-        sysctl_set: true
-
-    - name: Iptables Masquerade
-      iptables:
-        table: nat
-        chain: POSTROUTING
-        jump: MASQUERADE
-
-    - name: Configure Tailscale
+    - name: Use Headscale
       include_role:
         name: artis3n.tailscale
       vars:
-        tailscale_args: "--accept-routes=false --advertise-routes={{ subnet_blocks | join(',') }}"
+        tailscale_args: "--login-server='http://localhost:8080'"
         tailscale_authkey: "{{ lookup('env', 'TAILSCALE_KEY') }}"
 ```
 
@@ -287,9 +261,9 @@ This value is stored in a [GitHub Action secret][] with the name `TAILSCALE_CI_K
 To test this role locally, store the Tailscale ephemeral auth key in a `TAILSCALE_CI_KEY` env var.
 If you are a Collaborator on this repository, you can open a GitHub CodeSpace and the `TAILSCALE_CI_KEY` will be populated for you.
 
-Alternatively for Molecule testing, you can use [Headscale][] container that is spun up as part of the create/prepare steps. To do this, `USE_HEADSCALE` env variable needs to be set to any value. For example:
+Alternatively for Molecule testing, you can use a [Headscale][] container that is spun up as part of the create/prepare steps. To do this, set a `USE_HEADSCALE` env variable. For example:
 
-``` sh
+```bash
 USE_HEADSCALE=true molecule test
 ```
 
