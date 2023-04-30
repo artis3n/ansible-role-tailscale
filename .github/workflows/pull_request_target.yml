@@ -98,7 +98,7 @@ jobs:
         run: poetry run molecule test --scenario-name skip-authentication
 
   molecule-args:
-    name: "Test Tailscale Args"
+    name: "Test Up Args"
     runs-on: ubuntu-22.04
 
     steps:
