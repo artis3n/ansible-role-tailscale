@@ -8,6 +8,7 @@ all: lint test
 install:
 	poetry install
 	poetry run pre-commit install --install-hooks
+	poetry run ansible-galaxy collection install -r requirements.yml
 
 .PHONY: clean
 clean:
