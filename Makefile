@@ -66,3 +66,7 @@ ifndef TAILSCALE_CI_KEY
 else
 	poetry run molecule test --scenario-name state-absent
 endif
+
+.PHONY: test-headscale
+test-headscale:
+	USE_HEADSCALE=true poetry run molecule test --scenario-name default

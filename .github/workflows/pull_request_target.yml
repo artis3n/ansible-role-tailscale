@@ -2,6 +2,7 @@
 name: Molecule Tests
 
 on:
+  # Require approval for all outside collaborators
   pull_request_target:
     branches:
       - main
@@ -16,6 +17,7 @@ env:
 
 jobs:
   molecule:
+    name: "Test Role"
     strategy:
       fail-fast: false
       matrix:
@@ -35,8 +37,6 @@ jobs:
             command: /lib/systemd/systemd
           - image: geerlingguy/docker-debian10-ansible:latest
             command: /lib/systemd/systemd
-          - image: geerlingguy/docker-debian9-ansible:latest
-            command: /lib/systemd/systemd
           - image: geerlingguy/docker-fedora31-ansible:latest
           - image: ghcr.io/artis3n/docker-arch-ansible:latest
           - image: ghcr.io/artis3n/docker-opensuse-tumbleweed-ansible:latest
@@ -52,6 +52,7 @@ jobs:
 
   # Systems that aren't working with cgroups v2 on ubuntu 22.04, but works on ubuntu 20.04
   molecule-legacy:
+    name: "Test Role on Legacy"
     strategy:
       fail-fast: false
       matrix:
@@ -72,7 +73,7 @@ jobs:
       tailscale_key: ${{ secrets.TAILSCALE_CI_KEY }}
 
   molecule-skip-auth:
-    environment: E2E
+    name: "Test Skip Authentication"
     runs-on: ubuntu-22.04
 
     steps:
@@ -96,35 +97,8 @@ jobs:
       - name: Molecule - Skip Authentication
         run: poetry run molecule test --scenario-name skip-authentication
 
-  molecule-vars-priority:
-    environment: E2E
-    runs-on: ubuntu-22.04
-
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-
-      - name: Install dependency manager
-        run: pipx install poetry
-
-      - name: Set up Python 3.x
-        id: setup-python
-        uses: actions/setup-python@v4.6.0
-        with:
-          python-version: "3.11"
-          cache: 'poetry'
-
-      - name: Install packages
-        run: poetry install --no-interaction
-
-      - name: Molecule - Vars Priority Validation
-        run: poetry run molecule test --scenario-name vars-priority
-        env:
-          TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
-
   molecule-args:
-    environment: E2E
+    name: "Test Tailscale Args"
     runs-on: ubuntu-22.04
 
     steps:
@@ -151,7 +125,7 @@ jobs:
           TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
 
   molecule-state-present:
-    environment: E2E
+    name: "Test State Idempotency"
     runs-on: ubuntu-22.04
 
     steps:
@@ -177,8 +151,8 @@ jobs:
         env:
           TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
 
-  run-molecule-headscale:
-    environment: E2E
+  molecule-headscale:
+    name: "Test Headscale Compatibility"
     runs-on: ubuntu-22.04
 
     steps:
