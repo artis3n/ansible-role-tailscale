@@ -17,7 +17,7 @@ repos:
       - id: shellcheck
 
   - repo: https://github.com/ansible/ansible-lint
-    rev: v6.14.3
+    rev: v6.15.0
     hooks:
       - id: ansible-lint
         files: \.(yaml|yml)$
@@ -25,6 +25,6 @@ repos:
           - '--profile=production'
 
   - repo: https://github.com/rhysd/actionlint
-    rev: v1.6.23
+    rev: v1.6.24
     hooks:
       - id: actionlint-docker

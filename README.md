@@ -18,14 +18,14 @@ Supported operating systems:
 - Debian / Ubuntu
 - CentOS / RedHat
 - Rocky Linux / AlmaLinux
-- Amazon Linux 2 / Amazon Linux 2023
-- Oracle Linux
+- Amazon Linux 2023 / Amazon Linux 2
 - Fedora
 - Arch Linux
 - OpenSUSE
-- Raspbian (untested but should work through Debian support)
+- Oracle Linux
+- Raspbian
 
-See the [CI worfklow](https://github.com/artis3n/ansible-role-tailscale/blob/main/.github/workflows/ci.yml#L15) for the list of distribution versions actively tested in each pull request.
+See the [CI worfklow](https://github.com/artis3n/ansible-role-tailscale/blob/main/.github/workflows/pull_request_target.yml) for the list of distribution versions actively tested in each pull request.
 
 <div align="center">
   <a href="https://asciinema.org/a/g8P2DT45oedUaxXSKGBKpU2Dl"><img src="docs/demo.gif" width=650 height=450></a>
