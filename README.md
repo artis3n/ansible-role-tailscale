@@ -207,7 +207,7 @@ Pass arbitrary command-line arguments:
         name: artis3n.tailscale
       vars:
         tailscale_args: "--login-server='http://localhost:8080'"
-        tailscale_authkey: "{{ lookup('env', 'TAILSCALE_KEY') }}"
+        tailscale_authkey: "{{ lookup('env', 'HEADSCALE_KEY') }}"
 ```
 
 Get verbose output:
