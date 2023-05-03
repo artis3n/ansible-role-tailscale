@@ -12,3 +12,15 @@
       community.docker.docker_container_exec:
         container: headscale
         command: headscale preauthkeys create -u test --reusable
+
+    - name: Fetch Headscale container info
+      community.docker.docker_container_info:
+        name: headscale
+      register: headscale_info
+
+    - name: Set hosts override for Headscale
+      delegate_to: instance
+      ansible.builtin.lineinfile:
+        path: /etc/hosts
+        line: "{{ headscale_info.container.NetworkSettings.Networks.headscale.IPAddress }}  headscale"
+        unsafe_writes: true
