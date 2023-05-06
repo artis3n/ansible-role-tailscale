@@ -8,7 +8,7 @@
 - name: Parse status JSON
   listen: Confirm Tailscale is Connected
   vars:
-    status: "{{ tailscale_status.stdout|from_json }}"
+    status: "{{ tailscale_status.stdout | from_json }}"
   ansible.builtin.set_fact:
     tailscale_is_online: "{{ status.Self.Online }}"
 

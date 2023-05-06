@@ -66,7 +66,7 @@
 
 - name: Install | Parse status JSON
   vars:
-    status: "{{ tailscale_status.stdout|from_json }}"
+    status: "{{ tailscale_status.stdout | from_json }}"
   ansible.builtin.set_fact:
     tailscale_is_online: "{{ status.Self.Online }}"
     tailscale_version: "{{ status.Version }}"
@@ -90,6 +90,7 @@
   ansible.builtin.command: "tailscale up {{ tailscale_args | trim }} --authkey={{ tailscale_authkey }}"
   # Since the auth key is included in this task's output, we do not want to log output
   no_log: "{{ not (insecurely_log_authkey | bool) }}"
+  changed_when: true
   register: tailscale_start
   # If a failure occurred due to state changes, we still want to log a redacted version of the error if "no_log" is true
   ignore_errors: true
