@@ -2,7 +2,7 @@
 name: Molecule Tests
 
 on:
-  # Require approval for all outside collaborators
+  # Manual approval of environment is required
   pull_request_target:
     branches:
       - main
@@ -75,6 +75,7 @@ jobs:
   molecule-skip-auth:
     name: "Test Skip Authentication"
     runs-on: ubuntu-22.04
+    environment: E2E
 
     steps:
       - uses: actions/checkout@v3
@@ -100,6 +101,7 @@ jobs:
   molecule-args:
     name: "Test Up Args"
     runs-on: ubuntu-22.04
+    environment: E2E
 
     steps:
       - uses: actions/checkout@v3
@@ -127,6 +129,7 @@ jobs:
   molecule-state-present:
     name: "Test State Idempotency"
     runs-on: ubuntu-22.04
+    environment: E2E
 
     steps:
       - uses: actions/checkout@v3
@@ -154,6 +157,7 @@ jobs:
   molecule-headscale:
     name: "Test Headscale Compatibility"
     runs-on: ubuntu-22.04
+    environment: E2E
 
     steps:
       - uses: actions/checkout@v3
