@@ -96,8 +96,7 @@
   ignore_errors: true
   when:
     - not tailscale_up_skip
-    - state_file is changed
-    - not tailscale_is_online
+    - state_file is changed or not tailscale_is_online
   notify: Confirm Tailscale is Connected
   async: 60
   poll: 5
