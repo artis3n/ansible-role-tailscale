@@ -27,6 +27,7 @@ jobs:
   run-molecule:
     name: "Run Molecule"
     runs-on: ${{ inputs.runner }}
+    environment: E2E
 
     steps:
       - uses: actions/checkout@v3
