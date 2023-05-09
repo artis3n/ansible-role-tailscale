@@ -22,12 +22,10 @@ galaxy_info:
       versions:
         - "7"
         - "8"
-    - name: Amazon Linux 2023
-      version:
-        - "all"
-    - name: Amazon Linux 2
+    - name: Amazon Linux
       versions:
-        - "all"
+        - "2"
+        - "2023"
     - name: Debian
       versions:
         - buster
