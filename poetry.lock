@@ -59,14 +59,14 @@ resolvelib = ">=0.5.3,<0.9.0"
 
 [[package]]
 name = "ansible-lint"
-version = "6.16.0"
+version = "6.16.1"
 description = "Checks playbooks for practices and behavior that could potentially be improved"
 category = "dev"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "ansible-lint-6.16.0.tar.gz", hash = "sha256:df82f3935f1209e3074408eeae5e837ccec6fd52c1d3126689ff4124abb0a5cb"},
-    {file = "ansible_lint-6.16.0-py3-none-any.whl", hash = "sha256:c932a2ed77828943286cd46a29ddbae72d6fba8f09dbbcb2d620afa3cbe04871"},
+    {file = "ansible-lint-6.16.1.tar.gz", hash = "sha256:1f2b796379f86e2dc57f1bfe4288a46c976a1d406d6221ee46e3ac8307f73ca3"},
+    {file = "ansible_lint-6.16.1-py3-none-any.whl", hash = "sha256:899beed7baacc6cba5450fd32fb76fc9889688cf0f877d94986d6d24fe239a73"},
 ]
 
 [package.dependencies]
@@ -77,15 +77,15 @@ jsonschema = ">=4.10.0"
 packaging = ">=21.3"
 pyyaml = ">=5.4.1"
 rich = ">=12.0.0"
-"ruamel.yaml" = ">=0.17.24,<0.18"
+"ruamel.yaml" = ">=0.17.0,<0.18"
 subprocess-tee = ">=0.4.1"
 wcmatch = ">=8.1.2"
 yamllint = ">=1.30.0"
 
 [package.extras]
 docs = ["mkdocs-ansible[lock] (>=0.1.4)", "pipdeptree (>=2.4.0)"]
-lock = ["ansible-core (==2.14.5)", "attrs (==23.1.0)", "black (==23.3.0)", "bracex (==2.3.post1)", "cffi (==1.15.1)", "click (==8.1.3)", "cryptography (==40.0.2)", "filelock (==3.12.0)", "jinja2 (==3.1.2)", "jsonschema (==4.17.3)", "markdown-it-py (==2.2.0)", "markupsafe (==2.1.2)", "mdurl (==0.1.2)", "mypy-extensions (==1.0.0)", "packaging (==23.1)", "pathspec (==0.11.1)", "platformdirs (==3.5.0)", "pycparser (==2.21)", "pygments (==2.15.1)", "pyrsistent (==0.19.3)", "pyyaml (==6.0)", "rich (==13.3.5)", "ruamel-yaml (==0.17.24)", "subprocess-tee (==0.4.1)", "tomli (==2.0.1)", "typing-extensions (==4.5.0)", "wcmatch (==8.4.1)", "yamllint (==1.31.0)"]
-test = ["black", "coverage-enable-subprocess", "coverage[toml] (>=6.4.4)", "jmespath", "mypy", "netaddr", "psutil", "pylint", "pytest (>=7.2.2)", "pytest-mock", "pytest-plus (>=0.2)", "pytest-xdist (>=2.1.0)", "ruamel-yaml-clib", "spdx-tools (>=0.7.1)", "types-jsonschema", "types-pyyaml"]
+lock = ["ansible-core (==2.15.0)", "attrs (==23.1.0)", "black (==23.3.0)", "bracex (==2.3.post1)", "cffi (==1.15.1)", "click (==8.1.3)", "cryptography (==40.0.2)", "filelock (==3.12.0)", "importlib-resources (==5.0.7)", "jinja2 (==3.1.2)", "jsonschema (==4.17.3)", "markdown-it-py (==2.2.0)", "markupsafe (==2.1.2)", "mdurl (==0.1.2)", "mypy-extensions (==1.0.0)", "packaging (==23.1)", "pathspec (==0.11.1)", "platformdirs (==3.5.1)", "pycparser (==2.21)", "pygments (==2.15.1)", "pyrsistent (==0.19.3)", "pyyaml (==6.0)", "rich (==13.3.5)", "ruamel-yaml (==0.17.26)", "subprocess-tee (==0.4.1)", "tomli (==2.0.1)", "typing-extensions (==4.5.0)", "wcmatch (==8.4.1)", "yamllint (==1.31.0)"]
+test = ["black", "coverage-enable-subprocess", "coverage[toml] (>=6.4.4)", "jmespath", "mypy", "netaddr", "psutil", "pylint", "pytest (>=7.2.2)", "pytest-mock", "pytest-plus (>=0.2)", "pytest-xdist (>=2.1.0)", "ruamel-yaml-clib", "ruamel.yaml (>=0.17.26,<0.18)", "spdx-tools (>=0.7.1)", "types-jsonschema", "types-pyyaml"]
 
 [[package]]
 name = "arrow"
@@ -1408,4 +1408,4 @@ dev = ["doc8", "flake8", "flake8-import-order", "rstcheck[sphinx]", "sphinx"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "9f988ecb9326e19e226b3bf0366aff1d70c4f222a7b653c391b41ab248d6ed51"
+content-hash = "64c5d5c197b304d1840af4da1e7771b7328d3093273459868d23f4c6164202b5"
