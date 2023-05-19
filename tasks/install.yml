@@ -59,29 +59,21 @@
     state: started
     enabled: true
 
-- name: Install | Check if Tailscale is connected
-  ansible.builtin.command: tailscale status
+- name: Install | Fetch Tailscale status
+  ansible.builtin.command: tailscale status --json
   changed_when: false
   register: tailscale_status
-  failed_when:
-    - tailscale_status.rc != 0
-    - "'Logged out.' not in tailscale_status.stdout"
-    - "'not logged in' not in tailscale_status.stdout"
 
-- name: Install | Tailscale Status
+- name: Install | Parse status JSON
+  vars:
+    status: "{{ tailscale_status.stdout | from_json }}"
+  ansible.builtin.set_fact:
+    tailscale_is_online: "{{ status.Self.Online }}"
+    tailscale_version: "{{ status.Version }}"
+
+- name: Install | Tailscale version and online status
   ansible.builtin.debug:
-    var: tailscale_status
-  when: verbose
-
-- name: Install | Record Tailscale Version
-  ansible.builtin.command: tailscale version
-  changed_when: false
-  register: tailscale_version
-  when: verbose
-
-- name: Install | Tailscale Version
-  ansible.builtin.debug:
-    msg: "{{ tailscale_version.stdout.split('\n') }}"
+    msg: "Ver: {{ tailscale_version }} Online: {{ tailscale_is_online }}"
   when: verbose
 
 - name: Install | Save State
@@ -98,22 +90,20 @@
   ansible.builtin.command: "tailscale up {{ tailscale_args | trim }} --authkey={{ tailscale_authkey }}"
   # Since the auth key is included in this task's output, we do not want to log output
   no_log: "{{ not (insecurely_log_authkey | bool) }}"
+  changed_when: true
   register: tailscale_start
   # If a failure occurred due to state changes, we still want to log a redacted version of the error if "no_log" is true
   ignore_errors: true
-  changed_when: tailscale_start.rc != 0
-  when: >
-    not tailscale_up_skip | bool
-    and (('Logged out.' in tailscale_status.stdout
-    and 'not logged in' in tailscale_status.stdout)
-    or state_file is changed)
+  when:
+    - not tailscale_up_skip
+    - state_file is changed or not tailscale_is_online
   notify: Confirm Tailscale is Connected
   async: 60
   poll: 5
 
 - name: Install | Report non-sensitive stdout from "tailscale up"  # noqa: no-handler
   ansible.builtin.debug:
-    msg: "{{ tailscale_start.stdout | regex_replace('tskey.*\\s', 'REDACTED ') | regex_replace('\\t', '') | split('\n') }}"
+    msg: "{{ tailscale_start.stdout | replace(tailscale_auth_key, 'REDACTED') | regex_replace('\\t', '') | split('\n') }}"
   when:
     - tailscale_start is failed
     - tailscale_start.stdout | length > 0
@@ -122,9 +112,7 @@
 - name: Install | Pausing to highlight stdout message above
   ansible.builtin.pause:
     seconds: 5
-  when: >
-    nonsensitive_stdout.skipped is not defined
-    or not nonsensitive_stdout.skipped | bool
+  when: nonsensitive_stdout is not skipped
 
 - name: Install | Clear State Upon Error
   ansible.builtin.file:
