@@ -158,6 +158,13 @@ jobs:
     name: "Test Headscale Compatibility"
     runs-on: ubuntu-22.04
     environment: E2E
+    strategy:
+      fail-fast: false
+      matrix:
+        scenario:
+          - default
+          - state-absent
+          - idempotent-up
 
     steps:
       - uses: actions/checkout@v3
@@ -177,14 +184,8 @@ jobs:
       - name: Install packages
         run: poetry install --no-interaction
 
-      - name: Default scenario with Headscale
-        run: poetry run molecule test --scenario-name default
-        env:
-          TAILSCALE_CI_KEY: "unused"
-          USE_HEADSCALE: "true"
-
-      - name: Uninstall scenario with Headscale
-        run: poetry run molecule test --scenario-name state-absent
+      - name: Run scenario with Headscale
+        run: poetry run molecule test --scenario-name ${{ matrix.scenario }}
         env:
           TAILSCALE_CI_KEY: "unused"
           USE_HEADSCALE: "true"
