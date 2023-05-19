@@ -1,0 +1,16 @@
+---
+# https://www.jeffgeerling.com/blog/2020/resolving-fedora-dnf-error-no-such-file-or-directory-varlibdnfrpmdblockpid
+- name: Fedora | Wait for systemd to complete initialization.  # noqa command-instead-of-module
+  ansible.builtin.command: systemctl is-system-running
+  register: systemctl_status
+  until: >
+    'running' in systemctl_status.stdout or
+    'degraded' in systemctl_status.stdout
+  retries: 30
+  delay: 5
+  when: ansible_service_mgr == 'systemd'
+  changed_when: false
+  failed_when:
+    - systemctl_status.rc != 0
+    # It is not a failure if 'degraded' exit code 1 is returned, otherwise it is
+    - not (systemctl_status.rc == 1 and 'degraded' in systemctl_status.stdout )
