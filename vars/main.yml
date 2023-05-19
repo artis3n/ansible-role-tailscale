@@ -5,6 +5,7 @@ tailscale_debian_family_distros:
   - Ubuntu
   - Debian
   - Pop!_OS
+  - OSMC
 
 tailscale_centos_family_distros:
   - CentOS
@@ -34,6 +35,7 @@ tailscale_debian_distro:
   pop!_os: ubuntu
   ubuntu: ubuntu
   debian: debian
+  osmc: debian
 
 tailscale_apt_keyring_path: /usr/share/keyrings/tailscale-archive-keyring.gpg
 
