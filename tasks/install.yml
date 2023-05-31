@@ -103,7 +103,7 @@
 
 - name: Install | Report non-sensitive stdout from "tailscale up"  # noqa: no-handler
   ansible.builtin.debug:
-    msg: "{{ tailscale_start.stdout | replace(tailscale_auth_key, 'REDACTED') | regex_replace('\\t', '') | split('\n') }}"
+    msg: "{{ tailscale_start.stdout | replace(tailscale_authkey, 'REDACTED') | regex_replace('\\t', '') | split('\n') }}"
   when:
     - tailscale_start is failed
     - tailscale_start.stdout | length > 0
