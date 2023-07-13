@@ -89,7 +89,7 @@ jobs:
         id: setup-python
         uses: actions/setup-python@v4.7.0
         with:
-          python-version: "3.11"
+          python-version-file: pyproject.toml
           cache: 'poetry'
 
       - name: Install packages
@@ -115,7 +115,7 @@ jobs:
         id: setup-python
         uses: actions/setup-python@v4.7.0
         with:
-          python-version: "3.11"
+          python-version-file: pyproject.toml
           cache: 'poetry'
 
       - name: Install packages
@@ -143,7 +143,7 @@ jobs:
         id: setup-python
         uses: actions/setup-python@v4.7.0
         with:
-          python-version: "3.11"
+          python-version-file: pyproject.toml
           cache: 'poetry'
 
       - name: Install packages
@@ -178,7 +178,7 @@ jobs:
         id: setup-python
         uses: actions/setup-python@v4.7.0
         with:
-          python-version: "3.11"
+          python-version-file: pyproject.toml
           cache: 'poetry'
 
       - name: Install packages
