@@ -771,13 +771,13 @@ test = ["ansi2html (>=1.8.0)", "ansible-lint (>=6.12.1)", "check-jsonschema", "c
 
 [[package]]
 name = "molecule-plugins"
-version = "23.4.1"
+version = "23.5.0"
 description = "Molecule Plugins"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "molecule-plugins-23.4.1.tar.gz", hash = "sha256:34c47ee2c11c35ba30ca84ea684c1ee1669cf7e58d2197ac9dbfcbf42d0a1b7b"},
-    {file = "molecule_plugins-23.4.1-py3-none-any.whl", hash = "sha256:6734e11fa36b1ee3f1f80feaaa4eb703eae17f9117abe53dc5af6f3f093c0a63"},
+    {file = "molecule-plugins-23.5.0.tar.gz", hash = "sha256:f13ea047b8650c892604b81b76382bc80bb4ae25ea50b23f30e81fd9d5802aff"},
+    {file = "molecule_plugins-23.5.0-py3-none-any.whl", hash = "sha256:893dba8d077adb30fcd50a5d082300404ced3bb745451bc0927d4a1ada131d31"},
 ]
 
 [package.dependencies]
@@ -1345,4 +1345,4 @@ dev = ["doc8", "flake8", "flake8-import-order", "rstcheck[sphinx]", "sphinx"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "9ae155861f4e2ed98c8f84a79fa77140cf250bf01fe6d9e77cc05e4e5cfac2f9"
+content-hash = "e2f77cf63d4aaccd50333126f484ba3684f24bc9382045247f92e3546b2a3dc9"
