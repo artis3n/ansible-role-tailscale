@@ -30,7 +30,7 @@ jobs:
     environment: E2E
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
@@ -39,7 +39,7 @@ jobs:
 
       - name: Set up Python 3.x
         id: setup-python
-        uses: actions/setup-python@v4.7.0
+        uses: actions/setup-python@v4.7.1
         with:
           python-version-file: pyproject.toml
           cache: 'poetry'
