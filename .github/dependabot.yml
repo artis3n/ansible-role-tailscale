@@ -4,17 +4,26 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
-    reviewers:
-      - artis3n
-
-  - package-ecosystem: "pip"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    reviewers:
-      - artis3n
+      interval: "weekly"
     commit-message:
       prefix: fix
       prefix-development: chore
       include: scope
+    groups:
+      github-actions:
+        patterns:
+          - '*'
+
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: fix
+      prefix-development: chore
+      include: scope
+    groups:
+      python-production:
+        dependency-type: production
+      python-development:
+        dependency-type: development
