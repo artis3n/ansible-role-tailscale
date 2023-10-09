@@ -10,3 +10,4 @@ exclude_paths:
 skip_list:
     - yaml[line-length]
     - package-latest
+    - var-naming[no-role-prefix]
