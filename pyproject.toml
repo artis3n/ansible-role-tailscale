@@ -10,7 +10,7 @@ python = "^3.11"
 ansible = "^8.4.0"
 
 [tool.poetry.group.dev.dependencies]
-ansible-lint = { version = "^6.16.2", markers = "platform_system != 'Windows'" }
+ansible-lint = { version = "^6.18.0", markers = "platform_system != 'Windows'" }
 molecule = "^6.0.2"
 molecule-plugins = {extras = ["docker"], version = "^23.5.0"}
 pre-commit = "^3.4.0"
