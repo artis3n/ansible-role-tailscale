@@ -1,6 +1,6 @@
 # artis3n.tailscale
 
-[![Ansible Role](https://img.shields.io/ansible/role/d/3084)](https://galaxy.ansible.com/ui/standalone/roles/artis3n/tailscale/)
+[![Ansible Role](https://img.shields.io/ansible/role/d/artis3n/tailscale)](https://galaxy.ansible.com/ui/standalone/roles/artis3n/tailscale/)
 [![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/artis3n/ansible-role-tailscale?include_prereleases)](https://github.com/artis3n/ansible-role-tailscale/releases)
 [![Molecule Tests](https://github.com/artis3n/ansible-role-tailscale/actions/workflows/pull_request_target.yml/badge.svg)](https://github.com/artis3n/ansible-role-tailscale/actions/workflows/pull_request_target.yml)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/6312/badge)](https://bestpractices.coreinfrastructure.org/projects/6312)
