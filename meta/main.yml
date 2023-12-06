@@ -13,7 +13,6 @@ galaxy_info:
       versions:
         - eoan
         - bionic
-        - xenial
         - focal
         - groovy
         - hirsute

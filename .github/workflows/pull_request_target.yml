@@ -61,8 +61,14 @@ jobs:
             command: /usr/lib/systemd/systemd
           - image: ghcr.io/artis3n/docker-amazonlinux2-ansible:latest
             command: /usr/lib/systemd/systemd
-          - image: geerlingguy/docker-ubuntu1604-ansible:latest
-            command: /lib/systemd/systemd
+          # Default version of Python in 16.04 is 3.5.2
+          # Ansible-core now requires 2.7 or 3.6 minimum.
+          #
+          # Therefore, while Tailscale supports Ubuntu 16.04,
+          # this role has deprecated support for it.
+          #
+          # - image: geerlingguy/docker-ubuntu1604-ansible:latest
+          #   command: /lib/systemd/systemd
 
     uses: ./.github/workflows/molecule.yml
     with:
