@@ -7,6 +7,10 @@ state: latest
 tailscale_authkey: ""
 # Optional command-line arguments for 'tailscale up'
 tailscale_args: ""
+# --auth-key command-line parameter for 'tailscale up'
+tailscale_ephemeral: true
+# --auth-key command-line parameter for 'tailscale up'
+tailscale_preauthorized: false
 # Whether to output debug information during role execution
 verbose: false
 # Whether to skip 'tailscale up'
