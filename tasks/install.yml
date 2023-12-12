@@ -92,7 +92,7 @@
       - tailscale
       - up
       - "{{ tailscale_args | trim }}"
-      - "--authkey={{ tailscale_authkey }}?ephemeral={{ tailscale_ephemeral | bool }}&preauthorized={{ tailscale_preauthorized }}"
+      - "--authkey={{ tailscale_authkey }}?ephemeral={{ tailscale_ephemeral | bool }}&preauthorized={{ tailscale_preauthorized | bool }}"
   # Since the auth key is included in this task's output, we do not want to log output
   no_log: "{{ not (insecurely_log_authkey | bool) }}"
   changed_when: true
