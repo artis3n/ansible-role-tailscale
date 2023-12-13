@@ -76,8 +76,12 @@ Is **not** required if `tailscale_up_skip` is set to `true`.
 
 A Tailscale Node Authorization auth key.
 
-A Node Authorization auth key can be generated under your Tailscale account at <https://login.tailscale.com/admin/authkeys>.
-Note that reusable authorization keys now expire 90 days after they are generated.
+A Node Authorization key can be generated under your Tailscale account. The role supports two type of keys:
+
+- Auth key <https://login.tailscale.com/admin/authkeys>
+- OAuth key <https://login.tailscale.com/admin/settings/oauth>
+
+Note that reusable auth keys now expire 90 days after they are generated.
 
 This value should be treated as a sensitive secret.
 
@@ -89,6 +93,22 @@ This value should be treated as a sensitive secret.
 
 Whether to install and configure Tailscale as a service but skip running `tailscale up`.
 Helpful when packaging up a Tailscale installation into a build process such as AMI creation when the server should not yet authenticate to your Tailscale network.
+
+### tailscale_ephemeral
+
+**Used only if `tailscale_authkey` is OAuth key**
+
+**Default**: `true`
+
+Register as an ephemeral node, if `true`.
+
+### tailscale_preauthorized
+
+**Used only if `tailscale_authkey` is OAuth key**
+
+**Default**: `false`
+
+Skip manual device approval if `true`.
 
 ## Optional
 

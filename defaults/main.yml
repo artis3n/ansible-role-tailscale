@@ -7,9 +7,10 @@ state: latest
 tailscale_authkey: ""
 # Optional command-line arguments for 'tailscale up'
 tailscale_args: ""
-# --auth-key command-line parameter for 'tailscale up'
+# Variables for OAuth authentication
+#  register as an ephemeral node
 tailscale_ephemeral: true
-# --auth-key command-line parameter for 'tailscale up'
+#  skip manual device approval
 tailscale_preauthorized: false
 # Whether to output debug information during role execution
 verbose: false
