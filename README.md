@@ -85,6 +85,22 @@ Note that reusable auth keys now expire 90 days after they are generated.
 
 This value should be treated as a sensitive secret.
 
+#### tailscale_ephemeral
+
+**Used only if `tailscale_authkey` is OAuth key**
+
+**Default**: `true`
+
+Register as an ephemeral node, if `true`.
+
+#### tailscale_preauthorized
+
+**Used only if `tailscale_authkey` is OAuth key**
+
+**Default**: `false`
+
+Skip manual device approval if `true`.
+
 ### tailscale_up_skip
 
 **If set to true, `tailscale_authkey` is not required.**
@@ -94,21 +110,6 @@ This value should be treated as a sensitive secret.
 Whether to install and configure Tailscale as a service but skip running `tailscale up`.
 Helpful when packaging up a Tailscale installation into a build process such as AMI creation when the server should not yet authenticate to your Tailscale network.
 
-### tailscale_ephemeral
-
-**Used only if `tailscale_authkey` is OAuth key**
-
-**Default**: `true`
-
-Register as an ephemeral node, if `true`.
-
-### tailscale_preauthorized
-
-**Used only if `tailscale_authkey` is OAuth key**
-
-**Default**: `false`
-
-Skip manual device approval if `true`.
 
 ## Optional
 

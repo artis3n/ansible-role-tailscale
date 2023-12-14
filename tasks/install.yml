@@ -85,15 +85,16 @@
     mode: '0644'
   register: state_file
 
+# OAuth key starts with 'tskey-client-', auth key starts with 'tskey-auth-', with headscale it can be 'unused'
 - name: Install | Create authkey string
   ansible.builtin.set_fact:
     tailscale_authkey_sting: >-
-      {# Check if the key is a regular key #}
-      {% if tailscale_authkey.startswith('tskey-auth-') %}
-      {{ tailscale_authkey }}
       {# Check if the key is an OAuth key #}
-      {% elif tailscale_authkey.startswith('tskey-client-') %}
+      {% if tailscale_authkey.startswith('tskey-client-') %}
       {{ tailscale_authkey }}?ephemeral={{ tailscale_ephemeral | bool }}&preauthorized={{ tailscale_preauthorized | bool }}
+      {# Check if the key is not OAuth (auth or unuses) #}
+      {% else %}
+      {{ tailscale_authkey }}
       {% endif %}
   no_log: "{{ not (insecurely_log_authkey | bool) }}"
 
