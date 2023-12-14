@@ -14,6 +14,7 @@
 This role installs and configures [Tailscale][] on a Linux target.
 
 Supported operating systems:
+
 - Debian / Ubuntu
 - CentOS / RedHat
 - Rocky Linux / AlmaLinux
@@ -109,7 +110,6 @@ Skip manual device approval if `true`.
 
 Whether to install and configure Tailscale as a service but skip running `tailscale up`.
 Helpful when packaging up a Tailscale installation into a build process such as AMI creation when the server should not yet authenticate to your Tailscale network.
-
 
 ## Optional
 
@@ -292,6 +292,5 @@ USE_HEADSCALE=true molecule test
 [ephemeral auth keys]: https://tailscale.com/kb/1111/ephemeral-nodes/
 [github action secret]: https://docs.github.com/en/actions/reference/encrypted-secrets
 [tailscale]: https://tailscale.com/
-[tailscale account]: https://login.tailscale.com/start
 [tailscale up docs]: https://tailscale.com/kb/1080/cli/#up
 [headscale]: https://github.com/juanfont/headscale/
