@@ -95,7 +95,7 @@ This value should be treated as a sensitive secret.
 
 **Default**: `true`
 
-Register as an ephemeral node, if `true`.
+Register as an [ephemeral node](https://tailscale.com/kb/1111/ephemeral-nodes), if `true`.
 
 ### tailscale_oauth_preauthorized
 
