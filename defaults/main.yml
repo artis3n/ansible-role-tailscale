@@ -11,7 +11,7 @@ tailscale_args: ""
 #  register as an ephemeral node
 tailscale_ephemeral: true
 #  skip manual device approval
-tailscale_preauthorized: false
+tailscale_oauth_preauthorized: false
 # Whether to output debug information during role execution
 verbose: false
 # Whether to skip 'tailscale up'
