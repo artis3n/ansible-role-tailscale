@@ -88,7 +88,7 @@ For more information, see Tailscale's [OAuth clients](https://tailscale.com/kb/1
 
 This value should be treated as a sensitive secret.
 
-#### tailscale_ephemeral
+### tailscale_oauth_ephemeral
 
 **Used only if `tailscale_authkey` is OAuth key**
 
