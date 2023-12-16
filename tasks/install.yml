@@ -91,8 +91,8 @@
     tailscale_authkey_sting: >-
       {# Check if the key is an OAuth key #}
       {% if tailscale_authkey.startswith('tskey-client-') %}
-      {{ tailscale_authkey }}?ephemeral={{ tailscale_ephemeral | bool }}&preauthorized={{ tailscale_preauthorized | bool }}
-      {# Check if the key is not OAuth (auth or unuses) #}
+      {{ tailscale_authkey }}?ephemeral={{ tailscale_oauth_ephemeral | bool }}&preauthorized={{ tailscale_oauth_preauthorized | bool }}
+      {# Check if the key is not OAuth (regular authkey or unused) #}
       {% else %}
       {{ tailscale_authkey }}
       {% endif %}
