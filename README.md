@@ -97,7 +97,7 @@ This value should be treated as a sensitive secret.
 
 Register as an ephemeral node, if `true`.
 
-#### tailscale_preauthorized
+### tailscale_oauth_preauthorized
 
 **Used only if `tailscale_authkey` is OAuth key**
 
