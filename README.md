@@ -104,7 +104,7 @@ Register as an [ephemeral node](https://tailscale.com/kb/1111/ephemeral-nodes), 
 
 **Default**: `false`
 
-Skip manual device approval if `true`.
+Skip [manual device approval](https://tailscale.com/kb/1099/device-approval), if `true`.
 
 ### tailscale_up_skip
 
