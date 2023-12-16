@@ -99,7 +99,8 @@ Register as an ephemeral node, if `true`.
 
 ### tailscale_oauth_preauthorized
 
-**Used only if `tailscale_authkey` is OAuth key**
+> [!NOTE]
+> Used only when `tailscale_authkey` is an OAuth key.
 
 **Default**: `false`
 
