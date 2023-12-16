@@ -90,7 +90,8 @@ This value should be treated as a sensitive secret.
 
 ### tailscale_oauth_ephemeral
 
-**Used only if `tailscale_authkey` is OAuth key**
+> [!NOTE]
+> Used only when `tailscale_authkey` is an OAuth key.
 
 **Default**: `true`
 
