@@ -186,8 +186,7 @@ jobs:
       - name: Molecule - State Present
         run: poetry run molecule test --scenario-name oauth
         env:
-          # Note the use of the oauth client secret
-          TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}"
+          TAILSCALE_OAUTH_CLIENT_SECRET: "${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}"
 
   molecule-headscale:
     name: "Test Headscale Compatibility"
