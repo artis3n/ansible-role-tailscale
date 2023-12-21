@@ -68,6 +68,14 @@ else
 	poetry run molecule test --scenario-name state-absent
 endif
 
+.PHONY: test-oauth
+test-oauth:
+ifndef TAILSCALE_OAUTH_CLIENT_SECRET
+	$(error TAILSCALE_OAUTH_CLIENT_SECRET is not set)
+else
+	poetry run molecule test --scenario-name oauth
+endif
+
 .PHONY: test-headscale
 test-headscale:
 	USE_HEADSCALE=true poetry run molecule test --scenario-name default
