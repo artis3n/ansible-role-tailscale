@@ -5,7 +5,6 @@ exclude_paths:
     - .vscode/
     - molecule/default/headscale.config.yaml
     - molecule/default/init_tailscale_vars.yml
-    - molecule/oauth/headscale.config.yaml
     - molecule/oauth/init_tailscale_vars.yml
 
 skip_list:

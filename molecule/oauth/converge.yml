@@ -10,3 +10,4 @@
         name: artis3n.tailscale
       vars:
         verbose: true
+        tailscale_oauth_tags: "tag:ci-worker"
