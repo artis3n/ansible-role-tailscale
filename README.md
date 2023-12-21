@@ -190,8 +190,9 @@ Only `tailscale up` arguments can be passed in.
 > **Do not use this for `--authkey`.**
 > Use the `tailscale_authkey` variable instead.
 >
-> **Do not use this for `--advertise-tags`.**
+> **If authenticating with an OAuth key, do not use this for `--advertise-tags`.**
 > Use the `tailscale_oauth_tags` variable instead.
+> `--advertise-tags` may be used in this variable if you are not authenticating to Tailscale with OAuth.
 
 Any stdout/stderr output from the `tailscale` binary will be printed. Since the tasks move quickly in this section, a 5 second pause is introduced to grant more time for users to realize a message was printed.
 
