@@ -85,9 +85,22 @@
     mode: '0644'
   register: state_file
 
+# OAuth key starts with 'tskey-client-', auth key starts with 'tskey-auth-', with headscale it can be 'unused'
+- name: Install | Create authkey string
+  ansible.builtin.set_fact:
+    tailscale_authkey_sting: >-
+      {# Check if the key is an OAuth key #}
+      {% if tailscale_authkey.startswith('tskey-client-') %}
+      {{ tailscale_authkey }}?ephemeral={{ tailscale_oauth_ephemeral | bool }}&preauthorized={{ tailscale_oauth_preauthorized | bool }}
+      {# Check if the key is not OAuth (regular authkey or unused) #}
+      {% else %}
+      {{ tailscale_authkey }}
+      {% endif %}
+  no_log: "{{ not (insecurely_log_authkey | bool) }}"
+
 - name: Install | Bring Tailscale Up
   become: true
-  ansible.builtin.command: "tailscale up {{ tailscale_args | trim }} --authkey={{ tailscale_authkey }}"
+  ansible.builtin.command: "tailscale up {{ tailscale_args | trim }} --authkey='{{ tailscale_authkey_sting | trim }}'"
   # Since the auth key is included in this task's output, we do not want to log output
   no_log: "{{ not (insecurely_log_authkey | bool) }}"
   changed_when: true

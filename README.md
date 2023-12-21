@@ -14,6 +14,7 @@
 This role installs and configures [Tailscale][] on a Linux target.
 
 Supported operating systems:
+
 - Debian / Ubuntu
 - CentOS / RedHat
 - Rocky Linux / AlmaLinux
@@ -76,10 +77,34 @@ Is **not** required if `tailscale_up_skip` is set to `true`.
 
 A Tailscale Node Authorization auth key.
 
-A Node Authorization auth key can be generated under your Tailscale account at <https://login.tailscale.com/admin/authkeys>.
-Note that reusable authorization keys now expire 90 days after they are generated.
+A Node Authorization key can be generated under your Tailscale account. The role supports two type of keys:
+
+- Auth key (`tskey-auth-XXX-YYYYY`) <https://login.tailscale.com/admin/authkeys>
+- OAuth key (`tskey-client-XXX-YYYY`) <https://login.tailscale.com/admin/settings/oauth>
+
+Note that auth keys expire up to a maximum of 90 days after they are generated. OAuth secrets do not expire unless revoked, and the generated OAuth access token expires after 1 hour.
+
+For more information, see Tailscale's [OAuth clients](https://tailscale.com/kb/1215/oauth-clients) page, especially [Generating long-lived auth keys](https://tailscale.com/kb/1215/oauth-clients#generating-long-lived-auth-keys).
 
 This value should be treated as a sensitive secret.
+
+### tailscale_oauth_ephemeral
+
+> [!NOTE]
+> Used only when `tailscale_authkey` is an OAuth key.
+
+**Default**: `true`
+
+Register as an [ephemeral node](https://tailscale.com/kb/1111/ephemeral-nodes), if `true`.
+
+### tailscale_oauth_preauthorized
+
+> [!NOTE]
+> Used only when `tailscale_authkey` is an OAuth key.
+
+**Default**: `false`
+
+Skip [manual device approval](https://tailscale.com/kb/1099/device-approval), if `true`.
 
 ### tailscale_up_skip
 
@@ -271,6 +296,5 @@ USE_HEADSCALE=true molecule test
 [ephemeral auth keys]: https://tailscale.com/kb/1111/ephemeral-nodes/
 [github action secret]: https://docs.github.com/en/actions/reference/encrypted-secrets
 [tailscale]: https://tailscale.com/
-[tailscale account]: https://login.tailscale.com/start
 [tailscale up docs]: https://tailscale.com/kb/1080/cli/#up
 [headscale]: https://github.com/juanfont/headscale/

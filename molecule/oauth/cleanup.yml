@@ -1,0 +1,8 @@
+---
+- name: Cleanup
+  hosts: instance
+  tasks:
+    - name: De-register Tailscale node
+      become: true
+      ansible.builtin.command: tailscale logout
+      changed_when: false
