@@ -89,7 +89,7 @@ For more information, see Tailscale's [OAuth clients](https://tailscale.com/kb/1
 
 If an OAuth key is used, be sure to grant the `write` Devices scope to the OAuth client.
 
-![OAuth scopes](/docs/images/oauth_scopes.png)
+<img src="https://raw.githubusercontent.com/artis3n/ansible-role-tailscale/main/docs/images/oauth_scopes.png" alt="OAuth scopes" width="40%" height="40%">
 
 This value should be treated as a sensitive secret.
 
