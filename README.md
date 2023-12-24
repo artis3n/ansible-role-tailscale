@@ -209,6 +209,16 @@ Stderrs will continue to fail the role's execution.
 The sensitive `--authkey` value will be redacted by default.
 If you need to view the unredacted value, see [`insecurely_log_authkey`](#insecurely_log_authkey).
 
+### tailscale_up_timeout
+
+**Default**: `120s`
+
+Defines the timeout duration for the `tailscale up` command.
+
+>   --timeout duration
+>
+>    	maximum amount of time to wait for tailscaled to enter a Running state
+
 ### verbose
 
 **Default**: `false`
