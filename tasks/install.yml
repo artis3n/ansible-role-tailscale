@@ -81,7 +81,7 @@
     tailscale_prepared_tags: "{{ tailscale_tags | map('regex_replace', '^', 'tag:') | list }}"
 
 # OAuth key starts with 'tskey-client-', auth key starts with 'tskey-auth-', with headscale it can be 'unused'
-- name: Install | Build tailscale up arguments
+- name: Install | Build `tailscale up` arguments strings
   ansible.builtin.set_fact:
     tailscale_authkey_type: >-
       {# Check if the key is an OAuth key #}
@@ -113,7 +113,12 @@
 
 - name: Install | Build the final tailscale_args
   ansible.builtin.set_fact:
-    tailscale_args: "{{ tailscale_args }} {{ tailscale_tags_string | trim }} --timeout={{ tailscale_up_timeout | trim }}"
+    tailscale_args_string: "{{ tailscale_args }} {{ tailscale_tags_string | trim }} --timeout={{ tailscale_up_timeout | trim }}"
+
+- name: Install | Final `tailscale up` arguments string
+  ansible.builtin.debug:
+    msg: "{{ tailscale_args_string | trim }}"
+  when: verbose
 
 - name: Install | Save State
   ansible.builtin.template:
@@ -126,7 +131,7 @@
 
 - name: Install | Bring Tailscale Up
   become: true
-  ansible.builtin.command: "tailscale up {{ tailscale_args | trim }} --authkey={{ tailscale_authkey_sting | trim }}"
+  ansible.builtin.command: "tailscale up {{ tailscale_args_string | trim }} --authkey={{ tailscale_authkey_sting | trim }}"
   # Since the auth key is included in this task's output, we do not want to log output
   no_log: "{{ not (insecurely_log_authkey | bool) }}"
   changed_when: true
