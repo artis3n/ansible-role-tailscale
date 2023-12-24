@@ -78,7 +78,7 @@
 
 - name: Install | Prepend 'tag:' to each item in the list
   ansible.builtin.set_fact:
-    tailscale_tags: "{{ tailscale_tags | map('regex_replace', '^', 'tag:') | list }}"
+    tailscale_prepared_tags: "{{ tailscale_tags | map('regex_replace', '^', 'tag:') | list }}"
 
 # OAuth key starts with 'tskey-client-', auth key starts with 'tskey-auth-', with headscale it can be 'unused'
 - name: Install | Build tailscale up arguments
@@ -102,7 +102,7 @@
       {% endif %}
     tailscale_tags_string: >-
       {% if tailscale_tags | length > 0 %}
-      --advertise-tags={{ tailscale_tags | join(',') }}
+      --advertise-tags={{ tailscale_prepared_tags | join(',') }}
       {% endif %}
   no_log: "{{ not (insecurely_log_authkey | bool) }}"
 
@@ -113,7 +113,7 @@
 
 - name: Install | Build the final tailscale_args
   ansible.builtin.set_fact:
-    tailscale_args: "{{ tailscale_args }} {{ tailscale_tags_string | trim }} --timeout={{ tailscale_timeout | trim }}"
+    tailscale_args: "{{ tailscale_args }} {{ tailscale_tags_string | trim }} --timeout={{ tailscale_up_timeout | trim }}"
 
 - name: Install | Save State
   ansible.builtin.template:

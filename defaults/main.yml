@@ -7,10 +7,10 @@ state: latest
 tailscale_authkey: ""
 # Optional command-line arguments for 'tailscale up'
 tailscale_args: ""
-# Required device tags to advertise
+# Apply provided tags to node
 tailscale_tags: []
 # Set timeout for 'tailscale up' command
-tailscale_timeout: "120s"
+tailscale_up_timeout: "120s"
 
 # Used for OAuth authentication
 # Register as an ephemeral node (recommended)

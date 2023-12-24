@@ -20,7 +20,7 @@
 
 - name: Tailscale Tags Required with OAuth Key
   ansible.builtin.fail:
-    msg: "When `tailscale_authkey` is OAuth key, you must set tags `tailscale_tags`."
+    msg: "When `tailscale_authkey` is an OAuth key, you must supply one or more tags in `tailscale_tags`."
   when:
     - tailscale_authkey.startswith('tskey-client-')
     - not tailscale_tags
@@ -29,7 +29,7 @@
 
 - name: Use tailscale_tags instead of tailscale_args for tags
   ansible.builtin.debug:
-    msg: You can use tailscale_tags, instead of tailscale_args to assign tags.
+    msg: You must use `tailscale_tags` instead of `tailscale_args` to assign tags.
   when:
     - '"--advertise-tags" in tailscale_args'
     - not tailscale_tags
