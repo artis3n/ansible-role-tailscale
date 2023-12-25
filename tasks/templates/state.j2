@@ -1,5 +1,5 @@
 {%- if auth_key_in_state -%}
-{{ (tailscale_args + ' --authkey=' + tailscale_authkey) | trim | hash('sha256') }}
+{{ (tailscale_args_string + ' --authkey=' + tailscale_authkey) | trim | hash('sha256') }}
 {% else %}
-{{ tailscale_args | trim | hash('sha256') }}
+{{ tailscale_args_string | trim | hash('sha256') }}
 {%- endif -%}
