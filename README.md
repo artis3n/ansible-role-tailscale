@@ -14,6 +14,7 @@
 This role installs and configures [Tailscale][] on a Linux target.
 
 Supported operating systems:
+
 - Debian / Ubuntu
 - CentOS / RedHat
 - Rocky Linux / AlmaLinux
@@ -195,11 +196,8 @@ Only `tailscale up` arguments can be passed in.
 > **Do not use this for `--authkey`.**
 > Use the `tailscale_authkey` variable instead.
 >
-> **Do not use this for `--advertise-tags`.**
-> Use the `tailscale_tags` variable instead.
->
-> **Do not use this for `--timeout`.**
-> Use the `tailscale_up_timeout` variable instead.
+> **Some additional flags are implemented by variables (e.g `--advertise-tags`,  `--timeout`, and more).**
+> The role will warn you if you attempt to pass in a variable that is already implemented by a variable.
 
 Any stdout/stderr output from the `tailscale` binary will be printed. Since the tasks move quickly in this section, a 5 second pause is introduced to grant more time for users to realize a message was printed.
 
@@ -209,15 +207,25 @@ Stderrs will continue to fail the role's execution.
 The sensitive `--authkey` value will be redacted by default.
 If you need to view the unredacted value, see [`insecurely_log_authkey`](#insecurely_log_authkey).
 
+### tailscale_routes_list
+
+**Default**: `[]`
+
+Configure the Tailscale node advertise with the supplied routes (via the `--advertise-routes` flag to `tailscale up`).
+For example, `tailscale_routes_list: ['10.2.3.4', '123.4.5.6/24']` translates to `--advertise-routes='10.2.3.4,123.4.5.6/24'`.
+
+> [!NOTE]
+> The role will validate if each item in the list is a valid IP address and/or subnet.
+
 ### tailscale_up_timeout
 
 **Default**: `120s`
 
 Defines the timeout duration for the `tailscale up` command.
 
->   --timeout duration
+> --timeout duration
 >
->    	maximum amount of time to wait for tailscaled to enter a Running state
+>   maximum amount of time to wait for tailscaled to enter a Running state
 
 ### verbose
 

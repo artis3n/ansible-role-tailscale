@@ -41,7 +41,7 @@
   ansible.builtin.assert:
     that:
       - item | ipaddr
-    msg: "{{ item }} is not a valid IP address or subnet"
+    fail_msg: "{{ item }} is not a valid IP address or subnet"
     quiet: true
   loop: "{{ tailscale_routes_list }}"
   when:
