@@ -27,14 +27,25 @@
     - state != "absent"
     - not tailscale_up_skip
 
-- name: Use tailscale_tags instead of tailscale_args for tags
+- name: Use appropriate variable names for `tailscale up` parameters
   ansible.builtin.debug:
-    msg: You must use `tailscale_tags` instead of `tailscale_args` to assign tags.
+    msg: "You must use `{{ item.var_name }}` instead of `tailscale_args` for the `{{ item.param }}` parameter."
   when:
-    - '"--advertise-tags" in tailscale_args'
-    - not tailscale_tags
-    - state != "absent"
-    - not tailscale_up_skip
+    - item.param in tailscale_args
+    - lookup('vars', item.var_name, default='') | length == 0
+    - "state != 'absent'"
+    - "not tailscale_up_skip"
+  loop: "{{ args_check }}"
+
+- name: Assert each item in tailscale_routes_list is a valid IP address or subnet
+  ansible.builtin.assert:
+    that:
+      - item | ipaddr
+    msg: "{{ item }} is not a valid IP address or subnet"
+    quiet: true
+  loop: "{{ tailscale_routes_list }}"
+  when:
+    - tailscale_routes_list
 
 - name: Skipping Authentication
   ansible.builtin.debug:

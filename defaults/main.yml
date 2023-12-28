@@ -32,3 +32,6 @@ insecurely_log_authkey: false
 # Whether to store hashed authkey in state
 # Setting to false won't re-run 'tailscale up' on authkey change
 auth_key_in_state: true
+
+# Define routes, that your node will advertise to the Tailscale network
+tailscale_routes_list: []

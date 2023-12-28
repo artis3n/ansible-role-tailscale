@@ -104,6 +104,10 @@
       {% if tailscale_tags | length > 0 %}
       --advertise-tags={{ tailscale_prepared_tags | join(',') }}
       {% endif %}
+    tailscale_routes_string: >-
+      {% if tailscale_routes | length > 0 %}
+      --advertise-routes={{ tailscale_routes_list | join(',') }}
+      {% endif %}
   no_log: "{{ not (insecurely_log_authkey | bool) }}"
 
 - name: Install | Authkey Type
@@ -113,7 +117,8 @@
 
 - name: Install | Build the final tailscale_args
   ansible.builtin.set_fact:
-    tailscale_args_string: "{{ tailscale_args }} {{ tailscale_tags_string | trim }} --timeout={{ tailscale_up_timeout | trim }}"
+    tailscale_args_string:
+      "{{ tailscale_args }} {{ tailscale_tags_string | trim }} --timeout={{ tailscale_up_timeout | trim }} {{ tailscale_routes_string | trim }}"
 
 - name: Install | Final `tailscale up` arguments string
   ansible.builtin.debug:
