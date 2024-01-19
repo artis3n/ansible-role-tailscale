@@ -51,7 +51,7 @@ jobs:
       - name: Install packages
         run: poetry install --no-interaction
 
-      - name: Default scenario
+      - name: Run scenario
         run: poetry run molecule test --scenario-name "${{ inputs.scenario }}"
         env:
           MOLECULE_DISTRO: "${{ inputs.image }}"
