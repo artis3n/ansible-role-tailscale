@@ -123,12 +123,12 @@ jobs:
       tailscale_key: ${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}
 
   molecule-strategy-free:
-    name: "Run Molecule Scenario: stragegy-free"
+    name: "Run Molecule Scenario: strategy-free"
     uses: ./.github/workflows/molecule.yml
     with:
       scenario: 'strategy-free'
     secrets:
-      tailscale_key: ${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}
+      tailscale_key: ${{ secrets.TAILSCALE_CI_KEY }}
 
   molecule-headscale:
     name: "Test Headscale Compatibility"

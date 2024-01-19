@@ -29,6 +29,8 @@ platforms:
       - "${MOLECULE_PROJECT_DIRECTORY}/molecule/default/headscale.config.yaml:/etc/headscale/config.yaml"
 provisioner:
   name: ansible
+  playbooks:
+    prepare: ../default/prepare.yml
 verifier:
   name: ansible
 scenario:
