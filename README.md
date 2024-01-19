@@ -83,7 +83,7 @@ A Node Authorization key can be generated under your Tailscale account. The role
 - OAuth key (`tskey-client-XXX-YYYY`) <https://login.tailscale.com/admin/settings/oauth>
 
 > [!IMPORTANT]
-> Using an OAuth key requires additionally setting the following variables: `tailscale_tags` (must be provided), `tailscale_oauth_ephemeral` (defailts to `true`) and `tailscale_oauth_preauthorized` (defaults to `false`).
+> Using an OAuth key requires additionally setting the following variables: `tailscale_tags` (must be provided), `tailscale_oauth_ephemeral` (defaults to `true`) and `tailscale_oauth_preauthorized` (defaults to `false`).
 
 Note that auth keys expire up to a maximum of 90 days after they are generated. OAuth secrets do not expire unless revoked, and the generated OAuth access token expires after 1 hour.
 
