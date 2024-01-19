@@ -154,8 +154,8 @@
   register: nonsensitive_stdout
 
 - name: Install | Pausing to highlight stdout message above
-  ansible.builtin.pause:
-    seconds: 5
+  ansible.builtin.wait_for:
+    timeout: 5
   when: nonsensitive_stdout is not skipped
 
 - name: Install | Clear State Upon Error
