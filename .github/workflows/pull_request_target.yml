@@ -2,6 +2,8 @@
 name: Molecule Tests
 
 on:
+  # Temporary, for testing
+  pull_request:
   # Manual approval of environment is required
   pull_request_target:
     branches:
@@ -17,7 +19,7 @@ env:
 
 jobs:
   molecule:
-    name: "Test Distro"
+    name: "Test Distros"
     strategy:
       fail-fast: false
       matrix:
@@ -47,12 +49,13 @@ jobs:
     with:
       image: ${{ matrix.image }}
       command: ${{ matrix.command }}
+      scenario: 'default'
     secrets:
       tailscale_key: ${{ secrets.TAILSCALE_CI_KEY }}
 
   # Systems that aren't working with cgroups v2 on ubuntu 22.04, but works on ubuntu 20.04
   molecule-legacy:
-    name: "Test Legacy Distro"
+    name: "Test Legacy Distros"
     strategy:
       fail-fast: false
       matrix:
@@ -74,119 +77,58 @@ jobs:
     with:
       image: ${{ matrix.image }}
       command: ${{ matrix.command }}
+      scenario: 'default'
       runner: ubuntu-20.04
     secrets:
       tailscale_key: ${{ secrets.TAILSCALE_CI_KEY }}
 
+  molecule-state-absent:
+    name: "Run Molecule Scenario: state-absent"
+    uses: ./.github/workflows/molecule.yml
+    with:
+      scenario: 'state-absent'
+    secrets:
+      tailscale_key: ${{ secrets.TAILSCALE_CI_KEY }}
+
   molecule-skip-auth:
-    name: "Test Skip Authentication"
-    runs-on: ubuntu-22.04
-    environment: E2E
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-
-      - name: Install dependency manager
-        run: pipx install poetry
-
-      - name: Set up Python 3.x
-        id: setup-python
-        uses: actions/setup-python@v5.0.0
-        with:
-          python-version-file: pyproject.toml
-          cache: 'poetry'
-
-      - name: Install packages
-        run: poetry install --no-interaction
-
-      - name: Molecule - Skip Authentication
-        run: poetry run molecule test --scenario-name skip-authentication
+    name: "Run Molecule Scenario: skip-authentication"
+    uses: ./.github/workflows/molecule.yml
+    with:
+      scenario: 'skip-authentication'
+    secrets:
+      tailscale_key: ${{ secrets.TAILSCALE_CI_KEY }}
 
   molecule-args:
-    name: "Test Up Args"
-    runs-on: ubuntu-22.04
-    environment: E2E
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-
-      - name: Install dependency manager
-        run: pipx install poetry
-
-      - name: Set up Python 3.x
-        id: setup-python
-        uses: actions/setup-python@v5.0.0
-        with:
-          python-version-file: pyproject.toml
-          cache: 'poetry'
-
-      - name: Install packages
-        run: poetry install --no-interaction
-
-      - name: Molecule - Custom Arguments Validation
-        run: poetry run molecule test --scenario-name args
-        env:
-          TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
+    name: "Run Molecule Scenario: args"
+    uses: ./.github/workflows/molecule.yml
+    with:
+      scenario: 'args'
+    secrets:
+      tailscale_key: ${{ secrets.TAILSCALE_CI_KEY }}
 
   molecule-state-present:
-    name: "Test State Idempotency"
-    runs-on: ubuntu-22.04
-    environment: E2E
+    name: "Run Molecule Scenario: state-idempotency"
+    uses: ./.github/workflows/molecule.yml
+    with:
+      scenario: 'state-idempotency'
+    secrets:
+      tailscale_key: ${{ secrets.TAILSCALE_CI_KEY }}
 
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
+  molecule-oauth:
+    name: "Run Molecule Scenario: oauth"
+    uses: ./.github/workflows/molecule.yml
+    with:
+      scenario: 'oauth'
+    secrets:
+      tailscale_key: ${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}
 
-      - name: Install dependency manager
-        run: pipx install poetry
-
-      - name: Set up Python 3.x
-        id: setup-python
-        uses: actions/setup-python@v5.0.0
-        with:
-          python-version-file: pyproject.toml
-          cache: 'poetry'
-
-      - name: Install packages
-        run: poetry install --no-interaction
-
-      - name: Molecule - State Present
-        run: poetry run molecule test --scenario-name state-present
-        env:
-          TAILSCALE_CI_KEY: "${{ secrets.TAILSCALE_CI_KEY }}"
-
-  molecule-state-oauth:
-    name: "Test OAuth key support"
-    runs-on: ubuntu-22.04
-    environment: E2E
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-
-      - name: Install dependency manager
-        run: pipx install poetry
-
-      - name: Set up Python 3.x
-        id: setup-python
-        uses: actions/setup-python@v5.0.0
-        with:
-          python-version-file: pyproject.toml
-          cache: 'poetry'
-
-      - name: Install packages
-        run: poetry install --no-interaction
-
-      - name: Molecule - State Present
-        run: poetry run molecule test --scenario-name oauth
-        env:
-          TAILSCALE_OAUTH_CLIENT_SECRET: "${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}"
+  molecule-strategy-free:
+    name: "Run Molecule Scenario: stragegy-free"
+    uses: ./.github/workflows/molecule.yml
+    with:
+      scenario: 'strategy-free'
+    secrets:
+      tailscale_key: ${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}
 
   molecule-headscale:
     name: "Test Headscale Compatibility"
@@ -199,6 +141,7 @@ jobs:
           - default
           - state-absent
           - idempotent-up
+          - strategy-free
 
     steps:
       - uses: actions/checkout@v4

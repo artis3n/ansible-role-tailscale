@@ -18,8 +18,18 @@
         name: headscale
       register: headscale_info
 
+    - name: Fetch Headscale network info
+      community.docker.docker_network_info:
+        name: headscale
+      register: headscale_network
+
+    - name: Get instance names
+      ansible.builtin.set_fact:
+        instance_names: "{{ headscale_network.network.Containers | dict2items | selectattr('value.Name', 'match', '^instance') | map(attribute='value.Name') | list }}"
+
     - name: Set hosts override for Headscale
-      delegate_to: instance
+      delegate_to: "{{ item }}"
+      loop: "{{ instance_names }}"
       ansible.builtin.lineinfile:
         path: /etc/hosts
         line: "{{ headscale_info.container.NetworkSettings.Networks.headscale.IPAddress }}  headscale"
