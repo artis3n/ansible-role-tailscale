@@ -34,7 +34,7 @@ provisioner:
 verifier:
   name: ansible
 scenario:
-  name: state-present
+  name: state-idempotency
   test_sequence:
     - dependency
     - destroy
