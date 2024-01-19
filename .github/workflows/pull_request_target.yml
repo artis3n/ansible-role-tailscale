@@ -2,8 +2,6 @@
 name: Molecule Tests
 
 on:
-  # Temporary, for testing
-  pull_request:
   # Manual approval of environment is required
   pull_request_target:
     branches:
