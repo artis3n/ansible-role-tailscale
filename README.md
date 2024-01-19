@@ -362,11 +362,12 @@ and are automatically cleaned up within 30 minutes-48 hours.
 
 This value is stored in a [GitHub Action secret][] with the name `TAILSCALE_CI_KEY`.
 To test OAuth authkey compatibility, a Tailscale OAuth client secret is stored as `TAILSCALE_OAUTH_CLIENT_SECRET`.
-To test this role locally, store the Tailscale ephemeral auth key in a `TAILSCALE_CI_KEY` env var
-and, if running the `oauth` Molecule scenario,
-add an OAuth client secret in a `TAILSCALE_OAUTH_CLIENT_SECRET` env var.
 If you are a Collaborator on this repository,
 you can open a GitHub CodeSpace and these secrets will be pre-populated for you into the environment.
+
+To test this role locally, store the Tailscale ephemeral auth key in a `TAILSCALE_CI_KEY` env var
+and, if running the `oauth` Molecule scenario,
+add an OAuth client secret in a `TAILSCALE_CI_KEY` env var.
 
 Alternatively for Molecule testing,
 you can use a [Headscale][] container that is spun up as part of the create/prepare steps.
