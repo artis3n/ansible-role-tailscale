@@ -5,10 +5,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    commit-message:
-      prefix: fix
-      prefix-development: chore
-      include: scope
     groups:
       github-actions:
         patterns:
@@ -18,12 +14,17 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    commit-message:
-      prefix: fix
-      prefix-development: chore
-      include: scope
     groups:
       python-production:
         dependency-type: production
       python-development:
         dependency-type: development
+
+  - package-ecosystem: "devcontainers"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      devcontainer-features:
+        patterns:
+          - "*"
