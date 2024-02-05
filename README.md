@@ -37,9 +37,12 @@ See the [CI worfklow](https://github.com/artis3n/ansible-role-tailscale/blob/mai
 
 # State Tracking
 
-This role will create an `artis3n-tailscale` directory in the target's [`XDG_STATE_HOME`](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) directory, or `$HOME/.local/state` if the variable is not present, in order to maintain a concept of state from the configuration of the arguments passed to `tailscale up`.
+This role will create an `artis3n-tailscale` directory in the target's [`XDG_STATE_HOME`](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) directory,
+or `$HOME/.local/state` if the variable is not present,
+in order to maintain a concept of state from the configuration of the arguments passed to `tailscale up`.
 This allows the role to idempotently update a Tailscale node's configuration when needed.
-Deleting this directory will lead to this role re-configuring Tailscale when it is not needed, but will not otherwise break anything.
+Deleting this directory will lead to this role re-configuring Tailscale when it is not needed,
+but will not otherwise break anything.
 However, it is recommended that you let this Ansible role manage this directory and its contents.
 
 Note that:
@@ -48,7 +51,8 @@ Note that:
 >
 > ...
 >
-> In Tailscale v1.8 or later, if you forget to specify a flag you added before, the CLI will warn you and provide a copyable command that includes all existing flags.
+> In Tailscale v1.8 or later, if you forget to specify a flag you added before,
+> the CLI will warn you and provide a copyable command that includes all existing flags.
 
 <small>
 
@@ -56,7 +60,8 @@ Note that:
 
 </small>
 
-This role will bubble up any stderr messages from the Tailscale binary to resolve any end-user configuration errors with `tailscale up` arguments.
+This role will bubble up any stderr messages from the Tailscale binary
+to resolve any end-user configuration errors with `tailscale up` arguments.
 The `--authkey=` value will be redacted unless [`insecurely_log_authkey`](#insecurely_log_authkey) is set to `true`.
 
 ![logged stderr](docs/images/printed_stderr.png)
@@ -68,7 +73,8 @@ The `--authkey=` value will be redacted unless [`insecurely_log_authkey`](#insec
 One of `tailscale_authkey` or `tailscale_up_skip` must be present.
 In most cases you will use `tailscale_authkey`.
 
-If you are uninstalling Tailscale (`state: absent`), neither `tailscale_authkey` nor `tailscale_up_skip` is required.
+If you are uninstalling Tailscale (`state: absent`),
+neither `tailscale_authkey` nor `tailscale_up_skip` is required.
 
 If you are authenticating with an OAuth key, you must also set `tailscale_tags` (see below).
 
@@ -84,9 +90,14 @@ A Node Authorization key can be generated under your Tailscale account. The role
 - OAuth key (`tskey-client-XXX-YYYY`) <https://login.tailscale.com/admin/settings/oauth>
 
 > [!IMPORTANT]
-> Using an OAuth key requires additionally setting the following variables: `tailscale_tags` (must be provided), `tailscale_oauth_ephemeral` (defailts to `true`) and `tailscale_oauth_preauthorized` (defaults to `false`).
+> Using an OAuth key requires additionally setting the following variables:
+> `tailscale_tags` (must be provided),
+> `tailscale_oauth_ephemeral` (defaults to `true`),
+> and `tailscale_oauth_preauthorized` (defaults to `false`).
 
-Note that auth keys expire up to a maximum of 90 days after they are generated. OAuth secrets do not expire unless revoked, and the generated OAuth access token expires after 1 hour.
+Note that auth keys expire up to a maximum of 90 days after they are generated.
+OAuth secrets do not expire unless revoked,
+and the generated OAuth access token expires after 1 hour.
 
 For more information, see Tailscale's [OAuth clients](https://tailscale.com/kb/1215/oauth-clients) page, especially [Generating long-lived auth keys](https://tailscale.com/kb/1215/oauth-clients#generating-long-lived-auth-keys).
 
@@ -118,7 +129,8 @@ Skip [manual device approval](https://tailscale.com/kb/1099/device-approval), if
 
 **Default**: `[]`
 
-Apply supplied tags to the Tailscale nodes configured by this role (via the `--advertise-tags` flag to `tailscale up`).
+Apply supplied tags to the Tailscale nodes configured by this role
+(via the `--advertise-tags` flag to `tailscale up`).
 For more information, see [What are tags?](https://tailscale.com/kb/1068/acl-tags?q=acl%20tag#what-are-acl-tags)
 
 > [!NOTE]
@@ -136,7 +148,8 @@ For example, `tailscale_args: ['worker']` translates to `--advertise-tags=tag:wo
 **Default**: `false`
 
 Whether to install and configure Tailscale as a service but skip running `tailscale up`.
-Helpful when packaging up a Tailscale installation into a build process such as AMI creation when the server should not yet authenticate to your Tailscale network.
+Helpful when packaging up a Tailscale installation into a build process, such as AMI creation,
+when the server should not yet authenticate to your Tailscale network.
 
 ## Optional
 
@@ -144,12 +157,16 @@ Helpful when packaging up a Tailscale installation into a build process such as 
 
 **Default**: `false`
 
-If set to `true`, the "Bring Tailscale Up" command will include the raw value of the Tailscale authkey when logging any errors encountered during `tailscale up`.
-By default, the authkey is not logged in successful task completions and is redacted in the `stderr` output by this role if an error occurs.
+If set to `true`, the "Bring Tailscale Up" command will include the raw value of the Tailscale authkey
+when logging any errors encountered during `tailscale up`.
+By default, the authkey is not logged in successful task completions
+and is redacted in the `stderr` output by this role if an error occurs.
 
 ![redacted authkey](docs/images/redacted_authkey.png)
 
-If you are encountering an error bringing Tailscale up and want the "Bring Tailscale Up" task to _not_ redact the value of the authkey, set this variable to `true`.
+If you are encountering an error bringing Tailscale up
+and want the "Bring Tailscale Up" task to _not_ redact the value of the authkey,
+set this variable to `true`.
 
 Regardless, if the authkey is invalid, the role will relay Tailscale's error message on that fact:
 
@@ -176,9 +193,12 @@ Whether to use the Tailscale stable or unstable track.
 Whether to install or uninstall Tailscale.
 If defined, `state` must be either `latest`, `present`, or `absent`.
 
-This role uses `latest` by default to help ensure your software remains up-to-date and incorporates the latest security and product features.
-For users who desire more control over configuration drift, `present` will not update Tailscale if it is already installed.
-Changes to [`tailscale_args`](#tailscale_args) will be applied under both `latest` and `present`; this parameter only impacts the version of Tailscale installed to the target system.
+This role uses `latest` by default to help ensure your software remains up-to-date
+and incorporates the latest security and product features.
+For users who desire more control over configuration drift,
+`present` will not update Tailscale if it is already installed.
+Changes to [`tailscale_args`](#tailscale_args) will be applied under both `latest` and `present`;
+this parameter only impacts the version of Tailscale installed to the target system.
 
 If set to `absent`, this role will de-register the Tailscale node (if already authenticated)
 and clean up or disable all Tailscale artifacts added to the system.
@@ -189,7 +209,8 @@ Note that neither `tailscale_authkey` nor `tailscale_up_skip` is required if `st
 
 Pass any additional command-line arguments to `tailscale up`.
 
-Note that the [command][ansible.builtin.command] module is used, which does not support subshell expressions (`$()`) or bash operations like `;` and `&`.
+Note that the [command][ansible.builtin.command] module is used,
+which does not support subshell expressions (`$()`) or bash operations like `;` and `&`.
 Only `tailscale up` arguments can be passed in.
 
 > [!CAUTION]
@@ -199,7 +220,9 @@ Only `tailscale up` arguments can be passed in.
 > **Some additional flags are implemented by variables (e.g `--advertise-tags`,  `--timeout`, and more).**
 > The role will warn you if you attempt to pass in a variable that is already implemented by a variable.
 
-Any stdout/stderr output from the `tailscale` binary will be printed. Since the tasks move quickly in this section, a 5 second pause is introduced to grant more time for users to realize a message was printed.
+Any stdout/stderr output from the `tailscale` binary will be printed.
+Since the tasks move quickly in this section, a 5 second pause is introduced
+to grant more time for users to realize a message was printed.
 
 ![printed stdout](docs/images/printed_stdout.png)
 
@@ -342,14 +365,22 @@ Ari Kalfus ([@artis3n](https://www.artis3nal.com/)) <dev@artis3nal.com>
 
 This GitHub repository uses a dedicated "test" Tailscale account to authenticate Tailscale during CI runs.
 Each Docker container creates a new authorized machine in that test account.
-The machines are authorized with [ephemeral auth keys][] and are automatically cleaned up within 30 minutes-48 hours.
+The machines are authorized with [ephemeral auth keys][]
+and are automatically cleaned up within 30 minutes-48 hours.
 
 This value is stored in a [GitHub Action secret][] with the name `TAILSCALE_CI_KEY`.
 To test OAuth authkey compatibility, a Tailscale OAuth client secret is stored as `TAILSCALE_OAUTH_CLIENT_SECRET`.
-To test this role locally, store the Tailscale ephemeral auth key in a `TAILSCALE_CI_KEY` env var and, if running the `oauth` Molecule scenario, add an OAuth client secret in a `TAILSCALE_OAUTH_CLIENT_SECRET` env var.
-If you are a Collaborator on this repository, you can open a GitHub CodeSpace and these secrets will be pre-populated for you into the environment.
+If you are a Collaborator on this repository,
+you can open a GitHub CodeSpace and these secrets will be pre-populated for you into the environment.
 
-Alternatively for Molecule testing, you can use a [Headscale][] container that is spun up as part of the create/prepare steps. To do this, set a `USE_HEADSCALE` env variable. For example:
+To test this role locally, store the Tailscale ephemeral auth key in a `TAILSCALE_CI_KEY` env var
+and, if running the `oauth` Molecule scenario,
+add an OAuth client secret in a `TAILSCALE_CI_KEY` env var.
+
+Alternatively for Molecule testing,
+you can use a [Headscale][] container that is spun up as part of the create/prepare steps.
+To do this, set a `USE_HEADSCALE` env variable.
+For example:
 
 ```bash
 USE_HEADSCALE=true molecule test

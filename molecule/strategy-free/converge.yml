@@ -1,6 +1,7 @@
 ---
 - name: Converge
-  hosts: instance
+  hosts: instances
+  strategy: free
   tasks:
     - name: Init tailscale credentials variables
       ansible.builtin.include_tasks: ../default/init_tailscale_vars.yml
@@ -10,5 +11,3 @@
         name: artis3n.tailscale
       vars:
         verbose: true
-        tailscale_tags:
-          - "ci-worker"

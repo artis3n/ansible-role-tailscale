@@ -76,6 +76,14 @@ else
 	poetry run molecule test --scenario-name oauth
 endif
 
+.PHONY: test-strategy-free
+test-strategy-free:
+ifndef TAILSCALE_CI_KEY
+	$(error TAILSCALE_CI_KEY is not set)
+else
+	poetry run molecule test --scenario-name strategy-free
+endif
+
 .PHONY: test-headscale
 test-headscale:
 	USE_HEADSCALE=true poetry run molecule test --scenario-name default

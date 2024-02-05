@@ -4,11 +4,15 @@ name: Run Molecule Test
 on:
   workflow_call:
     inputs:
-      image:
+      scenario:
         required: true
         type: string
+      image:
+        required: false
+        type: string
+        default: 'ghcr.io/artis3n/docker-ubuntu2204-ansible:latest'
       command:
-        required: true
+        required: false
         type: string
       runner:
         required: false
@@ -24,8 +28,8 @@ env:
   ANSIBLE_FORCE_COLOR: '1'
 
 jobs:
-  run-molecule:
-    name: "Run Molecule"
+  run-scenario:
+    name: "Run Molecule Scenario - ${{ inputs.image }} / ${{ inputs.scenario }}"
     runs-on: ${{ inputs.runner }}
     environment: E2E
 
@@ -47,15 +51,8 @@ jobs:
       - name: Install packages
         run: poetry install --no-interaction
 
-      - name: Default scenario
-        run: poetry run molecule test --scenario-name default
-        env:
-          MOLECULE_DISTRO: "${{ inputs.image }}"
-          MOLECULE_COMMAND: "${{ inputs.command }}"
-          TAILSCALE_CI_KEY: "${{ secrets.tailscale_key }}"
-
-      - name: Uninstall scenario
-        run: poetry run molecule test --scenario-name state-absent
+      - name: Run scenario
+        run: poetry run molecule test --scenario-name "${{ inputs.scenario }}"
         env:
           MOLECULE_DISTRO: "${{ inputs.image }}"
           MOLECULE_COMMAND: "${{ inputs.command }}"
