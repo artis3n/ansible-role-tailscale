@@ -113,7 +113,7 @@
 
 - name: Install | Build the final tailscale_args
   ansible.builtin.set_fact:
-    tailscale_args_string: "{{ tailscale_args }} {{ tailscale_tags_string | trim }} --timeout={{ tailscale_up_timeout | trim }}"
+    tailscale_args_string: "{{ tailscale_args }} {{ tailscale_tags_string | trim }} --timeout={{ tailscale_up_timeout | trim }}s"
 
 - name: Install | Final `tailscale up` arguments string
   ansible.builtin.debug:
@@ -142,7 +142,7 @@
     - not tailscale_up_skip
     - state_file is changed or not tailscale_is_online
   notify: Confirm Tailscale is Connected
-  async: 60
+  async: "{{ (tailscale_up_timeout | trim | int) + 10 }}"
   poll: 5
 
 - name: Install | Report non-sensitive stdout from "tailscale up"  # noqa: no-handler

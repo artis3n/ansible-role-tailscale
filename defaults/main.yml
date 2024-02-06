@@ -9,8 +9,8 @@ tailscale_authkey: ""
 tailscale_args: ""
 # Apply provided tags to node
 tailscale_tags: []
-# Set timeout for 'tailscale up' command
-tailscale_up_timeout: "120s"
+# Set timeout for 'tailscale up' command in seconds
+tailscale_up_timeout: "120"
 
 # Used for OAuth authentication
 # Register as an ephemeral node (recommended)
