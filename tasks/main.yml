@@ -31,6 +31,7 @@
   ansible.builtin.fail:
     msg: "`tailscale_up_timeout` variable should be parseable as an integer."
   when:
+    - tailscale_up_timeout != 0
     - (tailscale_up_timeout | type_debug == "bool") or not (tailscale_up_timeout | int)
     - state != "absent"
     - not tailscale_up_skip
