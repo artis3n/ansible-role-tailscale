@@ -235,9 +235,9 @@ If you need to view the unredacted value, see [`insecurely_log_authkey`](#insecu
 
 ### tailscale_up_timeout
 
-**Default**: `120s`
+**Default**: `120`
 
-Defines the timeout duration for the `tailscale up` command.
+Defines the timeout duration for the `tailscale up` command in seconds.
 
 >   --timeout duration
 >
