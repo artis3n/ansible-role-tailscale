@@ -16,14 +16,9 @@
 		"ghcr.io/devcontainers-contrib/features/ansible:2": {},
 		"ghcr.io/devcontainers-contrib/features/poetry:2": {},
 		"ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
-		"ghcr.io/devcontainers/features/go:1": {},
 		"ghcr.io/devcontainers/features/common-utils:2": {
 			"installOhMyZsh": true,
 			"upgradePackages": true
-		},
-		"ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {
-			"plugins": "zsh-syntax-highlighting",
-			"omzPlugins":"https://github.com/zsh-users/zsh-syntax-highlighting.git"
 		}
 	},
 

@@ -6,7 +6,7 @@ all: lint test
 # Install Python 3.10 first
 .PHONY: install
 install:
-	poetry install
+	poetry install --no-root
 	poetry run pre-commit install --install-hooks
 	poetry run ansible-galaxy collection install -r requirements.yml
 
