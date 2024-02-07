@@ -92,7 +92,7 @@
       {% else %}
       Unknown token format
       {% endif %}
-    tailscale_authkey_sting: >-
+    tailscale_authkey_string: >-
       {# Check if the key is an OAuth key #}
       {% if tailscale_authkey.startswith('tskey-client-') %}
       {{ tailscale_authkey }}?ephemeral={{ tailscale_oauth_ephemeral | bool }}&preauthorized={{ tailscale_oauth_preauthorized | bool }}
@@ -131,7 +131,7 @@
 
 - name: Install | Bring Tailscale Up
   become: true
-  ansible.builtin.command: "tailscale up {{ tailscale_args_string | trim }} --authkey={{ tailscale_authkey_sting | trim }}"
+  ansible.builtin.command: "tailscale up {{ tailscale_args_string | trim }} --authkey={{ tailscale_authkey_string | trim }}"
   # Since the auth key is included in this task's output, we do not want to log output
   no_log: "{{ not (insecurely_log_authkey | bool) }}"
   changed_when: true
