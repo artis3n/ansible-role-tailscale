@@ -16,6 +16,8 @@
     - tailscale_status.rc != 2
     # "bash: tailscale: command not found"
     - tailscale_status.rc != 127
+    # 500 Internal Server Error: invalid key: API key XXXXX not valid
+    - tailscale_status.rc != 1
 
 - name: Uninstall | Delete Tailscale State
   ansible.builtin.file:
