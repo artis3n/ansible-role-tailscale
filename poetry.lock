@@ -56,13 +56,13 @@ resolvelib = ">=0.5.3,<1.1.0"
 
 [[package]]
 name = "ansible-lint"
-version = "6.22.2"
+version = "24.2.0"
 description = "Checks playbooks for practices and behavior that could potentially be improved"
 optional = false
-python-versions = ">=3.9"
+python-versions = ">=3.10"
 files = [
-    {file = "ansible-lint-6.22.2.tar.gz", hash = "sha256:2f409fe98efada61da9f8ab7cdf34a5b67de43e1338cee0619f5d51f4f8b15dd"},
-    {file = "ansible_lint-6.22.2-py3-none-any.whl", hash = "sha256:d28a7c1ceaf043b77aebeb0a20475e647565270356c23f4790a9c01e67bf815d"},
+    {file = "ansible-lint-24.2.0.tar.gz", hash = "sha256:6bc5d6273f33711ec6d370dfe5fdbe97a64b4c36c2a7a19a249401326eb03616"},
+    {file = "ansible_lint-24.2.0-py3-none-any.whl", hash = "sha256:755f369c6baf601b09c4931a4e6bd0df3d79c54eb519f093e5db6ab52ad03e0c"},
 ]
 
 [package.dependencies]
@@ -82,7 +82,6 @@ yamllint = ">=1.30.0"
 
 [package.extras]
 docs = ["mkdocs-ansible (>=0.2.0)", "pipdeptree (>=2.7.1)"]
-lock = ["ansible-compat (==4.1.11)", "ansible-core (==2.16.2)", "attrs (==23.2.0)", "black (==23.12.1)", "bracex (==2.4)", "certifi (==2023.11.17)", "cffi (==1.16.0)", "charset-normalizer (==3.3.2)", "click (==8.1.7)", "cryptography (==41.0.7)", "filelock (==3.13.1)", "idna (==3.6)", "jinja2 (==3.1.3)", "jsonschema (==4.20.0)", "jsonschema-specifications (==2023.12.1)", "markdown-it-py (==3.0.0)", "markupsafe (==2.1.3)", "mdurl (==0.1.2)", "mypy-extensions (==1.0.0)", "packaging (==23.2)", "pathspec (==0.12.1)", "platformdirs (==4.1.0)", "pycparser (==2.21)", "pygments (==2.17.2)", "pyyaml (==6.0.1)", "referencing (==0.32.1)", "requests (==2.31.0)", "rich (==13.7.0)", "rpds-py (==0.17.1)", "ruamel-yaml (==0.18.5)", "subprocess-tee (==0.4.1)", "tomli (==2.0.1)", "typing-extensions (==4.9.0)", "urllib3 (==2.1.0)", "wcmatch (==8.5)", "yamllint (==1.33.0)"]
 test = ["black", "coverage-enable-subprocess", "coverage[toml] (>=6.4.4)", "jmespath", "license-expression (>=30.1.1)", "mypy", "netaddr", "psutil", "pylint", "pytest (>=7.2.2)", "pytest-mock", "pytest-plus (>=0.6)", "pytest-xdist (>=2.1.0)", "ruamel-yaml-clib", "ruamel.yaml (>=0.17.31)", "types-jsonschema", "types-pyyaml"]
 
 [[package]]
@@ -710,13 +709,13 @@ files = [
 
 [[package]]
 name = "molecule"
-version = "6.0.3"
+version = "24.2.0"
 description = "Molecule aids in the development and testing of Ansible roles"
 optional = false
-python-versions = ">=3.9"
+python-versions = ">=3.10"
 files = [
-    {file = "molecule-6.0.3-py3-none-any.whl", hash = "sha256:8e5d7a7841f9ed5dd26878d24951ec030b86f780aca17ffc509db8076f42de3d"},
-    {file = "molecule-6.0.3.tar.gz", hash = "sha256:d2a881062fcc5ef1e08c1e5127c04354d2c95171955e270bd82b3fbfef72d3b0"},
+    {file = "molecule-24.2.0-py3-none-any.whl", hash = "sha256:eac7d9bf12d2bf5254e13a46a40357615c32e7003409f305c3940e93b65d7bea"},
+    {file = "molecule-24.2.0.tar.gz", hash = "sha256:47c982a7d05db7846da77fe7159deb946f26cafb2e388fc71812be0089a41776"},
 ]
 
 [package.dependencies]
@@ -734,31 +733,32 @@ rich = ">=9.5.1"
 wcmatch = ">=8.1.2"
 
 [package.extras]
-docs = ["linkchecker (==10.2.1)", "mkdocs-ansible[lock] (>=0.2.0)", "pipdeptree (>=2.4.0)"]
+docs = ["linkchecker (>=10.4.0)", "mkdocs-ansible (>=24.2.1)", "pipdeptree (>=2.4.0)"]
 test = ["ansi2html (>=1.8.0)", "ansible-lint (>=6.12.1)", "check-jsonschema", "coverage (>=7.0.3)", "filelock (>=3.9.0)", "pexpect (>=4.8.0,<5)", "pytest (>=7.2.0)", "pytest-mock (>=3.10.0)", "pytest-plus (>=0.4.0)", "pytest-xdist (>=3.1.0)"]
 testinfra = ["pytest-testinfra (>=8.1.0)"]
 
 [[package]]
 name = "molecule-plugins"
-version = "23.5.0"
+version = "23.5.3"
 description = "Molecule Plugins"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "molecule-plugins-23.5.0.tar.gz", hash = "sha256:f13ea047b8650c892604b81b76382bc80bb4ae25ea50b23f30e81fd9d5802aff"},
-    {file = "molecule_plugins-23.5.0-py3-none-any.whl", hash = "sha256:893dba8d077adb30fcd50a5d082300404ced3bb745451bc0927d4a1ada131d31"},
+    {file = "molecule-plugins-23.5.3.tar.gz", hash = "sha256:a2b1437d532d736e3fbc6db7a69ec533e2334b2115ff9245a0b2772ed9738d23"},
+    {file = "molecule_plugins-23.5.3-py3-none-any.whl", hash = "sha256:87f8ac8d5e9fe1cbdfb784d92b1fd08e7cb11bf02a9391bb34dcb93fadf7a3fc"},
 ]
 
 [package.dependencies]
 docker = {version = ">=4.3.1", optional = true, markers = "extra == \"docker\""}
-molecule = ">=5.0"
+molecule = ">=6.0.0a1"
 requests = {version = "*", optional = true, markers = "extra == \"docker\""}
 selinux = {version = "*", optional = true, markers = "(sys_platform == \"linux\" or sys_platform == \"linux2\") and extra == \"docker\""}
 
 [package.extras]
 docker = ["docker (>=4.3.1)", "requests", "selinux", "selinux"]
+openstack = ["openstacksdk (>=1.1.0)"]
 selinux = ["selinux", "selinux"]
-test = ["molecule[test]", "pytest-helpers-namespace (>=2019.1.8)"]
+test = ["molecule[test] (>=6.0.0a1)", "pytest-helpers-namespace (>=2019.1.8)"]
 vagrant = ["python-vagrant"]
 
 [[package]]
@@ -840,13 +840,13 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "pre-commit"
-version = "3.6.0"
+version = "3.6.1"
 description = "A framework for managing and maintaining multi-language pre-commit hooks."
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "pre_commit-3.6.0-py2.py3-none-any.whl", hash = "sha256:c255039ef399049a5544b6ce13d135caba8f2c28c3b4033277a788f434308376"},
-    {file = "pre_commit-3.6.0.tar.gz", hash = "sha256:d30bad9abf165f7785c15a21a1f46da7d0677cb00ee7ff4c579fd38922efe15d"},
+    {file = "pre_commit-3.6.1-py2.py3-none-any.whl", hash = "sha256:9fe989afcf095d2c4796ce7c553cf28d4d4a9b9346de3cda079bcf40748454a4"},
+    {file = "pre_commit-3.6.1.tar.gz", hash = "sha256:c90961d8aa706f75d60935aba09469a6b0bcb8345f127c3fbee4bdc5f114cf4b"},
 ]
 
 [package.dependencies]
@@ -1356,4 +1356,4 @@ dev = ["doc8", "flake8", "flake8-import-order", "rstcheck[sphinx]", "sphinx"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "e99e934c66a0e946b8bee0b51af9b2d8c54e266285620c27847c3bfb3f49a7f2"
+content-hash = "2708d5310ab092972f1ec0d40c28f51a16411f4fea4effbc0a7db138f8430e0a"
