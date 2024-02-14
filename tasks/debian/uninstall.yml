@@ -11,6 +11,7 @@
   ansible.builtin.apt:
     name: "{{ tailscale_package }}"
     state: absent
+    purge: true
 
 - name: Debian | Remove Tailscale Deb
   become: true
