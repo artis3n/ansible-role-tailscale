@@ -32,3 +32,6 @@ insecurely_log_authkey: false
 # Whether to store hashed authkey in state
 # Setting to false won't re-run 'tailscale up' on authkey change
 auth_key_in_state: true
+# Whether to purge state on uninstall
+# Setting to true will clean up the state folder /var/lib/tailscale
+tailscale_purge_state: false

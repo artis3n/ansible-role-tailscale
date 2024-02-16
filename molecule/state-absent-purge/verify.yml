@@ -1,0 +1,13 @@
+---
+- name: Verify
+  hosts: instance
+  tasks:
+    - name: Get state directory status
+      ansible.builtin.stat:
+        path: "/var/lib/tailscale"
+      register: ts_state_dir
+
+    - name: Assertions
+      ansible.builtin.assert:
+        that:
+          - not ts_state_dir.stat.exists

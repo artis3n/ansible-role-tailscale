@@ -16,8 +16,6 @@
     - tailscale_status.rc != 2
     # "bash: tailscale: command not found"
     - tailscale_status.rc != 127
-    # 500 Internal Server Error: invalid key: API key XXXXX not valid
-    - tailscale_status.rc != 1
 
 - name: Uninstall | Delete Tailscale State
   ansible.builtin.file:
@@ -58,3 +56,9 @@
 - name: Uninstall | OpenSUSE
   when: ansible_distribution in tailscale_opensuse_family_distros
   ansible.builtin.include_tasks: opensuse/uninstall.yml
+
+- name: Uninstall | Destroying Tailscale state
+  ansible.builtin.file:
+    path: "/var/lib/tailscale"
+    state: absent
+  when: tailscale_purge_state

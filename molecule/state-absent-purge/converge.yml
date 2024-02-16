@@ -1,0 +1,33 @@
+---
+- name: Converge
+  hosts: instance
+  tasks:
+    - name: Init tailscale credentials variables
+      ansible.builtin.include_tasks: ../default/init_tailscale_vars.yml
+
+    - name: Install Tailscale
+      ansible.builtin.include_role:
+        name: artis3n.tailscale
+
+    # Force these to run before we start uninstalling things
+    - name: Flush Handlers
+      ansible.builtin.meta: flush_handlers
+
+    - name: Get Tailscale status
+      become: true
+      ansible.builtin.command: tailscale status
+      changed_when: false
+      register: tailscale_status
+
+    - name: Assert Tailscale is installed
+      ansible.builtin.assert:
+        that:
+          - "'Logged out.' not in tailscale_status.stdout"
+          - "'not logged in' not in tailscale_status.stdout"
+
+    - name: Uninstall Tailscale
+      ansible.builtin.include_role:
+        name: artis3n.tailscale
+      vars:
+        state: absent
+        tailscale_purge_state: true

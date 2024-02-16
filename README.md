@@ -250,6 +250,12 @@ Defines the timeout duration for the `tailscale up` command in seconds.
 Whether to output additional information during role execution.
 Helpful for debugging and collecting information to submit in a GitHub issue on this repository.
 
+### tailscale_purge_state
+
+**Default**: `false`
+
+Whether to delete the state directory created tailscale process: `/var/lib/tailscale`.
+
 # Dependencies
 
 ## Collections
