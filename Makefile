@@ -68,6 +68,14 @@ else
 	poetry run molecule test --scenario-name state-absent
 endif
 
+.PHONY: test-absent-purge
+test-absent-purge:
+ifndef TAILSCALE_CI_KEY
+	$(error TAILSCALE_CI_KEY is not set)
+else
+	poetry run molecule test --scenario-name state-absent-purge
+endif
+
 .PHONY: test-oauth
 test-oauth:
 ifndef TAILSCALE_OAUTH_CLIENT_SECRET
