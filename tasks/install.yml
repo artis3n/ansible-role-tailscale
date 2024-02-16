@@ -65,13 +65,11 @@
   register: tailscale_status
 
 - name: Install | Parse status JSON
+  vars:
+    tailscale_status_parsed: "{{ tailscale_status.stdout | from_json }}"
   ansible.builtin.set_fact:
-    status: "{{ tailscale_status.stdout | from_json }}"
-
-- name: Install | Set facts based on status
-  ansible.builtin.set_fact:
-    tailscale_is_online: "{{ status.Self.Online }}"
-    tailscale_version: "{{ status.Version }}"
+    tailscale_is_online: "{{  tailscale_status_parsed.Self.Online }}"
+    tailscale_version: "{{  tailscale_status_parsed.Version }}"
 
 - name: Install | Tailscale version and online status
   ansible.builtin.debug:
