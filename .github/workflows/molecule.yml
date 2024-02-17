@@ -26,6 +26,8 @@ env:
   # https://www.jeffgeerling.com/blog/2020/getting-colorized-output-molecule-and-ansible-on-github-actions-ci
   PY_COLORS: '1'
   ANSIBLE_FORCE_COLOR: '1'
+  # Temporary - https://github.com/artis3n/ansible-role-tailscale/issues/432#issuecomment-1948954799
+  HEADSCALE_IMAGE: headscale/headscale:0.22
 
 jobs:
   run-scenario:
