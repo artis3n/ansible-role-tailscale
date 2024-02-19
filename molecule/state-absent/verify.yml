@@ -13,7 +13,7 @@
         - tailscale_status.rc != 1
       register: tailscale_status
 
-    - name: Get state directory status
+    - name: Get idempotent state directory status
       ansible.builtin.stat:
         path: "{{ ansible_env.HOME }}/.artis3n-tailscale"
       register: state_dir
@@ -24,3 +24,13 @@
           - tailscale_status.rc == 1
           - not state_dir.stat.exists
           - "'tailscaled' not in ansible_facts.services or ansible_facts.services['tailscaled']['status'] == 'stopped'"
+
+    - name: Get tailscale package state directory status
+      ansible.builtin.stat:
+        path: "/var/lib/tailscale"
+      register: ts_state_dir
+
+    - name: Assertions
+      ansible.builtin.assert:
+        that:
+          - not ts_state_dir.stat.exists
