@@ -25,9 +25,9 @@
           - not state_dir.stat.exists
           - "'tailscaled' not in ansible_facts.services or ansible_facts.services['tailscaled']['status'] == 'stopped'"
 
-    - name: Get tailscale package state directory status
+    - name: Get tailscale package state file status
       ansible.builtin.stat:
-        path: "/var/lib/tailscale"
+        path: "/var/lib/tailscale/tailscaled.state"
       register: ts_state_dir
 
     - name: Assertions
