@@ -58,6 +58,7 @@
   ansible.builtin.include_tasks: opensuse/uninstall.yml
 
 - name: Uninstall | Destroy Tailscale Package State
+  become: true
   ansible.builtin.file:
     path: "/var/lib/tailscale/tailscaled.state"
     state: absent
