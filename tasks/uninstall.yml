@@ -57,8 +57,8 @@
   when: ansible_distribution in tailscale_opensuse_family_distros
   ansible.builtin.include_tasks: opensuse/uninstall.yml
 
-- name: Uninstall | Destroy Tailscale Package State
+- name: Uninstall | Remove Tailscale Daemon State and Logs
   become: true
   ansible.builtin.file:
-    path: "/var/lib/tailscale/tailscaled.state"
+    path: "/var/lib/tailscale"
     state: absent
