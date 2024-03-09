@@ -1,23 +1,18 @@
----
-name: CI
+name: Publish to Ansible Galaxy
 
 on:
-  pull_request:
-    branches:
-     - main
+  release:
+    types:
+      - published
 
-env:
-  # https://www.jeffgeerling.com/blog/2020/getting-colorized-output-molecule-and-ansible-on-github-actions-ci
-  PY_COLORS: '1'
-  ANSIBLE_FORCE_COLOR: '1'
+  workflow_dispatch:
 
 jobs:
-  lint:
-    name: "Lint Checks"
-    runs-on: ubuntu-22.04
-
+  publish:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Install dependency manager
         run: pipx install poetry
@@ -32,5 +27,6 @@ jobs:
       - name: Install packages
         run: poetry install --no-interaction
 
-      - name: Lint
-        run: make lint
+      - name: Publish to Ansible Galaxy
+        run: |
+          poetry run ansible-galaxy role import --token ${{ secrets.ANSIBLE_GALAXY_TOKEN }} artis3n tailscale

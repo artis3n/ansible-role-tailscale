@@ -45,7 +45,7 @@ jobs:
 
       - name: Set up Python 3.x
         id: setup-python
-        uses: actions/setup-python@v5.0.0
+        uses: actions/setup-python@v5
         with:
           python-version-file: pyproject.toml
           cache: 'poetry'
