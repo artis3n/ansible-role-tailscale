@@ -27,6 +27,7 @@
   become: true
   ansible.builtin.apt_repository:
     repo: "{{ tailscale_apt_deb }}"
+    filename: "tailscale"
     state: present
 
 - name: Debian | Install Tailscale
