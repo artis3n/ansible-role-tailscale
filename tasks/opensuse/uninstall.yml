@@ -1,17 +1,11 @@
 ---
-- name: OpenSUSE | Remove Repo - Tumbleweed
-  become: true
-  community.general.zypper_repository:
-    repo: "{{ tailscale_opensuse_tumbleweed_repository }}"
-    state: absent
-  when: ansible_distribution == "openSUSE Tumbleweed"
+- name: OpenSUSE | Split Distribution
+  ansible.builtin.set_fact:
+    tailscale_opensuse_distribution: "{{ ansible_distribution | split(' ') }}"
 
-- name: OpenSUSE | Remove Repo - Leap
-  become: true
-  community.general.zypper_repository:
-    repo: "{{ tailscale_opensuse_leap_repository }}"
-    state: absent
-  when: ansible_distribution == "openSUSE Leap"
+- name: OpenSUSE | Get Distribution
+  ansible.builtin.set_fact:
+    tailscale_opensuse_distribution: "{{ tailscale_opensuse_distribution[1] | lower }}"
 
 - name: OpenSUSE | Remove Tailscale
   become: true
@@ -19,3 +13,15 @@
     name: tailscale
     update_cache: true
     state: absent
+
+- name: OpenSUSE | Remove Repo
+  become: true
+  community.general.zypper_repository:
+    repo: "{{ tailscale_opensuse_repository }}"
+    state: absent
+
+- name: OpenSUSE | Remove Repo Key
+  become: true
+  ansible.builtin.rpm_key:
+    state: absent
+    key: "{{ tailscale_opensuse_key }}"

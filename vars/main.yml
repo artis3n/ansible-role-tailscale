@@ -65,7 +65,8 @@ tailscale_dnf_repos:
   Amazon: https://pkgs.tailscale.com/{{ release_stability | lower }}/fedora/tailscale.repo
   Fedora: https://pkgs.tailscale.com/{{ release_stability | lower }}/fedora/tailscale.repo
 
-tailscale_opensuse_leap_repository: "https://pkgs.tailscale.com/stable/opensuse/leap/{{ ansible_distribution_version }}/tailscale.repo"
-tailscale_opensuse_tumbleweed_repository: https://pkgs.tailscale.com/stable/opensuse/tumbleweed/tailscale.repo
+# ansible_distribution will be like 'OpenSUSE Tumbleweed' or 'openSUSE Leap', we want just 'tumbleweed' or 'leap'
+tailscale_opensuse_key: https://pkgs.tailscale.com/{{ release_stability | lower }}/opensuse/{{ tailscale_opensuse_distribution }}/repo.gpg
+tailscale_opensuse_repository: https://pkgs.tailscale.com/{{ release_stability | lower }}/opensuse/{{ tailscale_opensuse_distribution }}/tailscale.repo
 
 tailscale_original_distribution_major_version: "{{ ansible_distribution_major_version }}"
