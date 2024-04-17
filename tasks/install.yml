@@ -62,6 +62,8 @@
 - name: Install | Fetch Tailscale status
   ansible.builtin.command: tailscale status --json
   changed_when: false
+  # data gathering, not a change, so ok to run in check mode
+  check_mode: false
   register: tailscale_status
 
 - name: Install | Parse status JSON
