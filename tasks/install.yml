@@ -173,3 +173,5 @@
 
 - name: Install | Register Role Fact Outputs
   ansible.builtin.include_tasks: facts.yml
+  when:
+    - not tailscale_up_skip

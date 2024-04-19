@@ -31,13 +31,13 @@
     tailscale_node_hostname_full: "{{ tailscale_whois.Node.Name }}"
     tailscale_node_hostname_short: "{{ tailscale_whois.Node.Hostinfo.Hostname }}"
     tailscale_node_created_at: "{{ tailscale_whois.Node.Created }}"
-    tailscale_node_services: "{{ tailscale_whois.Node.Hostinfo.Services }}"
-    tailscale_node_tags: "{{ tailscale_whois.Node.Tags }}"
+    tailscale_node_services: "{{ tailscale_whois.Node.Hostinfo.Services | default([]) }}"
+    tailscale_node_tags: "{{ tailscale_whois.Node.Tags | default([]) }}"
     tailscale_node_whois: "{{ tailscale_whois.Node }}"
 
 - name: Facts | Display key facts
   ansible.builtin.debug:
-    msg: "{{ item }}"
+    var: "{{ item }}"
   when: verbose
   loop:
     - tailscale_node_hostname_full
