@@ -170,3 +170,6 @@
     msg: "{{ tailscale_start.stderr | default () | regex_replace(tailscale_authkey, 'REDACTED') | regex_replace('\\t', '') | split('\n') }}"
   when:
     - tailscale_start is failed
+
+- name: Install | Register Role Fact Outputs
+  ansible.builtin.include_tasks: facts.yml
