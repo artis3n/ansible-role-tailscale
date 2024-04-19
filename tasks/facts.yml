@@ -11,7 +11,7 @@
   register: tailscale_ipv6_cmd
   changed_when: false
 
-- name: Facts | Register IP Facts
+- name: Facts | Register IP facts
   ansible.builtin.set_fact:
     tailscale_node_ipv4: "{{ tailscale_ipv4_cmd.stdout }}"
     tailscale_node_ipv6: "{{ tailscale_ipv6_cmd.stdout }}"
