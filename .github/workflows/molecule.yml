@@ -10,14 +10,14 @@ on:
       image:
         required: false
         type: string
-        default: 'ghcr.io/artis3n/docker-ubuntu2204-ansible:latest'
+        default: 'geerlingguy/docker-ubuntu2404-ansible:latest'
       command:
         required: false
         type: string
       runner:
         required: false
         type: string
-        default: ubuntu-22.04
+        default: ubuntu-24.04
     secrets:
       tailscale_key:
         required: true

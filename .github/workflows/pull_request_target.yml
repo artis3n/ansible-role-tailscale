@@ -30,6 +30,7 @@ jobs:
           - image: ghcr.io/artis3n/docker-almalinux8-ansible:latest
           - image: ghcr.io/artis3n/docker-rhel8-ansible:latest
           - image: ghcr.io/artis3n/docker-oraclelinux8-ansible:latest
+          - image: geerlingguy/docker-ubuntu2404-ansible:latest
           - image: geerlingguy/docker-ubuntu2204-ansible:latest
           - image: geerlingguy/docker-ubuntu2004-ansible:latest
           - image: geerlingguy/docker-ubuntu1804-ansible:latest
@@ -132,7 +133,7 @@ jobs:
 
   molecule-headscale:
     name: "Test Headscale Compatibility"
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     environment: E2E
     strategy:
       fail-fast: false

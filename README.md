@@ -35,6 +35,8 @@ See the [CI worfklow](https://github.com/artis3n/ansible-role-tailscale/blob/mai
 > This role uses Ansible fully qualified collection names (FQCN) and therefore requires Ansible 2.11+.
 > Ansible 2.12 is set as the minimum required version as this was the version tested for compatibility during the FQCN refactor.
 
+If you or your organization gets value out of this role, I would very much appreciate one-time or recurring [sponsorship](https://github.com/sponsors/artis3n?sponsor=artis3n) of this role.
+
 - [Role Outputs](#role-outputs)
 - [Role Variables](#role-variables)
   - [Required](#required)
