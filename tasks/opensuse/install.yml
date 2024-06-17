@@ -1,17 +1,33 @@
 ---
-- name: OpenSUSE | Install Repo - Tumbleweed
-  become: true
-  community.general.zypper_repository:
-    repo: "{{ tailscale_opensuse_tumbleweed_repository }}"
-    state: present
+- name: OpenSUSE | Install Tumbleweed
   when: ansible_distribution == "openSUSE Tumbleweed"
+  block:
+    - name: OpenSUSE | Install Tumbleweed Repo Key
+      become: true
+      ansible.builtin.rpm_key:
+        state: present
+        key: "{{ tailscale_opensuse_tumbleweed_key }}"
 
-- name: OpenSUSE | Install Repo - Leap
-  become: true
-  community.general.zypper_repository:
-    repo: "{{ tailscale_opensuse_leap_repository }}"
-    state: present
+    - name: OpenSUSE | Install Tumbleweed Repo
+      become: true
+      community.general.zypper_repository:
+        repo: "{{ tailscale_opensuse_tumbleweed_repository }}"
+        state: present
+
+- name: OpenSUSE | Install Leap
   when: ansible_distribution == "openSUSE Leap"
+  block:
+    - name: OpenSUSE | Install Leap Repo Key
+      become: true
+      ansible.builtin.rpm_key:
+        state: present
+        key: "{{ tailscale_opensuse_leap_key }}"
+
+    - name: OpenSUSE | Install Leap Repo
+      become: true
+      community.general.zypper_repository:
+        repo: "{{ tailscale_opensuse_leap_repository }}"
+        state: present
 
 - name: OpenSUSE | Install Tailscale
   become: true

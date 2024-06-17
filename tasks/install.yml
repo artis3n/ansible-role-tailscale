@@ -167,6 +167,11 @@
 
 - name: Install | Report redacted failure from "tailscale up"  # noqa: no-handler
   ansible.builtin.fail:
-    msg: "{{ tailscale_start.stderr | default () | regex_replace('tskey.*\\s', 'REDACTED ') | regex_replace('\\t', '') | split('\n') }}"
+    msg: "{{ tailscale_start.stderr | default () | regex_replace(tailscale_authkey, 'REDACTED') | regex_replace('\\t', '') | split('\n') }}"
   when:
     - tailscale_start is failed
+
+- name: Install | Register role facts
+  ansible.builtin.include_tasks: facts.yml
+  when:
+    - not tailscale_up_skip

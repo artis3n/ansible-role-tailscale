@@ -1,0 +1,48 @@
+---
+- name: Facts | Get IPv4 address
+  ansible.builtin.command:
+    cmd: tailscale ip --4
+  register: tailscale_ipv4_cmd
+  changed_when: false
+
+- name: Facts | Get IPv6 address
+  ansible.builtin.command:
+    cmd: tailscale ip --6
+  register: tailscale_ipv6_cmd
+  changed_when: false
+
+- name: Facts | Register IP facts
+  ansible.builtin.set_fact:
+    tailscale_node_ipv4: "{{ tailscale_ipv4_cmd.stdout }}"
+    tailscale_node_ipv6: "{{ tailscale_ipv6_cmd.stdout }}"
+
+- name: Facts | Get Tailscale host facts
+  ansible.builtin.command:
+    cmd: tailscale whois --json {{ tailscale_node_ipv4 }}
+  register: tailscale_whois_cmd
+  changed_when: false
+
+- name: Facts | Parse Tailscale host information
+  ansible.builtin.set_fact:
+    tailscale_whois: "{{ tailscale_whois_cmd.stdout | from_json }}"
+
+- name: Facts | Set Tailscale host facts
+  ansible.builtin.set_fact:
+    tailscale_node_hostname_full: "{{ tailscale_whois.Node.Name }}"
+    tailscale_node_hostname_short: "{{ tailscale_whois.Node.Hostinfo.Hostname }}"
+    tailscale_node_created_at: "{{ tailscale_whois.Node.Created }}"
+    tailscale_node_services: "{{ tailscale_whois.Node.Hostinfo.Services | default([]) }}"
+    tailscale_node_tags: "{{ tailscale_whois.Node.Tags | default([]) }}"
+    tailscale_node_whois: "{{ tailscale_whois.Node }}"
+
+- name: Facts | Display key facts
+  ansible.builtin.debug:
+    var: "{{ item }}"
+  when: verbose
+  loop:
+    - tailscale_node_hostname_full
+    - tailscale_node_hostname_short
+    - tailscale_node_created_at
+    - tailscale_node_ipv4
+    - tailscale_node_ipv6
+    - tailscale_node_tags

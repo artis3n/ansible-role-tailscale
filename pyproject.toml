@@ -1,20 +1,20 @@
 [tool.poetry]
 name = "artis3n.tailscale"
-version = "4.1.0"
+version = "4.5.0"
 description = "Ansible role to install and enable a Tailscale node."
 authors = ["Artis3n <dev@artis3nal.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-ansible = "^9.3.0"
+ansible = "^9.6.0"
 
 [tool.poetry.group.dev.dependencies]
-ansible-lint = { version = "^24.2.0", markers = "platform_system != 'Windows'" }
-molecule = "^24.2.0"
+ansible-lint = { version = "^24.2.3", markers = "platform_system != 'Windows'" }
+molecule = "^24.6.0"
 molecule-plugins = {extras = ["docker"], version = "^23.5.3"}
-pre-commit = "^3.6.2"
-pytest = "^8.1.1"
+pre-commit = "^3.7.1"
+pytest = "^8.2.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
