@@ -9,7 +9,7 @@ platforms:
   - name: instance-1
     groups:
       - instances
-    image: ${MOLECULE_DISTRO:-geerlingguy/docker-ubuntu2204-ansible:latest}
+    image: ${MOLECULE_DISTRO:-geerlingguy/docker-ubuntu2404-ansible:latest}
     command: ${MOLECULE_COMMAND:-/usr/sbin/init}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw

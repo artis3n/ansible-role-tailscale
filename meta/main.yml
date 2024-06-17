@@ -17,6 +17,7 @@ galaxy_info:
         - groovy
         - hirsute
         - jammy
+        - noble
     - name: EL
       versions:
         - "7"
