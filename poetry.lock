@@ -729,20 +729,20 @@ files = [
 
 [[package]]
 name = "molecule"
-version = "24.6.0"
+version = "24.6.1"
 description = "Molecule aids in the development and testing of Ansible roles"
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "molecule-24.6.0-py3-none-any.whl", hash = "sha256:3706f1a10d010406ecba715d7ff69d34cb3ed9366cae3fddb88945b9cf230bec"},
-    {file = "molecule-24.6.0.tar.gz", hash = "sha256:8decb4c684fcafb85a7b4f038da125ed425bdd10db76bf0cdb413f9b84e41b58"},
+    {file = "molecule-24.6.1-py3-none-any.whl", hash = "sha256:d1694cfeea787630105f83cd550c697532824e5efe55e40ac39a0eb11b5a0608"},
+    {file = "molecule-24.6.1.tar.gz", hash = "sha256:41c1903a597297c2602bd059e107b5ef2e32c9da24797dcb78ff9873c6615ee6"},
 ]
 
 [package.dependencies]
 ansible-compat = ">=24.6.1"
 ansible-core = ">=2.12.10"
 click = ">=8.0,<9"
-click-help-colors = ">=0.9"
+click-help-colors = "*"
 enrich = ">=1.2.7"
 Jinja2 = ">=2.11.3"
 jsonschema = ">=4.9.1"
@@ -754,7 +754,7 @@ wcmatch = ">=8.1.2"
 
 [package.extras]
 docs = ["linkchecker (>=10.4.0)", "mkdocs-ansible (>=24.3.0)", "pipdeptree (>=2.4.0)"]
-test = ["ansi2html (>=1.8.0)", "ansible-lint (>=6.12.1)", "check-jsonschema", "coverage (>=7.0.3)", "filelock (>=3.9.0)", "pexpect (>=4.8.0,<5)", "pytest (>=7.2.0)", "pytest-mock (>=3.10.0)", "pytest-plus (>=0.4.0)", "pytest-xdist (>=3.1.0)", "requests (!=2.32.0)"]
+test = ["ansi2html (>=1.8.0)", "ansible-lint (>=6.12.1)", "black", "check-jsonschema", "coverage[toml]", "filelock (>=3.9.0)", "mypy", "pexpect (>=4.8.0,<5)", "pip-tools", "pre-commit", "pydoclint", "pylint", "pytest", "pytest-mock (>=3.10.0)", "pytest-plus (>=0.4.0)", "pytest-xdist", "requests (!=2.32.0)", "ruff", "toml-sort", "tox", "types-jsonschema", "types-pexpect", "types-pyyaml"]
 testinfra = ["pytest-testinfra (>=8.1.0)"]
 
 [[package]]
@@ -1392,4 +1392,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "a05e420479f8d39314ab51d1df5ec52438d6ca1415e40d80e91b56e648cedd8a"
+content-hash = "b433da374ebc98918e41d7707eaa415536444d5b4c4d9a3e8e4c687c199d09b8"
