@@ -57,6 +57,10 @@
   when: ansible_distribution in tailscale_opensuse_family_distros
   ansible.builtin.include_tasks: opensuse/uninstall.yml
 
+- name: Uninstall | FreeBSD
+  when: ansible_distribution == 'FreeBSD'
+  ansible.builtin.include_tasks: freebsd/uninstall.yml
+
 - name: Uninstall | Remove Tailscale Daemon State and Logs
   become: true
   ansible.builtin.file:
