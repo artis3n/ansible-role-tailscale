@@ -1,19 +1,20 @@
 ---
-- name: CentOS | Yum Dependencies
+- name: CentOS | DNF Dependencies
   become: true
-  ansible.builtin.yum:
+  ansible.builtin.dnf:
     name: "{{ tailscale_yum_dependencies }}"
     state: present
 
 - name: CentOS | Add Tailscale Repo
   become: true
-  ansible.builtin.command: yum-config-manager --add-repo {{ tailscale_yum_repos[ansible_distribution] }}
+  ansible.builtin.command: dnf config-manager --add-repo {{ tailscale_yum_repos[ansible_distribution] }}
   args:
     creates: /etc/yum.repos.d/tailscale.repo
+  register: add_tailscale_repo
 
 - name: CentOS | Install Tailscale
   become: true
-  ansible.builtin.yum:
+  ansible.builtin.dnf:
     name: "{{ tailscale_package }}"
-    update_cache: true
+    update_cache: '{{ add_tailscale_repo.changed | default(false) | bool }}'
     state: '{{ state }}'
