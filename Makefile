@@ -3,7 +3,7 @@
 .PHONY: all
 all: lint test
 
-# Install Python 3.10 first
+# Install Python first
 .PHONY: install
 install:
 	poetry install --no-root

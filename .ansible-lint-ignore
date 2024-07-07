@@ -1,0 +1,2 @@
+tasks/centos/install-legacy.yml fqcn[action-core]
+tasks/centos/uninstall-legacy.yml fqcn[action-core]

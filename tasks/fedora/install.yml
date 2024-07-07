@@ -2,20 +2,20 @@
 - name: Fedora | Prepare Systemd
   ansible.builtin.import_tasks: ./systemd.yml
 
-- name: Fedora | Yum Dependencies
+- name: Fedora | DNF Plugins
   become: true
-  ansible.builtin.yum:
+  ansible.builtin.dnf:
     name: "{{ tailscale_dnf_plugins }}"
     update_cache: true
     state: present
 
-- name: Fedora | Dnf Dependencies
+- name: Fedora | DNF Dependencies
   become: true
   ansible.builtin.dnf:
     name: "{{ tailscale_dnf_dependencies }}"
     state: present
 
-- name: Fedora | Add Dnf Repo
+- name: Fedora | Add DNF Repo
   become: true
   ansible.builtin.command: dnf config-manager --add-repo {{ tailscale_dnf_repos[ansible_distribution] }}
   args:

@@ -43,8 +43,9 @@ jobs:
           - image: geerlingguy/docker-fedora31-ansible:latest
           - image: ghcr.io/artis3n/docker-arch-ansible:latest
           - image: ghcr.io/artis3n/docker-opensuse-tumbleweed-ansible:latest
-          - image: ghcr.io/artis3n/docker-opensuse-leap-ansible:latest
-            command: /lib/systemd/systemd
+          # Leap 15.6 is currently not supported by Tailscale: https://github.com/artis3n/ansible-role-tailscale/issues/480
+          # - image: ghcr.io/artis3n/docker-opensuse-leap-ansible:latest
+          #   command: /lib/systemd/systemd
 
     uses: ./.github/workflows/molecule.yml
     with:
@@ -61,18 +62,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - image: geerlingguy/docker-centos7-ansible:latest
-            command: /usr/lib/systemd/systemd
           - image: ghcr.io/artis3n/docker-amazonlinux2-ansible:latest
             command: /usr/lib/systemd/systemd
-          # Default version of Python in 16.04 is 3.5.2
-          # Ansible-core now requires 2.7 or 3.6 minimum.
-          #
-          # Therefore, while Tailscale supports Ubuntu 16.04,
-          # this role has deprecated support for it.
-          #
-          # - image: geerlingguy/docker-ubuntu1604-ansible:latest
-          #   command: /lib/systemd/systemd
 
     uses: ./.github/workflows/molecule.yml
     with:

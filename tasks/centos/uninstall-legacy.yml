@@ -1,7 +1,7 @@
 ---
 - name: CentOS | Remove Tailscale
   become: true
-  ansible.builtin.dnf:
+  ansible.builtin.yum:
     name: "{{ tailscale_package }}"
     state: absent
 
@@ -9,7 +9,7 @@
 - name: CentOS | Check for Tailscale Repo
   ansible.builtin.shell: |
     set -o pipefail
-    dnf repolist | grep tailscale
+    yum repolist | grep tailscale
   register: repolist_tailscale
   changed_when: false
   failed_when:
@@ -18,7 +18,7 @@
 
 - name: CentOS | Remove Tailscale Repo
   become: true
-  ansible.builtin.command: dnf config-manager --disable tailscale-{{ release_stability | lower }}
-  register: dnf_config_output
-  changed_when: dnf_config_output.rc != 0
+  ansible.builtin.command: yum-config-manager --disable tailscale-{{ release_stability | lower }}
+  register: yum_config_output
+  changed_when: yum_config_output.rc != 0
   when: repolist_tailscale.rc != 1
