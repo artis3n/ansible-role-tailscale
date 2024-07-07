@@ -5,8 +5,6 @@ exclude_paths:
     - .vscode/
     - molecule/default/headscale.config.yaml
     - molecule/default/init_tailscale_vars.yml
-    - tasks/centos/install-legacy.yml
-    - tasks/centos/uninstall-legacy.yml
 
 skip_list:
     - yaml[line-length]
