@@ -56,13 +56,13 @@ resolvelib = ">=0.5.3,<1.1.0"
 
 [[package]]
 name = "ansible-lint"
-version = "24.6.1"
+version = "24.7.0"
 description = "Checks playbooks for practices and behavior that could potentially be improved"
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "ansible_lint-24.6.1-py3-none-any.whl", hash = "sha256:a86ed91dbdff567ad6a5b374dcb098d5758d4a069eb1d0742048112bb0ef2ef3"},
-    {file = "ansible_lint-24.6.1.tar.gz", hash = "sha256:29896d6fcf5a648e79c4119e2789c5217fe1951f3c33384989920fbf523a3198"},
+    {file = "ansible_lint-24.7.0-py3-none-any.whl", hash = "sha256:a2305f1d69a25be27810c64a32711d1d0463d2fda5b9308166362347aeda36e0"},
+    {file = "ansible_lint-24.7.0.tar.gz", hash = "sha256:ca2edc7e4e80cf19df4b28cbf4c118f761ce6cdd6a5ef9c8561e454ed7af5a24"},
 ]
 
 [package.dependencies]
@@ -729,13 +729,13 @@ files = [
 
 [[package]]
 name = "molecule"
-version = "24.6.1"
+version = "24.7.0"
 description = "Molecule aids in the development and testing of Ansible roles"
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "molecule-24.6.1-py3-none-any.whl", hash = "sha256:d1694cfeea787630105f83cd550c697532824e5efe55e40ac39a0eb11b5a0608"},
-    {file = "molecule-24.6.1.tar.gz", hash = "sha256:41c1903a597297c2602bd059e107b5ef2e32c9da24797dcb78ff9873c6615ee6"},
+    {file = "molecule-24.7.0-py3-none-any.whl", hash = "sha256:d204a615a3951abaec8fe34e6e50150721d9fd07ea48631dddb5774cb27b55dd"},
+    {file = "molecule-24.7.0.tar.gz", hash = "sha256:db2c7fa59923e9bf23d61a92a5b19d6881ec9ee5fe96ed9e9e9d700b02723f03"},
 ]
 
 [package.dependencies]
@@ -1392,4 +1392,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "b433da374ebc98918e41d7707eaa415536444d5b4c4d9a3e8e4c687c199d09b8"
+content-hash = "8b3b66fc045d1b6bbcc7e69dbf7e4648415db9b4fbdae3232d538b8ab03cf9a1"
