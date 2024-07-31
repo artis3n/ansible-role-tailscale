@@ -1,0 +1,6 @@
+---
+- name: "FreeBSD | Uninstall Tailscale"
+  become: true
+  community.general.pkgng:
+    name: "{{ tailscale_package }}"
+    state: "absent"

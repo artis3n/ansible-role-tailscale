@@ -1,0 +1,6 @@
+---
+- name: "FreeBSD | Install Tailscale"
+  become: true
+  community.general.pkgng:
+    name: "{{ tailscale_package }}"
+    state: "{{ state }}"
