@@ -73,8 +73,8 @@
   vars:
     tailscale_status_parsed: "{{ tailscale_status.stdout | from_json }}"
   ansible.builtin.set_fact:
-    tailscale_is_online: "{{  tailscale_status_parsed.Self.Online }}"
-    tailscale_version: "{{  tailscale_status_parsed.Version }}"
+    tailscale_is_online: "{{ tailscale_status_parsed.Self.Online }}"
+    tailscale_version: "{{ tailscale_status_parsed.Version }}"
 
 - name: Install | Tailscale version and online status
   ansible.builtin.debug:
@@ -118,7 +118,10 @@
 
 - name: Install | Build the final tailscale_args
   ansible.builtin.set_fact:
-    tailscale_args_string: "{{ tailscale_args }} {{ tailscale_tags_string | trim if tailscale_tags_string is not none else '' }} --timeout={{ tailscale_up_timeout | trim }}s"
+    tailscale_args_string: >
+      {{ tailscale_args }}
+      {{ tailscale_tags_string | trim if tailscale_tags_string is not none else '' }}
+      --timeout={{ tailscale_up_timeout | trim }}s
 
 - name: Install | Final `tailscale up` arguments string
   ansible.builtin.debug:
