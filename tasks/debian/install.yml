@@ -26,7 +26,8 @@
 - name: Debian | Wait for apt to release lock
   become: true
   ansible.builtin.shell: "while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do sleep 1; done;"
-  changed_when: my_output.rc != 0 # <- Uses the return code to define when the task has changed.
+  register: shell_output
+  changed_when: shell_output.rc != 0 # <- Uses the return code to define when the task has changed.
 
 - name: Debian | Add Tailscale Deb
   become: true
