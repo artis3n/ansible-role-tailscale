@@ -46,9 +46,11 @@ galaxy_info:
         - "15.4"
         - "15.5"
         # - "15.6"
-    - name: Linux Mint
-      versions:
-        - "22"
+    # Linux Mint not supported in schema
+    # https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/meta.json
+    # - name: LinuxMint
+    #   versions:
+    #     - "22"
 
   galaxy_tags:
     - tailscale
