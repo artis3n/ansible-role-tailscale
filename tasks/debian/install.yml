@@ -29,6 +29,7 @@
     repo: "{{ tailscale_apt_deb }}"
     filename: "tailscale"
     state: present
+    codename: "{{ tailscale_debian_release[ansible_distribution_release] | default(omit) }}"
 
 - name: Debian | Install Tailscale
   become: true
