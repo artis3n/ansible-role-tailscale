@@ -1,29 +1,7 @@
 ---
-- name: Debian | Retrieve Apt ID_LIKE
-  check_mode: false
-  ansible.builtin.command: >-
-    awk -F= '/^ID_LIKE/ {print $2}' {{ ansible_distribution_file_path }}
-  register: apt_id_like
-  changed_when: false
-
-- name: Debian | Retrieve ubuntu_codename on Ubuntu derivatives
-  check_mode: false
-  ansible.builtin.command: >-
-    awk -F= '/^UBUNTU_CODENAME/ {print $2}' {{ ansible_distribution_file_path }}
-  register: ubuntu_codename
-  when: apt_id_like.stdout == '"ubuntu debian"'
-  changed_when: false
-
-- name: Debian | Set codename for apt
-  ansible.builtin.set_fact:
-    apt_codename: "{{ ubuntu_codename.stdout | default(ansible_distribution_release) }}"
-
-- name: Debian | Apt Dependencies
-  become: true
-  ansible.builtin.apt:
-    name: "{{ tailscale_apt_dependencies }}"
-    cache_valid_time: 3600
-    state: present
+- name: Debian | Include common dependencies for install and uninstall
+  ansible.builtin.include_tasks:
+    file: common.yml
 
 - name: Debian | Legacy Apt Dependencies
   become: true

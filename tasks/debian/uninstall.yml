@@ -1,10 +1,7 @@
 ---
-- name: Debian | Apt Dependencies
-  become: true
-  ansible.builtin.apt:
-    name: "{{ tailscale_apt_dependencies }}"
-    cache_valid_time: 3600
-    state: present
+- name: Debian | Include common dependencies for install and uninstall
+  ansible.builtin.include_tasks:
+    file: common.yml
 
 - name: Debian | Remove Tailscale
   become: true
@@ -17,6 +14,7 @@
   ansible.builtin.apt_repository:
     repo: "{{ tailscale_apt_deb }}"
     state: absent
+    codename: "{{ apt_codename }}"
 
 - name: Debian | Remove Tailscale Signing Key from trusted.gpg
   become: true
