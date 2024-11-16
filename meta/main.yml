@@ -46,6 +46,9 @@ galaxy_info:
         - "15.4"
         - "15.5"
         # - "15.6"
+    - name: Linux Mint
+      versions:
+        - "22"
 
   galaxy_tags:
     - tailscale

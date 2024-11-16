@@ -1,4 +1,21 @@
 ---
+- name: Debian | Retrieve Apt ID_LIKE
+  check_mode: False
+  ansible.builtin.command: >-
+    awk -F= '/^ID_LIKE/ {print $2}' {{ ansible_distribution_file_path }}
+  register: apt_id_like
+
+- name: Debian | Retrieve ubuntu_codename on Ubuntu derivatives
+  check_mode: False
+  ansible.builtin.command: >-
+    awk -F= '/^UBUNTU_CODENAME/ {print $2}' {{ ansible_distribution_file_path }}
+  register: ubuntu_codename
+  when: apt_id_like.stdout == '"ubuntu debian"'
+
+- name: Debian | Set codename for apt
+  ansible.builtin.set_fact:
+    apt_codename: "{{ ubuntu_codename.stdout | default(ansible_distribution_release) }}"
+
 - name: Debian | Apt Dependencies
   become: true
   ansible.builtin.apt:
@@ -29,7 +46,7 @@
     repo: "{{ tailscale_apt_deb }}"
     filename: "tailscale"
     state: present
-    codename: "{{ tailscale_debian_release[ansible_distribution_release] | default(omit) }}"
+    codename: "{{ apt_codename }}"
 
 - name: Debian | Install Tailscale
   become: true
