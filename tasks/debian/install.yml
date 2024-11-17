@@ -1,7 +1,14 @@
 ---
-- name: Debian | Include common dependencies for install and uninstall
+- name: Debian | Include apt codename generation tasks
   ansible.builtin.include_tasks:
-    file: common.yml
+    file: apt-codename.yml
+
+- name: Debian | Apt Dependencies
+  become: true
+  ansible.builtin.apt:
+    name: "{{ tailscale_apt_dependencies }}"
+    cache_valid_time: 3600
+    state: present
 
 - name: Debian | Legacy Apt Dependencies
   become: true
