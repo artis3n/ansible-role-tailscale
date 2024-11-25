@@ -2,17 +2,17 @@
 
 [[package]]
 name = "ansible"
-version = "9.12.0"
+version = "11.0.0"
 description = "Radically simple IT automation"
 optional = false
-python-versions = ">=3.10"
+python-versions = ">=3.11"
 files = [
-    {file = "ansible-9.12.0-py3-none-any.whl", hash = "sha256:fdd5738ae5b6ddb7c8bc8e7117df0b7c4e0b261fdb60b66e073843379a863b59"},
-    {file = "ansible-9.12.0.tar.gz", hash = "sha256:54557393fae5768ee6430491c55b74f7831d89dd198d3d74431edaae44004298"},
+    {file = "ansible-11.0.0-py3-none-any.whl", hash = "sha256:367f6acc8e927575f1ce31c3f3c23f0ed15b1d03086997803226cd948745dce2"},
+    {file = "ansible-11.0.0.tar.gz", hash = "sha256:d6b3929f9954e49387870a4da290dbfa38a1f56ea6d4bf24c9a2765d2897db79"},
 ]
 
 [package.dependencies]
-ansible-core = ">=2.16.13,<2.17.0"
+ansible-core = ">=2.18.0,<2.19.0"
 
 [[package]]
 name = "ansible-compat"
@@ -38,13 +38,13 @@ test = ["coverage", "pip-tools", "pytest (>=7.2.0)", "pytest-mock", "pytest-plus
 
 [[package]]
 name = "ansible-core"
-version = "2.16.13"
+version = "2.18.0"
 description = "Radically simple IT automation"
 optional = false
-python-versions = ">=3.10"
+python-versions = ">=3.11"
 files = [
-    {file = "ansible_core-2.16.13-py3-none-any.whl", hash = "sha256:859cd5ac00c5e52a8d63906985691d0fd1b8ed4f0600862a5e360bd1fd5f8f53"},
-    {file = "ansible_core-2.16.13.tar.gz", hash = "sha256:45194e11efe3c4c0c9bb0b112b6ddc1ca5028a01be6b41bae593576a8b1127af"},
+    {file = "ansible_core-2.18.0-py3-none-any.whl", hash = "sha256:d28818df3741d6cd744dab5e4ff9c658daa94ba71c8e15a12dbe9eeab30a658f"},
+    {file = "ansible_core-2.18.0.tar.gz", hash = "sha256:87fbebbfe8d961e9b153e84b4438ba3a327dbfdcd4ad05a6065d9ff5d9d02e7b"},
 ]
 
 [package.dependencies]
@@ -1386,4 +1386,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "5f5653bf21c5c5f262ea7860849b376985e70f0990c2b63938b29c1a606fdb5b"
+content-hash = "8ea7fdf9766f1eebcda96e2a86ae3afd3394a9bae73ddecfd9e86a0eb5bc5aa3"

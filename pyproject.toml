@@ -7,7 +7,7 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-ansible = "^9.12.0"
+ansible = "^11.0.0"
 
 [tool.poetry.group.dev.dependencies]
 ansible-lint = { version = "^24.7.0", markers = "platform_system != 'Windows'" }
