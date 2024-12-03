@@ -18,7 +18,7 @@
   changed_when: false
 
 # Ubuntu and its derivatives all have a value called "UBUNTU_CODENAME" set in their "/etc/os-release"
-# This value points to the actual ubuntu Version t
+# This value points to the actual ubuntu Version.
 # Ansible does not pick up that value on setup. Usually it picks up "VERSION_CODENAME"
 - name: Debian | Retrieve ubuntu_codename on Ubuntu derivatives
   check_mode: false
