@@ -6,6 +6,7 @@ tailscale_debian_family_distros:
   - Debian
   - Pop!_OS
   - OSMC
+  - "Linux Mint"
 
 tailscale_centos_family_distros:
   - CentOS
@@ -36,12 +37,13 @@ tailscale_debian_distro:
   ubuntu: ubuntu
   debian: debian
   osmc: debian
+  "linux mint": ubuntu
 
 tailscale_apt_keyring_path: /usr/share/keyrings/tailscale-archive-keyring.gpg
 
-tailscale_apt_deb: deb [signed-by={{ tailscale_apt_keyring_path }}] https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ tailscale_debian_distro[ansible_distribution | lower] }} {{ ansible_distribution_release | lower }} main
+tailscale_apt_deb: deb [signed-by={{ tailscale_apt_keyring_path }}] https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ tailscale_debian_distro[ansible_distribution | lower] }} {{ apt_codename | lower }} main
 
-tailscale_apt_signkey: https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ tailscale_debian_distro[ansible_distribution | lower] }}/{{ ansible_distribution_release | lower }}.noarmor.gpg
+tailscale_apt_signkey: https://pkgs.tailscale.com/{{ release_stability | lower }}/{{ tailscale_debian_distro[ansible_distribution | lower] }}/{{ apt_codename | lower }}.noarmor.gpg
 
 tailscale_yum_dependencies:
   - yum-utils
