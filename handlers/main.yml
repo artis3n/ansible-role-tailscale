@@ -11,7 +11,7 @@
     tailscale_is_online: "{{ (tailscale_status.stdout | from_json).Self.Online }}"
   when: not ansible_check_mode
 
-- name: return faked status JSON response in check mode
+- name: Return faked status JSON response in check mode
   listen: Confirm Tailscale is Connected
   ansible.builtin.set_fact:
     tailscale_is_online: true
