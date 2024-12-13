@@ -1,0 +1,33 @@
+---
+# Retrieve "ID_LIKE" from /etc/os-release
+# ID_LIKE has the following values, depending on the operating system
+# | OS               | ID_LIKE                |
+# | Debian           | -- does not exist --   |
+# | Raspberry Pi OS  | -- does not exist --   |
+# | Proxmox          | -- does not exist --   |
+# | Devuan           | "debian"               |
+# | Raspbian         | "debian"               |
+# | Ubuntu           | "debian"               |
+# | Pop!OS           | "ubuntu debian"        |
+# | Linux Mint       | "ubuntu debian"        |
+- name: Debian | Retrieve Apt ID_LIKE
+  check_mode: false
+  ansible.builtin.command: >-
+    awk -F= '/^ID_LIKE/ {print $2}' {{ ansible_distribution_file_path }}
+  register: apt_id_like
+  changed_when: false
+
+# Ubuntu and its derivatives all have a value called "UBUNTU_CODENAME" set in their "/etc/os-release"
+# This value points to the actual ubuntu Version.
+# Ansible does not pick up that value on setup. Usually it picks up "VERSION_CODENAME"
+- name: Debian | Retrieve ubuntu_codename on Ubuntu derivatives
+  check_mode: false
+  ansible.builtin.command: >-
+    awk -F= '/^UBUNTU_CODENAME/ {print $2}' {{ ansible_distribution_file_path }}
+  register: ubuntu_codename
+  when: apt_id_like.stdout == '"ubuntu debian"'
+  changed_when: false
+
+- name: Debian | Set codename for apt
+  ansible.builtin.set_fact:
+    apt_codename: "{{ ubuntu_codename.stdout | default(ansible_distribution_release) }}"

@@ -1,4 +1,8 @@
 ---
+- name: Debian | Include apt codename generation tasks
+  ansible.builtin.include_tasks:
+    file: apt-codename.yml
+
 - name: Debian | Apt Dependencies
   become: true
   ansible.builtin.apt:
@@ -29,6 +33,7 @@
     repo: "{{ tailscale_apt_deb }}"
     filename: "tailscale"
     state: present
+    codename: "{{ apt_codename }}"
 
 - name: Debian | Install Tailscale
   become: true

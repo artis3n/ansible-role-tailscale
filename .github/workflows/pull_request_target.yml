@@ -31,6 +31,7 @@ jobs:
           - image: ghcr.io/artis3n/docker-rhel8-ansible:latest
           - image: ghcr.io/artis3n/docker-oraclelinux8-ansible:latest
           - image: geerlingguy/docker-ubuntu2404-ansible:latest
+          - image: ghcr.io/fkonradmain/docker-linuxmint22-ansible:latest
           - image: geerlingguy/docker-ubuntu2204-ansible:latest
           - image: geerlingguy/docker-ubuntu2004-ansible:latest
           - image: geerlingguy/docker-ubuntu1804-ansible:latest
