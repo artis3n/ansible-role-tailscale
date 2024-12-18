@@ -4,6 +4,7 @@
   ansible.builtin.command: tailscale status --json
   changed_when: false
   register: tailscale_status
+  when: not ansible_check_mode
 
 - name: Parse status JSON
   listen: Confirm Tailscale is Connected
