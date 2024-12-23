@@ -11,10 +11,10 @@ ansible = "^9.12.0"
 
 [tool.poetry.group.dev.dependencies]
 ansible-lint = { version = "^24.7.0", markers = "platform_system != 'Windows'" }
-molecule = "^24.9.0"
-molecule-plugins = {extras = ["docker"], version = "^23.5.3"}
+molecule = "^24.12.0"
+molecule-plugins = {extras = ["docker"], version = "^23.6.0"}
 pre-commit = "^4.0.1"
-pytest = "^8.3.3"
+pytest = "^8.3.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
