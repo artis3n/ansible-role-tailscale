@@ -4,26 +4,16 @@
 server_url: http://headscale:8080
 listen_addr: 0.0.0.0:8080
 metrics_listen_addr: 0.0.0.0:9090
-private_key_path: /etc/headscale/private.key
+grpc_listen_addr: 0.0.0.0:50443
+grpc_allow_insecure: true
+
 noise:
   private_key_path: /etc/headscale/noise_private.key
-db_type: sqlite3
-db_path: /etc/headscale/db.sqlite
 
 # Default Tailscale prefixes
-ip_prefixes:
-  - fd7a:115c:a1e0::/48
-  - 100.64.0.0/10
-
-# Disable TLS
-tls_cert_path: ""
-tls_key_path: ""
-
-# Add DNS configuration so we can --accept-dns
-dns_config:
-  override_local_dns: true
-  nameservers:
-    - 1.1.1.1
+prefixes:
+  v6: fd7a:115c:a1e0::/48
+  v4: 100.64.0.0/10
 
 derp:
   server:
@@ -32,3 +22,12 @@ derp:
     region_code: "headscale"
     region_name: "Headscale Embedded DERP"
     stun_listen_addr: "0.0.0.0:3478"
+    private_key_path: /etc/headscale/derp_server_private.key
+
+database:
+  type: sqlite
+  sqlite:
+    path: /etc/headscale/db.sqlite
+
+dns:
+  base_domain: molecule.internal

@@ -52,8 +52,8 @@ platforms:
     privileged: true
     pre_build_image: true
   - name: headscale
-    image: ${HEADSCALE_IMAGE:-headscale/headscale:latest}
-    command: headscale serve
+    image: ${HEADSCALE_IMAGE:-headscale/headscale:stable}
+    command: serve
     pre_build_image: true
     networks:
       - name: headscale
