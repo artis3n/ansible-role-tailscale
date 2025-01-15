@@ -49,7 +49,7 @@ jobs:
           cache: 'poetry'
 
       - name: Install packages
-        run: poetry install --no-interaction
+        run: poetry install --no-interaction --no-root
 
       - name: Run scenario
         run: poetry run molecule test --scenario-name "${{ inputs.scenario }}"

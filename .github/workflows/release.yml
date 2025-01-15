@@ -25,7 +25,7 @@ jobs:
           cache: 'poetry'
 
       - name: Install packages
-        run: poetry install --no-interaction
+        run: poetry install --no-interaction --no-root
 
       - name: Publish to Ansible Galaxy
         run: |
