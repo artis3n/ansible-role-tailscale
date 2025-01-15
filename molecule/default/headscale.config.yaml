@@ -7,6 +7,8 @@ metrics_listen_addr: 0.0.0.0:9090
 grpc_listen_addr: 0.0.0.0:50443
 grpc_allow_insecure: true
 
+#test
+
 noise:
   private_key_path: /etc/headscale/noise_private.key
 
