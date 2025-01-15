@@ -7,6 +7,7 @@
 
     - name: Debugging
       changed_when: false
+      register: thing
       ansible.builtin.shell:
         cmd: |
           echo ""
@@ -16,6 +17,10 @@
           cat /etc/shadow
           cat /etc/passwd
           echo ""
+
+    - name: Print debug
+      ansible.builtin.debug:
+        var: thing.stdout
 
 
     - name: "Include artis3n.tailscale"
