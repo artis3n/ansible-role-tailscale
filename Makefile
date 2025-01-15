@@ -6,7 +6,7 @@ all: lint test
 # Install Python first
 .PHONY: install
 install:
-	poetry install --no-root
+	poetry install --with=dev
 	poetry run pre-commit install --install-hooks
 	poetry run ansible-galaxy collection install -r requirements.yml
 
@@ -16,7 +16,7 @@ clean:
 
 .PHONY: update
 update:
-	poetry update
+	poetry update --with=dev
 	poetry run pre-commit autoupdate
 
 .PHONY: lint
