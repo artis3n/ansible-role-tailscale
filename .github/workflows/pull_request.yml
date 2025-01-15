@@ -34,3 +34,8 @@ jobs:
 
       - name: Lint
         run: make lint
+
+      - name: Debugging
+        run: |
+          echo "::warning::Docker version $(docker --version)"
+          docker version
