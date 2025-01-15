@@ -5,6 +5,8 @@ description = "Ansible role to install and enable a Tailscale node."
 authors = ["Artis3n <dev@artis3nal.com>"]
 license = "MIT"
 
+# package-mode = false
+
 [tool.poetry.dependencies]
 python = "^3.12"
 ansible = "^9.12.0"
