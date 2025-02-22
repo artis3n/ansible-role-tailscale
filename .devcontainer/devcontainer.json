@@ -12,8 +12,8 @@
 		"ghcr.io/devcontainers/features/git:1": {},
 		"ghcr.io/devcontainers/features/github-cli:1": {},
 		// "ghcr.io/devcontainers-contrib/features/ansible:2": {},
-		"ghcr.io/devcontainers-contrib/features/poetry:2": {},
-		"ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
+		"ghcr.io/devcontainers-extra/features/poetry:2": {},
+		"ghcr.io/devcontainers-extra/features/pre-commit:2": {},
 		"ghcr.io/devcontainers/features/common-utils:2": {
 			"configureZshAsDefaultShell": true
 		}
@@ -29,10 +29,19 @@
 	// https://github.com/devcontainers-contrib/features/issues/607
 	"onCreateCommand": "sudo apt update && sudo apt install -y pipx; pipx install --include-deps ansible",
 	"postCreateCommand": "sudo apt update && sudo apt full-upgrade -y",
-	"postStartCommand": "git pull --prune; make install"
+	"postStartCommand": "git pull --prune; make install",
 
 	// Configure tool-specific properties.
-	// "customizations": {},
+	 "customizations": {
+       "jetbrains": {
+         "backend": "PyCharm",
+         "plugins": [
+           "name.kropp.intellij.makefile",
+           "org.jetbrains.plugins.github",
+           "org.jetbrains.plugins.yaml"
+         ]
+       }
+     },
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
