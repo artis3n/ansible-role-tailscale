@@ -14,7 +14,7 @@
 - name: CentOS | Enable Tailscale Repo
   become: true
   when: tailscale_repo_state.stat.exists
-  ansible.builtin.command: dnf config-manager --enable tailscale-{{ release_stability }}
+  ansible.builtin.command: "dnf config-manager --set-enabled tailscale*"
   register: add_tailscale_repo
 
 - name: CentOS | Add Tailscale Repo
