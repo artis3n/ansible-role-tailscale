@@ -24,7 +24,8 @@ jobs:
         include:
           - image: ghcr.io/artis3n/docker-amazonlinux2023-ansible:latest
 #          - image: geerlingguy/docker-rockylinux8-ansible:latest
-          - image: geerlingguy/docker-rockylinux9-ansible:latest
+          # Temporary: until https://github.com/rocky-linux/sig-cloud-instance-images/issues/56 is resolved
+#          - image: geerlingguy/docker-rockylinux9-ansible:latest
 #          - image: ghcr.io/artis3n/docker-almalinux8-ansible:latest
 #          - image: ghcr.io/artis3n/docker-rhel8-ansible:latest
 #          - image: ghcr.io/artis3n/docker-oraclelinux8-ansible:latest
@@ -39,7 +40,7 @@ jobs:
             command: /lib/systemd/systemd
 #          - image: geerlingguy/docker-debian10-ansible:latest
 #            command: /lib/systemd/systemd
-          - image: geerlingguy/docker-fedora31-ansible:latest
+          - image: geerlingguy/docker-fedora36-ansible:latest
           - image: ghcr.io/artis3n/docker-arch-ansible:latest
           - image: ghcr.io/artis3n/docker-opensuse-tumbleweed-ansible:latest
           - image: ghcr.io/artis3n/docker-opensuse-leap-ansible:latest
