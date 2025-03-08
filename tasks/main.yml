@@ -96,3 +96,9 @@
 - name: Uninstall Tailscale
   when: state == "absent"
   ansible.builtin.include_tasks: uninstall.yml
+
+- name: "Warning: Role migrated into Collection"
+  ansible.builtin.meta: end_role
+  delegate_to: localhost
+  run_once: true
+  when: "('This standalone role has been migrated into a collection.\n\nPlease review the collection and plan a drop-in migration.\nThis role will eventually be archived. A notice period will be communicated.\n\nhttps://github.com/artis3n/ansible-collection-tailscale' | print_warn())"

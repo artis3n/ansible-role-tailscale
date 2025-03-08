@@ -4,3 +4,5 @@
 .*vault-pass
 .dccache
 .DS_Store
+.ansible
+__pycache__
