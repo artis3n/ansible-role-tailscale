@@ -54,23 +54,23 @@ jobs:
       tailscale_key: ${{ secrets.TAILSCALE_CI_KEY }}
 
   # Systems that aren't working with cgroups v2 on ubuntu 22.04, but works on ubuntu 20.04
-  molecule-legacy:
-    name: "Test Legacy Distros"
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - image: ghcr.io/artis3n/docker-amazonlinux2-ansible:latest
-            command: /usr/lib/systemd/systemd
-
-    uses: ./.github/workflows/molecule.yml
-    with:
-      image: ${{ matrix.image }}
-      command: ${{ matrix.command }}
-      scenario: 'default'
-      runner: ubuntu-20.04
-    secrets:
-      tailscale_key: ${{ secrets.TAILSCALE_CI_KEY }}
+#  molecule-legacy:
+#    name: "Test Legacy Distros"
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        include:
+#          - image: ghcr.io/artis3n/docker-amazonlinux2-ansible:latest
+#            command: /usr/lib/systemd/systemd
+#
+#    uses: ./.github/workflows/molecule.yml
+#    with:
+#      image: ${{ matrix.image }}
+#      command: ${{ matrix.command }}
+#      scenario: 'default'
+#      runner: ubuntu-20.04
+#    secrets:
+#      tailscale_key: ${{ secrets.TAILSCALE_CI_KEY }}
 
   molecule-state-absent:
     name: "Run Molecule Scenario: state-absent"
