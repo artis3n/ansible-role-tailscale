@@ -7,6 +7,8 @@ driver:
   name: docker
 platforms:
   - name: instance
+    # We're not using the same container image as the other scenarios because this scenario
+    # is specifically testing behaviour in a CentOS like environment
     image: ${MOLECULE_DISTRO:-geerlingguy/docker-rockylinux9-ansible:latest}
     command: ${MOLECULE_COMMAND:-/usr/sbin/init}
     volumes:
@@ -32,7 +34,7 @@ provisioner:
 verifier:
   name: ansible
 scenario:
-  name: "537"
+  name: "reinstall"
   test_sequence:
     - dependency
     - destroy
