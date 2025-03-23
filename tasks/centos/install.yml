@@ -11,9 +11,16 @@
     path: /etc/yum.repos.d/tailscale.repo
   register: tailscale_repo_state
 
-- name: CentOS | Enable Tailscale Repo
+- name: CentOS | Check if Tailscale Repo is already enabled
   become: true
   when: tailscale_repo_state.stat.exists
+  changed_when: false
+  ansible.builtin.shell: "grep '^enabled=' /etc/yum.repos.d/tailscale.repo" # noqa command-instead-of-shell
+  register: tailscale_repo_enabled
+
+- name: CentOS | Enable Tailscale Repo # noqa no-changed-when
+  become: true
+  when: "'enabled=0' in tailscale_repo_enabled.stdout"
   ansible.builtin.command: "dnf config-manager --set-enabled tailscale*"
   register: add_tailscale_repo
 
