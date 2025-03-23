@@ -113,6 +113,14 @@ jobs:
     secrets:
       tailscale_key: ${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}
 
+  molecule-reinstall:
+    name: "Run Molecule Scenario: reinstall"
+    uses: ./.github/workflows/molecule.yml
+    with:
+      scenario: "reinstall"
+    secrets:
+      tailscale_key: ${{ secrets.TAILSCALE_CI_KEY }}
+
   molecule-strategy-free:
     name: "Run Molecule Scenario: strategy-free"
     uses: ./.github/workflows/molecule.yml
