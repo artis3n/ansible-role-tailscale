@@ -5,8 +5,27 @@
     name: "{{ tailscale_yum_dependencies }}"
     state: present
 
+- name: CentOS | Check if Tailscale Repo is already present
+  become: true
+  ansible.builtin.stat:
+    path: /etc/yum.repos.d/tailscale.repo
+  register: tailscale_repo_state
+
+- name: CentOS | Check if Tailscale Repo is already enabled
+  become: true
+  changed_when: false
+  ansible.builtin.command: "dnf repolist enabled"
+  register: tailscale_repolist_enabled
+
+- name: CentOS | Enable Tailscale Repo # noqa no-changed-when
+  become: true
+  when: "'tailscale' not in tailscale_repolist_enabled.stdout and tailscale_repo_state.stat.exists"
+  ansible.builtin.command: "dnf config-manager --set-enabled tailscale*"
+  register: add_tailscale_repo
+
 - name: CentOS | Add Tailscale Repo
   become: true
+  when: not tailscale_repo_state.stat.exists
   ansible.builtin.command: dnf config-manager --add-repo {{ tailscale_yum_repos[ansible_distribution] }}
   args:
     creates: /etc/yum.repos.d/tailscale.repo
@@ -16,5 +35,5 @@
   become: true
   ansible.builtin.dnf:
     name: "{{ tailscale_package }}"
-    update_cache: '{{ add_tailscale_repo.changed | default(false) | bool }}'
-    state: '{{ state }}'
+    update_cache: "{{ add_tailscale_repo.changed | default(false) | bool }}"
+    state: "{{ state }}"

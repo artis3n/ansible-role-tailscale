@@ -84,6 +84,14 @@ else
 	poetry run molecule test --scenario-name strategy-free
 endif
 
+.PHONY: test-reinstall
+test-reinstall:
+ifndef TAILSCALE_CI_KEY
+	$(error TAILSCALE_CI_KEY is not set)
+else
+	poetry run molecule test --scenario-name reinstall
+endif
+
 .PHONY: test-headscale
 test-headscale:
 	USE_HEADSCALE=true poetry run molecule test --scenario-name default

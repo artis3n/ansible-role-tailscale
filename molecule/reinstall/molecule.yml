@@ -1,0 +1,47 @@
+---
+dependency:
+  name: galaxy
+  options:
+    requirements-file: requirements.yml
+driver:
+  name: docker
+platforms:
+  - name: instance
+    # We're not using the same container image as the other scenarios because this scenario
+    # is specifically testing behaviour in a CentOS like environment
+    image: ${MOLECULE_DISTRO:-geerlingguy/docker-rockylinux9-ansible:latest}
+    command: ${MOLECULE_COMMAND:-/usr/sbin/init}
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    docker_networks:
+      - name: headscale
+    networks:
+      - name: bridge
+      - name: headscale
+    cgroupns_mode: host
+    privileged: true
+    pre_build_image: true
+  - name: headscale
+    image: ${HEADSCALE_IMAGE:-headscale/headscale:stable}
+    command: serve
+    pre_build_image: true
+    networks:
+      - name: headscale
+    volumes:
+      - "${MOLECULE_PROJECT_DIRECTORY}/molecule/default/headscale.config.yaml:/etc/headscale/config.yaml"
+provisioner:
+  name: ansible
+verifier:
+  name: ansible
+scenario:
+  name: "reinstall"
+  test_sequence:
+    - dependency
+    - destroy
+    - syntax
+    - create
+    - prepare
+    - converge
+    - verify
+    - cleanup
+    - destroy
