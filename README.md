@@ -3,7 +3,6 @@
 [![Ansible Role](https://img.shields.io/ansible/role/d/artis3n/tailscale)](https://galaxy.ansible.com/ui/standalone/roles/artis3n/tailscale/)
 [![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/artis3n/ansible-role-tailscale?include_prereleases)](https://github.com/artis3n/ansible-role-tailscale/releases)
 [![Molecule Tests](https://github.com/artis3n/ansible-role-tailscale/actions/workflows/pull_request_target.yml/badge.svg)](https://github.com/artis3n/ansible-role-tailscale/actions/workflows/pull_request_target.yml)
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/6312/badge)](https://bestpractices.coreinfrastructure.org/projects/6312)
 ![GitHub last commit](https://img.shields.io/github/last-commit/artis3n/ansible-role-tailscale)
 ![GitHub](https://img.shields.io/github/license/artis3n/ansible-role-tailscale)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/artis3n)](https://github.com/sponsors/artis3n)
@@ -16,7 +15,6 @@ This role installs and configures [Tailscale][] on a Linux target.
 > [!IMPORTANT]
 > **This standalone role has been migrated into a collection (<https://github.com/artis3n/ansible-collection-tailscale>).**
 >
-> This role will continue to function but future development work will focus on the collection.
 > Please try out the collection and provide feedback on the new repo.
 >
 > `ansible-galaxy collection install artis3n.tailscale`
