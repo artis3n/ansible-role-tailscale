@@ -67,6 +67,8 @@
 - name: Install | Fetch Tailscale status
   ansible.builtin.command: tailscale status --json
   changed_when: false
+  # data gathering, not a change, so ok to run in check mode
+  check_mode: false
   register: tailscale_status
 
 - name: Install | Parse status JSON
@@ -78,7 +80,7 @@
 
 - name: Install | Tailscale version and online status
   ansible.builtin.debug:
-    msg: "Ver: {{ tailscale_version }} Online: {{ tailscale_is_online }}"
+    msg: "Ver: {{ tailscale_version }}, Online: {{ tailscale_is_online }}"
   when: verbose
 
 - name: Install | Prepend 'tag:' to each item in the list
